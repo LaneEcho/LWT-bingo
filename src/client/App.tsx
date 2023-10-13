@@ -16,8 +16,8 @@ function App() {
     palette: {
       mode: 'light',
       primary: {
-        main: '#8E24AA',
-        dark: '#512da8',
+        main: '#E11774',
+        dark: '#46A4DB',
         contrastText: '#fff',
       },
     },
@@ -31,8 +31,8 @@ function App() {
     palette: {
       mode: 'dark',
       primary: {
-        main: '#69F0AE',
-        dark: '#00BFA5',
+        main: '#05FFF4',
+        dark: '#46A4DB',
         contrastText: '#000',
       },
     },

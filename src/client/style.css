@@ -1,0 +1,19 @@
+:root {
+  --hot-pink: #e11774;
+  --neon-blue: #05fff4;
+  --light-blue: #46a4db;
+  --primary-black: #000;
+}
+
+html {
+  font-size: 18px;
+}
+
+body {
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  display: block;
+}

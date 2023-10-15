@@ -1,35 +1,39 @@
 import React, { useState, useEffect } from 'react';
 import Row from './row';
 import Phrases from '../phrases';
+import { BoardState } from '../../types';
 
 import Button from '@mui/material/Button';
 
-function Board() {
-  // is there any state?
+// function for pulling in phrases
+// input: none
+// output: array of random numbers with no repeats
+// create a set so all numbers are unique
+// loop to fill set with 24 numbers
+// add to set
+// return as an array
 
-  // function for pulling in phrases
-  // input: none
-  // output: array of random numbers with no repeats
-  // create a set so all numbers are unique
-  // loop to fill set with 24 numbers
-  // add to set
-  // return as an array
+function pickUniqueNumbers(): number[] {
+  let uniqueNumbers: Set<number> = new Set();
 
-  function pickUniqueNumbers(): number[] {
-    let uniqueNumbers: Set<number> = new Set();
-
-    while (uniqueNumbers.size < 35) {
-      let randomNumber: number = Math.floor(Math.random() * 47) + 1;
-      uniqueNumbers.add(randomNumber);
-    }
-
-    return Array.from(uniqueNumbers);
+  while (uniqueNumbers.size < 35) {
+    let randomNumber: number = Math.floor(Math.random() * 47) + 1;
+    uniqueNumbers.add(randomNumber);
   }
+
+  return Array.from(uniqueNumbers);
+}
+
+const initialBoardState: BoardState = pickUniqueNumbers();
+
+function Board() {
+  // state of phrases
+  const [phraseIndex, setPhraseIndex] = useState(initialBoardState);
 
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
-  const phrasesIndex: number[] = pickUniqueNumbers();
-  console.log('Phrases index', phrasesIndex);
+  // const phrasesIndex: number[] = pickUniqueNumbers();
+  console.log('Phrases index', phraseIndex);
 
   for (let i = 0; i < 5; i++) {
     rows.push(
@@ -38,13 +42,15 @@ function Board() {
         content={null}
         handleBoxClick={null}
         key={i}
-        phrase={phrasesIndex}
+        phrase={phraseIndex}
       />
     );
   }
 
-  // function to reset board - just re-render components
-  function resetBoard(): void {}
+  // function to reset board - just re-render board
+  function resetBoard(): void {
+    setPhraseIndex(pickUniqueNumbers());
+  }
 
   return (
     <div className="board">
@@ -53,7 +59,7 @@ function Board() {
         variant="contained"
         size="large"
         className="resetButton"
-        onClick={null}
+        onClick={resetBoard}
       >
         Reset Board
       </Button>

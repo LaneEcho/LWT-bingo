@@ -2,6 +2,8 @@ export interface Phrases {
   [key: string]: string;
 }
 
+export type BoardState = number[];
+
 export type RowProps = {
   row: number;
   content: string;

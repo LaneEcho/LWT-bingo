@@ -23,7 +23,7 @@ function Row(props: RowProps) {
     } else {
       boxes.push(
         <Box
-          text={phrases[props.row + i * 5]}
+          text={phrases[props.phrase[props.row + i * 5]]}
           row={props.row}
           column={i}
           // handleBoxClick={props.handleBoxClick}

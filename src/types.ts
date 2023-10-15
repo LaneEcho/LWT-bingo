@@ -10,7 +10,7 @@ export type RowProps = {
 };
 
 export type BoxProps = {
-  text: string;
+  text: any;
   row: number;
   column: number;
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;

@@ -18,8 +18,8 @@ function Board() {
   function pickUniqueNumbers(): number[] {
     let uniqueNumbers: Set<number> = new Set();
 
-    while (uniqueNumbers.size < 24) {
-      let randomNumber: number = Math.floor(Math.random() * 48) + 1;
+    while (uniqueNumbers.size < 35) {
+      let randomNumber: number = Math.floor(Math.random() * 47) + 1;
       uniqueNumbers.add(randomNumber);
     }
 
@@ -29,6 +29,7 @@ function Board() {
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
   const phrasesIndex: number[] = pickUniqueNumbers();
+  console.log('Phrases index', phrasesIndex);
 
   for (let i = 0; i < 5; i++) {
     rows.push(
@@ -42,7 +43,8 @@ function Board() {
     );
   }
 
-  // function to reset board to different phrases
+  // function to reset board - just re-render components
+  function resetBoard(): void {}
 
   return (
     <div className="board">

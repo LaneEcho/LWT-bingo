@@ -7,11 +7,11 @@ function Box(props: BoxProps) {
   return (
     <Button
       variant="outlined"
-      //   className={`box ${textStyle}`}
+      className="box"
       //   onClick={props.handleBoxClick}
       data-row={props.row}
       data-column={props.column}
-      style={{ fontSize: '12px' }}
+      style={{ fontSize: '12px', margin: '4px' }}
       sx={{
         '&.Mui-disabled': {
           color: '#8E24AA',

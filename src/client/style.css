@@ -17,3 +17,8 @@ body {
   align-items: center;
   display: block;
 }
+
+.box {
+  height: 9rem;
+  width: 9rem;
+}

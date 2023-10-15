@@ -2,14 +2,17 @@ export interface Phrases {
   [key: string]: string;
 }
 
+export type BoardState = number[];
+
 export type RowProps = {
   row: number;
-  content: Phrases[];
+  content: string;
+  phrase: number[];
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
 export type BoxProps = {
-  text: Phrases;
+  text: any;
   row: number;
   column: number;
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;

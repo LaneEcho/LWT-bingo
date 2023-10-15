@@ -4,12 +4,12 @@ export interface Phrases {
 
 export type RowProps = {
   row: number;
-  content: Phrases[];
+  content: string;
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
 export type BoxProps = {
-  text: Phrases;
+  text: string;
   row: number;
   column: number;
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;

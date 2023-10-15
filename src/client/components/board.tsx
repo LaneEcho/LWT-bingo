@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Row from './row';
 import Phrases from '../phrases';
 
 import Button from '@mui/material/Button';
@@ -28,12 +29,16 @@ function Board() {
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
   const phrasesIndex: number[] = pickUniqueNumbers();
-  console.log(phrasesIndex);
+
+  for (let i = 0; i < 5; i++) {
+    rows.push(<Row row={i} content={null} handleBoxClick={null} key={i} />);
+  }
 
   // function to reset board to different phrases
 
   return (
     <div className="board">
+      <div className="grid">{rows}</div>
       <Button
         variant="contained"
         size="large"

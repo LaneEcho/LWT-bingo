@@ -60,7 +60,7 @@ function App() {
           className="toggleButton"
           onClick={toggleTheme}
           variant="outlined"
-          style={{ marginTop: '10px' }}
+          style={{ marginTop: '2px' }}
           size="small"
         >
           {darkMode ? 'Light' : 'Dark'} Mode

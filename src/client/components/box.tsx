@@ -8,14 +8,14 @@ function Box(props: BoxProps) {
     <Button
       variant="outlined"
       className="box"
-      //   onClick={props.handleBoxClick}
+      //   onClick={handleBoxClick}
       data-row={props.row}
       data-column={props.column}
-      style={{ fontSize: '12px', margin: '4px' }}
+      style={{ margin: '4px' }}
       sx={{
         '&.Mui-disabled': {
-          color: '#8E24AA',
-          border: '1px solid #8E24AA',
+          color: 'var(--neon-blue)',
+          border: '1px solid var(--neon-blue)',
         },
       }}
     >

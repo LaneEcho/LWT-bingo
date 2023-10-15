@@ -27,13 +27,11 @@ function pickUniqueNumbers(): number[] {
 const initialBoardState: BoardState = pickUniqueNumbers();
 
 function Board() {
-  // state of phrases
+  // state of phrases in beginning to be updated when resetting board
   const [phraseIndex, setPhraseIndex] = useState(initialBoardState);
 
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
-  // const phrasesIndex: number[] = pickUniqueNumbers();
-  console.log('Phrases index', phraseIndex);
 
   for (let i = 0; i < 5; i++) {
     rows.push(

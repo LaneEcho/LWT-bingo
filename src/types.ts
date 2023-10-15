@@ -4,14 +4,13 @@ export interface Phrases {
 
 export type RowProps = {
   row: number;
-  //   content: BoardText[];
+  content: Phrases[];
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 
 export type BoxProps = {
-  // text: BoardText;
+  text: Phrases;
   row: number;
   column: number;
-  gameOver: boolean;
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;
 };

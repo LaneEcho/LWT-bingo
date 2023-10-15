@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { render } from 'react-dom';
 
+import Board from './components/board';
+
 import {
   Typography,
   CssBaseline,
@@ -53,6 +55,7 @@ function App() {
         >
           Lesbians Who Tech Bingo!
         </Typography>
+        <Board />
         <Button
           className="toggleButton"
           onClick={toggleTheme}

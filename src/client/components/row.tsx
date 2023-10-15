@@ -9,10 +9,10 @@ function Row(props: RowProps) {
 
   for (let i = 0; i < 5; i++) {
     // first check if we're at the middle box
-    if (props.row === 2 && i === 2) {
+    if (props.row === 3 && i === 2) {
       boxes.push(
         <Box
-          text={'Free Space'} // add image later/ if time?
+          text={'Free Space'} // add image if time
           row={props.row}
           column={i}
           // handleBoxClick={props.handleBoxClick}
@@ -23,7 +23,7 @@ function Row(props: RowProps) {
     } else {
       boxes.push(
         <Box
-          text={'props.content[i]'}
+          text={phrases[props.row + i * 5]}
           row={props.row}
           column={i}
           // handleBoxClick={props.handleBoxClick}

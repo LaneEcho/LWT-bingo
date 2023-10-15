@@ -31,7 +31,15 @@ function Board() {
   const phrasesIndex: number[] = pickUniqueNumbers();
 
   for (let i = 0; i < 5; i++) {
-    rows.push(<Row row={i} content={null} handleBoxClick={null} key={i} />);
+    rows.push(
+      <Row
+        row={i + 1}
+        content={null}
+        handleBoxClick={null}
+        key={i}
+        phrase={phrasesIndex}
+      />
+    );
   }
 
   // function to reset board to different phrases

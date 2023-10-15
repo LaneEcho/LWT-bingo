@@ -5,6 +5,7 @@ export interface Phrases {
 export type RowProps = {
   row: number;
   content: string;
+  phrase: number[];
   handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;
 };
 

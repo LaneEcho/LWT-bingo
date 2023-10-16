@@ -48,7 +48,16 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <div className="app">
+      <div
+        className="app"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
         <Typography
           variant="h1"
           color="primary"
@@ -75,11 +84,11 @@ function App() {
           Warning! Do not refresh the page or you will lose your progress!
         </Alert>
         <Board />
+
         <Button
           className="toggleButton"
           onClick={toggleTheme}
           variant="outlined"
-          style={{ marginTop: '2px' }}
           size="small"
         >
           {darkMode ? 'Light' : 'Dark'} Mode

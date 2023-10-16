@@ -18,13 +18,9 @@ body {
   max-height: fit-content;
 }
 
-.app {
-  max-height: 100vh;
-}
-
 .board {
   margin-top: 0.5rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;

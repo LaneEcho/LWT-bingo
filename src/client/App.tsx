@@ -12,10 +12,15 @@ import {
   createTheme,
   Button,
   useTheme,
+  Modal,
+  Box,
 } from '@mui/material';
 
 function App() {
+  // dark mode
   const [darkMode, setDarkMode] = useState(false);
+  // for modal
+  const [open, setOpen] = useState(false);
 
   const lightTheme = createTheme({
     palette: {
@@ -45,6 +50,14 @@ function App() {
 
   const theme = useTheme();
 
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
@@ -62,7 +75,7 @@ function App() {
           variant="h1"
           color="primary"
           style={{
-            fontSize: '4rem',
+            fontSize: '3rem',
             marginTop: '10px',
             marginBottom: '10px',
             textAlign: 'center',
@@ -73,7 +86,7 @@ function App() {
         <Alert
           variant="filled"
           iconMapping={{
-            success: <PriorityHighIcon fontSize="inherit" />,
+            success: <PriorityHighIcon />,
           }}
           style={{
             justifyContent: 'center',
@@ -84,15 +97,42 @@ function App() {
           Warning! Do not refresh the page or you will lose your progress!
         </Alert>
         <Board />
-
-        <Button
-          className="toggleButton"
-          onClick={toggleTheme}
-          variant="outlined"
-          size="small"
-        >
-          {darkMode ? 'Light' : 'Dark'} Mode
-        </Button>
+        <div className="button container">
+          <Button
+            className="toggleButton"
+            onClick={toggleTheme}
+            variant="contained"
+            size="small"
+            style={{ display: 'inline-block' }}
+          >
+            {darkMode ? 'Light' : 'Dark'} Mode
+          </Button>
+          <Button
+            onClick={handleOpen}
+            variant="contained"
+            size="small"
+            style={{ marginLeft: '.5rem', display: 'inline-block' }}
+          >
+            About Us
+          </Button>
+        </div>
+        <Modal open={open} onClose={handleClose}>
+          <Box
+            sx={{
+              width: 300,
+              bgcolor: 'background.paper',
+              p: 2,
+              borderRadius: '8px',
+            }}
+          >
+            <Typography id="modal-modal-title" variant="h6" component="h2">
+              Text in a modal
+            </Typography>
+            <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+              Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
+            </Typography>
+          </Box>
+        </Modal>
       </div>
     </ThemeProvider>
   );

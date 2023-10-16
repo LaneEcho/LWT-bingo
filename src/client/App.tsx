@@ -14,6 +14,7 @@ import {
   useTheme,
   Modal,
   Box,
+  Link,
 } from '@mui/material';
 
 function App() {
@@ -131,7 +132,7 @@ function App() {
               overflow: 'scroll',
             }}
           >
-            <Typography id="modal-modal-title" variant="h5" component="h2">
+            <Typography id="modal-modal-title" variant="h4" component="h2">
               About Us
             </Typography>
             <div className="about-lane">
@@ -158,8 +159,20 @@ function App() {
                 Talk Series. 💪🏻​ I'm always eager to connect and discuss
                 exciting projects or ideas. Feel free to reach out I'm ready to
                 chat! ✉️​ If you're curious about my ongoing projects, you can
-                check them out on my GitHub profile: GitHub.com/LaneEcho ✨​
+                check them out on my GitHub profile ✨​
               </Typography>
+              <Link
+                href="https://www.linkedin.com/in/aleyna-hamilton/"
+                style={{ display: 'block' }}
+              >
+                LinkedIn
+              </Link>
+              <Link
+                href="https://github.com/LaneEcho"
+                style={{ display: 'block' }}
+              >
+                GitHub
+              </Link>
             </div>
             <div className="about-tegan">
               <Typography
@@ -196,6 +209,18 @@ function App() {
                 didn't I think of that?“​ Let's connect, collaborate, and make
                 great things happen!
               </Typography>
+              <Link
+                href="https://www.linkedin.com/in/tegan-barron/"
+                style={{ display: 'block' }}
+              >
+                LinkedIn
+              </Link>
+              <Link
+                href="https://linktr.ee/teganba"
+                style={{ display: 'block' }}
+              >
+                Link
+              </Link>
             </div>
           </Box>
         </Modal>

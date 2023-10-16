@@ -1,0 +1,38 @@
+:root {
+  --hot-pink: #e11774;
+  --neon-blue: #05fff4;
+  --light-blue: #46a4db;
+  --primary-black: #000;
+}
+
+html {
+  font-size: 1.8vh;
+}
+
+body {
+  margin: auto 0;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  max-height: fit-content;
+}
+
+.board {
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.box {
+  height: 8rem;
+  width: 8rem;
+}
+
+.about {
+  display: inline-block;
+}

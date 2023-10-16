@@ -12,6 +12,20 @@ A simple Bingo game built using TypeScript with React
 
 <br>
 
+## To Do
+
+| Feature                            | Status |
+| ---------------------------------- | ------ |
+| Alert player when they win         | ⏳     |
+| Do not reset board on page refresh | ⏳     |
+| Add Images to About                | ⏳     |
+| Responsive Design                  | ⏳     |
+| Accessibility improvement          | ⏳     |
+| And more...                        | ⏳     |
+
+- ✅ = Ready to use
+- ⏳ = In progress
+
 <!-- Logo Links -->
 
 [React.js]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB

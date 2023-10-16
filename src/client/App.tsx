@@ -53,26 +53,14 @@ function App() {
           variant="h1"
           color="primary"
           style={{
-            fontSize: '5rem',
+            fontSize: '4rem',
+            marginTop: '10px',
             marginBottom: '10px',
             textAlign: 'center',
           }}
         >
           Lesbians Who Tech Bingo!
         </Typography>
-        {/* <Typography
-          variant="subtitle1"
-          paragraph
-          color={theme.palette.primary.dark}
-          style={{
-            // fontSize: '5rem',
-            marginBottom: '10px',
-            textAlign: 'center',
-          }}
-        >
-          How to play: Click on a square when you've encountered it during the
-          conference.
-        </Typography> */}
         <Alert
           variant="filled"
           iconMapping={{

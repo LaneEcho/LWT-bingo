@@ -34,18 +34,11 @@ function Board() {
   const rows: JSX.Element[] = [];
 
   for (let i = 0; i < 5; i++) {
-    rows.push(
-      <Row
-        row={i + 1}
-        content={null}
-        handleBoxClick={null}
-        key={i}
-        phrase={phraseIndex}
-      />
-    );
+    rows.push(<Row row={i + 1} content={null} key={i} phrase={phraseIndex} />);
   }
 
   // function to reset board - just re-render board
+  // will need to unclick boxes
   function resetBoard(): void {
     setPhraseIndex(pickUniqueNumbers());
   }
@@ -55,7 +48,7 @@ function Board() {
       <div className="grid">{rows}</div>
       <Button
         variant="contained"
-        size="large"
+        size="small"
         className="resetButton"
         onClick={resetBoard}
       >

@@ -4,6 +4,11 @@ import { BoxProps } from '../../types';
 import Button from '@mui/material/Button';
 
 function Box(props: BoxProps) {
+  const [clicked, setClicked] = useState(false);
+
+  const handleBoxClick = () => {
+    setClicked(true);
+  };
   return (
     <Button
       variant="outlined"
@@ -11,7 +16,11 @@ function Box(props: BoxProps) {
       //   onClick={handleBoxClick}
       data-row={props.row}
       data-column={props.column}
-      style={{ margin: '4px' }}
+      style={{
+        margin: '4px',
+        backgroundColor: clicked ? 'var(--neon-blue)' : 'primary',
+        border: clicked ? '1px solid var(--neon-blue)' : 'primary',
+      }}
       sx={{
         '&.Mui-disabled': {
           color: 'var(--neon-blue)',

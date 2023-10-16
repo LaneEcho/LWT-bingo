@@ -46,14 +46,14 @@ function Board() {
   return (
     <div className="board">
       <div className="grid">{rows}</div>
-      <Button
+      {/* <Button
         variant="contained"
         size="small"
         className="resetButton"
         onClick={resetBoard}
       >
         Reset Board
-      </Button>
+      </Button> */}
     </div>
   );
 }

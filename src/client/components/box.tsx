@@ -13,7 +13,7 @@ function Box(props: BoxProps) {
     <Button
       variant="outlined"
       className="box"
-      //   onClick={handleBoxClick}
+      onClick={handleBoxClick}
       data-row={props.row}
       data-column={props.column}
       style={{

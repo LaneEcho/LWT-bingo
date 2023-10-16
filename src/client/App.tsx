@@ -95,7 +95,8 @@ function App() {
             color: darkMode ? '#fff' : '#000',
           }}
         >
-          Warning! Do not refresh the page or you will lose your progress!
+          Warning! Do not refresh the page or you will lose your progress! This
+          is not an official Lesbians Who Tech activity!
         </Alert>
         <Board />
         <div className="button container">

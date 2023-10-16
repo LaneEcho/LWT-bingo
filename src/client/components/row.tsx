@@ -15,8 +15,7 @@ function Row(props: RowProps) {
           text={'Free Space'} // add image if time
           row={props.row}
           column={i}
-          // handleBoxClick={props.handleBoxClick}
-          handleBoxClick={null}
+          //   handleBoxClick={props.handleBoxClick}
           key={i}
         />
       );
@@ -26,8 +25,7 @@ function Row(props: RowProps) {
           text={phrases[props.phrase[props.row + i * 5]]}
           row={props.row}
           column={i}
-          // handleBoxClick={props.handleBoxClick}
-          handleBoxClick={null}
+          //   handleBoxClick={props.handleBoxClick}
           key={i}
         />
       );

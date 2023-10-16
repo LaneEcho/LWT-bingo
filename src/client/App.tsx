@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { render } from 'react-dom';
 
 import Board from './components/board';
+import Alert from '@mui/material/Alert';
+import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 
 import {
   Typography,
@@ -9,6 +11,7 @@ import {
   ThemeProvider,
   createTheme,
   Button,
+  useTheme,
 } from '@mui/material';
 
 function App() {
@@ -40,6 +43,8 @@ function App() {
     },
   });
 
+  const theme = useTheme();
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
@@ -55,6 +60,32 @@ function App() {
         >
           Lesbians Who Tech Bingo!
         </Typography>
+        {/* <Typography
+          variant="subtitle1"
+          paragraph
+          color={theme.palette.primary.dark}
+          style={{
+            // fontSize: '5rem',
+            marginBottom: '10px',
+            textAlign: 'center',
+          }}
+        >
+          How to play: Click on a square when you've encountered it during the
+          conference.
+        </Typography> */}
+        <Alert
+          variant="filled"
+          iconMapping={{
+            success: <PriorityHighIcon fontSize="inherit" />,
+          }}
+          style={{
+            justifyContent: 'center',
+            backgroundColor: darkMode ? 'var(--hot-pink)' : 'var(--neon-blue)',
+            color: darkMode ? '#fff' : '#000',
+          }}
+        >
+          Warning! Do not refresh the page or you will lose your progress!
+        </Alert>
         <Board />
         <Button
           className="toggleButton"

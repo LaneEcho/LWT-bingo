@@ -13,11 +13,14 @@ import Button from '@mui/material/Button';
 // add to set
 // return as an array
 
+// gettting a number so we don't have to hard code
+let length = Object.keys(Phrases).length;
+
 function pickUniqueNumbers(): number[] {
   let uniqueNumbers: Set<number> = new Set();
 
-  while (uniqueNumbers.size < 35) {
-    let randomNumber: number = Math.floor(Math.random() * 47) + 1;
+  while (uniqueNumbers.size <= 25) {
+    let randomNumber: number = Math.floor(Math.random() * length) + 1;
     uniqueNumbers.add(randomNumber);
   }
 

@@ -1,7 +1,6 @@
 import { Phrases } from '../types';
 
 const phrases: Phrases = {
-  0: 'Technical difficulties during speed networking',
   1: 'Someone is wearing a unique shirt',
   2: '"I think what you said is..."',
   3: '“lots of love in the comments"',
@@ -49,6 +48,7 @@ const phrases: Phrases = {
   45: 'Make a new friend',
   46: 'Talk to someone starting their career',
   47: 'Strategic initiative',
+  48: 'Technical difficulties during speed networking',
 };
 
 export default phrases;

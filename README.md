@@ -4,6 +4,10 @@
 
 <center>
 A simple Bingo game to ehnance your Lesbians Who Tech experience
+<br>
+
+[Play it here!](https://laneecho.github.io/LWT-bingo/)
+
 </center>
 
 ## Tech Stack

@@ -19,7 +19,7 @@ let length = Object.keys(Phrases).length;
 function pickUniqueNumbers(): number[] {
   let uniqueNumbers: Set<number> = new Set();
 
-  while (uniqueNumbers.size < 35) {
+  while (uniqueNumbers.size <= 25) {
     let randomNumber: number = Math.floor(Math.random() * length) + 1;
     uniqueNumbers.add(randomNumber);
   }

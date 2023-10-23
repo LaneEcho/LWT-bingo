@@ -6,7 +6,7 @@ const phrases: Phrases = {
   3: '“lots of love in the comments"',
   4: '“I wish we had more time”',
   5: 'Someone has a unique virtual background',
-  6: 'Someone has a unique virtual background​',
+  6: 'Any astrology reference',
   7: '“Put your questions in the comments”​',
   8: 'Meeting finishes on time​',
   9: 'Someone breaks out into dance​',

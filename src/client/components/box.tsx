@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, SetStateAction } from 'react';
 import { BoxProps } from '../../types';
 
 import Button from '@mui/material/Button';
@@ -7,8 +7,24 @@ import { useTheme } from '@mui/material/styles';
 function Box(props: BoxProps) {
   const [clicked, setClicked] = useState(false);
 
+  // see if the box has been clicked
+  useEffect(() => {
+    const savedClickedState = localStorage.getItem(
+      `box-${props.row}-${props.column}`
+    );
+    if (savedClickedState) {
+      setClicked(savedClickedState === 'true');
+    }
+  }, [props.row, props.column]);
+
+  // update state and local storage
   const handleBoxClick = () => {
-    setClicked(true);
+    const updatedClicked = !clicked;
+    setClicked(updatedClicked);
+    localStorage.setItem(
+      `box-${props.row}-${props.column}`,
+      updatedClicked.toString()
+    );
   };
 
   const theme = useTheme();
@@ -26,7 +42,7 @@ function Box(props: BoxProps) {
           ? theme.palette.primary.dark
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
-        border: clicked ? theme.palette.primary.main : 'primary',
+        border: `1px solid ${theme.palette.primary.main}`,
       }}
       sx={{
         '&.Mui-disabled': {

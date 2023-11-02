@@ -27,11 +27,20 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-const initialBoardState: BoardState = pickUniqueNumbers();
-
 function Board() {
-  // state of phrases in beginning to be updated when resetting board
-  const [phraseIndex, setPhraseIndex] = useState(initialBoardState);
+  // start as an empty array
+  const [phraseIndex, setPhraseIndex] = useState([]);
+
+  // useEffect to get or set our phrases, depending on if they exist in local storage
+  useEffect(() => {
+    const savedPhrases: string[] = JSON.parse(localStorage.getItem('items'));
+    if (savedPhrases) {
+      setPhraseIndex(savedPhrases);
+    } else {
+      const phrases: number[] = pickUniqueNumbers();
+      localStorage.setItem('items', JSON.stringify(phrases));
+    }
+  }, []);
 
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
@@ -40,23 +49,27 @@ function Board() {
     rows.push(<Row row={i + 1} content={null} key={i} phrase={phraseIndex} />);
   }
 
-  // function to reset board - just re-render board
-  // will need to unclick boxes
+  // function to reset board
+  // clear local storage and set again
+  // will need to deal with clearing clicks
   function resetBoard(): void {
-    setPhraseIndex(pickUniqueNumbers());
+    localStorage.clear();
+    const phrases: number[] = pickUniqueNumbers();
+    localStorage.setItem('items', JSON.stringify(phrases));
+    setPhraseIndex(phrases);
   }
 
   return (
     <div className="board">
       <div className="grid">{rows}</div>
-      {/* <Button
+      <Button
         variant="contained"
         size="small"
         className="resetButton"
         onClick={resetBoard}
       >
         Reset Board
-      </Button> */}
+      </Button>
     </div>
   );
 }

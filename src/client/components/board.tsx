@@ -27,11 +27,20 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-const initialBoardState: BoardState = pickUniqueNumbers();
-
 function Board() {
-  // state of phrases in beginning to be updated when resetting board
-  const [phraseIndex, setPhraseIndex] = useState(initialBoardState);
+  // start as an empty array
+  const [phraseIndex, setPhraseIndex] = useState([]);
+
+  // useEffect to get or set our phrases, depending on if they exist in local storage
+  useEffect(() => {
+    const savedPhrases = JSON.parse(localStorage.getItem('items'));
+    if (savedPhrases) {
+      setPhraseIndex(savedPhrases);
+    } else {
+      const phrases = pickUniqueNumbers();
+      localStorage.setItem('items', JSON.stringify(phrases));
+    }
+  }, []);
 
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];

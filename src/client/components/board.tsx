@@ -27,20 +27,18 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-function Board() {
-  // start as an empty array
-  const [phraseIndex, setPhraseIndex] = useState([]);
+// initial state
+function initialState() {
+  const phrases: number[] = pickUniqueNumbers();
+  localStorage.setItem('items', JSON.stringify(phrases));
+  return phrases;
+}
 
-  // useEffect to get or set our phrases, depending on if they exist in local storage
-  useEffect(() => {
-    const savedPhrases: string[] = JSON.parse(localStorage.getItem('items'));
-    if (savedPhrases) {
-      setPhraseIndex(savedPhrases);
-    } else {
-      const phrases: number[] = pickUniqueNumbers();
-      localStorage.setItem('items', JSON.stringify(phrases));
-    }
-  }, []);
+function Board() {
+  // either going to pull from local storage if real, or invoke initial state
+  const [phraseIndex, setPhraseIndex] = useState(
+    JSON.parse(localStorage.getItem('items')) || initialState()
+  );
 
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];

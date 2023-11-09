@@ -5,14 +5,6 @@ import { BoardState } from '../../types';
 
 import Button from '@mui/material/Button';
 
-// function for pulling in phrases
-// input: none
-// output: array of random numbers with no repeats
-// create a set so all numbers are unique
-// loop to fill set with 24 numbers
-// add to set
-// return as an array
-
 // gettting a number so we don't have to hard code
 let length = Object.keys(Phrases).length;
 
@@ -36,7 +28,7 @@ function initialState() {
 
 function Board() {
   // either going to pull from local storage if real, or invoke initial state
-  const [phraseIndex, setPhraseIndex] = useState(
+  const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
 
@@ -44,12 +36,18 @@ function Board() {
   const rows: JSX.Element[] = [];
 
   for (let i = 0; i < 5; i++) {
-    rows.push(<Row row={i + 1} content={null} key={i} phrase={phraseIndex} />);
+    rows.push(
+      <Row
+        row={i + 1}
+        content={null}
+        // this key will trigger re-renders because keys will change
+        // key prop used to reconcile previous virtual DOM with the new one
+        key={i + phraseIndex.toString()}
+        phrase={phraseIndex}
+      />
+    );
   }
 
-  // function to reset board
-  // clear local storage and set again
-  // will need to deal with clearing clicks
   function resetBoard(): void {
     localStorage.clear();
     const phrases: number[] = pickUniqueNumbers();
@@ -58,7 +56,7 @@ function Board() {
   }
 
   return (
-    <div className="board">
+    <div className="board" key={phraseIndex.toString()}>
       <div className="grid">{rows}</div>
       <Button
         variant="contained"

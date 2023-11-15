@@ -55,6 +55,41 @@ function Board() {
     setPhraseIndex(phrases);
   }
 
+  // function to check for bingo
+  // whole row should be full
+  // whole column should be full
+  // or any diagonal
+  // check local storage for the keys of boxes that would win
+  // pop up an alert or similar saying bingo
+
+  function bingo() {
+    // figuring out what is in local storage
+    const boxes: string[] = Object.entries(localStorage)
+      .filter((element) => {
+        return element[0] !== 'items';
+      })
+      .map((element) => {
+        return element[0];
+      });
+    console.log('Boxes:', boxes);
+    if (
+      // the stupidest .includes ever?
+      boxes.includes(
+        'box-1-0' && 'box-1-1' && 'box-1-2' && 'box-1-3' && 'box-1-4'
+      )
+    ) {
+      console.log('BINGO');
+    } else {
+      console.log('FALSE');
+    }
+  }
+
+  function bingoLog(): void {
+    console.log(Object.entries(localStorage));
+    // invoke for testing
+    bingo();
+  }
+
   return (
     <div className="board" key={phraseIndex.toString()}>
       <div className="grid">{rows}</div>
@@ -65,6 +100,14 @@ function Board() {
         onClick={resetBoard}
       >
         Reset Board
+      </Button>
+      <Button
+        variant="contained"
+        size="small"
+        className="resetButton"
+        onClick={bingoLog}
+      >
+        Console Log
       </Button>
     </div>
   );

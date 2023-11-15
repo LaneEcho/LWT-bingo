@@ -73,14 +73,21 @@ function Board() {
       });
     console.log('Boxes:', boxes);
     if (
-      // the stupidest .includes ever?
-      boxes.includes(
-        'box-1-0' && 'box-1-1' && 'box-1-2' && 'box-1-3' && 'box-1-4'
-      )
+      boxes.includes('box-1-0') &&
+      boxes.includes('box-1-1') &&
+      boxes.includes('box-1-2') &&
+      boxes.includes('box-1-3') &&
+      boxes.includes('box-1-4')
     ) {
       console.log('BINGO');
-    } else {
-      console.log('FALSE');
+    } else if (
+      boxes.includes('box-1-0') &&
+      boxes.includes('box-1-1') &&
+      boxes.includes('box-1-2') &&
+      boxes.includes('box-1-3') &&
+      boxes.includes('box-1-4')
+    ) {
+      console.log('BINGO');
     }
   }
 

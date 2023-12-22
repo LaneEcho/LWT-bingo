@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import Row from './row';
 import Phrases from '../phrases';
 import { BoardState } from '../../types';
+import { bingoRow, bingoColumn } from '../../lib';
 
 import Button from '@mui/material/Button';
 
-// gettting a number so we don't have to hard code
+// gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length = Object.keys(Phrases).length;
 
 function pickUniqueNumbers(): number[] {
@@ -19,7 +20,7 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-// initial state
+// if nothing is in localStorage, we will use this function
 function initialState() {
   const phrases: number[] = pickUniqueNumbers();
   localStorage.setItem('items', JSON.stringify(phrases));
@@ -27,7 +28,7 @@ function initialState() {
 }
 
 function Board() {
-  // either going to pull from local storage if real, or invoke initial state
+  // either going to pull from localStorage, or invoke initial state function
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
@@ -55,46 +56,13 @@ function Board() {
     setPhraseIndex(phrases);
   }
 
-  // function to check for bingo
-  // whole row should be full
-  // whole column should be full
-  // or any diagonal
-  // check local storage for the keys of boxes that would win
-  // pop up an alert or similar saying bingo
-
-  function bingo() {
-    // figuring out what is in local storage
-    const boxes: string[] = Object.entries(localStorage)
-      .filter((element) => {
-        return element[0] !== 'items';
-      })
-      .map((element) => {
-        return element[0];
-      });
-    console.log('Boxes:', boxes);
-    if (
-      boxes.includes('box-1-0') &&
-      boxes.includes('box-1-1') &&
-      boxes.includes('box-1-2') &&
-      boxes.includes('box-1-3') &&
-      boxes.includes('box-1-4')
-    ) {
-      console.log('BINGO');
-    } else if (
-      boxes.includes('box-1-0') &&
-      boxes.includes('box-1-1') &&
-      boxes.includes('box-1-2') &&
-      boxes.includes('box-1-3') &&
-      boxes.includes('box-1-4')
-    ) {
-      console.log('BINGO');
-    }
-  }
-
   function bingoLog(): void {
     console.log(Object.entries(localStorage));
     // invoke for testing
-    bingo();
+    let bingo = bingoRow();
+    if (!bingo) {
+      bingo = bingoColumn();
+    }
   }
 
   return (

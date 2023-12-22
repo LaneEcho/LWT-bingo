@@ -89,36 +89,36 @@ export function bingoColumn() {
     return true;
   } else if (
     boxes.includes('box-1-1') &&
-    boxes.includes('box-2-2') &&
-    boxes.includes('box-3-3') &&
-    boxes.includes('box-4-4') &&
-    boxes.includes('box-5-5')
-  ) {
-    console.log('BINGO');
-    return true;
-  } else if (
-    boxes.includes('box-3-0') &&
+    boxes.includes('box-2-1') &&
     boxes.includes('box-3-1') &&
-    boxes.includes('box-3-2') &&
-    boxes.includes('box-3-3') &&
-    boxes.includes('box-3-4')
-  ) {
-    console.log('BINGO');
-    return true;
-  } else if (
-    boxes.includes('box-4-0') &&
     boxes.includes('box-4-1') &&
-    boxes.includes('box-4-2') &&
-    boxes.includes('box-4-3') &&
-    boxes.includes('box-4-4')
+    boxes.includes('box-5-1')
   ) {
     console.log('BINGO');
     return true;
   } else if (
-    boxes.includes('box-5-0') &&
-    boxes.includes('box-5-1') &&
-    boxes.includes('box-5-2') &&
-    boxes.includes('box-5-3') &&
+    boxes.includes('box-1-2') &&
+    boxes.includes('box-2-2') &&
+    boxes.includes('box-3-2') &&
+    boxes.includes('box-4-2') &&
+    boxes.includes('box-5-2')
+  ) {
+    console.log('BINGO');
+    return true;
+  } else if (
+    boxes.includes('box-1-3') &&
+    boxes.includes('box-2-3') &&
+    boxes.includes('box-3-3') &&
+    boxes.includes('box-4-3') &&
+    boxes.includes('box-5-3')
+  ) {
+    console.log('BINGO');
+    return true;
+  } else if (
+    boxes.includes('box-1-4') &&
+    boxes.includes('box-2-4') &&
+    boxes.includes('box-3-4') &&
+    boxes.includes('box-4-4') &&
     boxes.includes('box-5-4')
   ) {
     console.log('BINGO');

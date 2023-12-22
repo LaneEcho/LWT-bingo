@@ -3,7 +3,7 @@ import Row from './row';
 import Phrases from '../phrases';
 import { BoardState } from '../../types';
 import { bingoRow, bingoColumn, bingoSpecial } from '../../lib';
-
+import ConfettiExplosion from 'react-confetti-explosion';
 import Button from '@mui/material/Button';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
@@ -32,6 +32,7 @@ function Board() {
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
+  const [confetti, setConfetti] = useState(false);
 
   // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
@@ -54,6 +55,7 @@ function Board() {
     const phrases: number[] = pickUniqueNumbers();
     localStorage.setItem('items', JSON.stringify(phrases));
     setPhraseIndex(phrases);
+    setConfetti(false);
   }
 
   function bingoLog(): void {
@@ -67,10 +69,28 @@ function Board() {
     //   bingo = bingoSpecial();
     // }
     bingoSpecial();
+    setConfetti(true);
+    setTimeout(() => {
+      setConfetti(false);
+      console.log('Confetti Reset');
+    }, 3000);
   }
+
+  // accessing CSS variables in case we change them later
+  const root = document.documentElement;
+  const hotPinkColor = getComputedStyle(root).getPropertyValue('--hot-pink');
+  const neonBlueColor = getComputedStyle(root).getPropertyValue('--neon-blue');
+  const lightBlueColor =
+    getComputedStyle(root).getPropertyValue('--light-blue');
 
   return (
     <div className="board" key={phraseIndex.toString()}>
+      {confetti && (
+        <ConfettiExplosion
+          particleCount={500}
+          colors={[hotPinkColor, neonBlueColor, lightBlueColor]}
+        />
+      )}
       <div className="grid">{rows}</div>
       <Button
         variant="contained"

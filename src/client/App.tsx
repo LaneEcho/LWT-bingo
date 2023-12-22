@@ -18,9 +18,7 @@ import {
 } from '@mui/material';
 
 function App() {
-  // dark mode
   const [darkMode, setDarkMode] = useState(false);
-  // for modal
   const [open, setOpen] = useState(false);
 
   const lightTheme = createTheme({

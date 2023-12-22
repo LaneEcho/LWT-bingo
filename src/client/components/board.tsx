@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Row from './row';
 import Phrases from '../phrases';
 import { BoardState } from '../../types';
-import { bingoRow, bingoColumn } from '../../lib';
+import { bingoRow, bingoColumn, bingoSpecial } from '../../lib';
 
 import Button from '@mui/material/Button';
 
@@ -59,10 +59,14 @@ function Board() {
   function bingoLog(): void {
     console.log(Object.entries(localStorage));
     // invoke for testing
-    let bingo = bingoRow();
-    if (!bingo) {
-      bingo = bingoColumn();
-    }
+    // let bingo = bingoRow();
+    // if (!bingo) {
+    //   bingo = bingoColumn();
+    // }
+    // if (!bingo) {
+    //   bingo = bingoSpecial();
+    // }
+    bingoSpecial();
   }
 
   return (

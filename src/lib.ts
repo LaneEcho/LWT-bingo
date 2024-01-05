@@ -62,6 +62,26 @@ export function bingoRow() {
   ) {
     console.log('BINGO');
     return true;
+  } else if (
+    // diagonal
+    boxes.includes('box-1-0') &&
+    boxes.includes('box-2-1') &&
+    boxes.includes('box-3-2') &&
+    boxes.includes('box-4-3') &&
+    boxes.includes('box-5-4')
+  ) {
+    console.log('BINGO');
+    return true;
+  } else if (
+    // other diagonal
+    boxes.includes('box-1-4') &&
+    boxes.includes('box-2-3') &&
+    boxes.includes('box-3-2') &&
+    boxes.includes('box-4-1') &&
+    boxes.includes('box-5-0')
+  ) {
+    console.log('BINGO');
+    return true;
   }
   return false;
 }
@@ -207,26 +227,6 @@ export function bingoSpecial() {
   console.log('Boxes:', boxes);
   if (boxes.length === 25) {
     console.log('Full Board BINGO!');
-  } else if (
-    // diagonal
-    boxes.includes('box-1-0') &&
-    boxes.includes('box-2-1') &&
-    boxes.includes('box-3-2') &&
-    boxes.includes('box-4-3') &&
-    boxes.includes('box-5-4')
-  ) {
-    console.log('BINGO');
-    return true;
-  } else if (
-    // other diagonal
-    boxes.includes('box-1-4') &&
-    boxes.includes('box-2-3') &&
-    boxes.includes('box-3-2') &&
-    boxes.includes('box-4-1') &&
-    boxes.includes('box-5-0')
-  ) {
-    console.log('BINGO');
-    return true;
   } else if (
     // #
     equals(boxes, hashtag) === true

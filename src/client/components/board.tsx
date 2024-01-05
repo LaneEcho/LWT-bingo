@@ -58,18 +58,15 @@ function Board() {
     setConfetti(false);
   }
 
-  function bingoLog(): void {
-    console.log(Object.entries(localStorage));
-    // invoke for testing
-    // let bingo = bingoRow();
-    // if (!bingo) {
-    //   bingo = bingoColumn();
-    // }
-    // if (!bingo) {
-    //   bingo = bingoSpecial();
-    // }
-    bingoSpecial();
-    setConfetti(true);
+  function callBingo(): void {
+    let bingo: boolean = bingoRow();
+    // if not a row
+    if (!bingo) {
+      bingo = bingoColumn();
+    }
+    if (bingo) {
+      setConfetti(true);
+    }
     setTimeout(() => {
       setConfetti(false);
       console.log('Confetti Reset');
@@ -102,11 +99,11 @@ function Board() {
       </Button>
       <Button
         variant="contained"
-        size="small"
+        size="large"
         className="resetButton"
-        onClick={bingoLog}
+        onClick={callBingo}
       >
-        Console Log
+        BINGO!
       </Button>
     </div>
   );

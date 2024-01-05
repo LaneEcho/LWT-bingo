@@ -20,9 +20,9 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 
 | Feature                            | Status |
 | ---------------------------------- | ------ |
-| Alert player when they win         | ⏳     |
+| Alert player when they win         | ✅     |
 | Do not reset board on page refresh | ✅     |
-| Add Images to About                | ⏳     |
+| URL State Management               | ⏳     |
 | Separate Modal Component           | ⏳     |
 | Responsive Design                  | ⏳     |
 | Accessibility improvement          | ⏳     |

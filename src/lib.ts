@@ -5,8 +5,8 @@
 // check local storage for the keys of boxes that would win
 // pop up an alert or similar saying bingo
 
-// specifically checking for bingo rows
-export function bingoRow() {
+// checking for bingo rows
+export function bingoRow(): boolean {
   // figuring out what is in local storage
   const boxes: string[] = Object.entries(localStorage)
     .filter((element) => {
@@ -86,8 +86,8 @@ export function bingoRow() {
   return false;
 }
 
-// specifically checking for bingo columns
-export function bingoColumn() {
+// checking for bingo columns
+export function bingoColumn(): boolean {
   // figuring out what is in local storage
   const boxes: string[] = Object.entries(localStorage)
     .filter((element) => {
@@ -148,7 +148,7 @@ export function bingoColumn() {
 }
 
 // special patterns
-export function bingoSpecial() {
+export function bingoSpecial(): boolean {
   // these are sorted arrays that will be used for comparison to values stored in localStorage
   const hashtag: string[] = [
     'box-1-1',

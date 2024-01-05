@@ -7,7 +7,7 @@ import ConfettiExplosion from 'react-confetti-explosion';
 import Button from '@mui/material/Button';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
-let length = Object.keys(Phrases).length;
+let length: number = Object.keys(Phrases).length;
 
 function pickUniqueNumbers(): number[] {
   let uniqueNumbers: Set<number> = new Set();
@@ -21,7 +21,7 @@ function pickUniqueNumbers(): number[] {
 }
 
 // if nothing is in localStorage, we will use this function
-function initialState() {
+function initialState(): number[] {
   const phrases: number[] = pickUniqueNumbers();
   localStorage.setItem('items', JSON.stringify(phrases));
   return phrases;
@@ -32,9 +32,8 @@ function Board() {
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
-  const [confetti, setConfetti] = useState(false);
+  const [confetti, setConfetti] = useState<boolean>(false);
 
-  // iterate to create rows- an array of JSX elements
   const rows: JSX.Element[] = [];
 
   for (let i = 0; i < 5; i++) {
@@ -60,7 +59,7 @@ function Board() {
 
   function callBingo(): void {
     let bingo: boolean = bingoRow();
-    // if not a row
+    // if not a row then check for column
     if (!bingo) {
       bingo = bingoColumn();
     }
@@ -69,15 +68,16 @@ function Board() {
     }
     setTimeout(() => {
       setConfetti(false);
-      console.log('Confetti Reset');
     }, 3000);
   }
 
   // accessing CSS variables in case we change them later
-  const root = document.documentElement;
-  const hotPinkColor = getComputedStyle(root).getPropertyValue('--hot-pink');
-  const neonBlueColor = getComputedStyle(root).getPropertyValue('--neon-blue');
-  const lightBlueColor =
+  const root: HTMLElement = document.documentElement;
+  const hotPinkColor: string =
+    getComputedStyle(root).getPropertyValue('--hot-pink');
+  const neonBlueColor: string =
+    getComputedStyle(root).getPropertyValue('--neon-blue');
+  const lightBlueColor: string =
     getComputedStyle(root).getPropertyValue('--light-blue');
 
   return (

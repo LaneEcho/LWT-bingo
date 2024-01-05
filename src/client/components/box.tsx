@@ -5,9 +5,9 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 
 function Box(props: BoxProps) {
-  const [clicked, setClicked] = useState(false);
+  const [clicked, setClicked] = useState<boolean>(false);
 
-  // see if the box has been clicked
+  // see if the box has been clicked upon page reload
   useEffect(() => {
     const savedClickedState = localStorage.getItem(
       `box-${props.row}-${props.column}`
@@ -17,14 +17,18 @@ function Box(props: BoxProps) {
     }
   }, [props.row, props.column]);
 
-  // update state and local storage
-  const handleBoxClick = () => {
-    const updatedClicked = !clicked;
+  // update state and local storage on click
+  const handleBoxClick = (): void => {
+    const updatedClicked: boolean = !clicked;
     setClicked(updatedClicked);
-    localStorage.setItem(
-      `box-${props.row}-${props.column}`,
-      updatedClicked.toString()
-    );
+    if (updatedClicked) {
+      localStorage.setItem(
+        `box-${props.row}-${props.column}`,
+        updatedClicked.toString()
+      );
+    } else {
+      localStorage.removeItem(`box-${props.row}-${props.column}`);
+    }
   };
 
   const theme = useTheme();

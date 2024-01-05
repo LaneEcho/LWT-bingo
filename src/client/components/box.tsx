@@ -40,19 +40,18 @@ function Box(props: BoxProps) {
       onClick={handleBoxClick}
       data-row={props.row}
       data-column={props.column}
+      disabled={props.gameOver}
+      // WIP could use sx prop instead of style
       style={{
         margin: '4px',
+        // want users to know when button is disabled
         backgroundColor: clicked
-          ? theme.palette.primary.dark
+          ? props.gameOver
+            ? 'orange' // color of disabled clicked buttons
+            : theme.palette.primary.dark
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
         border: `1px solid ${theme.palette.primary.main}`,
-      }}
-      sx={{
-        '&.Mui-disabled': {
-          color: 'var(--neon-blue)',
-          border: '1px solid var(--neon-blue)',
-        },
       }}
     >
       {props.text}

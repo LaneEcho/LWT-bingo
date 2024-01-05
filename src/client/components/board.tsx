@@ -32,6 +32,10 @@ function Board() {
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
+  // persistin gameOver state in case of refresh
+  const [gameOver, setGameOver] = useState(
+    JSON.parse(localStorage.getItem('game over')) || false
+  );
   const [confetti, setConfetti] = useState<boolean>(false);
 
   const rows: JSX.Element[] = [];
@@ -45,6 +49,7 @@ function Board() {
         // key prop used to reconcile previous virtual DOM with the new one
         key={i + phraseIndex.toString()}
         phrase={phraseIndex}
+        gameOver={gameOver}
       />
     );
   }
@@ -53,6 +58,7 @@ function Board() {
     localStorage.clear();
     const phrases: number[] = pickUniqueNumbers();
     localStorage.setItem('items', JSON.stringify(phrases));
+    setGameOver(false);
     setPhraseIndex(phrases);
     setConfetti(false);
   }
@@ -65,7 +71,10 @@ function Board() {
     }
     if (bingo) {
       setConfetti(true);
+      setGameOver(true);
+      localStorage.setItem('game over', 'true');
     }
+    // just for fun in case user wants more confetti
     setTimeout(() => {
       setConfetti(false);
     }, 3000);

@@ -16,6 +16,7 @@ function Row(props: RowProps) {
           column={i}
           //   handleBoxClick={props.handleBoxClick}
           key={i}
+          gameOver={props.gameOver}
         />
       );
     } else {
@@ -26,6 +27,7 @@ function Row(props: RowProps) {
           column={i}
           //   handleBoxClick={props.handleBoxClick}
           key={i}
+          gameOver={props.gameOver}
         />
       );
     }

@@ -19,3 +19,7 @@ export type BoxProps = {
   gameOver: boolean;
   // handleBoxClick(event: React.MouseEvent<HTMLButtonElement>): void;
 };
+
+export type ResetProps = {
+  onClick: () => void;
+};

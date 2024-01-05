@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { render } from 'react-dom';
 
 import Board from './components/board';
-import About from './components/about';
 
 import {
   Typography,
@@ -11,14 +10,10 @@ import {
   createTheme,
   Button,
   useTheme,
-  Modal,
-  Box,
-  Link,
 } from '@mui/material';
 
 function App() {
-  const [darkMode, setDarkMode] = useState(false);
-  const [open, setOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState<boolean>(false);
 
   const lightTheme = createTheme({
     palette: {
@@ -47,14 +42,6 @@ function App() {
   });
 
   const theme = useTheme();
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
@@ -92,18 +79,7 @@ function App() {
           >
             {darkMode ? 'Light' : 'Dark'} Mode
           </Button>
-          <Button
-            onClick={handleOpen}
-            variant="contained"
-            size="small"
-            style={{ marginLeft: '.5rem', display: 'inline-block' }}
-          >
-            About Us
-          </Button>
         </div>
-        <Modal open={open} onClose={handleClose}>
-          <About></About>
-        </Modal>
       </div>
     </ThemeProvider>
   );

@@ -4,7 +4,9 @@ import Phrases from '../phrases';
 import { BoardState } from '../../types';
 import { bingoRow, bingoColumn, bingoSpecial } from '../../lib';
 import ConfettiExplosion from 'react-confetti-explosion';
-import Button from '@mui/material/Button';
+
+import { Button, Modal } from '@mui/material';
+import Reset from './reset';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;
@@ -37,6 +39,8 @@ function Board() {
     JSON.parse(localStorage.getItem('game over')) || false
   );
   const [confetti, setConfetti] = useState<boolean>(false);
+  // so it makes sure to tell user to play again
+  const [open, setOpen] = useState<boolean>(gameOver);
 
   const rows: JSX.Element[] = [];
 
@@ -61,6 +65,7 @@ function Board() {
     setGameOver(false);
     setPhraseIndex(phrases);
     setConfetti(false);
+    setOpen(false);
   }
 
   function callBingo(): void {
@@ -73,12 +78,19 @@ function Board() {
       setConfetti(true);
       setGameOver(true);
       localStorage.setItem('game over', 'true');
+      setOpen(true);
     }
+    // what do we want to say if it's false
     // just for fun in case user wants more confetti
     setTimeout(() => {
       setConfetti(false);
     }, 3000);
   }
+
+  // working out modal popup functionality
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   // accessing CSS variables in case we change them later
   const root: HTMLElement = document.documentElement;
@@ -100,20 +112,23 @@ function Board() {
       <div className="grid">{rows}</div>
       <Button
         variant="contained"
-        size="small"
-        className="resetButton"
-        onClick={resetBoard}
-      >
-        Reset Board
-      </Button>
-      <Button
-        variant="contained"
         size="large"
         className="resetButton"
         onClick={callBingo}
       >
         BINGO!
       </Button>
+      <Button
+        variant="contained"
+        size="small"
+        className="resetButton"
+        onClick={resetBoard}
+      >
+        Play Again
+      </Button>
+      <Modal open={open} onClose={handleClose}>
+        <Reset onClick={resetBoard}></Reset>
+      </Modal>
     </div>
   );
 }

@@ -15,7 +15,6 @@ export function bingoRow(): boolean {
     .map((element) => {
       return element[0];
     });
-  console.log('Boxes:', boxes);
   if (
     boxes.includes('box-1-0') &&
     boxes.includes('box-1-1') &&
@@ -23,8 +22,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-1-3') &&
     boxes.includes('box-1-4')
   ) {
-    // eventual make a separate function to invoke here
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-2-0') &&
@@ -33,7 +30,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-2-3') &&
     boxes.includes('box-2-4')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-3-0') &&
@@ -42,7 +38,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-3-3') &&
     boxes.includes('box-3-4')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-4-0') &&
@@ -51,7 +46,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-4-3') &&
     boxes.includes('box-4-4')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-5-0') &&
@@ -60,7 +54,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-5-3') &&
     boxes.includes('box-5-4')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     // diagonal
@@ -70,7 +63,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-4-3') &&
     boxes.includes('box-5-4')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     // other diagonal
@@ -80,7 +72,6 @@ export function bingoRow(): boolean {
     boxes.includes('box-4-1') &&
     boxes.includes('box-5-0')
   ) {
-    console.log('BINGO');
     return true;
   }
   return false;
@@ -96,7 +87,6 @@ export function bingoColumn(): boolean {
     .map((element) => {
       return element[0];
     });
-  console.log('Boxes:', boxes);
   if (
     boxes.includes('box-1-0') &&
     boxes.includes('box-2-0') &&
@@ -104,8 +94,6 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-0') &&
     boxes.includes('box-5-0')
   ) {
-    // eventual make a separate function to invoke here
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-1-1') &&
@@ -114,7 +102,6 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-1') &&
     boxes.includes('box-5-1')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-1-2') &&
@@ -123,7 +110,6 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-2') &&
     boxes.includes('box-5-2')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-1-3') &&
@@ -132,7 +118,6 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-3') &&
     boxes.includes('box-5-3')
   ) {
-    console.log('BINGO');
     return true;
   } else if (
     boxes.includes('box-1-4') &&
@@ -141,7 +126,6 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-4') &&
     boxes.includes('box-5-4')
   ) {
-    console.log('BINGO');
     return true;
   }
   return false;
@@ -224,32 +208,26 @@ export function bingoSpecial(): boolean {
     .map((element) => {
       return element[0];
     });
-  console.log('Boxes:', boxes);
   if (boxes.length === 25) {
-    console.log('Full Board BINGO!');
   } else if (
     // #
     equals(boxes, hashtag) === true
   ) {
-    console.log('BINGO Hashtag');
     return true;
   } else if (
     // L
     equals(boxes, L) === true
   ) {
-    console.log('BINGO L');
     return true;
   } else if (
     // W
     equals(boxes, W) === true
   ) {
-    console.log('BINGO W');
     return true;
   } else if (
     // T
     equals(boxes, T) === true
   ) {
-    console.log('BINGO T');
     return true;
   }
   return false;

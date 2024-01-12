@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { RowProps } from '../../types';
 import Box from './box';
 import phrases from '../phrases';
 
 function Row(props: RowProps) {
-  // iterate to create rows
   const boxes: JSX.Element[] = [];
 
   for (let i = 0; i < 5; i++) {
@@ -12,11 +11,12 @@ function Row(props: RowProps) {
     if (props.row === 3 && i === 2) {
       boxes.push(
         <Box
-          text={'Free Space'} // add image if time
+          text={'Free Space'} // add image later
           row={props.row}
           column={i}
           //   handleBoxClick={props.handleBoxClick}
           key={i}
+          gameOver={props.gameOver}
         />
       );
     } else {
@@ -27,6 +27,7 @@ function Row(props: RowProps) {
           column={i}
           //   handleBoxClick={props.handleBoxClick}
           key={i}
+          gameOver={props.gameOver}
         />
       );
     }

@@ -21,5 +21,7 @@ export type BoxProps = {
 };
 
 export type ResetProps = {
-  onClick: () => void;
+  reset: () => void;
+  onClose: () => void;
+  gameOver: boolean;
 };

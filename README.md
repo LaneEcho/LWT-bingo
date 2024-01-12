@@ -22,10 +22,10 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 | ---------------------------------- | ------ |
 | Alert player when they win         | ✅     |
 | Do not reset board on page refresh | ✅     |
-| URL State Management               | ⏳     |
-| Separate Modal Component           | ⏳     |
+| Separate Modal Component           | ✅     |
 | Responsive Design                  | ⏳     |
 | Accessibility improvement          | ⏳     |
+| URL State Management               | ⏳     |
 | And more...                        | ⏳     |
 
 - ✅ = Ready to use

@@ -40,7 +40,7 @@ function Board() {
   );
   const [confetti, setConfetti] = useState<boolean>(false);
   // so it makes sure to tell user to play again
-  const [open, setOpen] = useState<boolean>(gameOver);
+  const [open, setOpen] = useState<boolean>(false);
 
   const rows: JSX.Element[] = [];
 
@@ -79,12 +79,12 @@ function Board() {
       setGameOver(true);
       localStorage.setItem('game over', 'true');
       setOpen(true);
+      setTimeout(() => {
+        setConfetti(false);
+      }, 3000);
+    } else {
+      setOpen(true);
     }
-    // what do we want to say if it's false
-    // just for fun in case user wants more confetti
-    setTimeout(() => {
-      setConfetti(false);
-    }, 3000);
   }
 
   // working out modal popup functionality
@@ -127,7 +127,11 @@ function Board() {
         Play Again
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <Reset onClick={resetBoard}></Reset>
+        <Reset
+          gameOver={gameOver}
+          reset={resetBoard}
+          onClose={handleClose}
+        ></Reset>
       </Modal>
     </div>
   );

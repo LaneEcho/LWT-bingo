@@ -127,11 +127,13 @@ function Board() {
         Play Again
       </Button>
       <Modal open={open} onClose={handleClose}>
-        <Reset
-          gameOver={gameOver}
-          reset={resetBoard}
-          onClose={handleClose}
-        ></Reset>
+        <>
+          <Reset
+            gameOver={gameOver}
+            reset={resetBoard}
+            onClose={handleClose}
+          ></Reset>
+        </>
       </Modal>
     </div>
   );

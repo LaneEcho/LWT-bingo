@@ -11,8 +11,10 @@ import {
   Button,
   useTheme,
 } from '@mui/material';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
-function initialState(): boolean {
+function initialState() {
   if (localStorageAvailable()) {
     const theme: string = localStorage.getItem('darkMode');
 
@@ -94,7 +96,7 @@ function App() {
             onClick={toggleTheme}
             variant="contained"
             size="small"
-            style={{ display: 'inline-block' }}
+            startIcon={darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           >
             {darkMode ? 'Light' : 'Dark'} Mode
           </Button>

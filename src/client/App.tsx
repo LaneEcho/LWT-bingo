@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
+import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/board';
 
 import {
@@ -11,8 +12,26 @@ import {
   useTheme,
 } from '@mui/material';
 
+function initialState(): boolean {
+  if (localStorageAvailable()) {
+    const theme: string = localStorage.getItem('darkMode');
+
+    if (theme) {
+      return Boolean(theme);
+    } else {
+      const userPrefers: boolean = window.matchMedia(
+        '(prefers-color-scheme: dark)'
+      ).matches;
+      localStorage.setItem('darkMode', String(userPrefers));
+      return userPrefers;
+    }
+  }
+  // probably want to return something if there is not local storage access idk
+}
+
 function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const [darkMode, setDarkMode] = useState<boolean>(initialState());
+  console.log(window.matchMedia('(prefers-color-scheme: dark)'));
 
   const lightTheme = createTheme({
     palette: {
@@ -25,8 +44,9 @@ function App() {
     },
   });
 
-  const toggleTheme = () => {
+  const toggleTheme = (): void => {
     setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', (!darkMode).toString());
   };
 
   const darkTheme = createTheme({

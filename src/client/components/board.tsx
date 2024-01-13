@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Row from './row';
 import Phrases from '../phrases';
 import { BoardState } from '../../types';
-import { bingoRow, bingoColumn, bingoSpecial } from '../../lib';
+import { bingoRow, bingoColumn, bingoSpecial } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 
 import { Button, Modal } from '@mui/material';

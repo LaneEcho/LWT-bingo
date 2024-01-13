@@ -80,10 +80,9 @@ function App() {
         <Typography
           variant="h1"
           color="primary"
-          style={{
+          sx={{
             fontSize: '3rem',
-            marginTop: '10px',
-            marginBottom: '10px',
+            marginTop: '1rem',
             textAlign: 'center',
           }}
         >

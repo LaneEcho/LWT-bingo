@@ -19,13 +19,16 @@ body {
 }
 
 .board {
-  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
+}
+
+.grid {
+  margin: 0.5rem;
 }
 
 .box {

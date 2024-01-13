@@ -115,6 +115,10 @@ function Board() {
         size="large"
         className="resetButton"
         onClick={callBingo}
+        sx={{
+          width: '16rem',
+          fontSize: '1.5rem',
+        }}
       >
         BINGO!
       </Button>
@@ -123,6 +127,10 @@ function Board() {
         size="small"
         className="resetButton"
         onClick={resetBoard}
+        sx={{
+          width: '8rem',
+          marginTop: '0.5rem',
+        }}
       >
         Play Again
       </Button>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { ResetProps } from '../../types';
-import { Box, Typography, Button, Link } from '@mui/material';
+import { Box, Typography, Button, Stack } from '@mui/material';
 
 function Reset(props: ResetProps) {
   return (
@@ -11,42 +11,45 @@ function Reset(props: ResetProps) {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '50vw',
+          width: '40vw',
           bgcolor: 'background.paper',
-          padding: '5px',
+          padding: '1.5rem',
           borderRadius: '8px',
           textAlign: 'center',
-          overflow: 'scroll',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          // overflow: 'scroll',
+          // display: 'flex',
+          // flexDirection: 'column',
+          // justifyContent: 'center',
+          // alignItems: 'center',
         }}
       >
         {props.gameOver ? (
-          <div className="about bingo_true">
+          <Stack
+            className="about bingo_true"
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+          >
             <Typography id="modal-modal-title" variant="h4" component="h2">
               🌈 BINGO! 🌈
             </Typography>
-            <Typography
-              id="modal-modal-description"
-              variant="h6"
-              sx={{ mt: '1px' }}
-            >
-              You win!
-            </Typography>
             <Typography id="modal-modal-description">
-              Do you want to play again?
+              You've been all over the #LWT Summit and saw enough stuff to get a
+              bingo! Submit your score to the leaderboard or start a new game!
             </Typography>
             <Button
               variant="contained"
               size="small"
               className="resetButton"
               onClick={props.reset}
+              sx={{
+                width: '8rem',
+              }}
             >
               Play Again
             </Button>
-          </div>
+          </Stack>
         ) : (
           <div className="about bingo_false">
             <Typography id="modal-modal-title" variant="h4" component="h2">
@@ -59,9 +62,6 @@ function Reset(props: ResetProps) {
             >
               Keep playing, you've got this!
             </Typography>
-            {/* <Typography id="modal-modal-description">
-            Do you want to play again?
-          </Typography> */}
             <Button
               variant="contained"
               size="medium"

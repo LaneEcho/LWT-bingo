@@ -20,12 +20,11 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 
 | Feature                            | Status |
 | ---------------------------------- | ------ |
-| Alert player when they win         | ✅     |
-| Do not reset board on page refresh | ✅     |
-| Separate Modal Component           | ✅     |
+| Alert player when they win         | ⏳     |
+| Do not reset board on page refresh | ⏳     |
+| Add Images to About                | ⏳     |
 | Responsive Design                  | ⏳     |
 | Accessibility improvement          | ⏳     |
-| URL State Management               | ⏳     |
 | And more...                        | ⏳     |
 
 - ✅ = Ready to use

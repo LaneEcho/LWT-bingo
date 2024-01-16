@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Row from './row';
 import Phrases from '../phrases';
 import { BoardState } from '../../types';
-import { bingoRow, bingoColumn, bingoSpecial } from '../../lib';
+import { bingoRow, bingoColumn, bingoSpecial } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 
 import { Button, Modal } from '@mui/material';
@@ -115,6 +115,10 @@ function Board() {
         size="large"
         className="resetButton"
         onClick={callBingo}
+        sx={{
+          width: '16rem',
+          fontSize: '1.5rem',
+        }}
       >
         BINGO!
       </Button>
@@ -123,8 +127,12 @@ function Board() {
         size="small"
         className="resetButton"
         onClick={resetBoard}
+        sx={{
+          width: '8rem',
+          marginTop: '0.5rem',
+        }}
       >
-        Play Again
+        Reset Board
       </Button>
       <Modal open={open} onClose={handleClose}>
         <>

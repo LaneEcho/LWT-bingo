@@ -8,8 +8,10 @@ import {
   CssBaseline,
   ThemeProvider,
   createTheme,
-  Button,
   useTheme,
+  Stack,
+  Switch,
+  Button,
 } from '@mui/material';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
@@ -77,20 +79,18 @@ function App() {
           height: '100vh',
         }}
       >
-        <Typography
-          variant="h1"
-          color="primary"
-          sx={{
-            fontSize: '3rem',
-            marginTop: '1rem',
-            textAlign: 'center',
-          }}
-        >
-          Lesbians Who Tech Bingo!
-        </Typography>
-        <Board />
-        <div className="button container">
-          <Button
+        <Stack direction="row" spacing={2}>
+          <Typography
+            variant="h1"
+            color="primary"
+            sx={{
+              fontSize: '3rem',
+              textAlign: 'center',
+            }}
+          >
+            Lesbians Who Tech Bingo!
+          </Typography>
+          {/* <Button
             className="toggleButton"
             onClick={toggleTheme}
             variant="contained"
@@ -98,8 +98,36 @@ function App() {
             startIcon={darkMode ? <LightModeIcon /> : <DarkModeIcon />}
           >
             {darkMode ? 'Light' : 'Dark'} Mode
-          </Button>
-        </div>
+          </Button> */}
+          <Switch
+            checked={!darkMode}
+            onChange={toggleTheme}
+            // icon={<DarkModeIcon />}
+            icon={
+              <DarkModeIcon
+                sx={{
+                  backgroundColor: '#05FFF4',
+                  color: '#121212',
+                  borderRadius: '50%',
+                  padding: '5px',
+                }}
+              />
+            }
+            // checkedIcon={<LightModeIcon />}
+            checkedIcon={
+              <LightModeIcon
+                sx={{
+                  backgroundColor: '#E11774',
+                  color: 'white',
+                  borderRadius: '50%',
+                  padding: '5px',
+                }}
+              />
+            }
+            // style={{ color: darkMode ? '#42a5f5' : '#FFA500' }} // Customize switch color
+          />
+        </Stack>
+        <Board />
       </div>
     </ThemeProvider>
   );

@@ -132,7 +132,7 @@ function Board() {
           marginTop: '0.5rem',
         }}
       >
-        Play Again
+        Reset Board
       </Button>
       <Modal open={open} onClose={handleClose}>
         <>

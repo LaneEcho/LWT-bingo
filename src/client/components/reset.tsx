@@ -51,16 +51,23 @@ function Reset(props: ResetProps) {
             </Button>
           </Stack>
         ) : (
-          <div className="about bingo_false">
+          <Stack
+            className="about bingo_false"
+            direction="column"
+            justifyContent="center"
+            alignItems="center"
+            spacing={2}
+          >
             <Typography id="modal-modal-title" variant="h4" component="h2">
-              Not Yet!
+              Oops!
             </Typography>
             <Typography
               id="modal-modal-description"
               variant="h6"
               sx={{ mt: '1px' }}
             >
-              Keep playing, you've got this!
+              Looks like you don't have any score eligible patterns. You can go
+              back and continue this game or reset your board.
             </Typography>
             <Button
               variant="contained"
@@ -76,9 +83,9 @@ function Reset(props: ResetProps) {
               className="resetButton"
               onClick={props.reset}
             >
-              Play Again
+              Reset Board
             </Button>
-          </div>
+          </Stack>
         )}
       </Box>
     </>

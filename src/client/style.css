@@ -19,6 +19,7 @@ body {
 }
 
 .board {
+  margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   display: flex;
   justify-content: center;
@@ -27,11 +28,11 @@ body {
   box-sizing: border-box;
 }
 
-.grid {
-  margin: 0.5rem;
-}
-
 .box {
   height: 8rem;
   width: 8rem;
+}
+
+.about {
+  display: inline-block;
 }

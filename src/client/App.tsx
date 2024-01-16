@@ -18,10 +18,11 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 
 function initialState() {
   if (localStorageAvailable()) {
+    // see if there is a key or if null
     const theme: string = localStorage.getItem('darkMode');
 
     if (theme) {
-      return Boolean(theme);
+      return JSON.parse(theme);
     } else {
       const userPrefers: boolean = window.matchMedia(
         '(prefers-color-scheme: dark)'
@@ -102,7 +103,7 @@ function App() {
           <Switch
             checked={!darkMode}
             onChange={toggleTheme}
-            // icon={<DarkModeIcon />}
+            id="darkmode_toggle"
             icon={
               <DarkModeIcon
                 sx={{
@@ -113,7 +114,6 @@ function App() {
                 }}
               />
             }
-            // checkedIcon={<LightModeIcon />}
             checkedIcon={
               <LightModeIcon
                 sx={{

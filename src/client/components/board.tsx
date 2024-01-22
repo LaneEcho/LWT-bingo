@@ -5,7 +5,7 @@ import { BoardState } from '../../types';
 import { bingoRow, bingoColumn, bingoSpecial } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 
-import { Button, Modal } from '@mui/material';
+import { Button, Modal, Stack } from '@mui/material';
 import Reset from './reset';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
@@ -87,7 +87,6 @@ function Board() {
     }
   }
 
-  // working out modal popup functionality
   const handleClose = () => {
     setOpen(false);
   };
@@ -109,7 +108,9 @@ function Board() {
           colors={[hotPinkColor, neonBlueColor, lightBlueColor]}
         />
       )}
-      <div className="grid">{rows}</div>
+
+      <Stack>{rows}</Stack>
+
       <Button
         variant="contained"
         size="large"
@@ -117,6 +118,7 @@ function Board() {
         onClick={callBingo}
         sx={{
           width: '16rem',
+          marginTop: '0.5rem',
           fontSize: '1.5rem',
         }}
       >

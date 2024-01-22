@@ -2,6 +2,7 @@ import React from 'react';
 import { RowProps } from '../../types';
 import Box from './box';
 import phrases from '../phrases';
+import { Stack } from '@mui/material';
 
 function Row(props: RowProps) {
   const boxes: JSX.Element[] = [];
@@ -14,7 +15,6 @@ function Row(props: RowProps) {
           text={'Free Space'} // add image later
           row={props.row}
           column={i}
-          //   handleBoxClick={props.handleBoxClick}
           key={i}
           gameOver={props.gameOver}
         />
@@ -25,7 +25,6 @@ function Row(props: RowProps) {
           text={phrases[props.phrase[props.row + i * 5]]}
           row={props.row}
           column={i}
-          //   handleBoxClick={props.handleBoxClick}
           key={i}
           gameOver={props.gameOver}
         />
@@ -33,7 +32,7 @@ function Row(props: RowProps) {
     }
   }
 
-  return <div className="row">{boxes}</div>;
+  return <Stack direction="row">{boxes}</Stack>;
 }
 
 export default Row;

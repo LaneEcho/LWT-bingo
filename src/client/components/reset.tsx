@@ -16,11 +16,6 @@ function Reset(props: ResetProps) {
           padding: '1.5rem',
           borderRadius: '8px',
           textAlign: 'center',
-          // overflow: 'scroll',
-          // display: 'flex',
-          // flexDirection: 'column',
-          // justifyContent: 'center',
-          // alignItems: 'center',
         }}
       >
         {props.gameOver ? (

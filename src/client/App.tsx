@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
+import Menu from './components/menu';
 import Board from './components/board';
 
 import {
@@ -126,6 +127,7 @@ function App() {
             }
             // style={{ color: darkMode ? '#42a5f5' : '#FFA500' }} // Customize switch color
           />
+          <Menu></Menu>
         </Stack>
         <Board />
       </div>

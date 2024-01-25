@@ -1,7 +1,7 @@
 import React from 'react';
 import { RowProps } from '../../types';
 import Box from './box';
-import phrases from '../phrases';
+import phrases from '../../phrases';
 import { Stack } from '@mui/material';
 
 function Row(props: RowProps) {

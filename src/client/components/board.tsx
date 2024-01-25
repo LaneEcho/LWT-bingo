@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Row from './row';
-import Phrases from '../phrases';
+import Phrases from '../../phrases';
 import { BoardState } from '../../types';
-import { bingoRow, bingoColumn, bingoSpecial } from '../../util/bingo';
+import { bingoRow, bingoColumn } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
-
 import { Button, Modal, Stack } from '@mui/material';
 import Reset from './reset';
 
@@ -29,18 +28,21 @@ function initialState(): number[] {
   return phrases;
 }
 
-function Board() {
+export default function Board() {
   // either going to pull from localStorage, or invoke initial state function
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
-  // persistin gameOver state in case of refresh
+  // persist gameOver state in case of refresh
   const [gameOver, setGameOver] = useState(
     JSON.parse(localStorage.getItem('game over')) || false
   );
   const [confetti, setConfetti] = useState<boolean>(false);
   // so it makes sure to tell user to play again
   const [open, setOpen] = useState<boolean>(false);
+  // for menu popups
+  const [howTo, setHowTo] = useState<boolean>(false);
+  const [about, setAbout] = useState<boolean>(false);
 
   const rows: JSX.Element[] = [];
 
@@ -148,5 +150,3 @@ function Board() {
     </div>
   );
 }
-
-export default Board;

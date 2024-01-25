@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Toolbar, IconButton, Menu, MenuItem, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
+import HowToPlay from './howToPlay';
+
 export default function NavMenu() {
   // set the position of the popover element
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -20,6 +22,13 @@ export default function NavMenu() {
   function handleLWTClick(): void {
     window.open('https://lesbianswhotech.org/about/', '_blank');
   }
+
+  // how to play and about should show a new modal on click
+  // needs to close menu
+  // use react context?
+  function handleHowToPlayClick() {}
+
+  function handleAboutClick(): void {}
 
   // time to learn aria labels...
   // these are not quite correct
@@ -59,7 +68,7 @@ export default function NavMenu() {
             borderRadius: '8px',
           }}
         >
-          <MenuItem>How to Play</MenuItem>
+          <MenuItem onClick={handleHowToPlayClick}>How to Play</MenuItem>
           <MenuItem>About the Team</MenuItem>
           <MenuItem onClick={handleLWTClick}>#LWT</MenuItem>
         </Box>

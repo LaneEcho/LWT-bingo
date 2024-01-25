@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Toolbar, IconButton, Menu, MenuItem, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-import HowToPlay from './howToPlay';
-
 export default function NavMenu() {
   // set the position of the popover element
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);

@@ -5,7 +5,7 @@ import { BoardState } from '../../types';
 import { bingoRow, bingoColumn } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 import { Button, Modal, Stack } from '@mui/material';
-import Reset from './reset';
+import Reset from './modals/reset';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;

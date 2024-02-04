@@ -8,6 +8,7 @@ import { Button, Modal, Stack } from '@mui/material';
 import Reset from './modals/reset';
 import { ModalContext } from '../context/modalsContext';
 import AboutUs from './modals/aboutUs';
+import HowToPlay from './modals/howToPlay';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;
@@ -152,6 +153,11 @@ export default function Board() {
       <Modal open={openAbout}>
         <>
           <AboutUs></AboutUs>
+        </>
+      </Modal>
+      <Modal open={openHowTo}>
+        <>
+          <HowToPlay></HowToPlay>
         </>
       </Modal>
     </div>

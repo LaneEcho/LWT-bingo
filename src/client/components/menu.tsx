@@ -7,11 +7,7 @@ export default function NavMenu() {
   // set the position of the popover element
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
-  // new stuff for context
-  const { openHowTo, toggleHowTo, openAbout, toggleAbout } =
-    useContext(ModalContext);
-  console.log('menu open how To', openHowTo);
-  console.log('menu open about', openAbout);
+  const { toggleHowTo, toggleAbout } = useContext(ModalContext);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -25,15 +21,17 @@ export default function NavMenu() {
   const id: string = open ? 'navigation-menu' : undefined;
 
   function handleLWTClick(): void {
+    handleClose();
     window.open('https://lesbianswhotech.org/about/', '_blank');
   }
 
-  // how to play and about should show a new modal on click
-  // needs to close menu
-  // use react context?
-  function handleHowToPlayClick() {}
+  function handleHowToPlayClick() {
+    handleClose();
+    toggleHowTo();
+  }
 
   function handleAboutClick(): void {
+    handleClose();
     toggleAbout();
   }
 
@@ -75,7 +73,7 @@ export default function NavMenu() {
             borderRadius: '8px',
           }}
         >
-          <MenuItem onClick={null}>How to Play</MenuItem>
+          <MenuItem onClick={handleHowToPlayClick}>How to Play</MenuItem>
           <MenuItem onClick={handleAboutClick}>About the Team</MenuItem>
           <MenuItem onClick={handleLWTClick}>#LWT</MenuItem>
         </Box>

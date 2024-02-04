@@ -38,7 +38,6 @@ function initialState() {
 
 function App() {
   const [darkMode, setDarkMode] = useState<boolean>(initialState());
-  console.log(window.matchMedia('(prefers-color-scheme: dark)'));
 
   const lightTheme = createTheme({
     palette: {

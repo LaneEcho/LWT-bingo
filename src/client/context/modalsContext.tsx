@@ -17,12 +17,10 @@ export const ContextProvider: React.FC<ThemeProviderProps> = ({ children }) => {
   const [openAbout, setOpenAbout] = useState<boolean>(false);
 
   function toggleHowTo() {
-    console.log('toggle how to');
     SetHowTo(!openHowTo);
   }
 
   function toggleAbout() {
-    console.log('toggle about');
     setOpenAbout(!openAbout);
   }
 

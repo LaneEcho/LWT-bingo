@@ -1,10 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Toolbar, IconButton, Menu, MenuItem, Box } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { ModalContext } from '../context/modalsContext';
 
 export default function NavMenu() {
   // set the position of the popover element
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  // new stuff for context
+  const { openHowTo, toggleHowTo, openAbout, toggleAbout } =
+    useContext(ModalContext);
+  console.log('menu open how To', openHowTo);
+  console.log('menu open about', openAbout);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>): void => {
     setAnchorEl(event.currentTarget);
@@ -26,7 +33,9 @@ export default function NavMenu() {
   // use react context?
   function handleHowToPlayClick() {}
 
-  function handleAboutClick(): void {}
+  function handleAboutClick(): void {
+    toggleAbout();
+  }
 
   // time to learn aria labels...
   // these are not quite correct
@@ -66,8 +75,8 @@ export default function NavMenu() {
             borderRadius: '8px',
           }}
         >
-          <MenuItem onClick={handleHowToPlayClick}>How to Play</MenuItem>
-          <MenuItem>About the Team</MenuItem>
+          <MenuItem onClick={null}>How to Play</MenuItem>
+          <MenuItem onClick={handleAboutClick}>About the Team</MenuItem>
           <MenuItem onClick={handleLWTClick}>#LWT</MenuItem>
         </Box>
       </Menu>

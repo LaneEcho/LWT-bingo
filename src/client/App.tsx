@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
 import NavMenu from './components/menu';
 import Board from './components/board';
+import { ContextProvider } from './context/modalsContext';
 
 import {
   Typography,
@@ -71,28 +72,29 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <div
-        className="app"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <Stack direction="row" spacing={2}>
-          <Typography
-            variant="h1"
-            color="primary"
-            sx={{
-              fontSize: '3rem',
-              textAlign: 'center',
-            }}
-          >
-            Lesbians Who Tech Bingo!
-          </Typography>
-          {/* <Button
+      <ContextProvider>
+        <div
+          className="app"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          <Stack direction="row" spacing={2}>
+            <Typography
+              variant="h1"
+              color="primary"
+              sx={{
+                fontSize: '3rem',
+                textAlign: 'center',
+              }}
+            >
+              Lesbians Who Tech Bingo!
+            </Typography>
+            {/* <Button
             className="toggleButton"
             onClick={toggleTheme}
             variant="contained"
@@ -101,36 +103,37 @@ function App() {
           >
             {darkMode ? 'Light' : 'Dark'} Mode
           </Button> */}
-          <Switch
-            checked={!darkMode}
-            onChange={toggleTheme}
-            id="darkmode_toggle"
-            icon={
-              <DarkModeIcon
-                sx={{
-                  backgroundColor: '#05FFF4',
-                  color: '#121212',
-                  borderRadius: '50%',
-                  padding: '5px',
-                }}
-              />
-            }
-            checkedIcon={
-              <LightModeIcon
-                sx={{
-                  backgroundColor: '#E11774',
-                  color: 'white',
-                  borderRadius: '50%',
-                  padding: '5px',
-                }}
-              />
-            }
-            // style={{ color: darkMode ? '#42a5f5' : '#FFA500' }} // Customize switch color
-          />
-          <NavMenu></NavMenu>
-        </Stack>
-        <Board />
-      </div>
+            <Switch
+              checked={!darkMode}
+              onChange={toggleTheme}
+              id="darkmode_toggle"
+              icon={
+                <DarkModeIcon
+                  sx={{
+                    backgroundColor: '#05FFF4',
+                    color: '#121212',
+                    borderRadius: '50%',
+                    padding: '5px',
+                  }}
+                />
+              }
+              checkedIcon={
+                <LightModeIcon
+                  sx={{
+                    backgroundColor: '#E11774',
+                    color: 'white',
+                    borderRadius: '50%',
+                    padding: '5px',
+                  }}
+                />
+              }
+              // style={{ color: darkMode ? '#42a5f5' : '#FFA500' }} // Customize switch color
+            />
+            <NavMenu></NavMenu>
+          </Stack>
+          <Board />
+        </div>
+      </ContextProvider>
     </ThemeProvider>
   );
 }

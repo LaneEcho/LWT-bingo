@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Row from './row';
 import Phrases from '../../phrases';
 import { BoardState } from '../../types';
@@ -6,6 +6,8 @@ import { bingoRow, bingoColumn } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 import { Button, Modal, Stack } from '@mui/material';
 import Reset from './modals/reset';
+import { ModalContext } from '../context/modalsContext';
+import AboutUs from './modals/aboutUs';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;
@@ -40,9 +42,9 @@ export default function Board() {
   const [confetti, setConfetti] = useState<boolean>(false);
   // so it makes sure to tell user to play again
   const [open, setOpen] = useState<boolean>(false);
+
   // for menu popups
-  const [howTo, setHowTo] = useState<boolean>(false);
-  const [about, setAbout] = useState<boolean>(false);
+  const { openHowTo, openAbout } = useContext(ModalContext);
 
   const rows: JSX.Element[] = [];
 
@@ -145,6 +147,11 @@ export default function Board() {
             reset={resetBoard}
             onClose={handleClose}
           ></Reset>
+        </>
+      </Modal>
+      <Modal open={openAbout}>
+        <>
+          <AboutUs></AboutUs>
         </>
       </Modal>
     </div>

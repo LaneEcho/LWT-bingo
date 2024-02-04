@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useEffect, useContext } from 'react';
+import { ModalContext } from '../../../client/context/modalsContext';
 import { Box, Typography, Button, Stack } from '@mui/material';
 
 export default function AboutUs() {
+  const { toggleAbout } = useContext(ModalContext);
+
+  const handleClose = (event: KeyboardEvent) => {
+    if (event.key === 'Escape') {
+      toggleAbout();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleClose);
+
+    return () => {
+      document.removeEventListener('keydown', handleClose);
+    };
+  }, []);
+
   return (
     <Box
       sx={{
@@ -46,7 +63,7 @@ export default function AboutUs() {
           variant="contained"
           size="small"
           className="resetButton"
-          // onClick={}
+          onClick={toggleAbout}
           sx={{
             width: '8rem',
           }}

@@ -50,7 +50,7 @@ export default function NavMenu() {
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
       >
-        <MenuIcon />
+        <MenuIcon fontSize="large" />
       </IconButton>
       <Menu
         id={id}

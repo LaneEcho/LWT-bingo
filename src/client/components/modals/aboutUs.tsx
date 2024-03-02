@@ -1,14 +1,19 @@
-import React, { useEffect, useContext } from 'react';
-import { ModalContext } from '../../../client/context/modalsContext';
+import React, { SetStateAction, useEffect } from 'react';
 import { Box, Typography, Button, Stack } from '@mui/material';
 
-export default function AboutUs() {
-  const { toggleAbout } = useContext(ModalContext);
+type AboutUsProps = {
+  close: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+const AboutUs: React.FC<AboutUsProps> = ({ close }) => {
   const handleClose = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      toggleAbout();
+      close((prevOpenAbout) => !prevOpenAbout);
     }
+  };
+
+  const handleClick = () => {
+    close((prevOpenAbout) => !prevOpenAbout);
   };
 
   useEffect(() => {
@@ -63,7 +68,7 @@ export default function AboutUs() {
           variant="contained"
           size="small"
           className="resetButton"
-          onClick={toggleAbout}
+          onClick={handleClick}
           sx={{
             width: '8rem',
           }}
@@ -73,4 +78,6 @@ export default function AboutUs() {
       </Stack>
     </Box>
   );
-}
+};
+
+export default AboutUs;

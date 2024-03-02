@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
 import NavMenu from './components/menu';
 import Board from './components/board';
-import { ContextProvider } from './context/modalsContext';
 
 import {
   Typography,
@@ -13,11 +12,8 @@ import {
   useTheme,
   Stack,
   Switch,
-  Button,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import DarkModeIcon from '@mui/icons-material/DarkMode';
-import LightModeIcon from '@mui/icons-material/LightMode';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 48,
@@ -121,48 +117,38 @@ function App() {
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <CssBaseline />
-      <ContextProvider>
-        <div
-          className="app"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh',
-          }}
+
+      <div
+        className="app"
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh',
+        }}
+      >
+        <Stack
+          direction="row"
+          alignItems={'center'}
+          justifyContent={'space-evenly'}
         >
-          <Stack
-            direction="row"
-            alignItems={'center'}
-            justifyContent={'space-evenly'}
+          <Typography
+            variant="h1"
+            color="primary"
+            sx={{
+              fontSize: '3rem',
+              textAlign: 'center',
+              marginRight: '1.5rem', // to make the toggle button not have weird spacing
+            }}
           >
-            <Typography
-              variant="h1"
-              color="primary"
-              sx={{
-                fontSize: '3rem',
-                textAlign: 'center',
-                marginRight: '1.5rem', // to make the toggle button not have weird spacing
-              }}
-            >
-              Lesbians Who Tech Bingo!
-            </Typography>
-            {/* <Button
-            className="toggleButton"
-            onClick={toggleTheme}
-            variant="contained"
-            size="small"
-            startIcon={darkMode ? <LightModeIcon /> : <DarkModeIcon />}
-          >
-            {darkMode ? 'Light' : 'Dark'} Mode
-          </Button> */}
-            <MaterialUISwitch checked={!darkMode} onChange={toggleTheme} />
-            <NavMenu></NavMenu>
-          </Stack>
-          <Board />
-        </div>
-      </ContextProvider>
+            Lesbians Who Tech Bingo!
+          </Typography>
+          <MaterialUISwitch checked={!darkMode} onChange={toggleTheme} />
+          <NavMenu></NavMenu>
+        </Stack>
+        <Board />
+      </div>
     </ThemeProvider>
   );
 }

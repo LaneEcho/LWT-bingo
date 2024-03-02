@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useState } from 'react';
 import {
   IconButton,
   MenuItem,
@@ -8,15 +8,18 @@ import {
   MenuList,
   Stack,
   ClickAwayListener,
+  Modal,
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
-import { ModalContext } from '../context/modalsContext';
+import AboutUs from './modals/aboutUs';
+import HowToPlay from './modals/howToPlay';
 
 export default function NavMenu() {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
-  const { toggleHowTo, toggleAbout } = useContext(ModalContext);
+  const [openHowTo, SetHowTo] = useState<boolean>(false);
+  const [openAbout, setOpenAbout] = useState<boolean>(false);
 
   const id: string = open ? 'navigation-menu' : undefined;
 
@@ -60,11 +63,11 @@ export default function NavMenu() {
   }
 
   function handleHowToPlayClick() {
-    toggleHowTo();
+    SetHowTo(!openHowTo);
   }
 
   function handleAboutClick(): void {
-    toggleAbout();
+    setOpenAbout(!openAbout);
   }
 
   return (
@@ -131,6 +134,12 @@ export default function NavMenu() {
           </Grow>
         )}
       </Popper>
+      <Modal open={openAbout}>
+        <AboutUs close={setOpenAbout}></AboutUs>
+      </Modal>
+      <Modal open={openHowTo}>
+        <HowToPlay close={SetHowTo}></HowToPlay>
+      </Modal>
     </Stack>
   );
 }

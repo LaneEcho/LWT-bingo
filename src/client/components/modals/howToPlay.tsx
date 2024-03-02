@@ -1,14 +1,19 @@
-import React, { useEffect, useContext } from 'react';
-import { ModalContext } from '../../../client/context/modalsContext';
+import React, { useEffect } from 'react';
 import { Box, Typography, Button, Stack } from '@mui/material';
 
-export default function HowToPlay() {
-  const { toggleHowTo } = useContext(ModalContext);
+type HowToPlayProps = {
+  close: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
+const HowToPlay: React.FC<HowToPlayProps> = ({ close }) => {
   const handleClose = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      toggleHowTo();
+      close((prevOpenHowTo) => !prevOpenHowTo);
     }
+  };
+
+  const handleClick = () => {
+    close((prevOpenHowTo) => !prevOpenHowTo);
   };
 
   useEffect(() => {
@@ -63,7 +68,7 @@ export default function HowToPlay() {
           variant="contained"
           size="small"
           className="resetButton"
-          onClick={toggleHowTo}
+          onClick={handleClick}
           sx={{
             width: '8rem',
           }}
@@ -73,4 +78,6 @@ export default function HowToPlay() {
       </Stack>
     </Box>
   );
-}
+};
+
+export default HowToPlay;

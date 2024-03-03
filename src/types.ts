@@ -2,6 +2,10 @@ export interface Phrases {
   [key: string]: string;
 }
 
+export interface TermsConditions {
+  [key: string]: string;
+}
+
 export type BoardState = number[];
 
 export type RowProps = {

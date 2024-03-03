@@ -1,4 +1,4 @@
-import { Phrases } from './types';
+import { Phrases } from '../types';
 
 const phrases: Phrases = {
   1: 'Someone is wearing a unique shirt',

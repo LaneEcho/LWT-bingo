@@ -1,11 +1,12 @@
 import React, { useState, useContext } from 'react';
 import Row from './row';
-import Phrases from '../../phrases';
+import Phrases from '../../lib/phrases';
 import { BoardState } from '../../types';
 import { bingoRow, bingoColumn } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 import { Button, Modal, Stack } from '@mui/material';
 import Reset from './modals/reset';
+import TermsAndConditions from './modals/terms';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;
@@ -110,43 +111,60 @@ export default function Board() {
 
       <Stack>{rows}</Stack>
 
-      <Button
-        variant="contained"
-        size="large"
-        className="resetButton"
-        onClick={callBingo}
-        sx={{
-          width: '16rem',
-          marginTop: '0.5rem',
-          fontSize: '1.5rem',
-        }}
+      <Stack
+        direction="column"
+        alignItems={'center'}
+        justifyContent={'space-evenly'}
       >
-        BINGO!
-      </Button>
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-title"
-        aria-describedby="modal-description"
-      >
-        <Reset
-          gameOver={gameOver}
-          reset={resetBoard}
-          onClose={handleClose}
-        ></Reset>
-      </Modal>
-      <Button
-        variant="contained"
-        size="small"
-        className="resetButton"
-        onClick={resetBoard}
-        sx={{
-          width: '8rem',
-          marginTop: '0.5rem',
-        }}
-      >
-        Reset Board
-      </Button>
+        <Button
+          variant="contained"
+          size="large"
+          className="resetButton"
+          onClick={callBingo}
+          sx={{
+            width: '16rem',
+            marginTop: '0.5rem',
+            fontSize: '1.5rem',
+          }}
+        >
+          BINGO!
+        </Button>
+        <Modal open={open} onClose={handleClose}>
+          <Reset
+            gameOver={gameOver}
+            reset={resetBoard}
+            onClose={handleClose}
+          ></Reset>
+        </Modal>
+        <Button
+          variant="contained"
+          size="small"
+          className="resetButton"
+          onClick={resetBoard}
+          sx={{
+            width: '8rem',
+            marginTop: '0.5rem',
+          }}
+        >
+          Reset Board
+        </Button>
+        <Button
+          variant="contained"
+          size="small"
+          className="resetButton"
+          onClick={null}
+          sx={{
+            // width: '8rem',
+            marginTop: '0.5rem',
+            fontSize: '0.5rem',
+          }}
+        >
+          Terms & Conditions
+        </Button>
+        <Modal open={true} onClose={null}>
+          <TermsAndConditions close={null}></TermsAndConditions>
+        </Modal>
+      </Stack>
     </div>
   );
 }

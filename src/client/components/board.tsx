@@ -4,7 +4,7 @@ import Phrases from '../../lib/phrases';
 import { BoardState } from '../../types';
 import { bingoRow, bingoColumn } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
-import { Button, Modal, Stack } from '@mui/material';
+import { Button, Modal, Stack, Box } from '@mui/material';
 import Reset from './modals/reset';
 import TermsAndConditions from './modals/terms';
 
@@ -41,6 +41,8 @@ export default function Board() {
   const [confetti, setConfetti] = useState<boolean>(false);
   // so it makes sure to tell user to play again
   const [open, setOpen] = useState<boolean>(false);
+  // for the T&C modal
+  const [viewTerms, setViewTerms] = useState<boolean>(false);
 
   const rows: JSX.Element[] = [];
 
@@ -148,23 +150,23 @@ export default function Board() {
         >
           Reset Board
         </Button>
-        <Button
-          variant="contained"
-          size="small"
-          className="resetButton"
-          onClick={null}
-          sx={{
-            // width: '8rem',
-            marginTop: '0.5rem',
-            fontSize: '0.5rem',
-          }}
-        >
-          Terms & Conditions
-        </Button>
-        <Modal open={true} onClose={null}>
-          <TermsAndConditions close={null}></TermsAndConditions>
-        </Modal>
       </Stack>
+      <Button
+        variant="contained"
+        size="small"
+        className="resetButton"
+        onClick={() => setViewTerms(!viewTerms)}
+        sx={{
+          // width: '8rem',
+          marginTop: '0.5rem',
+          fontSize: '0.5rem',
+        }}
+      >
+        Terms & Conditions
+      </Button>
+      <Modal open={viewTerms}>
+        <TermsAndConditions close={setViewTerms}></TermsAndConditions>
+      </Modal>
     </div>
   );
 }

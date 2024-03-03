@@ -14,12 +14,12 @@ type TermsProps = {
 const TermsAndConditions: React.FC<TermsProps> = ({ close }) => {
   const handleClose = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
-      close((prevOpenHowTo) => !prevOpenHowTo);
+      close((prevViewTerms) => !prevViewTerms);
     }
   };
 
   const handleClick = () => {
-    close((prevOpenHowTo) => !prevOpenHowTo);
+    close((prevViewTerms) => !prevViewTerms);
   };
 
   useEffect(() => {

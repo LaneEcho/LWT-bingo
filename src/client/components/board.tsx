@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import Row from './row';
-import Phrases from '../phrases';
+import Phrases from '../../lib/phrases';
 import { BoardState } from '../../types';
-import { bingoRow, bingoColumn, bingoSpecial } from '../../util/bingo';
+import { bingoRow, bingoColumn } from '../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
-
-import { Button, Modal } from '@mui/material';
-import Reset from './reset';
+import { Button, Modal, Stack, Box } from '@mui/material';
+import Reset from './modals/reset';
+import TermsAndConditions from './modals/terms';
 
 // gettting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;
@@ -29,18 +29,20 @@ function initialState(): number[] {
   return phrases;
 }
 
-function Board() {
+export default function Board() {
   // either going to pull from localStorage, or invoke initial state function
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
-  // persistin gameOver state in case of refresh
+  // persist gameOver state in case of refresh
   const [gameOver, setGameOver] = useState(
     JSON.parse(localStorage.getItem('game over')) || false
   );
   const [confetti, setConfetti] = useState<boolean>(false);
   // so it makes sure to tell user to play again
   const [open, setOpen] = useState<boolean>(false);
+  // for the T&C modal
+  const [viewTerms, setViewTerms] = useState<boolean>(false);
 
   const rows: JSX.Element[] = [];
 
@@ -87,7 +89,6 @@ function Board() {
     }
   }
 
-  // working out modal popup functionality
   const handleClose = () => {
     setOpen(false);
   };
@@ -109,42 +110,63 @@ function Board() {
           colors={[hotPinkColor, neonBlueColor, lightBlueColor]}
         />
       )}
-      <div className="grid">{rows}</div>
-      <Button
-        variant="contained"
-        size="large"
-        className="resetButton"
-        onClick={callBingo}
-        sx={{
-          width: '16rem',
-          fontSize: '1.5rem',
-        }}
+
+      <Stack>{rows}</Stack>
+
+      <Stack
+        direction="column"
+        alignItems={'center'}
+        justifyContent={'space-evenly'}
       >
-        BINGO!
-      </Button>
-      <Button
-        variant="contained"
-        size="small"
-        className="resetButton"
-        onClick={resetBoard}
-        sx={{
-          width: '8rem',
-          marginTop: '0.5rem',
-        }}
-      >
-        Reset Board
-      </Button>
-      <Modal open={open} onClose={handleClose}>
-        <>
+        <Button
+          variant="contained"
+          size="large"
+          className="resetButton"
+          onClick={callBingo}
+          sx={{
+            width: '16rem',
+            marginTop: '0.5rem',
+            fontSize: '1.5rem',
+          }}
+        >
+          BINGO!
+        </Button>
+        <Modal open={open} onClose={handleClose}>
           <Reset
             gameOver={gameOver}
             reset={resetBoard}
             onClose={handleClose}
           ></Reset>
-        </>
+        </Modal>
+        <Button
+          variant="contained"
+          size="small"
+          className="resetButton"
+          onClick={resetBoard}
+          sx={{
+            width: '8rem',
+            marginTop: '0.5rem',
+          }}
+        >
+          Reset Board
+        </Button>
+      </Stack>
+      <Button
+        variant="contained"
+        size="small"
+        className="resetButton"
+        onClick={() => setViewTerms(!viewTerms)}
+        sx={{
+          // width: '8rem',
+          marginTop: '0.5rem',
+          fontSize: '0.5rem',
+        }}
+      >
+        Terms & Conditions
+      </Button>
+      <Modal open={viewTerms}>
+        <TermsAndConditions close={setViewTerms}></TermsAndConditions>
       </Modal>
     </div>
   );
 }
-
-export default Board;

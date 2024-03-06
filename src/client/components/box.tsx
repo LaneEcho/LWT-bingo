@@ -41,9 +41,10 @@ function Box(props: BoxProps) {
       data-row={props.row}
       data-column={props.column}
       disabled={props.gameOver}
-      // WIP could use sx prop instead of style
       style={{
         margin: '4px',
+        height: '8rem',
+        width: '8rem',
         // want users to know when button is disabled
         backgroundColor: clicked
           ? props.gameOver

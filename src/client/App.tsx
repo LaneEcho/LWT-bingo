@@ -71,6 +71,7 @@ function initialState() {
 
     if (theme) {
       return JSON.parse(theme);
+      
     } else {
       const userPrefers: boolean = window.matchMedia(
         '(prefers-color-scheme: dark)'

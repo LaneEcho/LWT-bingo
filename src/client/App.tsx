@@ -14,6 +14,7 @@ import {
   Switch,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
+import NavBar from './components/nav';
 
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 48,
@@ -71,7 +72,6 @@ function initialState() {
 
     if (theme) {
       return JSON.parse(theme);
-      
     } else {
       const userPrefers: boolean = window.matchMedia(
         '(prefers-color-scheme: dark)'
@@ -129,12 +129,12 @@ function App() {
           height: '100vh',
         }}
       >
-        <Stack
+        {/* <Stack
           direction="row"
           alignItems={'center'}
           justifyContent={'space-evenly'}
-        >
-          <Typography
+        > */}
+        {/* <Typography
             variant="h1"
             color="primary"
             sx={{
@@ -144,10 +144,11 @@ function App() {
             }}
           >
             Lesbians Who Tech Bingo!
-          </Typography>
-          <MaterialUISwitch checked={!darkMode} onChange={toggleTheme} />
-          <NavMenu></NavMenu>
-        </Stack>
+          </Typography> */}
+        {/* <MaterialUISwitch checked={!darkMode} onChange={toggleTheme} /> */}
+        <NavBar></NavBar>
+        {/* <NavMenu></NavMenu> */}
+        {/* </Stack> */}
         <Board />
       </div>
     </ThemeProvider>

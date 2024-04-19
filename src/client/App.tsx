@@ -129,26 +129,9 @@ function App() {
           height: '100vh',
         }}
       >
-        {/* <Stack
-          direction="row"
-          alignItems={'center'}
-          justifyContent={'space-evenly'}
-        > */}
-        {/* <Typography
-            variant="h1"
-            color="primary"
-            sx={{
-              fontSize: '3rem',
-              textAlign: 'center',
-              marginRight: '1.5rem', // to make the toggle button not have weird spacing
-            }}
-          >
-            Lesbians Who Tech Bingo!
-          </Typography> */}
         {/* <MaterialUISwitch checked={!darkMode} onChange={toggleTheme} /> */}
         <NavBar></NavBar>
-        {/* <NavMenu></NavMenu> */}
-        {/* </Stack> */}
+
         <Board />
       </div>
     </ThemeProvider>

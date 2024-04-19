@@ -8,13 +8,11 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from './sidebar';
 
-type Anchor = 'right';
-
 export default function NavBar() {
   const [state, setState] = useState(false);
 
   const toggleDrawer =
-    (anchor: Anchor, open: boolean) =>
+    (anchor: 'right', open: boolean) =>
     (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
         event.type === 'keydown' &&
@@ -28,7 +26,13 @@ export default function NavBar() {
     };
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
       <AppBar position="static" color="transparent" elevation={0}>
         <Toolbar>
           <Typography
@@ -46,7 +50,7 @@ export default function NavBar() {
             color="inherit"
             aria-label="menu"
             onClick={toggleDrawer('right', true)}
-            // sx={{ mr: 2 }}
+            sx={{ marginLeft: '2rem' }}
           >
             <MenuIcon />
           </IconButton>

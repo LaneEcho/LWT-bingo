@@ -151,7 +151,7 @@ export default function Board() {
           Reset Board
         </Button>
       </Stack>
-      <Button
+      {/* <Button
         variant="contained"
         size="small"
         className="resetButton"
@@ -163,10 +163,10 @@ export default function Board() {
         }}
       >
         Terms & Conditions
-      </Button>
-      <Modal open={viewTerms}>
+      </Button> */}
+      {/* <Modal open={viewTerms}>
         <TermsAndConditions close={setViewTerms}></TermsAndConditions>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }

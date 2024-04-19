@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
@@ -11,8 +10,6 @@ import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 
-type Anchor = 'right';
-
 interface SidebarProps {
   state: boolean;
   setState: any;
@@ -20,7 +17,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ state, setState, toggleDrawer }) => {
-  const list = (anchor: Anchor) => (
+  const list = (anchor: 'right') => (
     <Box
       sx={{ width: 250 }}
       role="presentation"
@@ -60,6 +57,7 @@ const Sidebar: React.FC<SidebarProps> = ({ state, setState, toggleDrawer }) => {
       {(['right'] as const).map((anchor) => (
         <React.Fragment key={anchor}>
           <Drawer
+            style={{ height: 'calc(100vh - 64px)' }}
             anchor={anchor}
             open={state}
             onClose={toggleDrawer(anchor, false)}

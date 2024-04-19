@@ -7,23 +7,19 @@ import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import Sidebar from './sidebar';
+import BurgerMenu from './menu';
 
 export default function NavBar() {
-  const [state, setState] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const toggleDrawer =
-    (anchor: 'right', open: boolean) =>
-    (event: React.KeyboardEvent | React.MouseEvent) => {
-      if (
-        event.type === 'keydown' &&
-        ((event as React.KeyboardEvent).key === 'Tab' ||
-          (event as React.KeyboardEvent).key === 'Shift')
-      ) {
-        return;
-      }
+  const open = Boolean(anchorEl);
 
-      setState(!state);
-    };
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   return (
     <Box
@@ -49,18 +45,14 @@ export default function NavBar() {
             edge="start"
             color="inherit"
             aria-label="menu"
-            onClick={toggleDrawer('right', true)}
+            onClick={handleClick}
             sx={{ marginLeft: '2rem' }}
           >
             <MenuIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-      <Sidebar
-        state={state}
-        setState={setState}
-        toggleDrawer={toggleDrawer}
-      ></Sidebar>
+      <BurgerMenu handleClose={handleClose} anchorEl={anchorEl} open={open} />
     </Box>
   );
 }

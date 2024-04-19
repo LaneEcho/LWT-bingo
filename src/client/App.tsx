@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
-import NavMenu from './components/menu';
 import Board from './components/board';
 
 import {
-  Typography,
   CssBaseline,
   ThemeProvider,
   createTheme,
   useTheme,
-  Stack,
   Switch,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';

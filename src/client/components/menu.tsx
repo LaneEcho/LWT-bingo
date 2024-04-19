@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   IconButton,
-  MenuItem,
   Grow,
   Paper,
   Popper,
@@ -10,136 +9,192 @@ import {
   ClickAwayListener,
   Modal,
 } from '@mui/material';
+
+import Button from '@mui/material/Button';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import MenuIcon from '@mui/icons-material/Menu';
 import AboutUs from './modals/aboutUs';
 import HowToPlay from './modals/howToPlay';
 
-export default function NavMenu() {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef<HTMLButtonElement>(null);
+// // old menu
 
-  const [openHowTo, SetHowTo] = useState<boolean>(false);
-  const [openAbout, setOpenAbout] = useState<boolean>(false);
+// export default function NavMenu() {
+//   const [open, setOpen] = React.useState(false);
+//   const anchorRef = React.useRef<HTMLButtonElement>(null);
 
-  const id: string = open ? 'navigation-menu' : undefined;
+//   const [openHowTo, SetHowTo] = useState<boolean>(false);
+//   const [openAbout, setOpenAbout] = useState<boolean>(false);
 
-  const handleToggle = () => {
-    setOpen((prevOpen) => !prevOpen);
-  };
+//   const id: string = open ? 'navigation-menu' : undefined;
 
-  const handleClose = (event: Event | React.SyntheticEvent) => {
-    if (
-      anchorRef.current &&
-      anchorRef.current.contains(event.target as HTMLElement)
-    ) {
-      return;
-    }
+//   const handleToggle = () => {
+//     setOpen((prevOpen) => !prevOpen);
+//   };
 
-    setOpen(false);
-  };
+//   const handleClose = (event: Event | React.SyntheticEvent) => {
+//     if (
+//       anchorRef.current &&
+//       anchorRef.current.contains(event.target as HTMLElement)
+//     ) {
+//       return;
+//     }
 
-  function handleListKeyDown(event: React.KeyboardEvent) {
-    if (event.key === 'Tab') {
-      event.preventDefault();
-      setOpen(false);
-    } else if (event.key === 'Escape') {
-      setOpen(false);
-    }
-  }
+//     setOpen(false);
+//   };
 
-  // return focus to the button when we transitioned from !open -> open
-  const prevOpen = React.useRef(open);
-  React.useEffect(() => {
-    if (prevOpen.current === true && open === false) {
-      anchorRef.current!.focus();
-    }
+//   function handleListKeyDown(event: React.KeyboardEvent) {
+//     if (event.key === 'Tab') {
+//       event.preventDefault();
+//       setOpen(false);
+//     } else if (event.key === 'Escape') {
+//       setOpen(false);
+//     }
+//   }
 
-    prevOpen.current = open;
-  }, [open]);
+//   // return focus to the button when we transitioned from !open -> open
+//   const prevOpen = React.useRef(open);
+//   React.useEffect(() => {
+//     if (prevOpen.current === true && open === false) {
+//       anchorRef.current!.focus();
+//     }
 
-  // functions for menu clicks
-  function handleLWTClick(): void {
-    window.open('https://lesbianswhotech.org/about/', '_blank');
-  }
+//     prevOpen.current = open;
+//   }, [open]);
 
-  function handleHowToPlayClick() {
-    SetHowTo(!openHowTo);
-  }
+//   // functions for menu clicks
+//   function handleLWTClick(): void {
+//     window.open('https://lesbianswhotech.org/about/', '_blank');
+//   }
 
-  function handleAboutClick(): void {
-    setOpenAbout(!openAbout);
-  }
+//   function handleHowToPlayClick() {
+//     SetHowTo(!openHowTo);
+//   }
+
+//   function handleAboutClick(): void {
+//     setOpenAbout(!openAbout);
+//   }
+
+//   return (
+//     <Stack>
+//       <IconButton
+//         aria-describedby={id}
+//         ref={anchorRef}
+//         id="composition-button"
+//         aria-controls={open ? 'composition-menu' : undefined}
+//         aria-expanded={open ? 'true' : undefined}
+//         aria-haspopup="true"
+//         onClick={handleToggle}
+//       >
+//         <MenuIcon fontSize="large" />
+//       </IconButton>
+//       <Popper
+//         open={open}
+//         anchorEl={anchorRef.current}
+//         role={undefined}
+//         placement="left-start"
+//         transition
+//         disablePortal
+//         sx={{
+//           zIndex: '10',
+//         }}
+//       >
+//         {({ TransitionProps, placement }) => (
+//           <Grow
+//             {...TransitionProps}
+//             style={{
+//               transformOrigin:
+//                 placement === 'bottom-start' ? 'left top' : 'left bottom',
+//             }}
+//           >
+//             <Paper>
+//               <ClickAwayListener onClickAway={handleClose}>
+//                 <MenuList
+//                   autoFocusItem={open}
+//                   id="composition-menu"
+//                   aria-labelledby="composition-button"
+//                   onKeyDown={handleListKeyDown}
+//                 >
+//                   <MenuItem
+//                     onClick={handleHowToPlayClick}
+//                     sx={{ fontSize: '1.5rem' }}
+//                   >
+//                     How to Play
+//                   </MenuItem>
+//                   <MenuItem
+//                     onClick={handleAboutClick}
+//                     sx={{ fontSize: '1.5rem' }}
+//                   >
+//                     About the Team
+//                   </MenuItem>
+//                   <MenuItem
+//                     onClick={handleLWTClick}
+//                     sx={{ fontSize: '1.5rem' }}
+//                   >
+//                     #LWT
+//                   </MenuItem>
+//                 </MenuList>
+//               </ClickAwayListener>
+//             </Paper>
+//           </Grow>
+//         )}
+//       </Popper>
+//       <Modal open={openAbout}>
+//         <AboutUs close={setOpenAbout}></AboutUs>
+//       </Modal>
+//       <Modal open={openHowTo}>
+//         <HowToPlay close={SetHowTo}></HowToPlay>
+//       </Modal>
+//     </Stack>
+//   );
+// }
+
+// new build for menu
+// move state out of here and into nav
+// pass down as props
+
+interface MenuProps {
+  anchorEl: any;
+  handleClose: any;
+  open: boolean;
+}
+
+const BurgerMenu: React.FC<MenuProps> = ({ handleClose, anchorEl, open }) => {
+  // const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  // const open = Boolean(anchorEl);
+  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
-    <Stack>
-      <IconButton
-        aria-describedby={id}
-        ref={anchorRef}
-        id="composition-button"
-        aria-controls={open ? 'composition-menu' : undefined}
-        aria-expanded={open ? 'true' : undefined}
+    <div>
+      {/* <Button
+        id="basic-button"
+        aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
-        onClick={handleToggle}
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
       >
-        <MenuIcon fontSize="large" />
-      </IconButton>
-      <Popper
+        Dashboard
+      </Button> */}
+      <Menu
+        id="basic-menu"
+        anchorEl={anchorEl}
         open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        placement="left-start"
-        transition
-        disablePortal
-        sx={{
-          zIndex: '10',
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button',
         }}
       >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === 'bottom-start' ? 'left top' : 'left bottom',
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList
-                  autoFocusItem={open}
-                  id="composition-menu"
-                  aria-labelledby="composition-button"
-                  onKeyDown={handleListKeyDown}
-                >
-                  <MenuItem
-                    onClick={handleHowToPlayClick}
-                    sx={{ fontSize: '1.5rem' }}
-                  >
-                    How to Play
-                  </MenuItem>
-                  <MenuItem
-                    onClick={handleAboutClick}
-                    sx={{ fontSize: '1.5rem' }}
-                  >
-                    About the Team
-                  </MenuItem>
-                  <MenuItem
-                    onClick={handleLWTClick}
-                    sx={{ fontSize: '1.5rem' }}
-                  >
-                    #LWT
-                  </MenuItem>
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper>
-      <Modal open={openAbout}>
-        <AboutUs close={setOpenAbout}></AboutUs>
-      </Modal>
-      <Modal open={openHowTo}>
-        <HowToPlay close={SetHowTo}></HowToPlay>
-      </Modal>
-    </Stack>
+        <MenuItem onClick={handleClose}>Profile</MenuItem>
+        <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem>
+      </Menu>
+    </div>
   );
-}
+};
+
+export default BurgerMenu;

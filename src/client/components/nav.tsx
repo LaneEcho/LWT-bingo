@@ -3,10 +3,8 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import Sidebar from './sidebar';
 import BurgerMenu from './menu';
 
 export default function NavBar() {
@@ -44,7 +42,10 @@ export default function NavBar() {
             size="large"
             edge="start"
             color="inherit"
-            aria-label="menu"
+            aria-label="menu-button"
+            aria-controls={open ? 'menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
             onClick={handleClick}
             sx={{ marginLeft: '2rem' }}
           >

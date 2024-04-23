@@ -151,22 +151,6 @@ export default function Board() {
           Reset Board
         </Button>
       </Stack>
-      {/* <Button
-        variant="contained"
-        size="small"
-        className="resetButton"
-        onClick={() => setViewTerms(!viewTerms)}
-        sx={{
-          // width: '8rem',
-          marginTop: '0.5rem',
-          fontSize: '0.5rem',
-        }}
-      >
-        Terms & Conditions
-      </Button> */}
-      {/* <Modal open={viewTerms}>
-        <TermsAndConditions close={setViewTerms}></TermsAndConditions>
-      </Modal> */}
     </div>
   );
 }

@@ -2,17 +2,29 @@ import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import Link from '@mui/material/Link';
-import { Modal } from '@mui/material';
+import Modal from '@mui/material/Modal';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
 import HowToPlay from './modals/howToPlay';
 import TermsAndConditions from './modals/terms';
 
 interface MenuProps {
   anchorEl: HTMLElement;
   handleClose: () => void;
+  toggleTheme: () => void;
+  darkMode: boolean;
   open: boolean;
 }
 
-const BurgerMenu: React.FC<MenuProps> = ({ handleClose, anchorEl, open }) => {
+const BurgerMenu: React.FC<MenuProps> = ({
+  handleClose,
+  toggleTheme,
+  anchorEl,
+  darkMode,
+  open,
+}) => {
   const [openHowTo, SetHowTo] = useState<boolean>(false);
   const [openTerms, SetTerms] = useState<boolean>(false);
 
@@ -71,8 +83,18 @@ const BurgerMenu: React.FC<MenuProps> = ({ handleClose, anchorEl, open }) => {
           Interconnected Collective
         </MenuItem>
         <MenuItem onClick={showTerms}>Terms & Conditions</MenuItem>
-        <MenuItem onClick={handleClose}>Dark Mode/ Light Mode</MenuItem>
+        <MenuItem onClick={toggleTheme}>
+          <ListItemIcon>
+            {darkMode ? (
+              <LightModeIcon fontSize="small" />
+            ) : (
+              <DarkModeIcon fontSize="small" />
+            )}
+          </ListItemIcon>
+          <ListItemText>{darkMode ? 'Light Mode' : 'Dark Mode'}</ListItemText>
+        </MenuItem>
       </Menu>
+
       <Modal
         aria-labelledby="modal-how-to-play"
         aria-describedby="modal-how-to-play-bingo"
@@ -80,6 +102,7 @@ const BurgerMenu: React.FC<MenuProps> = ({ handleClose, anchorEl, open }) => {
       >
         <HowToPlay close={SetHowTo}></HowToPlay>
       </Modal>
+
       <Modal
         aria-labelledby="modal-terms-and-conditions"
         aria-describedby="modal-terms-and-conditions"

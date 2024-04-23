@@ -127,7 +127,7 @@ function App() {
         }}
       >
         {/* <MaterialUISwitch checked={!darkMode} onChange={toggleTheme} /> */}
-        <NavBar></NavBar>
+        <NavBar toggleTheme={toggleTheme} darkMode={darkMode}></NavBar>
 
         <Board />
       </div>

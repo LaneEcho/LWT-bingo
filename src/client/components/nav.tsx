@@ -7,7 +7,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import BurgerMenu from './menu';
 
-export default function NavBar() {
+interface NavBarProps {
+  toggleTheme: () => void;
+  darkMode: boolean;
+}
+
+const NavBar: React.FC<NavBarProps> = ({ toggleTheme, darkMode }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -53,7 +58,15 @@ export default function NavBar() {
           </IconButton>
         </Toolbar>
       </AppBar>
-      <BurgerMenu handleClose={handleClose} anchorEl={anchorEl} open={open} />
+      <BurgerMenu
+        handleClose={handleClose}
+        toggleTheme={toggleTheme}
+        darkMode={darkMode}
+        anchorEl={anchorEl}
+        open={open}
+      />
     </Box>
   );
-}
+};
+
+export default NavBar;

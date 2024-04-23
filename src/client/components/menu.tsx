@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import MenuIcon from '@mui/icons-material/Menu';
-import AboutUs from './modals/aboutUs';
+import Link from '@mui/material/Link';
+import { Modal } from '@mui/material';
 import HowToPlay from './modals/howToPlay';
+import TermsAndConditions from './modals/terms';
 
 interface MenuProps {
   anchorEl: HTMLElement;
@@ -12,6 +13,19 @@ interface MenuProps {
 }
 
 const BurgerMenu: React.FC<MenuProps> = ({ handleClose, anchorEl, open }) => {
+  const [openHowTo, SetHowTo] = useState<boolean>(false);
+  const [openTerms, SetTerms] = useState<boolean>(false);
+
+  function showHowTo() {
+    handleClose();
+    SetHowTo(!openHowTo);
+  }
+
+  function showTerms() {
+    handleClose();
+    SetTerms(!openTerms);
+  }
+
   return (
     <div>
       <Menu
@@ -31,12 +45,48 @@ const BurgerMenu: React.FC<MenuProps> = ({ handleClose, anchorEl, open }) => {
           horizontal: 'right',
         }}
       >
-        <MenuItem onClick={handleClose}>Meet the Team</MenuItem>
-        <MenuItem onClick={handleClose}>#LWT Summit</MenuItem>
-        <MenuItem onClick={handleClose}>Interconnected Collective</MenuItem>
-        <MenuItem onClick={handleClose}>Get Involved</MenuItem>
-        <MenuItem onClick={handleClose}>Terms & Conditions</MenuItem>
+        <MenuItem onClick={showHowTo}>How to Play</MenuItem>
+        <MenuItem
+          component={Link}
+          href="https://lwtgames.netlify.app/about"
+          target="_blank"
+          onClick={handleClose}
+        >
+          Meet the Team
+        </MenuItem>
+        <MenuItem
+          component={Link}
+          href="https://lesbianswhotech.org/pridesummit2024/"
+          target="_blank"
+          onClick={handleClose}
+        >
+          #LWT Summit
+        </MenuItem>
+        <MenuItem
+          component={Link}
+          href="https://lwtgames.netlify.app/home"
+          target="_blank"
+          onClick={handleClose}
+        >
+          Interconnected Collective
+        </MenuItem>
+        <MenuItem onClick={showTerms}>Terms & Conditions</MenuItem>
+        <MenuItem onClick={handleClose}>Dark Mode/ Light Mode</MenuItem>
       </Menu>
+      <Modal
+        aria-labelledby="modal-how-to-play"
+        aria-describedby="modal-how-to-play-bingo"
+        open={openHowTo}
+      >
+        <HowToPlay close={SetHowTo}></HowToPlay>
+      </Modal>
+      <Modal
+        aria-labelledby="modal-terms-and-conditions"
+        aria-describedby="modal-terms-and-conditions"
+        open={openTerms}
+      >
+        <TermsAndConditions close={SetTerms}></TermsAndConditions>
+      </Modal>
     </div>
   );
 };

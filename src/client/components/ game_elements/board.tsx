@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Row from './row';
-import Phrases from '../../lib/phrases';
-import { BoardState } from '../../types';
-import { bingoRow, bingoColumn } from '../../util/bingo';
+import Phrases from '../../../lib/phrases';
+import { BoardState } from '../../../types';
+import { bingoRow, bingoColumn } from '../../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
 import { Button, Modal, Stack } from '@mui/material';
-import Reset from './modals/reset';
+import Reset from '../modals/reset';
 
 // gettting a number so we don't have to hard code if we continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;

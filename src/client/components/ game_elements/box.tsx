@@ -1,5 +1,5 @@
 import React, { useState, useEffect, SetStateAction } from 'react';
-import { BoxProps } from '../../types';
+import { BoxProps } from '../../../types';
 
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';

@@ -1,14 +1,13 @@
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 import Row from './row';
-import Phrases from '../../lib/phrases';
-import { BoardState } from '../../types';
-import { bingoRow, bingoColumn } from '../../util/bingo';
+import Phrases from '../../../lib/phrases';
+import { BoardState } from '../../../types';
+import { bingoRow, bingoColumn } from '../../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
-import { Button, Modal, Stack, Box } from '@mui/material';
-import Reset from './modals/reset';
-import TermsAndConditions from './modals/terms';
+import { Button, Modal, Stack } from '@mui/material';
+import Reset from '../modals/reset';
 
-// gettting a number so we don't have to hard code and continuously update the list of possible phrases
+// gettting a number so we don't have to hard code if we continuously update the list of possible phrases
 let length: number = Object.keys(Phrases).length;
 
 function pickUniqueNumbers(): number[] {
@@ -39,10 +38,7 @@ export default function Board() {
     JSON.parse(localStorage.getItem('game over')) || false
   );
   const [confetti, setConfetti] = useState<boolean>(false);
-  // so it makes sure to tell user to play again
   const [open, setOpen] = useState<boolean>(false);
-  // for the T&C modal
-  const [viewTerms, setViewTerms] = useState<boolean>(false);
 
   const rows: JSX.Element[] = [];
 
@@ -151,22 +147,6 @@ export default function Board() {
           Reset Board
         </Button>
       </Stack>
-      <Button
-        variant="contained"
-        size="small"
-        className="resetButton"
-        onClick={() => setViewTerms(!viewTerms)}
-        sx={{
-          // width: '8rem',
-          marginTop: '0.5rem',
-          fontSize: '0.5rem',
-        }}
-      >
-        Terms & Conditions
-      </Button>
-      <Modal open={viewTerms}>
-        <TermsAndConditions close={setViewTerms}></TermsAndConditions>
-      </Modal>
     </div>
   );
 }

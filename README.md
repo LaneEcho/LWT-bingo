@@ -33,9 +33,9 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 | Alert player when they win         | ✅     |
 | Do not reset board on page refresh | ✅     |
 | Separate Modal Component           | ✅     |
+| Updated UI                         | ⏳     |
 | Responsive Design                  | ⏳     |
 | Accessibility improvement          | ⏳     |
-| URL State Management               | ⏳     |
 | And more...                        | ⏳     |
 
 - ✅ = Ready to use

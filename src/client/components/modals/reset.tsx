@@ -2,7 +2,7 @@ import React from 'react';
 import { ResetProps } from '@/types';
 import { Box, Typography, Button, Stack } from '@mui/material';
 
-export default function Reset(props: ResetProps) {
+const Reset = React.forwardRef(function (props: ResetProps, ref) {
   return (
     <Box
       sx={{
@@ -102,4 +102,6 @@ export default function Reset(props: ResetProps) {
       )}
     </Box>
   );
-}
+});
+
+export default Reset;

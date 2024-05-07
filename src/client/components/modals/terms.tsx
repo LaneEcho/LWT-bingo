@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { Box, Typography, Button, Stack } from '@mui/material';
-
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -11,7 +10,10 @@ type TermsProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const TermsAndConditions: React.FC<TermsProps> = ({ close }) => {
+const TermsAndConditions = React.forwardRef(function (
+  { close }: TermsProps,
+  ref
+) {
   const handleClose = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       close((prevViewTerms) => !prevViewTerms);
@@ -34,7 +36,7 @@ const TermsAndConditions: React.FC<TermsProps> = ({ close }) => {
 
   for (const key in ConditionsList) {
     listItems.push(
-      <ListItem>
+      <ListItem key={key}>
         <ListItemText primary={key} secondary={ConditionsList[key]} />
       </ListItem>
     );
@@ -86,6 +88,6 @@ const TermsAndConditions: React.FC<TermsProps> = ({ close }) => {
       </Stack>
     </Box>
   );
-};
+});
 
 export default TermsAndConditions;

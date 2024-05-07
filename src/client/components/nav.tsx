@@ -12,10 +12,10 @@ interface NavBarProps {
   darkMode: boolean;
 }
 
-const NavBar = React.forwardRef(function ({
-  toggleTheme,
-  darkMode,
-}: NavBarProps) {
+const NavBar = React.forwardRef(function (
+  { toggleTheme, darkMode }: NavBarProps,
+  ref
+) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);

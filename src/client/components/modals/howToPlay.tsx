@@ -5,7 +5,7 @@ type HowToPlayProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const HowToPlay: React.FC<HowToPlayProps> = ({ close }) => {
+const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
   const handleClose = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       close((prevOpenHowTo) => !prevOpenHowTo);
@@ -103,6 +103,6 @@ const HowToPlay: React.FC<HowToPlayProps> = ({ close }) => {
       </Stack>
     </Box>
   );
-};
+});
 
 export default HowToPlay;

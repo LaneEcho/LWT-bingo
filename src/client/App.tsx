@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
-import Board from './components/ game_elements/board';
+import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider, createTheme, styled } from '@mui/material/styles';
-import { useTheme, Switch } from '@mui/material';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useTheme } from '@mui/material/';
 import NavBar from './components/nav';
 
 function initialState() {

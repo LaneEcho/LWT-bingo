@@ -18,13 +18,10 @@ interface MenuProps {
   open: boolean;
 }
 
-const BurgerMenu: React.FC<MenuProps> = ({
-  handleClose,
-  toggleTheme,
-  anchorEl,
-  darkMode,
-  open,
-}) => {
+const BurgerMenu = React.forwardRef(function (
+  { handleClose, toggleTheme, anchorEl, darkMode, open }: MenuProps,
+  ref: React.Ref<HTMLElement>
+) {
   const [openHowTo, SetHowTo] = useState<boolean>(false);
   const [openTerms, SetTerms] = useState<boolean>(false);
 
@@ -112,6 +109,6 @@ const BurgerMenu: React.FC<MenuProps> = ({
       </Modal>
     </div>
   );
-};
+});
 
 export default BurgerMenu;

@@ -12,7 +12,10 @@ interface NavBarProps {
   darkMode: boolean;
 }
 
-const NavBar: React.FC<NavBarProps> = ({ toggleTheme, darkMode }) => {
+const NavBar = React.forwardRef(function (
+  { toggleTheme, darkMode }: NavBarProps,
+  ref
+) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -67,6 +70,6 @@ const NavBar: React.FC<NavBarProps> = ({ toggleTheme, darkMode }) => {
       />
     </Box>
   );
-};
+});
 
 export default NavBar;

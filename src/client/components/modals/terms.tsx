@@ -45,6 +45,7 @@ const TermsAndConditions = React.forwardRef(function (
   return (
     <FocusTrap open>
       <Box
+        tabIndex={-1}
         sx={{
           position: 'fixed',
           top: '50%',

@@ -28,6 +28,7 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
   return (
     <FocusTrap open>
       <Box
+        tabIndex={-1}
         sx={{
           position: 'fixed',
           top: '50%',

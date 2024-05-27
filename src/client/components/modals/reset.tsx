@@ -7,6 +7,7 @@ const Reset = React.forwardRef(function (props: ResetProps, ref) {
   return (
     <FocusTrap open>
       <Box
+        tabIndex={-1}
         sx={{
           position: 'fixed',
           top: '50%',

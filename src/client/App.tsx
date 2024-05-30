@@ -43,6 +43,9 @@ function App() {
     typography: {
       fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
     },
+    typography: {
+      fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
+    },
   });
 
   const darkTheme = createTheme({

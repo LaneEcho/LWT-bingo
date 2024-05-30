@@ -36,12 +36,10 @@ function App() {
         contrastText: '#fff',
       },
     },
+    typography: {
+      fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
+    },
   });
-
-  const toggleTheme = (): void => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', (!darkMode).toString());
-  };
 
   const darkTheme = createTheme({
     palette: {
@@ -55,6 +53,11 @@ function App() {
   });
 
   const theme = useTheme();
+
+  const toggleTheme = (): void => {
+    setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', (!darkMode).toString());
+  };
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>

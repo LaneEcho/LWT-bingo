@@ -1,12 +1,13 @@
 :root {
   --hot-pink: #e11774;
   --neon-blue: #05fff4;
-  --light-blue: #46a4db;
+  --light-blue: #46a4df;
+  --purple: #7030a0;
   --primary-black: #000;
-}
-
-html {
-  font-size: 1.8vh;
+  --white: #fff;
+  --secondary-green: #92d050;
+  --secondary-yellow: #ffc000;
+  --secondary-gray: #575757;
 }
 
 body {
@@ -24,5 +25,4 @@ body {
   flex-direction: column;
   align-items: center;
   box-sizing: border-box;
-  /* margin-top: 0.5rem; */
 }

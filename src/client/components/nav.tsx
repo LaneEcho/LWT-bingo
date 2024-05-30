@@ -39,7 +39,9 @@ const NavBar = React.forwardRef(function (
         <Toolbar>
           <Typography
             variant="h1"
+            fontFamily={'Lalezar'}
             color="primary"
+            textTransform={'uppercase'}
             sx={{
               fontSize: '3rem',
             }}

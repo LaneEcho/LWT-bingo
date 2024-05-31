@@ -1,33 +1,33 @@
-import React, { useState, useEffect, SetStateAction } from 'react';
-import { BoxProps } from '../../../types';
-
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 
-function Box(props: BoxProps) {
+type BoxProps = {
+  text: any;
+  row: number;
+  column: number;
+  gameOver: boolean;
+};
+
+function Box({ text, row, column, gameOver }: BoxProps) {
   const [clicked, setClicked] = useState<boolean>(false);
 
   // see if the box has been clicked upon page reload
   useEffect(() => {
-    const savedClickedState = localStorage.getItem(
-      `box-${props.row}-${props.column}`
-    );
+    const savedClickedState = localStorage.getItem(`box-${row}-${column}`);
     if (savedClickedState) {
       setClicked(savedClickedState === 'true');
     }
-  }, [props.row, props.column]);
+  }, [row, column]);
 
   // update state and local storage on click
   const handleBoxClick = (): void => {
     const updatedClicked: boolean = !clicked;
     setClicked(updatedClicked);
     if (updatedClicked) {
-      localStorage.setItem(
-        `box-${props.row}-${props.column}`,
-        updatedClicked.toString()
-      );
+      localStorage.setItem(`box-${row}-${column}`, updatedClicked.toString());
     } else {
-      localStorage.removeItem(`box-${props.row}-${props.column}`);
+      localStorage.removeItem(`box-${row}-${column}`);
     }
   };
 
@@ -38,24 +38,26 @@ function Box(props: BoxProps) {
       variant="outlined"
       className="box"
       onClick={handleBoxClick}
-      data-row={props.row}
-      data-column={props.column}
-      disabled={props.gameOver}
-      style={{
+      data-row={row}
+      data-column={column}
+      disabled={gameOver}
+      sx={{
         margin: '4px',
         height: '8rem',
         width: '8rem',
-        // want users to know when button is disabled
+        fontFamily: 'Poppins',
+        borderRadius: '1rem',
         backgroundColor: clicked
-          ? props.gameOver
-            ? 'orange' // color of disabled clicked buttons
+          ? gameOver
+            ? '#7030A0' // color of disabled clicked buttons
             : theme.palette.primary.dark
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
-        border: `1px solid ${theme.palette.primary.main}`,
+        border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
+        fontSize: text.length > 40 ? '10.5px' : '14px',
       }}
     >
-      {props.text}
+      {text}
     </Button>
   );
 }

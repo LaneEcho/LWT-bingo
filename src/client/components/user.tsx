@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
-import {
-  Avatar,Typography
-} from '@mui/material';
+import { Avatar, Typography } from '@mui/material';
 import { getAuth } from 'firebase/auth';
 
 import UserMenu from './UserMenu';
-import { styled } from 'styled-components'
+import { styled } from 'styled-components';
 // import { AnchorOutlined } from '@mui/icons-material';
-
 
 const AvatarLabel = styled.div`
   display: flex;
@@ -21,9 +18,8 @@ const AvatarContainer = styled.div`
   & > * {
     margin: 4px;
   }
-  width: 100px
+  width: 100px;
 `;
-
 
 const User: React.FC = () => {
   const { user } = useAuth();
@@ -47,30 +43,28 @@ const User: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
-  console.log({user})
+  console.log({ user });
   return (
     <>
-      {user?.uid && 
-        // <AvatarContainer>
-        //   <AvatarLabel>
-            <Avatar 
-              src={user?.photoURL} 
-              onClick={showUserMenu}
-              aria-label='user-menu-button'
-              aria-controls={open ? 'menu' : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? 'true' : undefined}
-              alt={user?.displayName}
-            />
-            /*{ <Typography variant="body2"> {user?.displayName}</Typography>
+      {
+        user?.uid && (
+          // <AvatarContainer>
+          //   <AvatarLabel>
+          <Avatar
+            src={user?.photoURL}
+            onClick={showUserMenu}
+            aria-label="user-menu-button"
+            aria-controls={open ? 'menu' : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            alt={user?.displayName}
+          />
+        )
+        /*{ <Typography variant="body2"> {user?.displayName}</Typography>
           </AvatarLabel>
         </AvatarContainer> }*/
       }
-      <UserMenu 
-        handleClose={hideUserMenu}
-        anchorEl={anchorEl}
-        open={open}
-        />
+      <UserMenu handleClose={hideUserMenu} anchorEl={anchorEl} open={open} />
     </>
   );
 };

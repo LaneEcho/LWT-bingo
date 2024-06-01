@@ -1,15 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import {
-  getAuth,
-  signInWithPopup,
-  GoogleAuthProvider,
-} from "firebase/auth";
-import { useAuth } from "../hooks/useAuth";
-import Button from "./Button";
-import { GitHub, Google } from "@mui/icons-material";
-
-
+import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { useAuth } from '../hooks/useAuth';
+import Button from './Button';
+import { GitHub, Google } from '@mui/icons-material';
 
 interface IGmailLogin {
   onSuccess: () => void;
@@ -39,7 +33,9 @@ const GmailLogin: React.FC<IGmailLogin> = ({ onSuccess }) => {
         const email = error?.customData?.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        throw new Error(`Failed to log in via Google credential ${credential} with email ${email}. ${errorCode} - ${errorMessage}.`);
+        throw new Error(
+          `Failed to log in via Google credential ${credential} with email ${email}. ${errorCode} - ${errorMessage}.`
+        );
       });
   }
 

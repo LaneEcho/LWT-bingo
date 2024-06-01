@@ -41,7 +41,6 @@ const BurgerMenu = React.forwardRef(function (
     SetTerms(!openTerms);
   }
 
-
   return (
     <div>
       <Menu
@@ -96,6 +95,9 @@ const BurgerMenu = React.forwardRef(function (
             )}
           </ListItemIcon>
           <ListItemText>{darkMode ? 'Light Mode' : 'Dark Mode'}</ListItemText>
+        </MenuItem>
+        <MenuItem onClick={handleLogout}>
+          <ListItemText>Logout</ListItemText>
         </MenuItem>
       </Menu>
 

@@ -6,6 +6,7 @@ import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import BurgerMenu from './menu';
+import User from './user';
 
 interface NavBarProps {
   toggleTheme: () => void;
@@ -68,6 +69,7 @@ const NavBar = React.forwardRef(function (
         anchorEl={anchorEl}
         open={open}
       />
+      <User />
     </Box>
   );
 });

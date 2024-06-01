@@ -6,6 +6,8 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useTheme } from '@mui/material/';
 import NavBar from './components/nav';
+import Leaderboard from './components/leaderboard';
+import { AuthProvider } from './context/AuthContext';
 
 function initialState() {
   if (localStorageAvailable()) {
@@ -61,20 +63,23 @@ function App() {
 
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
-      <CssBaseline />
-      <div
-        className="app"
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-        }}
-      >
-        <NavBar toggleTheme={toggleTheme} darkMode={darkMode}></NavBar>
-        <Board />
-      </div>
+      <AuthProvider>
+        <CssBaseline />
+        <div
+          className="app"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            height: '100vh',
+          }}
+        >
+          <NavBar toggleTheme={toggleTheme} darkMode={darkMode}></NavBar>
+          <Board />
+        </div>
+        <Leaderboard />
+      </AuthProvider>
     </ThemeProvider>
   );
 }

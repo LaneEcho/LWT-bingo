@@ -1,14 +1,25 @@
 import React, { useState } from 'react';
 import Row from './row';
-import Phrases from '../../../lib/phrases';
-import { BoardState } from '../../../types';
-import { bingoRow, bingoColumn } from '../../../util/bingo';
+
+import {
+  bingoRow,
+  bingoColumn,
+  bingoSpecial,
+  BingoResult,
+} from '../../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
+
 import { Button, Modal, Stack } from '@mui/material';
 import Reset from '../modals/reset';
+import { useAuth } from '../../hooks/useAuth';
+import { LoginModal } from '../modals/LoginModal';
+import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
+import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
+import phrases from '../../../lib/phrases';
+import { BoardState, RowProps } from '../../../types';
 
-// gettting a number so we don't have to hard code if we continuously update the list of possible phrases
-let length: number = Object.keys(Phrases).length;
+// getting a number so we don't have to hard code and continuously update the list of possible phrases
+let length: number = Object.keys(phrases).length;
 
 function pickUniqueNumbers(): number[] {
   let uniqueNumbers: Set<number> = new Set();
@@ -28,17 +39,26 @@ function initialState(): number[] {
   return phrases;
 }
 
-export default function Board() {
+const Board: React.FC = () => {
+  const { user } = useAuth();
+
   // either going to pull from localStorage, or invoke initial state function
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
   );
-  // persist gameOver state in case of refresh
+  // persisting gameOver state in case of refresh
   const [gameOver, setGameOver] = useState(
     JSON.parse(localStorage.getItem('game over')) || false
   );
   const [confetti, setConfetti] = useState<boolean>(false);
-  const [open, setOpen] = useState<boolean>(false);
+  // so it makes sure to tell user to play again
+  const [loginOpen, setLoginOpen] = useState<boolean>(false);
+  const [usernameOpen, setUsernameOpen] = useState<boolean>(false);
+  const [submitScoreOpen, setSubmitScoreOpen] = useState<boolean>(false);
+
+  const [bingoResult, setBingoResult] = useState<BingoResult | undefined>(
+    undefined
+  );
 
   const rows: JSX.Element[] = [];
 
@@ -63,30 +83,69 @@ export default function Board() {
     setGameOver(false);
     setPhraseIndex(phrases);
     setConfetti(false);
-    setOpen(false);
+    setLoginOpen(false);
+    setLoginOpen(false);
+    setUsernameOpen(false);
+    setSubmitScoreOpen(false);
+    setBingoResult(undefined);
+  }
+
+  function onLoginSuccess(): void {
+    setLoginOpen(false);
+    setUsernameOpen(true);
+  }
+
+  function checkBingo(): BingoResult {
+    const isBingoSpecial = bingoSpecial();
+    if (isBingoSpecial.isBingo) {
+      return isBingoSpecial; // Return early if special bingo condition is met
+    }
+
+    const isRow = bingoRow();
+    if (isRow.isBingo) {
+      return isRow; // Only calculate and return row result if no special bingo
+    }
+
+    const isColumn = bingoColumn();
+    return isColumn; // Return column result last since it's the lowest priority
   }
 
   function callBingo(): void {
-    let bingo: boolean = bingoRow();
-    // if not a row then check for column
-    if (!bingo) {
-      bingo = bingoColumn();
-    }
-    if (bingo) {
+    const bingo = checkBingo();
+    setBingoResult(bingo);
+
+    if (bingo?.isBingo) {
       setConfetti(true);
       setGameOver(true);
       localStorage.setItem('game over', 'true');
-      setOpen(true);
+      if (user?.uid) {
+        setSubmitScoreOpen(true);
+      } else {
+        setLoginOpen(true);
+      }
       setTimeout(() => {
         setConfetti(false);
       }, 3000);
     } else {
-      setOpen(true);
+      if (user?.uid) {
+        setSubmitScoreOpen(true);
+      } else {
+        setLoginOpen(true);
+      }
+      // setLoginOpen(true);
     }
   }
 
   const handleClose = () => {
-    setOpen(false);
+    setLoginOpen(false);
+  };
+
+  const handleUsernameClose = () => {
+    setUsernameOpen(false);
+  };
+
+  const handleScoreSubmissionClose = () => {
+    setSubmitScoreOpen(false);
   };
 
   // accessing CSS variables in case we change them later
@@ -127,13 +186,6 @@ export default function Board() {
         >
           BINGO!
         </Button>
-        <Modal open={open} onClose={handleClose}>
-          <Reset
-            gameOver={gameOver}
-            reset={resetBoard}
-            onClose={handleClose}
-          ></Reset>
-        </Modal>
         <Button
           variant="contained"
           size="small"
@@ -147,6 +199,31 @@ export default function Board() {
           Reset Board
         </Button>
       </Stack>
+      {loginOpen && (
+        <LoginModal
+          isOpen={loginOpen}
+          onClose={handleClose}
+          score={bingoResult?.score}
+          resetBoard={resetBoard}
+          onLoginSuccess={onLoginSuccess}
+        />
+      )}
+      <UpdateUsernameModal
+        isOpen={usernameOpen}
+        onClose={handleUsernameClose}
+        score={bingoResult?.score}
+        resetBoard={resetBoard}
+      />
+      {submitScoreOpen && (
+        <ScoreSubmissionModal
+          isOpen={submitScoreOpen}
+          onClose={handleScoreSubmissionClose}
+          resetBoard={resetBoard}
+          score={bingoResult?.score}
+        />
+      )}
     </div>
   );
-}
+};
+
+export default Board;

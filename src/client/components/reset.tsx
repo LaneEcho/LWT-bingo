@@ -1,21 +1,26 @@
-import React from 'react';
-import { ResetProps } from '../../types';
-import { Box, Typography, Button, Stack } from '@mui/material';
+import React from "react";
+import { ResetProps } from "../../types";
+import { Box, Typography, Button, Stack } from "@mui/material";
 
-function Reset(props: ResetProps) {
+/**
+ * @deprecated now using 'LoginModal' for this
+ */
+const Reset: React.FC<ResetProps> = (props) => {
+  const [showLogin, setShowLogin] = React.useState(false);
+
   return (
     <>
       <Box
         sx={{
-          position: 'fixed',
-          top: '50%',
-          left: '50%',
-          transform: 'translate(-50%, -50%)',
-          width: '40vw',
-          bgcolor: 'background.paper',
-          padding: '1.5rem',
-          borderRadius: '8px',
-          textAlign: 'center',
+          position: "fixed",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+          width: "40vw",
+          bgcolor: "background.paper",
+          padding: "1.5rem",
+          borderRadius: "8px",
+          textAlign: "center",
           // overflow: 'scroll',
           // display: 'flex',
           // flexDirection: 'column',
@@ -44,7 +49,7 @@ function Reset(props: ResetProps) {
               className="resetButton"
               onClick={props.reset}
               sx={{
-                width: '8rem',
+                width: "8rem",
               }}
             >
               Play Again
@@ -64,7 +69,7 @@ function Reset(props: ResetProps) {
             <Typography
               id="modal-modal-description"
               variant="h6"
-              sx={{ mt: '1px' }}
+              sx={{ mt: "1px" }}
             >
               Looks like you don't have any score eligible patterns. You can go
               back and continue this game or reset your board.
@@ -90,6 +95,6 @@ function Reset(props: ResetProps) {
       </Box>
     </>
   );
-}
+};
 
 export default Reset;

@@ -53,7 +53,8 @@ export const updateUser = async (userId: string, username: string, isOptedIn?: b
   const userRef = doc(db, "users", userId);
 
   try {
-    await setDoc(userRef, { username, isOptedIn }, { merge: true });
+    const isFirstTimeUser = false;
+    await setDoc(userRef, { username, isOptedIn, isFirstTimeUser }, { merge: true });
     console.log("Username and iOptedIn saved!");
   } catch (error) {
     console.error("Error saving username:", error);

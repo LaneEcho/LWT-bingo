@@ -41,19 +41,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       try {
         // For now I'm storing the username via setUser here when updating,
         // but this will break as soon as user refreshes tab
+        const collectionRef = collection(db, 'users', user?.uid, 'username');
+        const q = query(collectionRef);
+        const querySnapshot = await getDocs(q);
 
-        if (!user?.uid) {
-          return;
-        }
-        const userDocRef = doc(db, 'users', user?.uid);
-        const userDocSnap = await getDoc(userDocRef);
+        let username = '';
+        querySnapshot.forEach((doc) => {
+          // Assuming there's only one document and it contains the username
+          username = doc.data().username;
+        });
+        console.log('🚀 ~ querySnapshot.forEach ~ username:', username);
 
-        if (userDocSnap.exists()) {
-          const username = userDocSnap.data().username;
-          setUser({ ...user, username });
-        } else {
-          console.error('User not found');
-        }
+        setUser({ ...user, username });
       } catch (error) {
         console.error('😢 Error fetching username:', error);
       }

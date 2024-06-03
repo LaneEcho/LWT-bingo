@@ -50,6 +50,7 @@ const BurgerMenu = React.forwardRef(function (
         onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'board-menu-button',
+          'aria-labelledby': 'board-menu-button',
         }}
         anchorOrigin={{
           vertical: 'top',
@@ -95,9 +96,6 @@ const BurgerMenu = React.forwardRef(function (
             )}
           </ListItemIcon>
           <ListItemText>{darkMode ? 'Light Mode' : 'Dark Mode'}</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>
-          <ListItemText>Logout</ListItemText>
         </MenuItem>
       </Menu>
 

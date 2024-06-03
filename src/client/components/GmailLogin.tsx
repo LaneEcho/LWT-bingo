@@ -33,9 +33,7 @@ const GmailLogin: React.FC<IGmailLogin> = ({ onSuccess }) => {
         const email = error?.customData?.email;
         // The AuthCredential type that was used.
         const credential = GoogleAuthProvider.credentialFromError(error);
-        throw new Error(
-          `Failed to log in via Google credential ${credential} with email ${email}. ${errorCode} - ${errorMessage}.`
-        );
+        throw new Error('Failed to log in via Gmail.');
       });
   }
 

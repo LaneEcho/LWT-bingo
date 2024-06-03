@@ -9,7 +9,6 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import HowToPlay from './modals/howToPlay';
 import TermsAndConditions from './modals/terms';
-import GmailLogout from './GmailLogout';
 import { getAuth, signOut } from 'firebase/auth';
 import { useAuth } from '../hooks/useAuth';
 import { Google } from '@mui/icons-material';
@@ -42,19 +41,6 @@ const BurgerMenu = React.forwardRef(function (
     SetTerms(!openTerms);
   }
 
-  function handleLogout() {
-    if (user?.email) {
-      signOut(auth)
-        .then(() => {
-          handleClose();
-          console.log('Signed out successfully.');
-          //  TODO: add toast!
-        })
-        .catch((error) => {
-          console.log('NOT Signed out, something went wrong.');
-        });
-    }
-  }
 
   return (
     <div>
@@ -64,7 +50,7 @@ const BurgerMenu = React.forwardRef(function (
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'menu-button',
+          'aria-labelledby': 'board-menu-button',
         }}
         anchorOrigin={{
           vertical: 'top',
@@ -110,9 +96,6 @@ const BurgerMenu = React.forwardRef(function (
             )}
           </ListItemIcon>
           <ListItemText>{darkMode ? 'Light Mode' : 'Dark Mode'}</ListItemText>
-        </MenuItem>
-        <MenuItem onClick={handleLogout}>
-          <ListItemText>Logout</ListItemText>
         </MenuItem>
       </Menu>
 

@@ -1,7 +1,7 @@
 import React, { createContext, useEffect, useState, ReactNode } from "react";
 import { getAuth, onAuthStateChanged, User } from "firebase/auth";
 import { app, db } from "../../firebase/firebase-api";
-import { collection, getDocs, query } from "firebase/firestore";
+import { doc,getDoc } from "firebase/firestore";
 
 const auth = getAuth(app);
 
@@ -28,6 +28,7 @@ interface AuthProviderProps {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<LeaderboardUser | null>(null);
+  const [newUser,setNewUser] = useState<boolean>()
 
   useEffect(() => {
     // Set up listener that sets user on change
@@ -41,18 +42,31 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         // TODO: getting insufficient permissions!
         // For now I'm storing the username via setUser here when updating,
         // but this will break as soon as user refreshes tab
-        const collectionRef = collection(db, "users", user?.uid, "username");
-        const q = query(collectionRef);
-        const querySnapshot = await getDocs(q);
 
-        let username = "";
-        querySnapshot.forEach((doc) => {
-          // Assuming there's only one document and it contains the username
-          username = doc.data().username;
-        });
-        console.log("🚀 ~ querySnapshot.forEach ~ username:", username);
+        if (!user?.uid) {
+          return
+        }
+        const userDocRef = doc(db, "users", user?.uid);
+        const userDocSnap = await getDoc(userDocRef);
 
-        setUser({ ...user, username });
+        if (userDocSnap.exists()) {
+          const username = userDocSnap.data().username
+          setUser({ ...user, username });
+        } else {
+          console.error("User not found");
+        }
+        // const collectionRef = collection(db, "documents", "users", user?.uid);
+        // const q = query(collectionRef);
+        // const querySnapshot = await getDocs(q);
+
+        // let username = "";
+        // querySnapshot.forEach((doc) => {
+        //   // Assuming there's only one document and it contains the username
+        //   username = doc.data().username;
+        // });
+        // console.log("🚀 ~ querySnapshot.forEach ~ username:", username);
+
+        // setUser({ ...user, username });
       } catch (error) {
         console.error("😢 Error fetching username:", error);
       }
@@ -73,6 +87,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   );
 
   function setUsername(username: string) {
+    checkIfNewUser()
     setUser({ ...user, username });
   }
 };

@@ -1,78 +1,78 @@
 import React, { useState } from 'react';
 import { useAuth } from '../hooks/useAuth';
 import {
-  Avatar,
-  Dialog,
-  DialogContent,
-  DialogTitle,
-  IconButton,
-  Typography,
+  Avatar,Typography
 } from '@mui/material';
 import { getAuth } from 'firebase/auth';
-import { doc, setDoc } from 'firebase/firestore';
-import { db, updateUser } from '../../firebase/firebase-api';
-import { CloseOutlined } from '@mui/icons-material';
+
+import UserMenu from './UserMenu';
+import { styled } from 'styled-components'
+// import { AnchorOutlined } from '@mui/icons-material';
+
+
+const AvatarLabel = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const AvatarContainer = styled.div`
+  display: flex;
+  margin-bottom: 14px;
+  & > * {
+    margin: 4px;
+  }
+  width: 100px
+`;
+
 
 const User: React.FC = () => {
   const { user } = useAuth();
   const auth = getAuth();
 
-  const [showForm, setShowForm] = useState(false);
-  const [username, setUsername] = useState('');
-
+  const [showMenu, setShowMenu] = useState<boolean>(false);
   // TODO: Clean this modal up!
   // We need to add validation. We need to know if the username already exists
   // Open questions: what do we do if it does exist?
+
+  function showUserMenu(event: React.MouseEvent<HTMLElement>) {
+    setShowMenu(true);
+    setAnchorEl(event.currentTarget);
+  }
+
+  function hideUserMenu() {
+    setShowMenu(false);
+    setAnchorEl(null);
+  }
+
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const open = Boolean(anchorEl);
+  console.log({user})
   return (
     <>
-      {user?.uid && <Avatar src={user?.photoURL} onClick={showUsernameForm} />}
-      <Dialog open={showForm} onClose={handleOnCloseClick}>
-        <DialogTitle>
-          Update Username
-          <IconButton onClick={handleOnCloseClick}>
-            <CloseOutlined />
-          </IconButton>
-        </DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit}>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder={user?.username ?? ''}
+      {user?.uid && 
+        // <AvatarContainer>
+        //   <AvatarLabel>
+            <Avatar 
+              src={user?.photoURL} 
+              onClick={showUserMenu}
+              aria-label='user-menu-button'
+              aria-controls={open ? 'menu' : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? 'true' : undefined}
+              alt={user?.displayName}
             />
-            <button type="submit">Submit</button>
-          </form>
-        </DialogContent>
-      </Dialog>
+            /*{ <Typography variant="body2"> {user?.displayName}</Typography>
+          </AvatarLabel>
+        </AvatarContainer> }*/
+      }
+      <UserMenu 
+        handleClose={hideUserMenu}
+        anchorEl={anchorEl}
+        open={open}
+        />
     </>
   );
-
-  function handleOnCloseClick() {
-    // TODO: add confirmation if unsaved changes
-    setShowForm(false);
-  }
-
-  function showUsernameForm() {
-    setShowForm(true);
-  }
-
-  async function handleSubmit(event: any) {
-    event.preventDefault();
-    const user = auth.currentUser;
-
-    if (user) {
-      const userRef = doc(db, 'users', user.uid);
-      try {
-        // await setDoc(userRef, { username }, { merge: true });
-        await updateUser(user?.uid, username);
-        setShowForm(false);
-        console.log('Username saved!');
-      } catch (error) {
-        console.error('Error saving username:', error);
-      }
-    }
-  }
 };
 
 export default User;

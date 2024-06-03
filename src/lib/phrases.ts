@@ -132,7 +132,7 @@ const phrases: Phrases = {
   129: 'Wear something Pride related',
   130: 'Get some fresh air',
   131: 'Spend 5 minutes with your fur baby',
-  132: 'Send your firend a positive message',
+  132: 'Send your friend a positive message',
   133: 'Send someone a positive emoji in the chat',
   134: 'Put your LinkedIn in the chat',
   135: 'Add another participant on LinkedIn',

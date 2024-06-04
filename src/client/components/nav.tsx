@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, FC } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,6 +7,9 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import BurgerMenu from './menu';
 import User from './user';
+import PresentedByInCo from '../../assets/icons/PresentedByInCo.svg';
+
+const MySVG: FC = () => <PresentedByInCo />;
 
 interface NavBarProps {
   toggleTheme: () => void;
@@ -49,6 +52,7 @@ const NavBar = React.forwardRef(function (
           >
             Lesbians Who Tech Bingo!
           </Typography>
+          <MySVG></MySVG>
           <IconButton
             size="large"
             edge="start"

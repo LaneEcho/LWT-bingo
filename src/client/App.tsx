@@ -4,9 +4,9 @@ import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useTheme } from '@mui/material/';
+import { Box, useTheme } from '@mui/material/';
 import Header from './components/Header';
-import Leaderboard from './components/leaderboard';
+import Leaderboard from './components/Leaderboard';
 import { AuthProvider } from './context/AuthContext';
 
 function initialState() {
@@ -66,16 +66,10 @@ function App() {
       <AuthProvider>
         <CssBaseline />
         <Header toggleTheme={toggleTheme} darkMode={darkMode}></Header>
-        <div
-          style={{
-            display: 'flex',
-
-            // width: '100vw',
-          }}
-        >
+        <Box display="flex" width="100vw" gap={2} justifyContent={'center'}>
           <Board />
           <Leaderboard />
-        </div>
+        </Box>
       </AuthProvider>
     </ThemeProvider>
   );

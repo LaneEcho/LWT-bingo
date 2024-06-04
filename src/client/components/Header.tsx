@@ -10,13 +10,13 @@ import User from './user';
 import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
 import Unofficial from '../../assets/svg/Unofficial.svg';
 
-interface NavBarProps {
+interface HeaderProps {
   toggleTheme: () => void;
   darkMode: boolean;
 }
 
-const NavBar = React.forwardRef(function (
-  { toggleTheme, darkMode }: NavBarProps,
+const Header = React.forwardRef(function (
+  { toggleTheme, darkMode }: HeaderProps,
   ref
 ) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -80,4 +80,4 @@ const NavBar = React.forwardRef(function (
   );
 });
 
-export default NavBar;
+export default Header;

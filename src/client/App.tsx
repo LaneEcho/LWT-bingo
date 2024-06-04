@@ -5,7 +5,7 @@ import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useTheme } from '@mui/material/';
-import NavBar from './components/Header';
+import Header from './components/Header';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
 
@@ -65,20 +65,17 @@ function App() {
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <AuthProvider>
         <CssBaseline />
+        <Header toggleTheme={toggleTheme} darkMode={darkMode}></Header>
         <div
-          className="app"
           style={{
             display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            width: '100vw',
+
+            // width: '100vw',
           }}
         >
-          <NavBar toggleTheme={toggleTheme} darkMode={darkMode}></NavBar>
           <Board />
+          <Leaderboard />
         </div>
-        <Leaderboard />
       </AuthProvider>
     </ThemeProvider>
   );

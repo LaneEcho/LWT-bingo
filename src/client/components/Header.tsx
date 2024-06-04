@@ -1,4 +1,4 @@
-import React, { useState, FC } from 'react';
+import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,9 +7,8 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import BurgerMenu from './menu';
 import User from './user';
-import PresentedByInCo from '../../assets/icons/PresentedByInCo.svg';
-
-const MySVG: FC = () => <PresentedByInCo />;
+import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
+import Unofficial from '../../assets/svg/Unofficial.svg';
 
 interface NavBarProps {
   toggleTheme: () => void;
@@ -33,14 +32,15 @@ const NavBar = React.forwardRef(function (
 
   return (
     <Box
-      sx={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      py={2}
+      width={'100%'}
+      display={'flex'}
+      justifyContent={'center'}
+      alignItems={'center'}
     >
-      <AppBar position="static" color="transparent" elevation={0}>
-        <Toolbar>
+      <Unofficial />
+      <Toolbar>
+        <Box display="flex" flexDirection="column" alignItems="flex-end">
           <Typography
             variant="h1"
             fontFamily={'Lalezar'}
@@ -52,22 +52,22 @@ const NavBar = React.forwardRef(function (
           >
             Lesbians Who Tech Bingo!
           </Typography>
-          <MySVG></MySVG>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="menu-button"
-            aria-controls={open ? 'menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={open ? 'true' : undefined}
-            onClick={handleClick}
-            sx={{ marginLeft: '2rem' }}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+          <PresentedByInCo />
+        </Box>
+        <IconButton
+          size="large"
+          edge="start"
+          color="inherit"
+          aria-label="menu-button"
+          aria-controls={open ? 'menu' : undefined}
+          aria-haspopup="true"
+          aria-expanded={open ? 'true' : undefined}
+          onClick={handleClick}
+          sx={{ marginLeft: '2rem' }}
+        >
+          <MenuIcon />
+        </IconButton>
+      </Toolbar>
       <BurgerMenu
         handleClose={handleClose}
         toggleTheme={toggleTheme}

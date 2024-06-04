@@ -5,7 +5,7 @@ import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { useTheme } from '@mui/material/';
-import NavBar from './components/nav';
+import NavBar from './components/Header';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
 
@@ -72,7 +72,7 @@ function App() {
             flexDirection: 'column',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100vh',
+            width: '100vw',
           }}
         >
           <NavBar toggleTheme={toggleTheme} darkMode={darkMode}></NavBar>

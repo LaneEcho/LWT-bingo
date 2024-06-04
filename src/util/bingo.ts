@@ -4,9 +4,14 @@
 // or any diagonal
 // check local storage for the keys of boxes that would win
 // pop up an alert or similar saying bingo
+// returns BingoResult object that has isBingo property and score
+export interface BingoResult {
+  isBingo: boolean;
+  score: number;
+}
 
 // checking for bingo rows
-export function bingoRow(): boolean {
+export function bingoRow(): BingoResult {
   // figuring out what is in local storage
   const boxes: string[] = Object.entries(localStorage)
     .filter((element) => {
@@ -22,7 +27,8 @@ export function bingoRow(): boolean {
     boxes.includes('box-1-3') &&
     boxes.includes('box-1-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-2-0') &&
     boxes.includes('box-2-1') &&
@@ -30,7 +36,8 @@ export function bingoRow(): boolean {
     boxes.includes('box-2-3') &&
     boxes.includes('box-2-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-3-0') &&
     boxes.includes('box-3-1') &&
@@ -38,7 +45,8 @@ export function bingoRow(): boolean {
     boxes.includes('box-3-3') &&
     boxes.includes('box-3-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-4-0') &&
     boxes.includes('box-4-1') &&
@@ -46,7 +54,8 @@ export function bingoRow(): boolean {
     boxes.includes('box-4-3') &&
     boxes.includes('box-4-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-5-0') &&
     boxes.includes('box-5-1') &&
@@ -54,7 +63,8 @@ export function bingoRow(): boolean {
     boxes.includes('box-5-3') &&
     boxes.includes('box-5-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     // diagonal
     boxes.includes('box-1-0') &&
@@ -63,7 +73,8 @@ export function bingoRow(): boolean {
     boxes.includes('box-4-3') &&
     boxes.includes('box-5-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     // other diagonal
     boxes.includes('box-1-4') &&
@@ -72,13 +83,15 @@ export function bingoRow(): boolean {
     boxes.includes('box-4-1') &&
     boxes.includes('box-5-0')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   }
-  return false;
+  return { isBingo: false, score: undefined };
+
 }
 
 // checking for bingo columns
-export function bingoColumn(): boolean {
+export function bingoColumn(): BingoResult {
   // figuring out what is in local storage
   const boxes: string[] = Object.entries(localStorage)
     .filter((element) => {
@@ -94,7 +107,7 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-0') &&
     boxes.includes('box-5-0')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
   } else if (
     boxes.includes('box-1-1') &&
     boxes.includes('box-2-1') &&
@@ -102,7 +115,8 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-1') &&
     boxes.includes('box-5-1')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-1-2') &&
     boxes.includes('box-2-2') &&
@@ -110,7 +124,8 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-2') &&
     boxes.includes('box-5-2')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-1-3') &&
     boxes.includes('box-2-3') &&
@@ -118,7 +133,8 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-3') &&
     boxes.includes('box-5-3')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   } else if (
     boxes.includes('box-1-4') &&
     boxes.includes('box-2-4') &&
@@ -126,13 +142,15 @@ export function bingoColumn(): boolean {
     boxes.includes('box-4-4') &&
     boxes.includes('box-5-4')
   ) {
-    return true;
+    return { isBingo: true, score: 25 };
+
   }
-  return false;
+  return { isBingo: false, score: undefined };
+
 }
 
 // special patterns
-export function bingoSpecial(): boolean {
+export function bingoSpecial(): BingoResult {
   // these are sorted arrays that will be used for comparison to values stored in localStorage
   const hashtag: string[] = [
     'box-1-1',
@@ -208,27 +226,32 @@ export function bingoSpecial(): boolean {
     .map((element) => {
       return element[0];
     });
+
+  // Short circuit if not enough boxes to make up a score
+  if (boxes.length < 5) return { isBingo: false, score: undefined };
+
   if (boxes.length === 25) {
+    return { isBingo: true, score: 125 };
   } else if (
     // #
     equals(boxes, hashtag) === true
   ) {
-    return true;
+    return { isBingo: true, score: 80 };
   } else if (
     // L
     equals(boxes, L) === true
   ) {
-    return true;
+    return { isBingo: true, score: 45 };
   } else if (
     // W
     equals(boxes, W) === true
   ) {
-    return true;
+    return { isBingo: true, score: 85 };
   } else if (
     // T
     equals(boxes, T) === true
   ) {
-    return true;
+    return { isBingo: true, score: 45 };
   }
-  return false;
+  return { isBingo: false, score: undefined };
 }

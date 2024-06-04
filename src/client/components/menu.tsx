@@ -9,6 +9,9 @@ import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import HowToPlay from './modals/howToPlay';
 import TermsAndConditions from './modals/terms';
+import { getAuth, signOut } from 'firebase/auth';
+import { useAuth } from '../hooks/useAuth';
+import { Google } from '@mui/icons-material';
 
 interface MenuProps {
   anchorEl: HTMLElement;
@@ -25,6 +28,9 @@ const BurgerMenu = React.forwardRef(function (
   const [openHowTo, SetHowTo] = useState<boolean>(false);
   const [openTerms, SetTerms] = useState<boolean>(false);
 
+  const auth = getAuth();
+  const { user } = useAuth();
+
   function showHowTo() {
     handleClose();
     SetHowTo(!openHowTo);
@@ -35,6 +41,7 @@ const BurgerMenu = React.forwardRef(function (
     SetTerms(!openTerms);
   }
 
+
   return (
     <div>
       <Menu
@@ -43,7 +50,7 @@ const BurgerMenu = React.forwardRef(function (
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'menu-button',
+          'aria-labelledby': 'board-menu-button',
         }}
         anchorOrigin={{
           vertical: 'top',

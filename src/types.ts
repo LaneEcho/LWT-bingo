@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export interface Phrases {
   [key: string]: string;
 }
@@ -28,4 +30,11 @@ export type ResetProps = {
   reset: () => void;
   onClose: () => void;
   gameOver: boolean;
+  score?: number;
 };
+
+export type SubmitScore = {
+  score: number;
+  onClose: () => void;
+  showLoginOptions?: Dispatch<SetStateAction<boolean>>;
+}

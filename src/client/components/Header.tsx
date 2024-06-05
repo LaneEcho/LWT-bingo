@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -32,6 +30,7 @@ const Header = React.forwardRef(function (
 
   return (
     <Box
+      gap={4}
       py={2}
       width={'100%'}
       display={'flex'}
@@ -39,21 +38,32 @@ const Header = React.forwardRef(function (
       alignItems={'center'}
     >
       <Unofficial />
-      <Toolbar>
-        <Box display="flex" flexDirection="column" alignItems="flex-end">
-          <Typography
-            variant="h1"
-            fontFamily={'Lalezar'}
-            color="primary"
-            textTransform={'uppercase'}
-            sx={{
-              fontSize: '3rem',
-            }}
-          >
-            Lesbians Who Tech Bingo!
-          </Typography>
-          <PresentedByInCo />
-        </Box>
+
+      <Box
+        display="flex"
+        flexDirection="column"
+        alignItems={'center'}
+        justifyContent={'space-between'}
+      >
+        <Typography
+          variant="h1"
+          fontFamily={'Lalezar'}
+          color="primary"
+          textTransform={'uppercase'}
+          sx={{
+            fontSize: '3rem',
+          }}
+        >
+          Lesbians Who Tech Bingo!
+        </Typography>
+        <PresentedByInCo />
+      </Box>
+      <Box
+        display={'flex'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        alignSelf={'flex-start'}
+      >
         <IconButton
           size="large"
           edge="start"
@@ -67,15 +77,16 @@ const Header = React.forwardRef(function (
         >
           <MenuIcon />
         </IconButton>
-      </Toolbar>
-      <BurgerMenu
-        handleClose={handleClose}
-        toggleTheme={toggleTheme}
-        darkMode={darkMode}
-        anchorEl={anchorEl}
-        open={open}
-      />
-      <User />
+        <BurgerMenu
+          handleClose={handleClose}
+          toggleTheme={toggleTheme}
+          darkMode={darkMode}
+          anchorEl={anchorEl}
+          open={open}
+        />
+
+        <User />
+      </Box>
     </Box>
   );
 });

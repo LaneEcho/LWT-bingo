@@ -54,7 +54,7 @@ function Box({ text, row, column, gameOver }: BoxProps) {
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
         border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
-        fontSize: text.length > 40 ? '10.5px' : '14px',
+        fontSize: text.length > 35 ? '10.5px' : '14px',
       }}
     >
       {text}

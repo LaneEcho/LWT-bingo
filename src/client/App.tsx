@@ -66,13 +66,7 @@ function App() {
       <AuthProvider>
         <CssBaseline />
         <Header toggleTheme={toggleTheme} darkMode={darkMode} />
-        <Box
-          display="flex"
-          width="100vw"
-          // height="80vh" // do we need a height property?
-          gap={2}
-          justifyContent={'center'}
-        >
+        <Box display="flex" width="100vw" gap={2} justifyContent={'center'}>
           <Board />
           <Leaderboard />
         </Box>

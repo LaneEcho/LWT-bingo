@@ -31,7 +31,7 @@ const Header = React.forwardRef(function (
   return (
     <Box
       gap={4}
-      py={2}
+      py={1}
       width={'100%'}
       display={'flex'}
       justifyContent={'center'}

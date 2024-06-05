@@ -53,7 +53,7 @@ function Leaderboard() {
   return (
     <Box
       width="434px"
-      height="80vh"
+      height="75vh"
       sx={{ background: 'black', padding: '24px', borderRadius: '25px' }}
     >
       <Typography

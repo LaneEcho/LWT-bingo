@@ -73,7 +73,7 @@ const Header = React.forwardRef(function (
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
-          sx={{ marginLeft: '2rem' }}
+          sx={{ marginLeft: '2rem', marginRight: '5px' }}
         >
           <MenuIcon />
         </IconButton>

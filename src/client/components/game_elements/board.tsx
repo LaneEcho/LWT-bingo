@@ -171,35 +171,31 @@ const Board: React.FC = () => {
 
       <Stack>{rows}</Stack>
 
-      <Stack
-        direction="column"
-        alignItems={'center'}
-        justifyContent={'space-evenly'}
-      >
+      <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
           variant="contained"
-          size="large"
-          className="resetButton"
-          onClick={callBingo}
-          sx={{
-            width: '16rem',
-            marginTop: '0.5rem',
-            fontSize: '1.5rem',
-          }}
-        >
-          BINGO!
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          className="resetButton"
+          size="medium"
           onClick={resetBoard}
           sx={{
             width: '8rem',
             marginTop: '0.5rem',
+            borderRadius: '30px',
           }}
         >
           Reset Board
+        </Button>
+
+        <Button
+          variant="contained"
+          size="medium"
+          onClick={callBingo}
+          sx={{
+            width: '8rem',
+            marginTop: '0.5rem',
+            borderRadius: '30px',
+          }}
+        >
+          BINGO!
         </Button>
       </Stack>
       {loginOpen && (

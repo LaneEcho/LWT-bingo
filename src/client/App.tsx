@@ -8,6 +8,7 @@ import { Box, useTheme } from '@mui/material/';
 import Header from './components/Header';
 import Leaderboard from './components/Leaderboard';
 import { AuthProvider } from './context/AuthContext';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 function initialState() {
   if (localStorageAvailable()) {
@@ -56,6 +57,8 @@ function App() {
 
   const theme = useTheme();
 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const toggleTheme = (): void => {
     setDarkMode(!darkMode);
     localStorage.setItem('darkMode', (!darkMode).toString());
@@ -66,7 +69,13 @@ function App() {
       <AuthProvider>
         <CssBaseline />
         <Header toggleTheme={toggleTheme} darkMode={darkMode} />
-        <Box display="flex" width="100vw" gap={2} justifyContent={'center'}>
+        <Box
+          display="flex"
+          width="100vw"
+          gap={2}
+          justifyContent={'center'}
+          flexDirection={isMobile ? 'column' : 'row'}
+        >
           <Board />
           <Leaderboard />
         </Box>

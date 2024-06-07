@@ -50,7 +50,6 @@ const BurgerMenu = React.forwardRef(function (
         onClose={handleClose}
         MenuListProps={{
           'aria-labelledby': 'board-menu-button',
-          'aria-labelledby': 'board-menu-button',
         }}
         anchorOrigin={{
           vertical: 'top',

@@ -36,6 +36,10 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 | Updated UI                         | ⏳     |
 | Responsive Design                  | ⏳     |
 | Accessibility improvement          | ⏳     |
+| Update How To Play Copy            | ⏳     |
+| Responsive + Mobile Friendly       | ⏳     |
+| Accessibility Improvement          | ⏳     |
+| Leaderboard/ Database              | ⏳     |
 | And more...                        | ⏳     |
 
 - ✅ = Ready to use

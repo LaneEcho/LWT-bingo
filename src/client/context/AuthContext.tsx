@@ -37,7 +37,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    const fetchUsername = async () => {
+    const fetchUsername = async (user:LeaderboardUser, retryCount = 0) => {
       try {
         // For now I'm storing the username via setUser here when updating,
         // but this will break as soon as user refreshes tab
@@ -52,26 +52,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           const username = userDocSnap.data().username;
           setUser({ ...user, username });
         } else {
+          if (retryCount < 3) {
+            setTimeout(() => fetchUsername(user, retryCount + 1), 5000)
+          } else {
           console.error('User not found');
+          }
         }
-        // const collectionRef = collection(db, "documents", "users", user?.uid);
-        // const q = query(collectionRef);
-        // const querySnapshot = await getDocs(q);
-
-        // let username = "";
-        // querySnapshot.forEach((doc) => {
-        //   // Assuming there's only one document and it contains the username
-        //   username = doc.data().username;
-        // });
-        // console.log("🚀 ~ querySnapshot.forEach ~ username:", username);
-
-        // setUser({ ...user, username });
       } catch (error) {
         console.error('😢 Error fetching username:', error);
       }
     };
 
-    fetchUsername();
+    fetchUsername(user);
   }, [user?.uid, db]);
 
   return (
@@ -87,6 +79,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   function setUsername(username: string) {
     // checkIfNewUser()
-    setUser({ ...user, username } as LeaderboardUser);
+    setUser({ ...user, username });
   }
 };

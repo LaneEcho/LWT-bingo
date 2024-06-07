@@ -25,10 +25,14 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
+      {
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      },
     ],
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js', '.jsx'],
+    extensions: ['.tsx', '.ts', '.js', '.jsx', '.svg'],
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -42,12 +46,6 @@ module.exports = {
   devServer: {
     static: {
       directory: path.join(__dirname, './dist'),
-    },
-    proxy: {
-      '/api': {
-        target: 'http://localhost:3000',
-        secure: false,
-      },
     },
   },
 };

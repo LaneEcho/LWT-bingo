@@ -16,6 +16,16 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 
 <br>
 
+## How to Work on This Project
+1. Fork and close this repository to your local machine
+2. Install NPM packages: `npm install`
+3. Run `npm run dev` to start up the application
+4. Navigate to http://localhost:8080 to view the application
+5. Choose an issue to work on and create a branch
+6. Create a PR to merge your branch into dev & await review!
+
+<br>
+
 ## To Do
 
 | Feature                            | Status |
@@ -23,6 +33,9 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 | Alert player when they win         | ✅     |
 | Do not reset board on page refresh | ✅     |
 | Separate Modal Component           | ✅     |
+| Updated UI                         | ⏳     |
+| Responsive Design                  | ⏳     |
+| Accessibility improvement          | ⏳     |
 | Update How To Play Copy            | ⏳     |
 | Responsive + Mobile Friendly       | ⏳     |
 | Accessibility Improvement          | ⏳     |

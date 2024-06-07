@@ -1,11 +1,13 @@
 import React from 'react';
-import { ResetProps } from '../../types';
+import { ResetProps } from '@/types';
 import { Box, Typography, Button, Stack } from '@mui/material';
+import { FocusTrap } from '@mui/base/FocusTrap';
 
-function Reset(props: ResetProps) {
+const Reset = React.forwardRef(function (props: ResetProps, ref) {
   return (
-    <>
+    <FocusTrap open>
       <Box
+        tabIndex={-1}
         sx={{
           position: 'fixed',
           top: '50%',
@@ -16,11 +18,6 @@ function Reset(props: ResetProps) {
           padding: '1.5rem',
           borderRadius: '8px',
           textAlign: 'center',
-          // overflow: 'scroll',
-          // display: 'flex',
-          // flexDirection: 'column',
-          // justifyContent: 'center',
-          // alignItems: 'center',
         }}
       >
         {props.gameOver ? (
@@ -34,9 +31,22 @@ function Reset(props: ResetProps) {
             <Typography id="modal-modal-title" variant="h4" component="h2">
               🌈 BINGO! 🌈
             </Typography>
-            <Typography id="modal-modal-description">
-              You've been all over the #LWT Summit and saw enough stuff to get a
-              bingo! Submit your score to the leaderboard or start a new game!
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              Congratulations! You've been all over the #LWT Summit and saw
+              enough stuff to get a BINGO!
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              Submit your score to the leaderboard or just start a new game!
+              There’s no limit to the number of games you can play, so go ahead
+              and start fresh with a new board!
             </Typography>
             <Button
               variant="contained"
@@ -63,11 +73,17 @@ function Reset(props: ResetProps) {
             </Typography>
             <Typography
               id="modal-modal-description"
-              variant="h6"
+              variant="body1"
               sx={{ mt: '1px' }}
             >
-              Looks like you don't have any score eligible patterns. You can go
-              back and continue this game or reset your board.
+              Looks like you haven't completed any score eligible patterns yet!
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              You can go back and continue this game or reset your board!
             </Typography>
             <Button
               variant="contained"
@@ -88,8 +104,8 @@ function Reset(props: ResetProps) {
           </Stack>
         )}
       </Box>
-    </>
+    </FocusTrap>
   );
-}
+});
 
 export default Reset;

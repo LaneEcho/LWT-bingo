@@ -2,10 +2,6 @@ import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { app, db } from '../../firebase/firebase-api';
 import { doc, getDoc } from 'firebase/firestore';
-import React, { createContext, useEffect, useState, ReactNode } from 'react';
-import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { app, db } from '../../firebase/firebase-api';
-import { doc, getDoc } from 'firebase/firestore';
 
 const auth = getAuth(app);
 
@@ -91,6 +87,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   function setUsername(username: string) {
     // checkIfNewUser()
-    setUser({ ...user, username });
+    setUser({ ...user, username } as LeaderboardUser);
   }
 };

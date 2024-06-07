@@ -2,6 +2,10 @@ import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
 import { app, db } from '../../firebase/firebase-api';
 import { doc, getDoc } from 'firebase/firestore';
+import React, { createContext, useEffect, useState, ReactNode } from 'react';
+import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
+import { app, db } from '../../firebase/firebase-api';
+import { doc, getDoc } from 'firebase/firestore';
 
 const auth = getAuth(app);
 
@@ -54,6 +58,18 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         } else {
           console.error('User not found');
         }
+        // const collectionRef = collection(db, "documents", "users", user?.uid);
+        // const q = query(collectionRef);
+        // const querySnapshot = await getDocs(q);
+
+        // let username = "";
+        // querySnapshot.forEach((doc) => {
+        //   // Assuming there's only one document and it contains the username
+        //   username = doc.data().username;
+        // });
+        // console.log("🚀 ~ querySnapshot.forEach ~ username:", username);
+
+        // setUser({ ...user, username });
       } catch (error) {
         console.error('😢 Error fetching username:', error);
       }

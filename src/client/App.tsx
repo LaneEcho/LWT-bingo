@@ -6,9 +6,10 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { Box, useTheme } from '@mui/material/';
 import Header from './components/Header';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
-import useMediaQuery from '@mui/material/useMediaQuery';
 
 function initialState() {
   if (localStorageAvailable()) {

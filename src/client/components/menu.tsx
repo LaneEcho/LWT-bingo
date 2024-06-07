@@ -41,7 +41,6 @@ const BurgerMenu = React.forwardRef(function (
     SetTerms(!openTerms);
   }
 
-
   return (
     <div>
       <Menu

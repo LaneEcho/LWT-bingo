@@ -11,6 +11,7 @@ interface ButtonProps {
   startIcon?: React.ReactNode;
   className?: string;
   sx?: SxProps<Theme>;
+  disabled?:boolean;
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -19,6 +20,7 @@ const Button: FunctionComponent<ButtonProps> = ({
   startIcon,
   sx,
   onClick,
+  disabled,
 }) => {
   const isPrimary = variant === 'primary';
   const isSecondary = variant === 'secondary';
@@ -47,6 +49,7 @@ const Button: FunctionComponent<ButtonProps> = ({
       startIcon={startIcon}
       variant={isPrimary ? 'contained' : 'outlined'}
       onClick={onClick}
+      disabled={disabled}
       sx={[
         styles,
         isPrimary && primaryStyles,

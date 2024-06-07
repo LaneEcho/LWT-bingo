@@ -31,9 +31,9 @@ export const UpdateUsernameModal = ({
   const isMobile = useMediaQuery('(max-width: 768px)');
   const auth = getAuth();
   const functions = getFunctions();
-  const { setUsername: updateGlobalUsername } = useAuth();
+  const { user, setUsername: updateGlobalUsername } = useAuth();
 
-  const [username, setUsername] = React.useState<string>('');
+  const [username, setUsername] = React.useState<string>();
   const [isOptedIn, setIsOptedIn] = React.useState<boolean>(false);
   const [isBusy, setIsBusy] = React.useState<boolean>();
 
@@ -43,7 +43,11 @@ export const UpdateUsernameModal = ({
   );
 
   React.useEffect(() => {
-    getRandomUsername();
+    if (!user?.username) {
+      getRandomUsername();
+    } else {
+      setUsername(user.username);
+    }
   }, []);
 
   interface UsernameResult {
@@ -117,7 +121,7 @@ export const UpdateUsernameModal = ({
           />
         </div>
         <Button variant="primary" onClick={handleSubmit}>
-          Submit your name to the Leaderboard
+          Submit to the Leaderboard
         </Button>
         <Button variant="secondary" onClick={handleSubmit}>
           No thanks, just reset my board

@@ -73,6 +73,7 @@ function Leaderboard() {
             getRowColor(index + 1),
             { borderRadius: '10px  ' },
             { border: row?.id === user?.uid ? `4px solid #FAFF03` : undefined },
+            { fontWeight: row?.id === user?.uid ? 'bold' : undefined },
           ]}
         >
           <Grid
@@ -87,7 +88,13 @@ function Leaderboard() {
             <Grid item flex={6}>
               {row?.username}
             </Grid>
-            <Grid item alignItems={'flex-end'} flex={4}>
+            <Grid
+              item
+              alignItems={'flex-end'}
+              flex={4}
+              textAlign={'right'}
+              marginLeft={2}
+            >
               {row.totalScore}
             </Grid>
           </Grid>

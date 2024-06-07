@@ -4,8 +4,10 @@ import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useTheme } from '@mui/material/';
-import NavBar from './components/nav';
+import { Box, useTheme } from '@mui/material/';
+import Header from './components/Header';
+
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
 
@@ -38,12 +40,10 @@ function App() {
         contrastText: '#fff',
       },
     },
+    typography: {
+      fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
+    },
   });
-
-  const toggleTheme = (): void => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', (!darkMode).toString());
-  };
 
   const darkTheme = createTheme({
     palette: {
@@ -58,24 +58,28 @@ function App() {
 
   const theme = useTheme();
 
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const toggleTheme = (): void => {
+    setDarkMode(!darkMode);
+    localStorage.setItem('darkMode', (!darkMode).toString());
+  };
+
   return (
     <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
       <AuthProvider>
         <CssBaseline />
-        <div
-          className="app"
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100vh',
-          }}
+        <Header toggleTheme={toggleTheme} darkMode={darkMode} />
+        <Box
+          display="flex"
+          width="100vw"
+          gap={2}
+          justifyContent={'center'}
+          flexDirection={isMobile ? 'column' : 'row'}
         >
-          <NavBar toggleTheme={toggleTheme} darkMode={darkMode}></NavBar>
           <Board />
-        </div>
-        <Leaderboard />
+          <Leaderboard />
+        </Box>
       </AuthProvider>
     </ThemeProvider>
   );

@@ -241,6 +241,8 @@ const phrases: Phrases = {
   238: '"green technologies"',
   239: '"quantum computing"',
   240: 'I am a presenter',
+  241: 'Someone makes a Taylor Swift Reference',
+  242: 'Someone makes a Chappell Roan Reference',
 };
 
 export default phrases;

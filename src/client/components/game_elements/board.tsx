@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import Row from './row';
-
 import {
   bingoRow,
   bingoColumn,
@@ -8,15 +7,14 @@ import {
   BingoResult,
 } from '../../../util/bingo';
 import ConfettiExplosion from 'react-confetti-explosion';
-
-import { Button, Modal, Stack } from '@mui/material';
-import Reset from '../modals/reset';
+import Stack from '@mui/material/Stack';
 import { useAuth } from '../../hooks/useAuth';
 import { LoginModal } from '../modals/LoginModal';
 import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
 import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
 import phrases from '../../../lib/phrases';
-import { BoardState, RowProps } from '../../../types';
+import { BoardState } from '../../../types';
+import Button from '../Button';
 
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(phrases).length;
@@ -171,35 +169,25 @@ const Board: React.FC = () => {
 
       <Stack>{rows}</Stack>
 
-      <Stack
-        direction="column"
-        alignItems={'center'}
-        justifyContent={'space-evenly'}
-      >
+      <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
-          variant="contained"
-          size="large"
-          className="resetButton"
-          onClick={callBingo}
-          sx={{
-            width: '16rem',
-            marginTop: '0.5rem',
-            fontSize: '1.5rem',
-          }}
-        >
-          BINGO!
-        </Button>
-        <Button
-          variant="contained"
-          size="small"
-          className="resetButton"
+          variant="primary"
           onClick={resetBoard}
           sx={{
             width: '8rem',
-            marginTop: '0.5rem',
           }}
         >
           Reset Board
+        </Button>
+
+        <Button
+          variant="primary"
+          onClick={callBingo}
+          sx={{
+            width: '8rem',
+          }}
+        >
+          BINGO!
         </Button>
       </Stack>
       {loginOpen && (

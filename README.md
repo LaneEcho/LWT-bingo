@@ -17,6 +17,7 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 <br>
 
 ## How to Work on This Project
+
 1. Fork and close this repository to your local machine
 2. Install NPM packages: `npm install`
 3. Run `npm run dev` to start up the application
@@ -35,10 +36,6 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 | Separate Modal Component           | ✅     |
 | Updated UI                         | ⏳     |
 | Responsive Design                  | ⏳     |
-| Accessibility improvement          | ⏳     |
-| Update How To Play Copy            | ⏳     |
-| Responsive + Mobile Friendly       | ⏳     |
-| Accessibility Improvement          | ⏳     |
 | Leaderboard/ Database              | ⏳     |
 | And more...                        | ⏳     |
 
@@ -47,10 +44,13 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 
 ## The Team
 
-| Developed By  |                                                                                                                                                |                                                                                                                                             |
-| :-----------: | :--------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| Lane Hamilton | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aleyna-hamilton/) | [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LaneEcho) |
-| Tegan Barron  |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tegan-barron/)   |
+|  Developed By  |                                                                                                                                                  |                                                                                                                                                  |
+| :------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: |
+| Lane Hamilton  |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aleyna-hamilton/)  |   [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LaneEcho)    |
+|  Tegan Barron  |   [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tegan-barron/)    |
+| Jimena Cuadros |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jimena-cuadros/)   |   [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jcuadrosj)   |
+|   Alex Sharp   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alex-nicole-sharp/) | [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alexsharp4096) |
+|  K.D. Hubbard  |    [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/k-d-hubbard/)    |    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kdhubb)     |
 
 <!-- Logo Links -->
 

@@ -219,6 +219,18 @@ export function bingoSpecial(): BingoResult {
     return array1.sort().every((element, index) => element === array2[index]);
   }
 
+  function containsAllBoxes(boxes:string[], pattern:string[]):boolean {
+    const boxSet = new Set(boxes);
+    
+    for (const box of pattern) {
+      if (!boxSet.has(box)) {
+        return false;
+      }
+    }
+
+    return true
+  }
+
   const boxes: string[] = Object.entries(localStorage)
     .filter((element) => {
       return element[0] !== 'items';
@@ -234,22 +246,22 @@ export function bingoSpecial(): BingoResult {
     return { isBingo: true, score: 125 };
   } else if (
     // #
-    equals(boxes, hashtag) === true
+    containsAllBoxes(boxes, hashtag) === true
   ) {
     return { isBingo: true, score: 80 };
   } else if (
     // L
-    equals(boxes, L) === true
-  ) {
-    return { isBingo: true, score: 45 };
-  } else if (
-    // W
-    equals(boxes, W) === true
+    containsAllBoxes(boxes, W) === true
   ) {
     return { isBingo: true, score: 85 };
   } else if (
+    // W
+    containsAllBoxes(boxes, L) === true
+  ) {
+    return { isBingo: true, score: 45 };
+  } else if (
     // T
-    equals(boxes, T) === true
+    containsAllBoxes(boxes, T) === true
   ) {
     return { isBingo: true, score: 45 };
   }

@@ -25,6 +25,7 @@ function Box({ text, row, column, gameOver }: BoxProps) {
     const updatedClicked: boolean = !clicked;
     setClicked(updatedClicked);
     if (updatedClicked) {
+      // track(EventName.TILE_SELECTED, trackingParams);
       localStorage.setItem(`box-${row}-${column}`, updatedClicked.toString());
     } else {
       localStorage.removeItem(`box-${row}-${column}`);
@@ -54,7 +55,7 @@ function Box({ text, row, column, gameOver }: BoxProps) {
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
         border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
-        fontSize: text.length > 35 ? '10.5px' : '14px',
+        fontSize: text?.length > 35 ? '10.5px' : '14px',
       }}
     >
       {text}

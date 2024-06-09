@@ -4,6 +4,7 @@ import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuth } from '../hooks/useAuth';
 import Button from './Button';
 import { GitHub, Google } from '@mui/icons-material';
+import useAnalytics, { EventName } from '../hooks/useAnalytics';
 
 interface IGmailLogin {
   onSuccess: () => void;
@@ -13,6 +14,7 @@ const GmailLogin: React.FC<IGmailLogin> = ({ onSuccess }) => {
   const provider = new GoogleAuthProvider();
   const auth = getAuth();
   const { user } = useAuth();
+  const track = useAnalytics();
 
   function handlePopUp() {
     signInWithPopup(auth, provider)
@@ -21,6 +23,7 @@ const GmailLogin: React.FC<IGmailLogin> = ({ onSuccess }) => {
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const token = credential.accessToken;
         // The signed-in user info.
+        track(EventName.USER_LOGIN, { userId: user?.uid });
         onSuccess();
         // IdP data available using getAdditionalUserInfo(result)
         // ...

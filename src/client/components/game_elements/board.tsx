@@ -15,6 +15,7 @@ import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
 import phrases from '../../../lib/phrases';
 import { BoardState } from '../../../types';
 import Button from '../Button';
+import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(phrases).length;
@@ -30,15 +31,9 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-// if nothing is in localStorage, we will use this function
-function initialState(): number[] {
-  const phrases: number[] = pickUniqueNumbers();
-  localStorage.setItem('items', JSON.stringify(phrases));
-  return phrases;
-}
-
 const Board: React.FC = () => {
   const { user } = useAuth();
+  const track = useAnalytics();
 
   // either going to pull from localStorage, or invoke initial state function
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
@@ -74,10 +69,19 @@ const Board: React.FC = () => {
     );
   }
 
+  function handleResetClicked(): void {
+    track(EventName.BOARD_RESET, { userId: user?.uid });
+    resetBoard();
+  }
+
   function resetBoard(): void {
     localStorage.clear();
     const phrases: number[] = pickUniqueNumbers();
     localStorage.setItem('items', JSON.stringify(phrases));
+    track(EventName.BOARD_RESET, {
+      phrases: JSON.stringify(phrases),
+      userId: user?.uid ?? 'no user',
+    });
     setGameOver(false);
     setPhraseIndex(phrases);
     setConfetti(false);
@@ -110,6 +114,7 @@ const Board: React.FC = () => {
 
   function callBingo(): void {
     const bingo = checkBingo();
+    track(EventName.BINGO_CLICKED, { userId: user?.uid ?? null, bingo });
     setBingoResult(bingo);
 
     if (bingo?.isBingo) {
@@ -132,6 +137,17 @@ const Board: React.FC = () => {
       }
       // setLoginOpen(true);
     }
+  }
+
+  // if nothing is in localStorage, we will use this function
+  function initialState(): number[] {
+    const phrases: number[] = pickUniqueNumbers();
+    localStorage.setItem('items', JSON.stringify(phrases));
+    track(EventName.BOARD_INITIALIZED, {
+      phrases,
+      userId: user?.uid,
+    });
+    return phrases;
   }
 
   const handleClose = () => {
@@ -172,7 +188,7 @@ const Board: React.FC = () => {
       <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
           variant="primary"
-          onClick={resetBoard}
+          onClick={handleResetClicked}
           sx={{
             width: '8rem',
           }}

@@ -14,6 +14,7 @@ import { submitScore, updateUser } from '../../../firebase/firebase-api';
 
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useAuth } from '../../hooks/useAuth';
+import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 type UpdateUsernameModalProps = {
   score: number;
@@ -31,6 +32,7 @@ export const UpdateUsernameModal = ({
   const isMobile = useMediaQuery('(max-width: 768px)');
   const auth = getAuth();
   const functions = getFunctions();
+  const track = useAnalytics();
   const { user, setUsername: updateGlobalUsername } = useAuth();
 
   const [username, setUsername] = React.useState<string>();
@@ -161,7 +163,9 @@ export const UpdateUsernameModal = ({
     if (user) {
       try {
         await updateUser(user?.uid, username, isOptedIn);
+        track(EventName.USERNAME_UPDATED, { userId: user?.uid, username });
         await submitScore(user?.uid, score);
+        track(EventName.SCORE_SUBMITTED, { userId: user?.uid, score });
         updateGlobalUsername(username);
         resetBoard();
         console.log('Username, score and iOptedIn saved!');

@@ -1,4 +1,5 @@
 import { initializeApp } from 'firebase/app';
+import { getAnalytics } from "firebase/analytics";
 import {
   getFirestore,
   addDoc,
@@ -37,6 +38,7 @@ console.log('Firebase initialized');
 
 // Initialize Firestore
 const db = getFirestore(app);
+const analytics = getAnalytics(app);
 
 /**
  *
@@ -119,4 +121,4 @@ export const subscribeToTopScores = (
   return unsubscribe;
 };
 
-export { db, app };
+export { db, app, analytics };

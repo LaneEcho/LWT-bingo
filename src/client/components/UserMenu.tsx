@@ -131,7 +131,11 @@ const UserMenu = React.forwardRef(function (
         </MenuItem>
       </Menu>
       <Dialog open={openUsernameChange} onClose={handleOnCloseClick}>
-        <DialogTitle>
+        <DialogTitle
+          display={'flex'}
+          justifyContent={'space-between'}
+          alignItems={'center'}
+        >
           Update Username
           <IconButton onClick={handleOnCloseClick}>
             <CloseOutlined />

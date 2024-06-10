@@ -79,7 +79,7 @@ const BurgerMenu = React.forwardRef(function (
         </MenuItem>
         <MenuItem
           component={Link}
-          href="https://lwtgames.netlify.app/home"
+          href="https://lwtgames.netlify.app"
           target="_blank"
           onClick={handleClose}
         >

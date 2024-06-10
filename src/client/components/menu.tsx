@@ -63,7 +63,7 @@ const BurgerMenu = React.forwardRef(function (
         <MenuItem onClick={showHowTo}>How to Play</MenuItem>
         <MenuItem
           component={Link}
-          href="https://lwtgames.netlify.app/about"
+          href="https://incocollective.com/about"
           target="_blank"
           onClick={handleClose}
         >
@@ -79,7 +79,7 @@ const BurgerMenu = React.forwardRef(function (
         </MenuItem>
         <MenuItem
           component={Link}
-          href="https://lwtgames.netlify.app/home"
+          href="https://incocollective.com"
           target="_blank"
           onClick={handleClose}
         >

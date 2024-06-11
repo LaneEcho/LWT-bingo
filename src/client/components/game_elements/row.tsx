@@ -19,6 +19,8 @@ function Row(props: RowProps) {
           gameOver={props.gameOver}
         />
       );
+      // free space clicked by default
+      localStorage.setItem(`box-3-2`, 'true');
     } else {
       boxes.push(
         <Box

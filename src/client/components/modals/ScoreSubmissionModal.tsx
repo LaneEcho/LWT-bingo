@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Checkbox,
   Dialog,
@@ -6,11 +6,12 @@ import {
   FormControlLabel,
   Typography,
   useMediaQuery,
-} from "@mui/material";
-import Button from "../Button";
-import { useAuth } from "../../hooks/useAuth";
-import { submitScore } from "../../../firebase/firebase-api";
-import InvalidBoard from "./content/InvalidBoard";
+} from '@mui/material';
+import Button from '../Button';
+import { useAuth } from '../../hooks/useAuth';
+import { submitScore } from '../../../firebase/firebase-api';
+import InvalidBoard from './content/InvalidBoard';
+import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 type ScoreSubmissionModalProps = {
   score: number;
@@ -25,8 +26,10 @@ export const ScoreSubmissionModal = ({
   score,
   resetBoard,
 }: ScoreSubmissionModalProps) => {
-  const isMobile = useMediaQuery("(max-width: 768px)");
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { user } = useAuth();
+  const track = useAnalytics();
+
   const [isOptedIn, setIsOptedIn] = React.useState<boolean>(false);
 
   return (
@@ -34,22 +37,22 @@ export const ScoreSubmissionModal = ({
       open={isOpen}
       fullScreen={isMobile}
       onClose={onClose}
-      maxWidth={"md"}
+      maxWidth={'md'}
       PaperProps={{
         sx: {
-          borderRadius: "16px",
+          borderRadius: '16px',
           border: `3px solid #7030A0`,
         },
       }}
     >
       <DialogContent
         sx={{
-          display: "flex",
-          margin: "60px 24px",
-          flexDirection: "column",
-          alignContent: "center",
-          alignItems: "center",
-          textAlign: "center",
+          display: 'flex',
+          margin: '60px 24px',
+          flexDirection: 'column',
+          alignContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
         }}
       >
         {score !== undefined ? (
@@ -57,17 +60,14 @@ export const ScoreSubmissionModal = ({
             <Typography
               variant="h5"
               sx={{
-                marginBottom: "16px",
+                marginBottom: '16px',
               }}
             >
-              Congratulations!!! You earned another Bingo at the #LWTSummit!
+              Congratulations, {user?.username}!!! You earned another Bingo at
+              the #LWTSummit!
             </Typography>
             <Typography variant="h5">
               <strong>Board score: {score} points</strong>
-              <br />
-              {user?.username && (
-                <strong>Display name: {user?.username} </strong>
-              )}
             </Typography>
             <Button variant="primary" onClick={handleSubmitScore}>
               Submit score to leaderboard
@@ -98,10 +98,11 @@ export const ScoreSubmissionModal = ({
   async function handleSubmitScore() {
     try {
       await submitScore(user?.uid, score);
+      track(EventName.SCORE_SUBMITTED, { userId: user?.uid, score });
       resetBoard();
       onClose();
     } catch (error) {
-      throw new Error("Failed to submit score.");
+      throw new Error('Failed to submit score.');
     }
   }
 };

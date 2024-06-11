@@ -1,14 +1,32 @@
-import React, { useEffect } from 'react';
-import { Box, Typography, Button, Stack, List, ListItem } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import {
+  Box,
+  Typography,
+  Button,
+  Stack,
+  List,
+  ListItem,
+  IconButton,
+} from '@mui/material';
 import { FocusTrap } from '@mui/base/FocusTrap';
+import { CloseOutlined } from '@mui/icons-material';
 
 type HowToPlayProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
-  const handleClose = (event: KeyboardEvent) => {
-    if (event.key === 'Escape') {
+  const modalRef = useRef(null);
+
+  const keydown = (event: KeyboardEvent) => {
+    console.log(event.key);
+    if (event.key === 'Enter') {
+      close((prevOpenHowTo) => !prevOpenHowTo);
+    }
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
       close((prevOpenHowTo) => !prevOpenHowTo);
     }
   };
@@ -18,16 +36,19 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
   };
 
   useEffect(() => {
-    document.addEventListener('keydown', handleClose);
+    document.addEventListener('keydown', keydown);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      document.removeEventListener('keydown', handleClose);
+      document.removeEventListener('keydown', keydown);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
   return (
     <FocusTrap open>
       <Box
+        ref={modalRef}
         tabIndex={-1}
         sx={{
           position: 'fixed',
@@ -48,15 +69,20 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
           alignItems="center"
           spacing={2}
         >
-          <Typography
-            id="modal-modal-title"
-            variant="h4"
-            component="h2"
-            align="center"
-            gutterBottom
-          >
-            How To Play #LWT Bingo
-          </Typography>
+          <Stack direction="row" spacing={2} justifyContent="space-evenly">
+            <Typography
+              id="modal-modal-title"
+              variant="h4"
+              component="h2"
+              align="center"
+              gutterBottom
+            >
+              How To Play #LWT Bingo
+            </Typography>
+            <IconButton onClick={handleClick}>
+              <CloseOutlined />
+            </IconButton>
+          </Stack>
           <List>
             <ListItem>
               Similar to classic Bingo, the goal is to mark squares on your

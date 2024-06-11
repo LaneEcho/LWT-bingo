@@ -11,7 +11,7 @@ interface ButtonProps {
   startIcon?: React.ReactNode;
   className?: string;
   sx?: SxProps<Theme>;
-  disabled?:boolean;
+  disabled?: boolean;
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -28,13 +28,14 @@ const Button: FunctionComponent<ButtonProps> = ({
   const styles: SxProps<Theme> = {
     margin: '16px 8px',
     borderRadius: '30px',
-    boxShadow: '0px 3.43px 3.43px 0px #00000040',
+    // boxShadow: '0px 3.43px 3.43px 0px #00000040',
   };
 
   // TODO: use theme styles
   const primaryStyles: SxProps<Theme> = {
     backgroundColor: '#0AFFF4',
     color: '#000000',
+    boxShadow: 'none',
     // TODO: Figure out hover style -- either by updating the theme or by addressing here
   };
 
@@ -42,6 +43,7 @@ const Button: FunctionComponent<ButtonProps> = ({
     backgroundColor: '#FFFFFF',
     color: '#7030A0',
     borderColor: '#7030A0',
+    boxShadow: 'none',
   };
 
   return (

@@ -143,7 +143,7 @@ const UserMenu = React.forwardRef(function (
         </DialogTitle>
         <DialogContent sx={{ textAlign: 'center' }}>
           <div>
-            <Typography variant="h4">
+            <Typography variant="h6">
               Enter the username you would like to use.
             </Typography>
             <TextField

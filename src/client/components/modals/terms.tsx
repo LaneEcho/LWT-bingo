@@ -1,10 +1,11 @@
-import React, { useEffect } from 'react';
-import { Box, Typography, Button, Stack } from '@mui/material';
+import React, { useEffect, useRef } from 'react';
+import { Box, Typography, Button, Stack, IconButton } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FocusTrap } from '@mui/base/FocusTrap';
 import { ConditionsList } from '../../../lib/termsconditions';
+import { CloseOutlined } from '@mui/icons-material';
 
 type TermsProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
@@ -14,6 +15,8 @@ const TermsAndConditions = React.forwardRef(function (
   { close }: TermsProps,
   ref
 ) {
+  const modalRef = useRef(null);
+
   const handleClose = (event: KeyboardEvent) => {
     if (event.key === 'Escape') {
       close((prevViewTerms) => !prevViewTerms);
@@ -24,11 +27,19 @@ const TermsAndConditions = React.forwardRef(function (
     close((prevViewTerms) => !prevViewTerms);
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (modalRef.current && !modalRef.current.contains(event.target)) {
+      close((prevViewTerms) => !prevViewTerms);
+    }
+  };
+
   useEffect(() => {
     document.addEventListener('keydown', handleClose);
+    document.addEventListener('mousedown', handleClickOutside);
 
     return () => {
       document.removeEventListener('keydown', handleClose);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -45,6 +56,7 @@ const TermsAndConditions = React.forwardRef(function (
   return (
     <FocusTrap open>
       <Box
+        ref={modalRef}
         tabIndex={-1}
         sx={{
           position: 'fixed',
@@ -66,9 +78,20 @@ const TermsAndConditions = React.forwardRef(function (
           alignItems="center"
           spacing={2}
         >
-          <Typography id="modal-modal-title" variant="h4" component="h2">
-            Terms of Use
-          </Typography>
+          <Stack direction="row" spacing={2} justifyContent="space-evenly">
+            <Typography
+              id="modal-modal-title"
+              variant="h4"
+              component="h2"
+              align="center"
+              gutterBottom
+            >
+              Terms of Use
+            </Typography>
+            <IconButton onClick={handleClick}>
+              <CloseOutlined />
+            </IconButton>
+          </Stack>
           <List
             sx={{
               overflow: 'scroll',

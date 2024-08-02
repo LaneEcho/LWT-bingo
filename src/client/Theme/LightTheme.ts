@@ -70,11 +70,11 @@ const lightTheme = createTheme({
   },
   breakpoints: {
     values: {
-      xs: 320, // default 0
-      sm: 480, // default 600
-      md: 768, // default 900
-      lg: 992, // default 1200
-      xl: 1200, // default 1536
+      xs: 640, // default 0
+      sm: 768, // default 600
+      md: 1024, // default 900
+      lg: 1280, // default 1200
+      xl: 1536, // default 1536
     },
   },
 });

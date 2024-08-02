@@ -34,7 +34,9 @@ function App() {
 
   const theme = useTheme();
 
+  // check if mobile or tablet
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  console.log(isMobile);
 
   const toggleTheme = (): void => {
     setDarkMode(!darkMode);
@@ -51,7 +53,7 @@ function App() {
           width="100vw"
           gap={2}
           justifyContent={'center'}
-          flexDirection={isMobile ? 'column' : 'row'} // start with this
+          flexDirection={isMobile ? 'column' : 'row'}
         >
           <Board darkMode={darkMode} />
           <Leaderboard />

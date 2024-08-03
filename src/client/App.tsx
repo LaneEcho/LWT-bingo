@@ -1,22 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
-import { ThemeProvider } from '@mui/material/styles';
 import {
   Experimental_CssVarsProvider as CssVarsProvider,
-  experimental_extendTheme as extendTheme,
   useColorScheme,
 } from '@mui/material/styles';
 import { lightTheme } from './Theme';
-// import { darkTheme } from './Theme';
-import { Box, useTheme } from '@mui/material/';
+import { Box } from '@mui/material/';
 import Header from './components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
-
 import { Button } from '@mui/material/';
 
 function initialState() {
@@ -37,12 +33,17 @@ function initialState() {
 }
 
 function ModeToggle() {
+  const prefersDark = initialState();
+
   const { mode, setMode } = useColorScheme();
-  console.log('mode', mode);
+
+  if (prefersDark) setMode('dark');
+
   return (
     <Button
       onClick={() => {
         setMode(mode === 'light' ? 'dark' : 'light');
+        localStorage.setItem('darkMode', (!prefersDark).toString());
       }}
     >
       {mode === 'light' ? 'Turn dark' : 'Turn light'}
@@ -51,28 +52,17 @@ function ModeToggle() {
 }
 
 function App() {
-  // const [darkMode, setDarkMode] = useState<boolean>(initialState());
-
-  // const { mode, setMode } = useColorScheme();
-  // console.log('color mode', mode);
-
   const theme = lightTheme;
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   console.log(isMobile);
 
-  const toggleTheme = (): void => {
-    // setDarkMode(!darkMode);
-    // setMode(mode === 'light' ? 'dark' : 'light');
-    // localStorage.setItem('darkMode', (!darkMode).toString());
-  };
-
   return (
     <CssVarsProvider theme={theme}>
-      <ModeToggle />
       <AuthProvider>
         <CssBaseline />
-        <Header toggleTheme={ModeToggle} />
+        <Header />
+        <ModeToggle />
         <Box
           display="flex"
           width="100vw"

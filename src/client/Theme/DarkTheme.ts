@@ -24,9 +24,9 @@ const greenBase = '#92d050';
 const yellowBase = '#ffc000';
 const grayBase = '#575757';
 
-const darkTheme = createTheme({
+const darkTheme = {
   palette: {
-    mode: 'dark',
+    // mode: 'dark',
     primary: {
       main: '#E11774',
       contrastText: '#fff',
@@ -62,6 +62,6 @@ const darkTheme = createTheme({
       main: grayBase,
     },
   },
-});
+};
 
 export default darkTheme;

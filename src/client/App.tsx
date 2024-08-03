@@ -4,13 +4,20 @@ import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
 import { ThemeProvider } from '@mui/material/styles';
+import {
+  Experimental_CssVarsProvider as CssVarsProvider,
+  experimental_extendTheme as extendTheme,
+  useColorScheme,
+} from '@mui/material/styles';
 import { lightTheme } from './Theme';
-import { darkTheme } from './Theme';
+// import { darkTheme } from './Theme';
 import { Box, useTheme } from '@mui/material/';
 import Header from './components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
+
+import { Button } from '@mui/material/';
 
 function initialState() {
   if (localStorageAvailable()) {
@@ -29,25 +36,43 @@ function initialState() {
   // probably want to return something if there is not local storage access idk
 }
 
+function ModeToggle() {
+  const { mode, setMode } = useColorScheme();
+  console.log('mode', mode);
+  return (
+    <Button
+      onClick={() => {
+        setMode(mode === 'light' ? 'dark' : 'light');
+      }}
+    >
+      {mode === 'light' ? 'Turn dark' : 'Turn light'}
+    </Button>
+  );
+}
+
 function App() {
-  const [darkMode, setDarkMode] = useState<boolean>(initialState());
+  // const [darkMode, setDarkMode] = useState<boolean>(initialState());
 
-  const theme = useTheme();
+  // const { mode, setMode } = useColorScheme();
+  // console.log('color mode', mode);
 
-  // check if mobile or tablet
+  const theme = lightTheme;
+
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   console.log(isMobile);
 
   const toggleTheme = (): void => {
-    setDarkMode(!darkMode);
-    localStorage.setItem('darkMode', (!darkMode).toString());
+    // setDarkMode(!darkMode);
+    // setMode(mode === 'light' ? 'dark' : 'light');
+    // localStorage.setItem('darkMode', (!darkMode).toString());
   };
 
   return (
-    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+    <CssVarsProvider theme={theme}>
+      <ModeToggle />
       <AuthProvider>
         <CssBaseline />
-        <Header toggleTheme={toggleTheme} darkMode={darkMode} />
+        <Header toggleTheme={ModeToggle} />
         <Box
           display="flex"
           width="100vw"
@@ -59,7 +84,7 @@ function App() {
           <Leaderboard />
         </Box>
       </AuthProvider>
-    </ThemeProvider>
+    </CssVarsProvider>
   );
 }
 

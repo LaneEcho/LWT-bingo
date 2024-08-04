@@ -7,7 +7,7 @@ import {
   Experimental_CssVarsProvider as CssVarsProvider,
   useColorScheme,
 } from '@mui/material/styles';
-import { lightTheme } from './Theme';
+import { mainTheme } from './Theme';
 import { Box } from '@mui/material/';
 import Header from './components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -52,7 +52,7 @@ function ModeToggle() {
 }
 
 function App() {
-  const theme = lightTheme;
+  const theme = mainTheme;
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   console.log(isMobile);

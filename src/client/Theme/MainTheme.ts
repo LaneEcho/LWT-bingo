@@ -1,4 +1,4 @@
-import { createTheme, alpha, getContrastRatio } from '@mui/material/styles';
+import { alpha, getContrastRatio } from '@mui/material/styles';
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 import darkTheme from './DarkTheme';
 
@@ -29,7 +29,7 @@ const greenBase = '#92d050';
 const yellowBase = '#ffc000';
 const grayBase = '#575757';
 
-let lightTheme = extendTheme({
+let mainTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
@@ -70,7 +70,7 @@ let lightTheme = extendTheme({
         },
       },
     },
-    dark: darkTheme, // did this work
+    dark: darkTheme,
   },
   typography: {
     fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
@@ -92,13 +92,4 @@ let lightTheme = extendTheme({
   },
 });
 
-// typography using custom values and breakpoint queries
-// lightTheme.typography.h1 = {
-//   fontSize: '3rem',
-//   [lightTheme.breakpoints.down('sm')]: {
-//     // size of h1 on mobile
-//     fontSize: '1rem',
-//   },
-// };
-
-export default lightTheme;
+export default mainTheme;

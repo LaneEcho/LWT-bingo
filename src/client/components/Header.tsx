@@ -1,20 +1,24 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
+import { useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import BurgerMenu from './menu';
 import User from './user';
 import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
+import PresentedByInCoSmall from '../../assets/svg/PresentedByInCoSmall.svg';
 import Unofficial from '../../assets/svg/Unofficial.svg';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import { DarkModeToggle } from '@anatoliygatt/dark-mode-toggle';
 import { Icon } from '@mui/material';
+import UnofficialSmall from '../../assets/svg/UnofficialSmall.svg';
 
 interface HeaderProps {
-  toggleTheme: () => void;
-  darkMode: boolean;
+  toggleTheme?: () => void;
+  darkMode?: boolean;
 }
 
 const Header = React.forwardRef(function (
@@ -25,6 +29,10 @@ const Header = React.forwardRef(function (
 
   const open = Boolean(anchorEl);
 
+  const theme = useTheme();
+
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -34,20 +42,19 @@ const Header = React.forwardRef(function (
 
   return (
     <Box
-      gap={4}
+      gap={isMobile ? 1 : 4}
       py={1}
-      width={'100%'}
-      display={'flex'}
+      width="100vw"
+      display="flex"
       justifyContent={'center'}
       alignItems={'center'}
     >
-      <Icon sx={{width:'35px',height:'35px'}}>
+      <Icon sx={{ width: '35px', height: '35px' }}>
         {!darkMode ? (
-          <LightModeIcon fontSize="large" htmlColor='#E11774'/>
-          ) : (
-          <DarkModeIcon fontSize="large" htmlColor='#0AFFF4' />
-          )
-        }
+          <LightModeIcon fontSize="large" htmlColor="#E11774" />
+        ) : (
+          <DarkModeIcon fontSize="large" htmlColor="#0AFFF4" />
+        )}
       </Icon>
       <DarkModeToggle
         mode={darkMode ? 'dark' : 'light'}
@@ -63,7 +70,7 @@ const Header = React.forwardRef(function (
         onChange={toggleTheme}
       />
 
-      <Unofficial />
+      {isMobile ? <UnofficialSmall /> : <Unofficial />}
 
       <Box
         display="flex"
@@ -76,14 +83,14 @@ const Header = React.forwardRef(function (
           fontFamily={'Lalezar'}
           color="primary"
           textTransform={'uppercase'}
-          sx={{
-            fontSize: '3rem',
-          }}
+          align="center"
         >
           Lesbians Who Tech Bingo!
         </Typography>
-        <PresentedByInCo />
+
+        {isMobile ? <PresentedByInCoSmall /> : <PresentedByInCo />}
       </Box>
+
       <Box
         display={'flex'}
         justifyContent={'center'}

@@ -77,7 +77,7 @@ function App() {
           justifyContent={'center'}
           flexDirection={isMobile ? 'column' : 'row'}
         >
-          <Board />
+          <Board darkMode={darkMode} />
           <Leaderboard />
         </Box>
       </AuthProvider>

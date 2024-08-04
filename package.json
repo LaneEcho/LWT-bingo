@@ -24,6 +24,7 @@
     "@babel/core": "^7.24.4",
     "@babel/preset-env": "^7.24.4",
     "@babel/preset-react": "^7.24.1",
+    "@iconify-icon/react": "^2.1.0",
     "@svgr/webpack": "^8.1.0",
     "@types/express": "^4.17.13",
     "@types/node": "^17.0.8",
@@ -43,8 +44,9 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@emotion/styled": "^11.11.5",
+    "@anatoliygatt/dark-mode-toggle": "^1.0.1",
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.0.8",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",

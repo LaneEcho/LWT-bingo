@@ -76,15 +76,19 @@ let mainTheme = extendTheme({
     fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
     h1: {
       fontSize: '3rem',
-      '@media (max-width:600px)': {
-        fontSize: '1rem',
+      '@media (max-width:640px)': {
+        fontSize: '1.25rem',
+      },
+      '@media (max-width:320px)': {
+        // possibly the smallest screen size
+        fontSize: '.85rem',
       },
     },
   },
   breakpoints: {
     values: {
-      xs: 640, // default 0
-      sm: 768, // default 600
+      xs: 320, // default 0
+      sm: 640, // default 600
       md: 1024, // default 900
       lg: 1280, // default 1200
       xl: 1536, // default 1536

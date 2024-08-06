@@ -42,8 +42,9 @@ const Header = React.forwardRef(function (
 
   return (
     <Box
-      gap={isMobile ? 1 : 4}
+      gap={isMobile ? 0 : 4}
       py={1}
+      px={isMobile ? 2 : ''}
       width="100vw"
       display="flex"
       justifyContent={'center'}
@@ -77,6 +78,7 @@ const Header = React.forwardRef(function (
         flexDirection="column"
         alignItems={'center'}
         justifyContent={'space-between'}
+        zIndex={-5}
       >
         <Typography
           variant="h1"
@@ -106,7 +108,6 @@ const Header = React.forwardRef(function (
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
-          sx={{ marginLeft: '2rem', marginRight: '5px' }}
         >
           <MenuIcon />
         </IconButton>
@@ -117,7 +118,6 @@ const Header = React.forwardRef(function (
           anchorEl={anchorEl}
           open={open}
         />
-
         <User />
       </Box>
     </Box>

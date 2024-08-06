@@ -39,8 +39,10 @@ function ModeToggle() {
 
   if (prefersDark) setMode('dark');
 
+  // change this to toggle switch
   return (
     <Button
+      size="small"
       onClick={() => {
         setMode(mode === 'light' ? 'dark' : 'light');
         localStorage.setItem('darkMode', (!prefersDark).toString());
@@ -61,17 +63,23 @@ function App() {
     <CssVarsProvider theme={theme}>
       <AuthProvider>
         <CssBaseline />
-        <Header />
-        <ModeToggle />
         <Box
           display="flex"
-          width="100vw"
-          gap={2}
-          justifyContent={'center'}
-          flexDirection={isMobile ? 'column' : 'row'}
+          flexDirection="column"
+          justifyContent="center"
+          width={'100vw'}
         >
-          <Board darkMode={darkMode} />
-          <Leaderboard />
+          <Header />
+          <ModeToggle />
+          <Box
+            display="flex"
+            gap={2}
+            justifyContent={'center'}
+            flexDirection={isMobile ? 'column' : 'row'}
+          >
+            <Board darkMode={darkMode} />
+            <Leaderboard />
+          </Box>
         </Box>
       </AuthProvider>
     </CssVarsProvider>

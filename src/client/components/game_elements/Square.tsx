@@ -9,7 +9,7 @@ type BoxProps = {
   gameOver: boolean;
 };
 
-function Box({ text, row, column, gameOver }: BoxProps) {
+function Square({ text, row, column, gameOver }: BoxProps) {
   const [clicked, setClicked] = useState<boolean>(false);
 
   // see if the box has been clicked upon page reload
@@ -63,4 +63,4 @@ function Box({ text, row, column, gameOver }: BoxProps) {
   );
 }
 
-export default Box;
+export default Square;

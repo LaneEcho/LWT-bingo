@@ -75,6 +75,7 @@ function App() {
             display="flex"
             gap={2}
             justifyContent={'center'}
+            alignItems={isMobile ? 'center' : 'flex-start'}
             flexDirection={isMobile ? 'column' : 'row'}
           >
             <Board darkMode={darkMode} />

@@ -46,8 +46,8 @@ function Square({ text, row, column, gameOver }: BoxProps) {
       disabled={gameOver}
       sx={{
         margin: isMobile ? '1px' : '4px',
-        height: isMobile ? '5rem' : '8rem',
-        width: isMobile ? '5rem' : '8rem',
+        height: isMobile ? '4.5rem' : '8rem',
+        width: isMobile ? '4.5rem' : '8rem',
         fontFamily: 'Poppins',
         borderRadius: '1rem',
         backgroundColor: clicked
@@ -57,13 +57,14 @@ function Square({ text, row, column, gameOver }: BoxProps) {
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
         border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
+        padding: isMobile ? '1px' : '5px',
         fontSize:
           text?.length > 35
             ? isMobile
               ? '.4rem' // long phrases if on mobile
               : '.7rem' // long phrases if not on mobile
             : isMobile
-            ? '.625rem' // short phrases if on mobile
+            ? '.55rem' // short phrases if on mobile
             : '.875rem', // short phrases if not on mobile
       }}
     >

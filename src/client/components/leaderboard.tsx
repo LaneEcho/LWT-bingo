@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import { subscribeToTopScores } from '../../firebase/firebase-api';
 import { Box, Card, Grid, Typography } from '@mui/material';
 import { useAuth } from '../hooks/useAuth';
@@ -8,6 +9,9 @@ function Leaderboard() {
   const { user } = useAuth();
   const [topScores, setTopScores] = useState<any[]>([]);
   const [error, setError] = useState<string>('');
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     const unsubscribe = subscribeToTopScores(
@@ -22,8 +26,6 @@ function Leaderboard() {
 
     return () => unsubscribe(); // Clean up the subscription when the component unmounts
   }, [user?.email]);
-
-  const theme = useTheme();
 
   function getRowColor(index: number) {
     // TODO: Use theme colors...
@@ -52,7 +54,7 @@ function Leaderboard() {
 
   return (
     <Box
-      width="434px"
+      width={isMobile ? '90vw' : '27rem'}
       height="75vh"
       sx={{ background: 'black', padding: '24px', borderRadius: '25px' }}
     >

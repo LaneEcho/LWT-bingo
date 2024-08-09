@@ -7,6 +7,10 @@ import BurgerMenu from './menu';
 import User from './user';
 import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
 import Unofficial from '../../assets/svg/Unofficial.svg';
+import LightModeIcon from '@mui/icons-material/LightMode';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import { DarkModeToggle } from '@anatoliygatt/dark-mode-toggle';
+import { Icon } from '@mui/material';
 
 interface HeaderProps {
   toggleTheme: () => void;
@@ -37,6 +41,28 @@ const Header = React.forwardRef(function (
       justifyContent={'center'}
       alignItems={'center'}
     >
+      <Icon sx={{width:'35px',height:'35px'}}>
+        {!darkMode ? (
+          <LightModeIcon fontSize="large" htmlColor='#E11774'/>
+          ) : (
+          <DarkModeIcon fontSize="large" htmlColor='#0AFFF4' />
+          )
+        }
+      </Icon>
+      <DarkModeToggle
+        mode={darkMode ? 'dark' : 'light'}
+        size="sm"
+        inactiveTrackColor="#0AFFF4"
+        inactiveTrackColorOnHover="#2af7ee"
+        inactiveTrackColorOnActive="#2af7ee"
+        activeTrackColor="#E11774"
+        activeTrackColorOnHover="#fc328f"
+        activeTrackColorOnActive="#fc328f"
+        inactiveThumbColor="#000000"
+        activeThumbColor="#FFFFFF"
+        onChange={toggleTheme}
+      />
+
       <Unofficial />
 
       <Box

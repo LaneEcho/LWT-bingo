@@ -15,6 +15,8 @@ import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
 import phrases from '../../../lib/phrases';
 import { BoardState } from '../../../types';
 import Button from '../Button';
+import Modal from '@mui/material/Modal';
+import HowToPlay from '../modals/howToPlay';
 import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
@@ -31,7 +33,11 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-const Board: React.FC = () => {
+type BoardProps = {
+  darkMode: boolean;
+};
+
+const Board: React.FC<BoardProps> = ({ darkMode }: BoardProps) => {
   const { user } = useAuth();
   const track = useAnalytics();
 
@@ -48,6 +54,7 @@ const Board: React.FC = () => {
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [usernameOpen, setUsernameOpen] = useState<boolean>(false);
   const [submitScoreOpen, setSubmitScoreOpen] = useState<boolean>(false);
+  const [openHowTo, SetHowTo] = useState<boolean>(false);
 
   const [bingoResult, setBingoResult] = useState<BingoResult | undefined>(
     undefined
@@ -150,6 +157,10 @@ const Board: React.FC = () => {
     return phrases;
   }
 
+  function showHowTo() {
+    SetHowTo(!openHowTo);
+  }
+
   const handleClose = () => {
     setLoginOpen(false);
     resetBoard();
@@ -188,23 +199,42 @@ const Board: React.FC = () => {
       <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
           variant="primary"
+          onClick={callBingo}
+          sx={{
+            width: '12rem',
+            height: '3rem',
+            fontSize: 'x-large'
+          }}
+          darkMode={darkMode}
+        >
+          BINGO!
+        </Button>
+      </Stack>
+
+      <Stack width={'100%'} direction="row" justifyContent="space-evenly">
+
+        <Button
+          variant="secondary"
+          onClick={showHowTo}
+          sx={{
+            width: '8rem',
+          }}
+          darkMode={darkMode}
+        >
+          How to Play
+        </Button>
+
+        <Button
+          variant="secondary"
           onClick={handleResetClicked}
           sx={{
             width: '8rem',
           }}
+          darkMode={darkMode}
         >
           Reset Board
         </Button>
 
-        <Button
-          variant="primary"
-          onClick={callBingo}
-          sx={{
-            width: '8rem',
-          }}
-        >
-          BINGO!
-        </Button>
       </Stack>
       {loginOpen && (
         <LoginModal
@@ -215,6 +245,16 @@ const Board: React.FC = () => {
           onLoginSuccess={onLoginSuccess}
         />
       )}
+      <Modal
+        aria-labelledby="modal-how-to-play"
+        aria-describedby="modal-how-to-play-bingo"
+        open={openHowTo}
+      >
+        <HowToPlay 
+          close={SetHowTo} 
+          darkMode={darkMode}>
+        </HowToPlay>
+      </Modal>
       <UpdateUsernameModal
         isOpen={usernameOpen}
         onClose={handleUsernameClose}

@@ -10,12 +10,14 @@ import {
 } from '@mui/material';
 import { FocusTrap } from '@mui/base/FocusTrap';
 import { CloseOutlined } from '@mui/icons-material';
+import { dark } from '@mui/material/styles/createPalette';
 
 type HowToPlayProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
-};
+  darkMode: boolean;
+}
 
-const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
+const HowToPlay = React.forwardRef(function ({ close, darkMode }: HowToPlayProps, ref) {
   const modalRef = useRef(null);
 
   const keydown = (event: KeyboardEvent) => {
@@ -34,6 +36,34 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
   const handleClick = () => {
     close((prevOpenHowTo) => !prevOpenHowTo);
   };
+
+  const hashtagImgUrl = (darkMode: boolean) => {
+    if (darkMode) {
+      return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Dark%20Mode_%23.png?alt=media&token=0fbe217b-af07-45a7-84e0-9a3b76af2ffb"
+    }
+    return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Light%20Mode_%23.png?alt=media&token=688c4c7d-33e4-4be3-9b4e-d74879fd4a99"
+  }
+
+  const elImgUrl = (darkMode: boolean) => {
+    if (darkMode) {
+      return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Dark%20Mode_L.png?alt=media&token=5a5f2615-e2e7-43ab-8bd8-f07e6078e3d1"
+    }
+    return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Light%20Mode_L.png?alt=media&token=37150466-a15a-4528-a432-7de4d77eb708"
+  }
+
+  const dubyaImgUrl = (darkMode: boolean) => {
+    if (darkMode) {
+      return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Dark%20Mode_W.png?alt=media&token=c7bf0f85-17f1-483d-b6cd-1cc40839edb3"
+    }
+    return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Light%20Mode_W.png?alt=media&token=1ee0cedd-6b5a-4330-aa45-5b8e57cb9049"
+  }
+
+  const teeImgUrl = (darkMode: boolean) => {
+    if (darkMode) {
+      return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Dark%20Mode_T.png?alt=media&token=0e6be9c2-7109-47f4-85ac-fa13125a27fe"
+    }
+    return "https://firebasestorage.googleapis.com/v0/b/inco-games.appspot.com/o/Light%20Mode_T.png?alt=media&token=f56fe2dd-99e7-4186-b1f8-0776df56f206"
+  }
 
   useEffect(() => {
     document.addEventListener('keydown', keydown);
@@ -104,9 +134,64 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               playing to try to match more complicated patterns for more points!
             </ListItem>
             <ListItem>
-              Points: Single line, any direction = 25 points # = 80 points "L" =
-              45 points "W" = 85 points "T" = 45 points "Blackout" (all the
-              squares!) = 125 points!
+              Points:
+            </ListItem>
+            <ListItem> 
+              <List>
+                <ListItem>Single line, any direction = 25 points</ListItem> 
+                <ListItem># = 80 points</ListItem>
+                <ListItem>"L" = 45 points</ListItem> <ListItem>"W" = 85 points</ListItem>
+                <ListItem>"T" = 45 points</ListItem>
+                <ListItem>"Blackout" (all the squares!) = 125 points!</ListItem>
+              </List>
+              <Box
+                component="img"
+                sx={{
+                  height: 128,
+                  width: 128,
+                  mr: 2
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the hashtag layout, with the second and fourth columns and rows clicked."
+                src={hashtagImgUrl(darkMode)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  height: 128,
+                  width: 128,
+                  mr: 2
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the L layout, with the left side and bottom clicked."
+                src={elImgUrl(darkMode)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  height: 128,
+                  width: 128,
+                  mr: 2
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the W layout, with the first, third, and fifth columns and the bottom clicked."
+                src={dubyaImgUrl(darkMode)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  height: 128,
+                  width: 128,
+                  mr: 2
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the T layout, with the top and the third column clicked."
+                src={teeImgUrl(darkMode)}
+              />
             </ListItem>
             <ListItem>
               When you submit your board, you have the option to submit your

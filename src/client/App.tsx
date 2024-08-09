@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/game_elements/board';
@@ -37,7 +37,11 @@ function ModeToggle() {
 
   const { mode, setMode } = useColorScheme();
 
-  if (prefersDark) setMode('dark');
+  useEffect(() => {
+    if (prefersDark) {
+      setMode('dark');
+    }
+  }, [prefersDark, setMode]);
 
   // change this to toggle switch
   return (
@@ -78,7 +82,7 @@ function App() {
             alignItems={isMobile ? 'center' : 'flex-start'}
             flexDirection={isMobile ? 'column' : 'row'}
           >
-            <Board darkMode={darkMode} />
+            <Board />
             <Leaderboard />
           </Box>
         </Box>

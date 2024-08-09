@@ -13,7 +13,7 @@ import Header from './components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from './components/leaderboard';
 import { AuthProvider } from './context/AuthContext';
-import { Button } from '@mui/material/';
+import ToggleSwitch from './components/UI_Elements/Switch';
 
 function initialState() {
   if (localStorageAvailable()) {
@@ -37,6 +37,8 @@ function ModeToggle() {
 
   const { mode, setMode } = useColorScheme();
 
+  const darkMode = mode === 'dark';
+
   useEffect(() => {
     if (prefersDark) {
       setMode('dark');
@@ -45,15 +47,13 @@ function ModeToggle() {
 
   // change this to toggle switch
   return (
-    <Button
-      size="small"
-      onClick={() => {
+    <ToggleSwitch
+      checked={!darkMode}
+      onChange={() => {
         setMode(mode === 'light' ? 'dark' : 'light');
         localStorage.setItem('darkMode', (!prefersDark).toString());
       }}
-    >
-      {mode === 'light' ? 'Turn dark' : 'Turn light'}
-    </Button>
+    />
   );
 }
 
@@ -61,7 +61,6 @@ function App() {
   const theme = mainTheme;
 
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  console.log(isMobile);
 
   return (
     <CssVarsProvider theme={theme}>

@@ -67,6 +67,7 @@ let mainTheme = extendTheme({
         },
         secondaryGray: {
           main: grayBase,
+          light: alpha(grayBase, 0.5),
         },
       },
     },

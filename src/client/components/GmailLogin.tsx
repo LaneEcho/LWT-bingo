@@ -2,7 +2,7 @@ import React from 'react';
 
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { useAuth } from '../hooks/useAuth';
-import Button from './Button';
+import Button from './UI_Elements/Button';
 import { GitHub, Google } from '@mui/icons-material';
 import useAnalytics, { EventName } from '../hooks/useAnalytics';
 

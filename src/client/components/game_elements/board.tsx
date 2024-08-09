@@ -14,7 +14,7 @@ import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
 import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
 import phrases from '../../../lib/phrases';
 import { BoardState } from '../../../types';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import Modal from '@mui/material/Modal';
 import HowToPlay from '../modals/howToPlay';
 import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';

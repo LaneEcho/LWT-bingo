@@ -8,7 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import { getAuth } from 'firebase/auth';
 import { submitScore, updateUser } from '../../../firebase/firebase-api';
 

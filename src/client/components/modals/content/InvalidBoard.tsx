@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Typography } from "@mui/material";
-import Button from "../../Button";
+import { Typography } from '@mui/material';
+import Button from '../../UI_Elements/Button';
 
 interface Props {
   onClose: () => void;

@@ -14,13 +14,9 @@ import UnofficialSmall from '../../assets/svg/UnofficialSmall.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
-  darkMode?: boolean;
 }
 
-const Header = React.forwardRef(function (
-  { toggleTheme, darkMode }: HeaderProps,
-  ref
-) {
+const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
@@ -89,7 +85,6 @@ const Header = React.forwardRef(function (
         <BurgerMenu
           handleClose={handleClose}
           toggleTheme={toggleTheme}
-          darkMode={darkMode}
           anchorEl={anchorEl}
           open={open}
         />

@@ -8,16 +8,16 @@ const ToggleSwitch = styled(Switch)(({ theme }) => {
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return {
-    width: 62,
-    height: 34,
-    padding: 7,
+    width: isMobile ? 50 : 62,
+    height: isMobile ? 28 : 34,
+    padding: isMobile ? 5 : 7,
     '& .MuiSwitch-switchBase': {
       margin: 1,
       padding: 0,
-      transform: 'translateX(6px)',
+      transform: isMobile ? 'translateX(4px)' : 'translateX(6px)',
       '&.Mui-checked': {
         color: '#fff',
-        transform: 'translateX(22px)',
+        transform: isMobile ? 'translateX(20px)' : 'translateX(22px)',
         '& .MuiSwitch-thumb:before': {
           backgroundImage: `url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" height="20" width="20" viewBox="0 0 20 20"><path fill="${encodeURIComponent(
             theme.palette.secondary.main // color of moon symbol
@@ -39,8 +39,8 @@ const ToggleSwitch = styled(Switch)(({ theme }) => {
         theme.palette.mode === 'dark'
           ? theme.palette.secondary.main
           : theme.palette.primary.dark,
-      width: 32,
-      height: 32,
+      width: isMobile ? 24 : 32,
+      height: isMobile ? 24 : 32,
       '&::before': {
         content: "''",
         position: 'absolute',

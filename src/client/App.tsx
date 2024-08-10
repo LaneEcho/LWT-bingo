@@ -8,6 +8,7 @@ import {
   useColorScheme,
 } from '@mui/material/styles';
 import { mainTheme } from './Theme';
+import { useTheme } from '@mui/material';
 import { Box } from '@mui/material/';
 import Header from './components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
@@ -39,19 +40,27 @@ function ModeToggle() {
 
   const darkMode = mode === 'dark';
 
+  const theme = useTheme();
+
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   useEffect(() => {
     if (prefersDark) {
       setMode('dark');
     }
   }, [prefersDark, setMode]);
 
-  // change this to toggle switch
   return (
     <ToggleSwitch
       checked={!darkMode}
       onChange={() => {
         setMode(mode === 'light' ? 'dark' : 'light');
         localStorage.setItem('darkMode', (!prefersDark).toString());
+      }}
+      sx={{
+        position: 'absolute',
+        top: '50px',
+        right: isMobile ? '20px' : '50px',
       }}
     />
   );

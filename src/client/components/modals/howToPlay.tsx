@@ -1,15 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import {
-  Box,
-  Typography,
-  Button,
-  Stack,
-  List,
-  ListItem,
-  IconButton,
-} from '@mui/material';
+import { Box, Typography, Button, Stack, IconButton } from '@mui/material';
 import { FocusTrap } from '@mui/base/FocusTrap';
 import { CloseOutlined } from '@mui/icons-material';
+import { useTheme } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 type HowToPlayProps = {
   close: React.Dispatch<React.SetStateAction<boolean>>;
@@ -18,7 +12,11 @@ type HowToPlayProps = {
 const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
   const modalRef = useRef(null);
 
-  // check for darkMode in localStorage
+  const theme = useTheme();
+
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // check for darkMode in localStorage (for images)
   const darkMode: boolean = localStorage.getItem('darkMode') === 'true';
 
   const keydown = (event: KeyboardEvent) => {
@@ -86,12 +84,13 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
           top: '50%',
           left: '50%',
           transform: 'translate(-50%, -50%)',
-          width: '40vw',
-          height: '60vh',
+          width: isMobile ? '100vw' : 'auto',
+          height: isMobile ? '85vh' : '60vh',
           bgcolor: 'background.paper',
           padding: '1.5rem',
           borderRadius: '8px',
           overflow: 'scroll',
+          textAlign: 'center',
         }}
       >
         <Stack
@@ -114,41 +113,97 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               <CloseOutlined />
             </IconButton>
           </Stack>
-          <List>
-            <ListItem>
-              Similar to classic Bingo, the goal is to mark squares on your
-              board to achieve a winning pattern. However, we reimagined to game
-              to have a #LWT twist!
-            </ListItem>
-            <ListItem>
-              You can play one board at a time. Each board has 25 playable
-              squares in a 5x5 square. The middle square is a free space!
-            </ListItem>
-            <ListItem>
-              Each square has a phrase, visual, or experience that might occur
-              during the #LWTSummit. If you see or hear that thing happen, click
-              on that square on your board to mark it!
-            </ListItem>
-            <ListItem>
-              Once you have enough squares marked to match a winning pattern,
-              you can click the "submit board" button to get a score, or keep
-              playing to try to match more complicated patterns for more points!
-            </ListItem>
-            <ListItem>Points:</ListItem>
-            <ListItem>
-              <List>
-                <ListItem>Single line, any direction = 25 points</ListItem>
-                <ListItem># = 80 points</ListItem>
-                <ListItem>"L" = 45 points</ListItem>{' '}
-                <ListItem>"W" = 85 points</ListItem>
-                <ListItem>"T" = 45 points</ListItem>
-                <ListItem>"Blackout" (all the squares!) = 125 points!</ListItem>
-              </List>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            Similar to classic Bingo, the goal is to mark squares on your board
+            to achieve a winning pattern. However, we reimagined to game to have
+            a #LWT twist!
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            You can play one board at a time. Each board has 25 playable squares
+            in a 5x5 square. The middle square is a free space!
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            Each square has a phrase, visual, or experience that might occur
+            during the #LWTSummit. If you see or hear that thing happen, click
+            on that square on your board to mark it!
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            Once you have enough squares marked to match a winning pattern, you
+            can click the "submit board" button to get a score, or keep playing
+            to try to match more complicated patterns for more points!
+          </Typography>
+          <Stack>
+            <Typography
+              id="modal-modal-description"
+              variant="h6"
+              sx={{ mt: '1px' }}
+            >
+              Points:
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              Single line, any direction = 25 points
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              # = 80 points
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "L" = 45 points
+            </Typography>{' '}
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "W" = 85 points
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "T" = 45 points
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "Blackout" (all the squares!) = 125 points!
+            </Typography>
+            <Stack direction="row" spacing={2} sx={{ mt: '15px' }}>
               <Box
                 component="img"
                 sx={{
-                  height: 128,
-                  width: 128,
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
                   mr: 2,
                   // maxHeight: { xs: 128, md: 167 },
                   // maxWidth: { xs: 128, md: 250 },
@@ -159,8 +214,8 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               <Box
                 component="img"
                 sx={{
-                  height: 128,
-                  width: 128,
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
                   mr: 2,
                   // maxHeight: { xs: 128, md: 167 },
                   // maxWidth: { xs: 128, md: 250 },
@@ -171,8 +226,8 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               <Box
                 component="img"
                 sx={{
-                  height: 128,
-                  width: 128,
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
                   mr: 2,
                   // maxHeight: { xs: 128, md: 167 },
                   // maxWidth: { xs: 128, md: 250 },
@@ -183,8 +238,8 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               <Box
                 component="img"
                 sx={{
-                  height: 128,
-                  width: 128,
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
                   mr: 2,
                   // maxHeight: { xs: 128, md: 167 },
                   // maxWidth: { xs: 128, md: 250 },
@@ -192,20 +247,32 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
                 alt="Diagram of the T layout, with the top and the third column clicked."
                 src={teeImgUrl(darkMode)}
               />
-            </ListItem>
-            <ListItem>
-              When you submit your board, you have the option to submit your
-              email (so we can keep your scores tracked together) and the
-              display name you would like to use for the leaderboard.
-            </ListItem>
-            <ListItem>
-              After you submit, reset your board and play again!
-            </ListItem>
-            <ListItem>
-              You can reset your board at any time if you want a fresh start,
-              but any marked squares you have will also be reset.
-            </ListItem>
-          </List>
+            </Stack>
+          </Stack>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            When you submit your board, you have the option to submit your email
+            (so we can keep your scores tracked together) and the display name
+            you would like to use for the leaderboard.
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            After you submit, reset your board and play again!
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
+            You can reset your board at any time if you want a fresh start, but
+            any marked squares you have will also be reset.
+          </Typography>
           <Button
             variant="contained"
             size="small"

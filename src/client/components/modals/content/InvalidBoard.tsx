@@ -26,7 +26,7 @@ const InvalidBoard = ({ onClose, resetBoard }: Props) => {
         Return to my board
       </Button>
       <Button variant="secondary" onClick={resetBoard}>
-        Reset my board
+        Get New Board
       </Button>
     </>
   );

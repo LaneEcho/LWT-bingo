@@ -28,6 +28,14 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 
 <br>
 
+### Theme
+```client/Theme/MainTheme.tsx``` contains the current information for our theme, and another theme object for Dark Mode is found in ```DarkMode.tsx```
+It uses the experimental_extendTheme API which extends the default theme of MUI, which I found to avoid repetitive code like declaring the font family in both Dark Mode and Light Mode. We can easily update things like font family and breakpoints in the MainTheme object and they'll still apply to Dark Mode without having to also define them within the DarkMode object. 
+<br>
+More details: <br>
+[MUI Theme](https://mui.com/material-ui/customization/theming/) <br>
+[extendTheme](https://mui.com/material-ui/experimental-api/css-theme-variables/customization/)
+
 ## To Do
 
 | Feature                            | Status |

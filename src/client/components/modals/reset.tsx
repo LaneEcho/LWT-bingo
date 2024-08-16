@@ -101,7 +101,7 @@ const Reset = React.forwardRef(function (props: ResetProps, ref) {
               className="resetButton"
               onClick={props.reset}
             >
-              Reset Board
+              Give me a new board
             </Button>
           </Stack>
         )}

@@ -221,10 +221,10 @@ const Board: React.FC = () => {
           variant="secondary"
           onClick={handleResetClicked}
           sx={{
-            width: '8rem',
+            width: '10rem',
           }}
         >
-          Reset Board
+          Get New Board
         </Button>
       </Stack>
       {loginOpen && (

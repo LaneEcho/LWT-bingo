@@ -126,7 +126,7 @@ export const UpdateUsernameModal = ({
           Submit to the Leaderboard
         </Button>
         <Button variant="secondary" onClick={handleSubmit}>
-          No thanks, just reset my board
+          No thanks, give me a new board
         </Button>
       </DialogContent>
     </Dialog>

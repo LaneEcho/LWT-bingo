@@ -82,7 +82,7 @@ export const ScoreSubmissionModal = ({
             mailing list"
             /> */}
             <Button variant="secondary" onClick={resetBoard}>
-              No thanks, just reset my board
+              No thanks, give me a new board
             </Button>
           </>
         ) : (

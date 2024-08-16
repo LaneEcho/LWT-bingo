@@ -164,12 +164,10 @@ const Board: React.FC = () => {
 
   const handleUsernameClose = () => {
     setUsernameOpen(false);
-    resetBoard();
   };
 
   const handleScoreSubmissionClose = () => {
     setSubmitScoreOpen(false);
-    resetBoard();
   };
 
   // accessing CSS variables in case we change them later

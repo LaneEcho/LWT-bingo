@@ -159,7 +159,6 @@ const Board: React.FC = () => {
 
   const handleClose = () => {
     setLoginOpen(false);
-    resetBoard();
   };
 
   const handleUsernameClose = () => {

@@ -117,7 +117,11 @@ const Board: React.FC = () => {
 
   function callBingo(): void {
     const bingo = checkBingo();
-    track(EventName.BINGO_CLICKED, { userId: user?.uid ?? null, bingo });
+
+    track(EventName.BINGO_CLICKED, {
+      userId: user?.uid ?? null,
+      ...bingo,
+    });
     setBingoResult(bingo);
 
     if (bingo?.isBingo) {

@@ -7,6 +7,7 @@
 // returns BingoResult object that has isBingo property and score
 export interface BingoResult {
   isBingo: boolean;
+  bingoPattern: string;
   score: number;
 }
 
@@ -27,7 +28,7 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-1-3') &&
     boxes.includes('box-1-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'row' };
 
   } else if (
     boxes.includes('box-2-0') &&
@@ -36,7 +37,7 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-2-3') &&
     boxes.includes('box-2-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'row' };
 
   } else if (
     boxes.includes('box-3-0') &&
@@ -45,7 +46,7 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-3-3') &&
     boxes.includes('box-3-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'row' };
 
   } else if (
     boxes.includes('box-4-0') &&
@@ -54,7 +55,7 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-4-3') &&
     boxes.includes('box-4-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'row' };
 
   } else if (
     boxes.includes('box-5-0') &&
@@ -63,7 +64,7 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-5-3') &&
     boxes.includes('box-5-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'row' };
 
   } else if (
     // diagonal
@@ -73,7 +74,7 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-4-3') &&
     boxes.includes('box-5-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'diagonal' };
 
   } else if (
     // other diagonal
@@ -83,10 +84,10 @@ export function bingoRow(): BingoResult {
     boxes.includes('box-4-1') &&
     boxes.includes('box-5-0')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'diagonal' };
 
   }
-  return { isBingo: false, score: undefined };
+  return { isBingo: false, score: undefined, bingoPattern: undefined };
 
 }
 
@@ -107,7 +108,7 @@ export function bingoColumn(): BingoResult {
     boxes.includes('box-4-0') &&
     boxes.includes('box-5-0')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'column' };
   } else if (
     boxes.includes('box-1-1') &&
     boxes.includes('box-2-1') &&
@@ -115,7 +116,7 @@ export function bingoColumn(): BingoResult {
     boxes.includes('box-4-1') &&
     boxes.includes('box-5-1')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'column' };
 
   } else if (
     boxes.includes('box-1-2') &&
@@ -124,7 +125,7 @@ export function bingoColumn(): BingoResult {
     boxes.includes('box-4-2') &&
     boxes.includes('box-5-2')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'column' };
 
   } else if (
     boxes.includes('box-1-3') &&
@@ -133,7 +134,7 @@ export function bingoColumn(): BingoResult {
     boxes.includes('box-4-3') &&
     boxes.includes('box-5-3')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'column' };
 
   } else if (
     boxes.includes('box-1-4') &&
@@ -142,10 +143,10 @@ export function bingoColumn(): BingoResult {
     boxes.includes('box-4-4') &&
     boxes.includes('box-5-4')
   ) {
-    return { isBingo: true, score: 25 };
+    return { isBingo: true, score: 25, bingoPattern: 'column' };
 
   }
-  return { isBingo: false, score: undefined };
+  return { isBingo: false, score: undefined, bingoPattern: undefined };
 
 }
 
@@ -219,9 +220,9 @@ export function bingoSpecial(): BingoResult {
     return array1.sort().every((element, index) => element === array2[index]);
   }
 
-  function containsAllBoxes(boxes:string[], pattern:string[]):boolean {
+  function containsAllBoxes(boxes: string[], pattern: string[]): boolean {
     const boxSet = new Set(boxes);
-    
+
     for (const box of pattern) {
       if (!boxSet.has(box)) {
         return false;
@@ -240,30 +241,30 @@ export function bingoSpecial(): BingoResult {
     });
 
   // Short circuit if not enough boxes to make up a score
-  if (boxes.length < 5) return { isBingo: false, score: undefined };
+  if (boxes.length < 5) return { isBingo: false, score: undefined, bingoPattern: undefined };
 
   if (boxes.length === 25) {
-    return { isBingo: true, score: 125 };
+    return { isBingo: true, score: 125, bingoPattern: 'blackout' };
   } else if (
     // #
     containsAllBoxes(boxes, hashtag) === true
   ) {
-    return { isBingo: true, score: 80 };
-  } else if (
-    // L
-    containsAllBoxes(boxes, W) === true
-  ) {
-    return { isBingo: true, score: 85 };
+    return { isBingo: true, score: 80, bingoPattern: '#' };
   } else if (
     // W
+    containsAllBoxes(boxes, W) === true
+  ) {
+    return { isBingo: true, score: 85, bingoPattern: 'W' };
+  } else if (
+    // L
     containsAllBoxes(boxes, L) === true
   ) {
-    return { isBingo: true, score: 45 };
+    return { isBingo: true, score: 45, bingoPattern: 'L' };
   } else if (
     // T
     containsAllBoxes(boxes, T) === true
   ) {
-    return { isBingo: true, score: 45 };
+    return { isBingo: true, score: 45, bingoPattern: 'T' };
   }
-  return { isBingo: false, score: undefined };
+  return { isBingo: false, score: undefined, bingoPattern: undefined };
 }

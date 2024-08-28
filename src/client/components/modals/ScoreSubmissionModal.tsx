@@ -7,7 +7,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { submitScore } from '../../../firebase/firebase-api';
 import InvalidBoard from './content/InvalidBoard';

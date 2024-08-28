@@ -5,7 +5,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import { GitHub, Google } from '@mui/icons-material';
 import GmailLogin from '../GmailLogin';
 import InvalidBoard from './content/InvalidBoard';

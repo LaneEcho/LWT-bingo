@@ -23,7 +23,6 @@ const Button: FunctionComponent<ButtonProps> = ({
   disabled,
   darkMode,
 }) => {
-
   const isPrimary = variant === 'primary';
   const isSecondary = variant === 'secondary';
   const primaryBackGroundColor = !darkMode ? '#E11774' : '#0AFFF4';
@@ -31,9 +30,8 @@ const Button: FunctionComponent<ButtonProps> = ({
   const secondaryBackgroundColor = !darkMode ? '#FFFFFF' : '#000000';
   const secondaryColor = !darkMode ? '#E11774' : '#0AFFF4';
 
-  
   const styles: SxProps<Theme> = {
-    margin: '16px 8px',
+    margin: '5px 8px',
     borderRadius: '30px',
     // boxShadow: '0px 3.43px 3.43px 0px #00000040',
   };
@@ -54,8 +52,17 @@ const Button: FunctionComponent<ButtonProps> = ({
     boxShadow: 'none',
   };
 
-
-  console.log(variant,darkMode,!darkMode,primaryBackGroundColor,primaryColor,primaryStyles,secondaryBackgroundColor,secondaryColor,secondaryStyles)
+  console.log(
+    variant,
+    darkMode,
+    !darkMode,
+    primaryBackGroundColor,
+    primaryColor,
+    primaryStyles,
+    secondaryBackgroundColor,
+    secondaryColor,
+    secondaryStyles
+  );
 
   return (
     <MuiButton

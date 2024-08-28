@@ -14,7 +14,7 @@ import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
 import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
 import phrases from '../../../lib/phrases';
 import { BoardState } from '../../../types';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import Modal from '@mui/material/Modal';
 import HowToPlay from '../modals/howToPlay';
 import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
@@ -33,11 +33,7 @@ function pickUniqueNumbers(): number[] {
   return Array.from(uniqueNumbers);
 }
 
-type BoardProps = {
-  darkMode: boolean;
-};
-
-const Board: React.FC<BoardProps> = ({ darkMode }: BoardProps) => {
+const Board: React.FC = () => {
   const { user } = useAuth();
   const track = useAnalytics();
 
@@ -203,23 +199,20 @@ const Board: React.FC<BoardProps> = ({ darkMode }: BoardProps) => {
           sx={{
             width: '12rem',
             height: '3rem',
-            fontSize: 'x-large'
+            fontSize: 'x-large',
           }}
-          darkMode={darkMode}
         >
           BINGO!
         </Button>
       </Stack>
 
       <Stack width={'100%'} direction="row" justifyContent="space-evenly">
-
         <Button
           variant="secondary"
           onClick={showHowTo}
           sx={{
             width: '8rem',
           }}
-          darkMode={darkMode}
         >
           How to Play
         </Button>
@@ -230,11 +223,9 @@ const Board: React.FC<BoardProps> = ({ darkMode }: BoardProps) => {
           sx={{
             width: '8rem',
           }}
-          darkMode={darkMode}
         >
           Reset Board
         </Button>
-
       </Stack>
       {loginOpen && (
         <LoginModal
@@ -250,10 +241,7 @@ const Board: React.FC<BoardProps> = ({ darkMode }: BoardProps) => {
         aria-describedby="modal-how-to-play-bingo"
         open={openHowTo}
       >
-        <HowToPlay 
-          close={SetHowTo} 
-          darkMode={darkMode}>
-        </HowToPlay>
+        <HowToPlay close={SetHowTo}></HowToPlay>
       </Modal>
       <UpdateUsernameModal
         isOpen={usernameOpen}

@@ -17,12 +17,11 @@ interface MenuProps {
   anchorEl: HTMLElement;
   handleClose: () => void;
   toggleTheme: () => void;
-  darkMode: boolean;
   open: boolean;
 }
 
 const BurgerMenu = React.forwardRef(function (
-  { handleClose, toggleTheme, anchorEl, darkMode, open }: MenuProps,
+  { handleClose, toggleTheme, anchorEl, open }: MenuProps,
   ref: React.Ref<HTMLElement>
 ) {
   const [openHowTo, SetHowTo] = useState<boolean>(false);
@@ -80,7 +79,6 @@ const BurgerMenu = React.forwardRef(function (
           Interconnected Collective
         </MenuItem>
         <MenuItem onClick={showTerms}>Terms & Conditions</MenuItem>
-
       </Menu>
 
       <Modal

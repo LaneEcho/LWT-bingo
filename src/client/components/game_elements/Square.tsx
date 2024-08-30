@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 type BoxProps = {
   text: any;
@@ -15,6 +16,7 @@ function Square({ text, row, column, gameOver }: BoxProps) {
 
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const track = useAnalytics();
 
   // see if the box has been clicked upon page reload
   useEffect(() => {
@@ -29,7 +31,7 @@ function Square({ text, row, column, gameOver }: BoxProps) {
     const updatedClicked: boolean = !clicked;
     setClicked(updatedClicked);
     if (updatedClicked) {
-      // track(EventName.TILE_SELECTED, trackingParams);
+      track(EventName.TILE_SELECTED, { text, row, column, gameOver });
       localStorage.setItem(`box-${row}-${column}`, updatedClicked.toString());
     } else {
       localStorage.removeItem(`box-${row}-${column}`);

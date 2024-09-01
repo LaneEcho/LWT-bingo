@@ -74,7 +74,7 @@ export const LoginModal = ({
               Github Login
             </Button> */}
             <Button variant="secondary" onClick={resetBoard}>
-              No thanks, just reset my board
+              No thanks, give me a new board
             </Button>
           </>
         ) : (

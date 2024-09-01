@@ -163,17 +163,14 @@ const Board: React.FC = () => {
 
   const handleClose = () => {
     setLoginOpen(false);
-    resetBoard();
   };
 
   const handleUsernameClose = () => {
     setUsernameOpen(false);
-    resetBoard();
   };
 
   const handleScoreSubmissionClose = () => {
     setSubmitScoreOpen(false);
-    resetBoard();
   };
 
   // accessing CSS variables in case we change them later
@@ -225,10 +222,10 @@ const Board: React.FC = () => {
           variant="secondary"
           onClick={handleResetClicked}
           sx={{
-            width: '8rem',
+            width: '10rem',
           }}
         >
-          Reset Board
+          Get New Board
         </Button>
       </Stack>
       {loginOpen && (

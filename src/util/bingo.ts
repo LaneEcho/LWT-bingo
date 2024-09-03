@@ -4,6 +4,9 @@
 // or any diagonal
 // check local storage for the keys of boxes that would win
 // pop up an alert or similar saying bingo
+
+import { get } from "http";
+
 // returns BingoResult object that has isBingo property and score
 export interface BingoResult {
   isBingo: boolean;
@@ -11,16 +14,25 @@ export interface BingoResult {
   score: number;
 }
 
-// checking for bingo rows
-export function bingoRow(): BingoResult {
-  // figuring out what is in local storage
+const getBoxes = () => {
   const boxes: string[] = Object.entries(localStorage)
     .filter((element) => {
       return element[0] !== 'items';
     })
+    .filter((element) => {
+      return element.toString().split("-")[0] === 'box';
+    })
     .map((element) => {
       return element[0];
     });
+
+  return boxes;
+}
+
+// checking for bingo rows
+export function bingoRow(): BingoResult {
+  // figuring out what is in local storage
+  const boxes = getBoxes()
   if (
     boxes.includes('box-1-0') &&
     boxes.includes('box-1-1') &&
@@ -94,13 +106,7 @@ export function bingoRow(): BingoResult {
 // checking for bingo columns
 export function bingoColumn(): BingoResult {
   // figuring out what is in local storage
-  const boxes: string[] = Object.entries(localStorage)
-    .filter((element) => {
-      return element[0] !== 'items';
-    })
-    .map((element) => {
-      return element[0];
-    });
+  const boxes = getBoxes()
   if (
     boxes.includes('box-1-0') &&
     boxes.includes('box-2-0') &&
@@ -232,13 +238,15 @@ export function bingoSpecial(): BingoResult {
     return true
   }
 
-  const boxes: string[] = Object.entries(localStorage)
-    .filter((element) => {
-      return element[0] !== 'items';
-    })
-    .map((element) => {
-      return element[0];
-    });
+  // const boxes: string[] = Object.entries(localStorage)
+  //   .filter((element) => {
+  //     return element[0] !== 'items';
+  //   })
+  //   .map((element) => {
+  //     return element[0];
+  //   });
+
+  const boxes = getBoxes()
 
   // Short circuit if not enough boxes to make up a score
   if (boxes.length < 5) return { isBingo: false, score: undefined, bingoPattern: undefined };

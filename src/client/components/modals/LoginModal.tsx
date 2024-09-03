@@ -2,11 +2,14 @@ import React from 'react';
 import {
   Dialog,
   DialogContent,
+  DialogTitle,
+  IconButton,
   Typography,
   useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import Button from '../UI_Elements/Button';
-import { GitHub, Google } from '@mui/icons-material';
+import { CloseOutlined } from '@mui/icons-material';
 import GmailLogin from '../GmailLogin';
 import InvalidBoard from './content/InvalidBoard';
 
@@ -26,6 +29,7 @@ export const LoginModal = ({
   onLoginSuccess,
 }: LoginModalProps) => {
   const isMobile = useMediaQuery('(max-width: 768px)');
+  const theme = useTheme();
 
   return (
     <Dialog
@@ -40,10 +44,28 @@ export const LoginModal = ({
         },
       }}
     >
+      <div
+        style={{
+          display: 'flex',
+          padding: theme.spacing(1),
+          justifyContent: 'space-between',
+        }}
+      >
+        <DialogTitle>Log in</DialogTitle>
+        <IconButton
+          onClick={onClose}
+          sx={{
+            width: 64,
+            marginRight: theme.spacing(1),
+          }}
+        >
+          <CloseOutlined />
+        </IconButton>
+      </div>
       <DialogContent
         sx={{
           display: 'flex',
-          margin: '60px 24px',
+          margin: theme.spacing(3),
           flexDirection: 'column',
           alignContent: 'center',
           alignItems: 'center',
@@ -55,7 +77,7 @@ export const LoginModal = ({
             <Typography
               variant="h5"
               sx={{
-                marginBottom: '16px',
+                marginBottom: theme.spacing(2),
               }}
             >
               Congratulations!!! You earned a Bingo at the #LWTSummit! Submit

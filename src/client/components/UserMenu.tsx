@@ -34,46 +34,49 @@ const UserMenu = React.forwardRef(function (
 ) {
   const functions = getFunctions();
   const track = useAnalytics();
-  const [openUsernameChange, SetUserNameChange] = useState<boolean>(false);
+  const [openUsernameChange, SetUserChange] = useState<boolean>(false);
 
   const [isBusy, setIsBusy] = React.useState<boolean>();
   const [isOptedIn, setIsOptedIn] = React.useState<boolean>(false);
 
   const auth = getAuth();
   const { user } = useAuth();
+
   const [username, setUsername] = useState(user?.username);
+  const [linkedInURL, setLinkedInURL] = useState(user?.linkedInURL);
 
   function showUserNameChange() {
     handleClose();
-    SetUserNameChange((x) => !x);
+    SetUserChange((x) => !x);
   }
 
   function handleOnCloseClick() {
     // TODO: add confirmation if unsaved changes
-    SetUserNameChange(false);
+    SetUserChange(false);
   }
 
   function showUsernameForm() {
-    SetUserNameChange(true);
+    SetUserChange(true);
   }
 
   async function handleSubmit(event: any) {
     event.preventDefault();
-    const user = auth.currentUser;
+    
     track(EventName.USERNAME_UPDATED, {
       location: 'Modal',
       userId: user?.uid ?? null,
+      linkedInURL: user?.linkedInURL ?? null
     });
 
     if (user) {
       const userRef = doc(db, 'users', user.uid);
       try {
         // await setDoc(userRef, { username }, { merge: true });
-        await updateUser(user?.uid, username, isOptedIn);
-        SetUserNameChange(false);
-        console.log('Username saved!');
+        await updateUser(user?.uid, username, isOptedIn, linkedInURL);
+        SetUserChange(false);
+        console.log('User updated!');
       } catch (error) {
-        console.error('Error saving username:', error);
+        console.error('Error updating user:', error);
       }
     }
   }
@@ -100,10 +103,11 @@ const UserMenu = React.forwardRef(function (
   );
 
   React.useEffect(() => {
-    if (!user?.username) {
+    if (!user?.username && !user?.linkedInURL) {
       return;
     }
     setUsername(user?.username);
+    setLinkedInURL(user?.linkedInURL)
   }, [user?.username]);
 
   return (
@@ -136,7 +140,7 @@ const UserMenu = React.forwardRef(function (
           justifyContent={'space-between'}
           alignItems={'center'}
         >
-          Update Username
+          Update User
           <IconButton onClick={handleOnCloseClick}>
             <CloseOutlined />
           </IconButton>
@@ -160,6 +164,20 @@ const UserMenu = React.forwardRef(function (
             </Button>
           </div>
           <div>
+            <Typography 
+              variant="h6"
+              sx={{ width: '552px', paddingTop: '15px' }}
+              >
+              Enter the url for your LinkedIn profile.
+            </Typography>
+            <TextField
+              name="linkedInURL"
+              onChange={(e) => setLinkedInURL(e.target.value)}
+              value={linkedInURL}
+              sx={{ width: '552px', paddingTop: '15px' }}
+            />
+          </div>
+          <div>
             {/* style={{ marginTop: '24px' }}> */}
             <FormControlLabel
               control={
@@ -169,7 +187,7 @@ const UserMenu = React.forwardRef(function (
             />
           </div>
           <Button variant="primary" onClick={handleSubmit}>
-            Submit your name to the Leaderboard
+            Submit your updates to the Leaderboard
           </Button>
         </DialogContent>
       </Dialog>

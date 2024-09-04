@@ -70,7 +70,8 @@ export const submitScore = async (userId: string, score: number) => {
 export const updateUser = async (
   userId: string,
   username: string,
-  isOptedIn?: boolean
+  isOptedIn?: boolean,
+  linkedInURL?: string
 ) => {
   const userRef = doc(db, 'users', userId);
 
@@ -78,12 +79,12 @@ export const updateUser = async (
     const isFirstTimeUser = false;
     await setDoc(
       userRef,
-      { username, isOptedIn, isFirstTimeUser },
+      { username, isOptedIn, isFirstTimeUser, linkedInURL },
       { merge: true }
     );
-    console.log('Username and iOptedIn saved!');
+    console.log('Username, iOptedIn, and LinkedIn profile saved!');
   } catch (error) {
-    console.error('Error saving username:', error);
+    console.error('Error updating user:', error);
   }
 };
 

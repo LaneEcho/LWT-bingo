@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import {
   Checkbox,
   Dialog,
@@ -8,7 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import Button from '../UI_Elements/Button';
+import Button from '../../components/UI_Elements/Button';;
 import { getAuth } from 'firebase/auth';
 import { submitScore, updateUser } from '../../../firebase/firebase-api';
 
@@ -33,28 +33,44 @@ export const UpdateUsernameModal = ({
   const auth = getAuth();
   const functions = getFunctions();
   const track = useAnalytics();
-  const { user, setUsername: updateGlobalUsername } = useAuth();
+  const { user, setUsername: updateGlobalUsername, setLinkedInURL: updateGlobalURL } = useAuth();
 
-  const [username, setUsername] = React.useState<string>();
+  const [username, setUsername] = React.useState<string>("");
   const [isOptedIn, setIsOptedIn] = React.useState<boolean>(false);
-  const [isBusy, setIsBusy] = React.useState<boolean>();
+  const [isBusy, setIsBusy] = React.useState<boolean>(false);
+  const [linkedInURL, setlinkedInURL] = React.useState<string>("");
+  const [randomUsername, setRandomUsername] = React.useState<string>("");
+
 
   const generateRandomUsername = httpsCallable(
     functions,
     'generateRandomUsername'
   );
 
+  // React.useEffect(() => {
+  //   const fetchRandomUsername = async () => {
+  //     try {
+  //       const response = await getRandomUsername();
+  //       setRandomUsername(response)
+  //     }
+  //     catch (e) {
+  //       console.log("Error getting random username!")
+  //     }
+  //   }
+  //   fetchRandomUsername()
+  // },[]);
+  
   React.useEffect(() => {
     if (!user?.username) {
-      getRandomUsername();
-    } else {
-      setUsername(user.username);
+      getRandomUsername()
+    } else if (username !== user?.username){
+    setUsername(user?.username || "" )
     }
-  }, []);
+    if (linkedInURL !== user?.linkedInURL) {
+      setlinkedInURL(user?.linkedInURL || "");
+    }
 
-  interface UsernameResult {
-    data: string;
-  }
+  }, [user?.username, user?.linkedInURL]);
 
   return (
     <Dialog
@@ -113,6 +129,17 @@ export const UpdateUsernameModal = ({
             Random username
           </Button>
         </div>
+        <Typography variant={'h5'}>
+          Enter your LinkedIn profile name if you want to network
+        </Typography>
+        <div>
+          <TextField
+            name="linkedinUrl"
+            onChange={(e) => setlinkedInURL(e.target.value)}
+            value={linkedInURL} // ? linkedInURL : ""}
+            sx={{ width: '600px' }}
+          />
+        </div>
         <div style={{ marginTop: '24px' }}>
           <FormControlLabel
             control={
@@ -126,7 +153,7 @@ export const UpdateUsernameModal = ({
           Submit to the Leaderboard
         </Button>
         <Button variant="secondary" onClick={handleSubmit}>
-          No thanks, give me a new board
+          No thanks, just reset my board
         </Button>
       </DialogContent>
     </Dialog>
@@ -136,18 +163,22 @@ export const UpdateUsernameModal = ({
     try {
       setIsBusy(true);
       const generatedUsername = await generateRandomUsername();
+      const username = generatedUsername.data as string
+      setUsername(username);
 
-      setUsername(generatedUsername.data as string);
     } catch (error) {
       setUsername('');
+
       console.error('Error fetching random username:', error);
     } finally {
       setIsBusy(false);
+
     }
   }
 
   function handleGenerateRandom() {
     getRandomUsername();
+
   }
 
   function handleOnCheckmark(e: React.ChangeEvent<HTMLInputElement>) {
@@ -162,13 +193,14 @@ export const UpdateUsernameModal = ({
 
     if (user) {
       try {
-        await updateUser(user?.uid, username, isOptedIn);
+        await updateUser(user?.uid, username, isOptedIn, linkedInURL);
         track(EventName.USERNAME_UPDATED, { userId: user?.uid, username });
         await submitScore(user?.uid, score);
         track(EventName.SCORE_SUBMITTED, { userId: user?.uid, score });
         updateGlobalUsername(username);
+        updateGlobalURL(linkedInURL)
         resetBoard();
-        console.log('Username, score and iOptedIn saved!');
+        console.log('Username saved!');
         onClose();
       } catch (error) {
         console.error('Error saving username:', error);

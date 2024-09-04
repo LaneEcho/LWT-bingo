@@ -9,12 +9,14 @@ export interface LeaderboardUser extends User {
   rank?: number;
   username?: string;
   totalScore?: number;
+  linkedInURL?: string;
 }
 
 interface AuthContextType {
   user: LeaderboardUser | null;
   setUsername: (username: string) => void;
   // Improvement: we can have sign in/log in/log out fns here.
+  setLinkedInURL: (linkedInURL: string) => void;
 }
 
 export const AuthContext = createContext<AuthContextType | undefined>(
@@ -48,8 +50,10 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         const userDocSnap = await getDoc(userDocRef);
 
         if (userDocSnap.exists()) {
-          const username = userDocSnap.data().username;
-          setUser({ ...user, username });
+          const userData = userDocSnap.data();
+          const username = userData.username;
+          const linkedInURL = userData.linkedInURL
+          setUser({ ...user, username, linkedInURL });
         } else {
           if (retryCount < 3) {
             setTimeout(() => fetchUsername(user, retryCount + 1), 5000);
@@ -92,6 +96,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       value={{
         user,
         setUsername,
+        setLinkedInURL
       }}
     >
       {children}
@@ -101,5 +106,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   function setUsername(username: string) {
     // checkIfNewUser()
     setUser({ ...user, username });
+  }
+
+  function setLinkedInURL(linkedInURL: string) {
+    setUser({ ...user, linkedInURL})
   }
 };

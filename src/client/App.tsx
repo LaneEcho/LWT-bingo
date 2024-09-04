@@ -4,7 +4,7 @@ import localStorageAvailable from '../util/localStorageAvail';
 import Board from './components/game_elements/board';
 import CssBaseline from '@mui/material/CssBaseline';
 import {
-  Experimental_CssVarsProvider as CssVarsProvider,
+  ThemeProvider as CssVarsProvider,
   useColorScheme,
 } from '@mui/material/styles';
 import { mainTheme } from './Theme';

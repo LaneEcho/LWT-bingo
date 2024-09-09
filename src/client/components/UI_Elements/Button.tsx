@@ -2,16 +2,16 @@ import React from 'react';
 
 import { FunctionComponent } from 'react';
 import { Button as MuiButton, SxProps, Theme } from '@mui/material';
-import { GitHub } from '@mui/icons-material';
 
 interface ButtonProps {
-  variant: 'primary' | 'secondary';
+  variant: 'primary' | 'secondary-dark' | 'secondary' | 'primary-light';
   onClick: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children: React.ReactNode;
   startIcon?: React.ReactNode;
   className?: string;
   sx?: SxProps<Theme>;
   disabled?: boolean;
+  darkMode?: boolean;
 }
 
 const Button: FunctionComponent<ButtonProps> = ({
@@ -21,30 +21,48 @@ const Button: FunctionComponent<ButtonProps> = ({
   sx,
   onClick,
   disabled,
+  darkMode,
 }) => {
   const isPrimary = variant === 'primary';
   const isSecondary = variant === 'secondary';
+  const primaryBackGroundColor = !darkMode ? '#E11774' : '#0AFFF4';
+  const primaryColor = !darkMode ? '#FFFFFF' : '#000000';
+  const secondaryBackgroundColor = !darkMode ? '#FFFFFF' : '#000000';
+  const secondaryColor = !darkMode ? '#E11774' : '#0AFFF4';
 
   const styles: SxProps<Theme> = {
-    margin: '16px 8px',
+    margin: '5px 8px',
     borderRadius: '30px',
     // boxShadow: '0px 3.43px 3.43px 0px #00000040',
   };
 
   // TODO: use theme styles
   const primaryStyles: SxProps<Theme> = {
-    backgroundColor: '#0AFFF4',
-    color: '#000000',
+    backgroundColor: primaryBackGroundColor,
+    color: primaryColor,
+    borderColor: primaryColor,
     boxShadow: 'none',
     // TODO: Figure out hover style -- either by updating the theme or by addressing here
   };
 
   const secondaryStyles: SxProps<Theme> = {
-    backgroundColor: '#FFFFFF',
-    color: '#7030A0',
-    borderColor: '#7030A0',
+    backgroundColor: secondaryBackgroundColor,
+    color: secondaryColor,
+    borderColor: secondaryColor,
     boxShadow: 'none',
   };
+
+  console.log(
+    variant,
+    darkMode,
+    !darkMode,
+    primaryBackGroundColor,
+    primaryColor,
+    primaryStyles,
+    secondaryBackgroundColor,
+    secondaryColor,
+    secondaryStyles
+  );
 
   return (
     <MuiButton

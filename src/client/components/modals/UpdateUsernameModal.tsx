@@ -8,7 +8,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import { getAuth } from 'firebase/auth';
 import { submitScore, updateUser } from '../../../firebase/firebase-api';
 
@@ -126,7 +126,7 @@ export const UpdateUsernameModal = ({
           Submit to the Leaderboard
         </Button>
         <Button variant="secondary" onClick={handleSubmit}>
-          No thanks, just reset my board
+          No thanks, give me a new board
         </Button>
       </DialogContent>
     </Dialog>

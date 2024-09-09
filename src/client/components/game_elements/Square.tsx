@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 type BoxProps = {
   text: any;
@@ -9,8 +11,12 @@ type BoxProps = {
   gameOver: boolean;
 };
 
-function Box({ text, row, column, gameOver }: BoxProps) {
+function Square({ text, row, column, gameOver }: BoxProps) {
   const [clicked, setClicked] = useState<boolean>(false);
+
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const track = useAnalytics();
 
   // see if the box has been clicked upon page reload
   useEffect(() => {
@@ -25,14 +31,12 @@ function Box({ text, row, column, gameOver }: BoxProps) {
     const updatedClicked: boolean = !clicked;
     setClicked(updatedClicked);
     if (updatedClicked) {
-      // track(EventName.TILE_SELECTED, trackingParams);
+      track(EventName.TILE_SELECTED, { text, row, column, gameOver });
       localStorage.setItem(`box-${row}-${column}`, updatedClicked.toString());
     } else {
       localStorage.removeItem(`box-${row}-${column}`);
     }
   };
-
-  const theme = useTheme();
 
   return (
     <Button
@@ -43,19 +47,27 @@ function Box({ text, row, column, gameOver }: BoxProps) {
       data-column={column}
       disabled={gameOver}
       sx={{
-        margin: '4px',
-        height: '8rem',
-        width: '8rem',
+        margin: isMobile ? '1px' : '4px',
+        height: isMobile ? '4.5rem' : '8rem',
+        width: isMobile ? '4.5rem' : '8rem',
         fontFamily: 'Poppins',
         borderRadius: '1rem',
         backgroundColor: clicked
           ? gameOver
-            ? '#7030A0' // color of disabled clicked buttons
+            ? '#7030A0' // color of disabled clicked buttons (change to theme)
             : theme.palette.primary.dark
           : theme.palette.background.default,
         color: clicked ? '#fff' : theme.palette.primary.main,
         border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
-        fontSize: text?.length > 35 ? '10.5px' : '14px',
+        padding: isMobile ? '1px' : '5px',
+        fontSize:
+          text?.length > 35
+            ? isMobile
+              ? '.4rem' // long phrases if on mobile
+              : '.7rem' // long phrases if not on mobile
+            : isMobile
+            ? '.55rem' // short phrases if on mobile
+            : '.875rem', // short phrases if not on mobile
       }}
     >
       {text}
@@ -63,4 +75,4 @@ function Box({ text, row, column, gameOver }: BoxProps) {
   );
 }
 
-export default Box;
+export default Square;

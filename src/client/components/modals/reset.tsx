@@ -3,6 +3,8 @@ import { ResetProps } from '@/types';
 import { Box, Typography, Button, Stack } from '@mui/material';
 import { FocusTrap } from '@mui/base/FocusTrap';
 
+// there is a bug here where clicking return to board will reset the board
+
 const Reset = React.forwardRef(function (props: ResetProps, ref) {
   return (
     <FocusTrap open>
@@ -99,7 +101,7 @@ const Reset = React.forwardRef(function (props: ResetProps, ref) {
               className="resetButton"
               onClick={props.reset}
             >
-              Reset Board
+              Give me a new board
             </Button>
           </Stack>
         )}

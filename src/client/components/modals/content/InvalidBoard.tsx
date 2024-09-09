@@ -1,7 +1,7 @@
-import * as React from "react";
+import * as React from 'react';
 
-import { Typography } from "@mui/material";
-import Button from "../../Button";
+import { Typography } from '@mui/material';
+import Button from '../../UI_Elements/Button';
 
 interface Props {
   onClose: () => void;
@@ -26,7 +26,7 @@ const InvalidBoard = ({ onClose, resetBoard }: Props) => {
         Return to my board
       </Button>
       <Button variant="secondary" onClick={resetBoard}>
-        Reset my board
+        Get New Board
       </Button>
     </>
   );

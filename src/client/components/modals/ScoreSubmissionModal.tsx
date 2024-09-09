@@ -7,7 +7,7 @@ import {
   Typography,
   useMediaQuery,
 } from '@mui/material';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { submitScore } from '../../../firebase/firebase-api';
 import InvalidBoard from './content/InvalidBoard';
@@ -82,7 +82,7 @@ export const ScoreSubmissionModal = ({
             mailing list"
             /> */}
             <Button variant="secondary" onClick={resetBoard}>
-              No thanks, just reset my board
+              No thanks, give me a new board
             </Button>
           </>
         ) : (

@@ -14,7 +14,9 @@ import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
 import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
 import phrases from '../../../lib/phrases';
 import { BoardState } from '../../../types';
-import Button from '../Button';
+import Button from '../UI_Elements/Button';
+import Modal from '@mui/material/Modal';
+import HowToPlay from '../modals/howToPlay';
 import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
@@ -48,6 +50,7 @@ const Board: React.FC = () => {
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [usernameOpen, setUsernameOpen] = useState<boolean>(false);
   const [submitScoreOpen, setSubmitScoreOpen] = useState<boolean>(false);
+  const [openHowTo, SetHowTo] = useState<boolean>(false);
 
   const [bingoResult, setBingoResult] = useState<BingoResult | undefined>(
     undefined
@@ -114,7 +117,11 @@ const Board: React.FC = () => {
 
   function callBingo(): void {
     const bingo = checkBingo();
-    track(EventName.BINGO_CLICKED, { userId: user?.uid ?? null, bingo });
+
+    track(EventName.BINGO_CLICKED, {
+      userId: user?.uid ?? null,
+      ...bingo,
+    });
     setBingoResult(bingo);
 
     if (bingo?.isBingo) {
@@ -150,19 +157,20 @@ const Board: React.FC = () => {
     return phrases;
   }
 
+  function showHowTo() {
+    SetHowTo(!openHowTo);
+  }
+
   const handleClose = () => {
     setLoginOpen(false);
-    resetBoard();
   };
 
   const handleUsernameClose = () => {
     setUsernameOpen(false);
-    resetBoard();
   };
 
   const handleScoreSubmissionClose = () => {
     setSubmitScoreOpen(false);
-    resetBoard();
   };
 
   // accessing CSS variables in case we change them later
@@ -188,22 +196,36 @@ const Board: React.FC = () => {
       <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
           variant="primary"
-          onClick={handleResetClicked}
-          sx={{
-            width: '8rem',
-          }}
-        >
-          Reset Board
-        </Button>
-
-        <Button
-          variant="primary"
           onClick={callBingo}
           sx={{
-            width: '8rem',
+            width: '12rem',
+            height: '3rem',
+            fontSize: 'x-large',
           }}
         >
           BINGO!
+        </Button>
+      </Stack>
+
+      <Stack width={'100%'} direction="row" justifyContent="space-evenly">
+        <Button
+          variant="secondary"
+          onClick={showHowTo}
+          sx={{
+            width: '8rem',
+          }}
+        >
+          How to Play
+        </Button>
+
+        <Button
+          variant="secondary"
+          onClick={handleResetClicked}
+          sx={{
+            width: '10rem',
+          }}
+        >
+          Get New Board
         </Button>
       </Stack>
       {loginOpen && (
@@ -215,6 +237,13 @@ const Board: React.FC = () => {
           onLoginSuccess={onLoginSuccess}
         />
       )}
+      <Modal
+        aria-labelledby="modal-how-to-play"
+        aria-describedby="modal-how-to-play-bingo"
+        open={openHowTo}
+      >
+        <HowToPlay close={SetHowTo}></HowToPlay>
+      </Modal>
       <UpdateUsernameModal
         isOpen={usernameOpen}
         onClose={handleUsernameClose}

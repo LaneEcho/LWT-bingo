@@ -18,7 +18,7 @@ import {
 } from '@mui/material';
 import { CloseOutlined } from '@mui/icons-material';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import Button from './Button';
+import Button from './UI_Elements/Button';
 import useAnalytics, { EventName } from '../hooks/useAnalytics';
 // import ListItemIcon from '@mui/material/ListItemIcon';
 

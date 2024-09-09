@@ -17,12 +17,11 @@ interface MenuProps {
   anchorEl: HTMLElement;
   handleClose: () => void;
   toggleTheme: () => void;
-  darkMode: boolean;
   open: boolean;
 }
 
 const BurgerMenu = React.forwardRef(function (
-  { handleClose, toggleTheme, anchorEl, darkMode, open }: MenuProps,
+  { handleClose, toggleTheme, anchorEl, open }: MenuProps,
   ref: React.Ref<HTMLElement>
 ) {
   const [openHowTo, SetHowTo] = useState<boolean>(false);
@@ -30,11 +29,6 @@ const BurgerMenu = React.forwardRef(function (
 
   const auth = getAuth();
   const { user } = useAuth();
-
-  function showHowTo() {
-    handleClose();
-    SetHowTo(!openHowTo);
-  }
 
   function showTerms() {
     handleClose();
@@ -60,7 +54,6 @@ const BurgerMenu = React.forwardRef(function (
           horizontal: 'right',
         }}
       >
-        <MenuItem onClick={showHowTo}>How to Play</MenuItem>
         <MenuItem
           component={Link}
           href="https://incocollective.com/about"
@@ -86,25 +79,7 @@ const BurgerMenu = React.forwardRef(function (
           Interconnected Collective
         </MenuItem>
         <MenuItem onClick={showTerms}>Terms & Conditions</MenuItem>
-        <MenuItem onClick={toggleTheme}>
-          <ListItemIcon>
-            {darkMode ? (
-              <LightModeIcon fontSize="small" />
-            ) : (
-              <DarkModeIcon fontSize="small" />
-            )}
-          </ListItemIcon>
-          <ListItemText>{darkMode ? 'Light Mode' : 'Dark Mode'}</ListItemText>
-        </MenuItem>
       </Menu>
-
-      <Modal
-        aria-labelledby="modal-how-to-play"
-        aria-describedby="modal-how-to-play-bingo"
-        open={openHowTo}
-      >
-        <HowToPlay close={SetHowTo}></HowToPlay>
-      </Modal>
 
       <Modal
         aria-labelledby="modal-terms-and-conditions"

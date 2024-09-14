@@ -52,18 +52,6 @@ const Button: FunctionComponent<ButtonProps> = ({
     boxShadow: 'none',
   };
 
-  console.log(
-    variant,
-    darkMode,
-    !darkMode,
-    primaryBackGroundColor,
-    primaryColor,
-    primaryStyles,
-    secondaryBackgroundColor,
-    secondaryColor,
-    secondaryStyles
-  );
-
   return (
     <MuiButton
       startIcon={startIcon}

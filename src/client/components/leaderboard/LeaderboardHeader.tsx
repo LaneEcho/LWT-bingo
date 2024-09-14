@@ -11,7 +11,7 @@ const LeaderboardHeader: FunctionComponent<LeaderboardHeaderProps> = ({
   color = 'secondary',
 }) => {
   const theme = useTheme();
-
+  const darkMode: boolean = localStorage.getItem('darkMode') === 'true';
   return (
     <Typography
       sx={{
@@ -19,7 +19,7 @@ const LeaderboardHeader: FunctionComponent<LeaderboardHeaderProps> = ({
         fontWeight: 600,
         fontStyle: 'italic',
         color:
-          color === 'secondary'
+          darkMode
             ? theme.palette.secondary.main
             : theme.palette.primary.main,
         textAlign: 'center',

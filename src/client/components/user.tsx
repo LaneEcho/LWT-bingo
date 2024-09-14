@@ -43,7 +43,7 @@ const User: React.FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const open = Boolean(anchorEl);
-  console.log({ user });
+
   return (
     <>
       {

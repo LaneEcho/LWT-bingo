@@ -23,7 +23,11 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   const theme = useTheme();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const isMobileSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const isExtraSmall = useMediaQuery(theme.breakpoints.down('xs'));
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -34,7 +38,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   return (
     <Box
-      gap={isMobile ? 0 : 4}
+      gap={2}
       py={1}
       px={isMobile ? 2 : ''}
       width="100vw"
@@ -42,11 +46,14 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       justifyContent={'center'}
       alignItems={'center'}
     >
-      {isMobile ? (
-        <UnofficialSmall aria-hidden="true" />
-      ) : (
-        <Unofficial aria-hidden="true" />
-      )}
+      <Box sx={{ background: 'transparent', paddingRight: '5px' }}>
+        {!isExtraSmall &&
+          (isMobileSmall ? (
+            <UnofficialSmall aria-hidden="true" />
+          ) : (
+            <Unofficial aria-hidden="true" />
+          ))}
+      </Box>
 
       <Box
         display="flex"
@@ -54,6 +61,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         alignItems={'center'}
         justifyContent={'space-between'}
         zIndex={-5}
+        sx={{ background: 'transparent' }}
       >
         <Typography
           variant="h1"
@@ -61,8 +69,11 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
           color="primary"
           textTransform={'uppercase'}
           align="center"
+          zIndex={-10}
         >
-          Lesbians Who Tech Bingo!
+          {isExtraSmall
+            ? 'Unofficial Lesbians Who Tech Bingo!'
+            : ' Lesbians Who Tech Bingo'}
         </Typography>
 
         {isMobile ? (

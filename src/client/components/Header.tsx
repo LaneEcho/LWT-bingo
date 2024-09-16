@@ -42,7 +42,11 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       justifyContent={'center'}
       alignItems={'center'}
     >
-      {isMobile ? <UnofficialSmall /> : <Unofficial />}
+      {isMobile ? (
+        <UnofficialSmall aria-hidden="true" />
+      ) : (
+        <Unofficial aria-hidden="true" />
+      )}
 
       <Box
         display="flex"
@@ -61,7 +65,11 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
           Lesbians Who Tech Bingo!
         </Typography>
 
-        {isMobile ? <PresentedByInCoSmall /> : <PresentedByInCo />}
+        {isMobile ? (
+          <PresentedByInCoSmall aria-hidden="true" />
+        ) : (
+          <PresentedByInCo aria-hidden="true" />
+        )}
       </Box>
 
       <Box

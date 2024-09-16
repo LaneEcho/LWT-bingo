@@ -121,4 +121,41 @@ export const subscribeToTopScores = (
   return unsubscribe;
 };
 
+/**
+ * Given the userId, returns the rank of the user from totalScore collection, if found.
+ * Otherwise return -1 for a rank and undefined score.
+ * 
+ * @param userId 
+ * @returns rank of user, and totalScore collection corresponding to userId
+ */
+export const getRankByUserId = async (userId: string) => {
+  const scoresRef = collection(db, 'leaderboards', 'bingo', 'userScores');
+
+  // Create a query to order by totalScore in descending order
+  const q = query(scoresRef, orderBy('totalScore', 'desc'));
+
+  // Execute the query
+  const querySnapshot = await getDocs(q);
+
+  let rank = 1;
+  let userRank = -1; // Initialize with a value indicating the user was not found
+  let userScore: Score = {
+    id: undefined,
+    totalScore: undefined,
+    username: undefined
+  };
+
+  // Iterate through the results to find the user's rank
+  querySnapshot.forEach((doc) => {
+    if (doc.id === userId) {
+      userRank = rank;
+      userScore = doc.data() as Score; // Figure out how to type responses better!
+    }
+    rank++;
+  });
+
+  // Return the user's rank if found, otherwise return -1 or any other value indicating not found
+  return { rank: userRank, score: userScore };
+};
+
 export { db, app, analytics };

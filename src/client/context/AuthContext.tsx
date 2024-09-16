@@ -1,15 +1,14 @@
 import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { app, db } from '../../firebase/firebase-api';
+import { app, db, getRankByUserId } from '../../firebase/firebase-api';
 import { doc, getDoc } from 'firebase/firestore';
 
 const auth = getAuth(app);
 
 export interface LeaderboardUser extends User {
-  // TODO: Grab the rank to show active state in leaderbaord
-  // We can do this for v2..
   rank?: number;
   username?: string;
+  totalScore?: number;
 }
 
 interface AuthContextType {
@@ -37,7 +36,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   }, []);
 
   React.useEffect(() => {
-    const fetchUsername = async (user:LeaderboardUser, retryCount = 0) => {
+    const fetchUsername = async (user: LeaderboardUser, retryCount = 0) => {
       try {
         // For now I'm storing the username via setUser here when updating,
         // but this will break as soon as user refreshes tab
@@ -53,9 +52,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
           setUser({ ...user, username });
         } else {
           if (retryCount < 3) {
-            setTimeout(() => fetchUsername(user, retryCount + 1), 5000)
+            setTimeout(() => fetchUsername(user, retryCount + 1), 5000);
           } else {
-          console.error('User not found');
+            console.error('User not found');
           }
         }
       } catch (error) {
@@ -64,6 +63,28 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     };
 
     fetchUsername(user);
+  }, [user?.uid, db]);
+
+  React.useEffect(() => {
+    const fetchRank = async (user: LeaderboardUser, retryCount = 0) => {
+      try {
+        if (!user?.uid) {
+          return;
+        }
+        const rank = await getRankByUserId(user.uid);
+        setUser({
+          ...user,
+          rank: rank.rank,
+          totalScore: rank.score.totalScore,
+          username: rank.score.username,
+        });
+        console.error('User not found');
+      } catch (error) {
+        console.error('😢 Error fetching username:', error);
+      }
+    };
+
+    fetchRank(user);
   }, [user?.uid, db]);
 
   return (

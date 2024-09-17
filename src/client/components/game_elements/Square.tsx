@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
+import { useColorScheme } from '@mui/material/styles';
 
 type BoxProps = {
   text: any;
@@ -17,6 +18,10 @@ function Square({ text, row, column, gameOver }: BoxProps) {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const track = useAnalytics();
+
+  // const { mode } = useColorScheme();
+
+  // const darkMode = mode === 'dark';
 
   // see if the box has been clicked upon page reload
   useEffect(() => {
@@ -55,11 +60,13 @@ function Square({ text, row, column, gameOver }: BoxProps) {
         backgroundColor: clicked
           ? gameOver
             ? '#7030A0' // color of disabled clicked buttons (change to theme)
-            : theme.palette.primary.dark
+            : theme.palette.primary.main
           : theme.palette.background.default,
-        color: clicked ? '#fff' : theme.palette.primary.main,
         border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
         padding: isMobile ? '1px' : '5px',
+        color: clicked
+          ? theme.palette.primary.contrastText
+          : theme.palette.primary.main,
         fontSize:
           text?.length > 35
             ? isMobile

@@ -29,7 +29,7 @@ const darkTheme = {
     // mode: 'dark',
     primary: {
       main: '#05fff4',
-      contrastText: '#fff',
+      contrastText: '#212121',
     },
     secondary: {
       main: '#E11774',

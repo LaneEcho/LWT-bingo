@@ -50,7 +50,7 @@ function Leaderboard() {
   return (
     <Box
       width={isMobile ? '90vw' : '27rem'}
-      height="76vh"
+      min-height={isMobile ? '48rem' : '67vh'}
       sx={{
         background: theme.palette.background.default,
         padding: '24px',

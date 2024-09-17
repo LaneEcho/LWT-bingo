@@ -46,7 +46,10 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
         <Grid item flex={2}>
           {rank ?? index + 1}
         </Grid>
-        <Grid item flex={6}>
+        <Grid item 
+          flex={6} 
+          sx={{textOverflow:'ellipsis'}}
+          >
           {score?.username}
         </Grid>
         <Grid

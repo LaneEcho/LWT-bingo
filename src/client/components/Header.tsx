@@ -46,6 +46,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       justifyContent={'center'}
       alignItems={'center'}
     >
+
       <Box sx={{ background: 'transparent', paddingRight: '5px' }}>
         {!isExtraSmall &&
           (isMobileSmall ? (

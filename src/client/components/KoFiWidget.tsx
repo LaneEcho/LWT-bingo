@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
+
 type WidgetProps = {
   mode: string;
 };
@@ -22,8 +23,6 @@ const KoFiWidget = ({ mode }: WidgetProps) => {
       script2.type = 'text/javascript';
       script2.innerHTML = `kofiwidget2.init('Support InCo on Ko-fi', '#7030a0', 'G2G412HLTW');kofiwidget2.draw();`;
       iframeDoc.body.appendChild(script2);
-
-      console.log('load mode', mode);
 
       setTimeout(() => {
         iframeDoc.body.style.background = '#575757'; // hard coding color due to rendering

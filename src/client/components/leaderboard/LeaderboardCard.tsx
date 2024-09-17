@@ -46,7 +46,9 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
         <Grid item flex={2}>
           {rank ?? index + 1}
         </Grid>
+
         <Grid item flex={6} sx={{ textOverflow: 'ellipsis' }}>
+
           {score?.username}
         </Grid>
         <Grid
@@ -63,6 +65,7 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
   );
 
   function getRowColor(index: number) {
+
     // const colors = [theme.palette.primary.main, theme.palette.secondary.main];
     // quick fix to stop having the colors swap up when changing modes
     // TODO: do it better

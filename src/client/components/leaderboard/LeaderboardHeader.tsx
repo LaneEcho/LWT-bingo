@@ -6,7 +6,6 @@ interface LeaderboardHeaderProps {
 }
 
 const LeaderboardHeader: FunctionComponent<LeaderboardHeaderProps> = ({
-  label,
 }) => {
   const theme = useTheme();
   return (

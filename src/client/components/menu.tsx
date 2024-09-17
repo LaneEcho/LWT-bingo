@@ -64,7 +64,7 @@ const BurgerMenu = React.forwardRef(function (
         </MenuItem>
         <MenuItem
           component={Link}
-          href="https://lesbianswhotech.org/pridesummit2024/"
+          href="https://lesbianswhotech.org/newyorksummit2024/"
           target="_blank"
           onClick={handleClose}
         >

@@ -7,7 +7,7 @@ interface LeaderboardCardProps {
   score: Score;
   userId?: string;
   // Used to show current user's score
-  rank?: number;
+  rank?: number | string;
 }
 
 const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
@@ -44,12 +44,11 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
         }}
       >
         <Grid item flex={2}>
-          {rank ?? index + 1}
+          {rank ?? index + 1 ?? ''}
         </Grid>
 
         <Grid item flex={6} sx={{ textOverflow: 'ellipsis' }}>
-
-          {score?.username}
+          {score?.username ?? '...'}
         </Grid>
         <Grid
           item
@@ -58,14 +57,13 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
           textAlign={'right'}
           marginLeft={2}
         >
-          {score.totalScore}
+          {isNaN(score.totalScore) ? 0 : score.totalScore}
         </Grid>
       </Grid>
     </Card>
   );
 
   function getRowColor(index: number) {
-
     // const colors = [theme.palette.primary.main, theme.palette.secondary.main];
     // quick fix to stop having the colors swap up when changing modes
     // TODO: do it better

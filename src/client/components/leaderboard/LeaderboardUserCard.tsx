@@ -90,7 +90,7 @@ const LeaderboardUserCard: FunctionComponent<LeaderboardUserCardProps> = () => {
     );
   }
 
-  if (user?.email && rank === -1) {
+  if (user?.email && (rank === -1 || !rank)) {
     return (
       <Typography
         sx={{
@@ -105,12 +105,16 @@ const LeaderboardUserCard: FunctionComponent<LeaderboardUserCardProps> = () => {
     );
   }
 
+  if (!user.username) {
+    return null;
+  }
+
   return (
     <LeaderboardCard
       score={{
-        id: uid,
-        totalScore,
-        username,
+        id: uid ?? '',
+        totalScore: isNaN(totalScore) ? 0 : totalScore,
+        username: username ?? '',
       }}
       rank={rank}
     />

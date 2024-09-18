@@ -122,40 +122,53 @@ export const subscribeToTopScores = (
 };
 
 /**
- * Given the userId, returns the rank of the user from totalScore collection, if found.
- * Otherwise return -1 for a rank and undefined score.
+ * Subscribes to the user's rank, score, and username updates.
  * 
  * @param userId 
- * @returns rank of user, and totalScore collection corresponding to userId
+ * @param onUpdate Callback function to handle updates to the user's data.
+ * @param onError Callback function to handle errors.
+ * @returns A function to unsubscribe from the updates.
  */
-export const getRankByUserId = async (userId: string) => {
+export const subscribeToUserRank = (
+  userId: string,
+  onUpdate: (rank: number, score: Score) => void,
+  onError: (error: Error) => void
+): (() => void) => {
   const scoresRef = collection(db, 'leaderboards', 'bingo', 'userScores');
-
-  // Create a query to order by totalScore in descending order
   const q = query(scoresRef, orderBy('totalScore', 'desc'));
 
-  // Execute the query
-  const querySnapshot = await getDocs(q);
+  const unsubscribe = onSnapshot(
+    q,
+    (snapshot) => {
+      let rank = 1;
+      let userRank = -1;
+      let userScore: Score = {
+        id: undefined,
+        totalScore: undefined,
+        username: undefined
+      };
 
-  let rank = 1;
-  let userRank = -1; // Initialize with a value indicating the user was not found
-  let userScore: Score = {
-    id: undefined,
-    totalScore: undefined,
-    username: undefined
-  };
+      snapshot.forEach((doc) => {
+        if (doc.id === userId) {
+          userRank = rank;
+          userScore = {
+            id: doc.id,
+            totalScore: doc.data().totalScore,
+            username: doc.data().username
+          };
+        }
+        rank++;
+      });
 
-  // Iterate through the results to find the user's rank
-  querySnapshot.forEach((doc) => {
-    if (doc.id === userId) {
-      userRank = rank;
-      userScore = doc.data() as Score; // Figure out how to type responses better!
+      onUpdate(userRank, userScore);
+    },
+    (error: Error) => {
+      console.error('Error subscribing to user rank:', error);
+      onError(new Error('Failed to subscribe to user rank'));
     }
-    rank++;
-  });
+  );
 
-  // Return the user's rank if found, otherwise return -1 or any other value indicating not found
-  return { rank: userRank, score: userScore };
+  return unsubscribe;
 };
 
 export { db, app, analytics };

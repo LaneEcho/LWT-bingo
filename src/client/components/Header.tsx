@@ -7,10 +7,8 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import BurgerMenu from './menu';
 import User from './user';
-import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
-import PresentedByInCoSmall from '../../assets/svg/PresentedByInCoSmall.svg';
-import Unofficial from '../../assets/svg/Unofficial.svg';
-import UnofficialSmall from '../../assets/svg/UnofficialSmall.svg';
+import PresentedGayme from '../../assets/svg/gayme/PresentedGayme.svg';
+import PresentedGaymeSmall from '../../assets/svg/gayme/PresentedGaymeSmall.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
@@ -46,16 +44,6 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       justifyContent={'center'}
       alignItems={'center'}
     >
-
-      <Box sx={{ background: 'transparent', paddingRight: '5px' }}>
-        {!isExtraSmall &&
-          (isMobileSmall ? (
-            <UnofficialSmall aria-hidden="true" />
-          ) : (
-            <Unofficial aria-hidden="true" />
-          ))}
-      </Box>
-
       <Box
         display="flex"
         flexDirection="column"
@@ -72,15 +60,13 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
           align="center"
           zIndex={-10}
         >
-          {isExtraSmall
-            ? 'Unofficial Lesbians Who Tech Bingo!'
-            : ' Lesbians Who Tech Bingo'}
+          Big Gayme Bingo
         </Typography>
 
         {isMobile ? (
-          <PresentedByInCoSmall aria-hidden="true" />
+          <PresentedGaymeSmall aria-hidden="true" />
         ) : (
-          <PresentedByInCo aria-hidden="true" />
+          <PresentedGayme aria-hidden="true" />
         )}
       </Box>
 

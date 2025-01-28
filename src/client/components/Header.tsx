@@ -43,6 +43,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       display="flex"
       justifyContent={'center'}
       alignItems={'center'}
+      sx={{ backgroundColor: 'transparent', zIndex: 99 }}
     >
       <Box
         display="flex"
@@ -50,7 +51,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         alignItems={'center'}
         justifyContent={'space-between'}
         zIndex={-5}
-        sx={{ background: 'transparent' }}
+        sx={{ backgroundColor: 'transparent' }}
       >
         <Typography
           variant="h1"

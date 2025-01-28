@@ -1,6 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 
-const KoFiWidget = () => {
+
+type WidgetProps = {
+  mode: string;
+};
+
+const KoFiWidget = ({ mode }: WidgetProps) => {
   const iframeRef = useRef(null);
 
   useEffect(() => {
@@ -18,6 +23,10 @@ const KoFiWidget = () => {
       script2.type = 'text/javascript';
       script2.innerHTML = `kofiwidget2.init('Support InCo on Ko-fi', '#7030a0', 'G2G412HLTW');kofiwidget2.draw();`;
       iframeDoc.body.appendChild(script2);
+
+      setTimeout(() => {
+        iframeDoc.body.style.background = '#575757'; // hard coding color due to rendering
+      }, 100);
 
       // Adjust the style of the btn-container after the widget is loaded
       const btnContainer = iframeDoc.querySelector('div.btn-container');
@@ -52,6 +61,7 @@ const KoFiWidget = () => {
         overflow: 'hidden',
         margin: '16px',
         display: 'inline-block',
+        background: 'transparent',
       }}
     />
   );

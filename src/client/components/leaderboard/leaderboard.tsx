@@ -10,6 +10,7 @@ import KoFiWidget from '../KoFiWidget';
 import LeaderboardUserCard from './LeaderboardUserCard';
 import Logo from '../../../assets/svg/Logo.svg';
 import CarabinerLogo from '../logos/CarabinerLogo';
+import { useColorScheme } from '@mui/material';
 
 export interface Score {
   id: string;
@@ -23,7 +24,11 @@ function Leaderboard() {
   const [error, setError] = useState<string>('');
 
   const theme = useTheme();
+
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // need to pass to widget
+  const { mode } = useColorScheme();
 
   useEffect(() => {
     const unsubscribe = subscribeToTopScores(
@@ -52,7 +57,7 @@ function Leaderboard() {
       width={isMobile ? '90vw' : '27rem'}
       min-height={isMobile ? '48rem' : '67vh'}
       sx={{
-        background: theme.palette.background.default,
+        background: theme.palette.secondaryGray.main,
         padding: '24px',
         marginTop: '4px',
         border: `1px solid ${theme.palette.primaryPurple.main}`,
@@ -62,7 +67,7 @@ function Leaderboard() {
       <Typography
         variant={'h4'}
         fontFamily={'Lalezar'}
-        color="primary"
+        color={theme.palette.primary.main}
         textTransform={'uppercase'}
         textAlign={'center'}
         gutterBottom={false}
@@ -70,7 +75,7 @@ function Leaderboard() {
         Leaderboard
       </Typography>
       <CarabinerLogo />
-      <LeaderboardHeader label="Your Current Score:" color="primary" />
+      <LeaderboardHeader label="Your Current Score:" />
       <LeaderboardUserCard />
       <Divider
         sx={{
@@ -96,7 +101,7 @@ function Leaderboard() {
           paddingTop: theme.spacing(2),
         }}
       >
-        <KoFiWidget />
+        <KoFiWidget mode={mode} />
       </div>
     </Box>
   );

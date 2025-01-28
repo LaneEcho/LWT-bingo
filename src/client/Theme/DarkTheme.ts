@@ -28,38 +28,12 @@ const darkTheme = {
   palette: {
     // mode: 'dark',
     primary: {
-      main: '#E11774',
-      contrastText: '#fff',
+      main: '#05fff4',
+      contrastText: '#212121',
     },
     secondary: {
-      main: '#05fff4',
+      main: '#E11774',
       contrastText: '#fff',
-    },
-    primaryBlue: {
-      main: lightBlueBase,
-      light: alpha(lightBlueBase, 0.5),
-      dark: alpha(lightBlueBase, 0.9),
-      contrastText:
-        getContrastRatio(lightBlueBase, '#fff') > 4.5 ? '#fff' : '#000',
-    },
-    primaryPurple: {
-      main: purpleBase,
-      light: alpha(purpleBase, 0.5),
-      dark: alpha(purpleBase, 0.9),
-      contrastText:
-        getContrastRatio(purpleBase, '#fff') > 4.5 ? '#fff' : '#000',
-    },
-    secondaryGreen: {
-      main: greenBase,
-      light: alpha(greenBase, 0.5),
-      dark: alpha(greenBase, 0.9),
-      contrastText: getContrastRatio(greenBase, '#fff') > 4.5 ? '#fff' : '#000',
-    },
-    secondaryYellow: {
-      main: yellowBase,
-    },
-    secondaryGray: {
-      main: grayBase,
     },
   },
 };

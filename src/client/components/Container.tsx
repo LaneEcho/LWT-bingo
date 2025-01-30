@@ -12,27 +12,26 @@ export default function Container() {
   const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <>
+    <Box
+      display="flex"
+      flexDirection="column"
+      justifyContent="center"
+      sx={{
+        background: theme.palette.background.default,
+        height: '100vh',
+      }}
+    >
+      <Header />
       <Box
         display="flex"
-        flexDirection="column"
-        justifyContent="center"
-        sx={{
-          background: theme.palette.primary.contrastText,
-        }}
+        gap={2}
+        justifyContent={'center'}
+        alignItems={isMobile ? 'center' : 'flex-start'}
+        flexDirection={isMobile ? 'column' : 'row'}
       >
-        <Header />
-        <Box
-          display="flex"
-          gap={2}
-          justifyContent={'center'}
-          alignItems={isMobile ? 'center' : 'flex-start'}
-          flexDirection={isMobile ? 'column' : 'row'}
-        >
-          <Board />
-          <Leaderboard />
-        </Box>
+        <Board />
+        <Leaderboard />
       </Box>
-    </>
+    </Box>
   );
 }

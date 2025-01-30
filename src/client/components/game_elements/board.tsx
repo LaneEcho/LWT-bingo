@@ -22,6 +22,8 @@ import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 // this component emcompases the bingo game board, buttons, and related functions for gameplay
 
+// TODO: conditional color changing for dark vs light since theme colors do not match
+
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(phrases).length;
 
@@ -205,6 +207,7 @@ const Board: React.FC = () => {
             width: '12rem',
             height: '3rem',
             fontSize: 'x-large',
+            border: `2px solid ${theme.palette.primary.main}`,
           }}
         >
           BINGO!
@@ -217,6 +220,9 @@ const Board: React.FC = () => {
           onClick={showHowTo}
           sx={{
             width: '8rem',
+            border: `2px solid ${theme.palette.primary.contrastText}`,
+            backgroundColor: `${theme.palette.primary.main}`,
+            color: `${theme.palette.primary.contrastText}`,
           }}
         >
           How to Play
@@ -227,6 +233,9 @@ const Board: React.FC = () => {
           onClick={handleResetClicked}
           sx={{
             width: '10rem',
+            border: `2px solid ${theme.palette.primary.contrastText}`,
+            backgroundColor: `${theme.palette.primary.main}`,
+            color: `${theme.palette.primary.contrastText}`,
           }}
         >
           Get New Board

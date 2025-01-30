@@ -36,7 +36,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   return (
     <Box
-      gap={2}
+      gap={5}
       py={1}
       px={isMobile ? 2 : ''}
       width="100vw"
@@ -75,19 +75,18 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         display={'flex'}
         justifyContent={'center'}
         alignItems={'center'}
-        alignSelf={'flex-start'}
+        // alignSelf={'flex-start'}
       >
         <IconButton
           size="large"
           edge="start"
-          color="inherit"
           aria-label="menu-button"
           aria-controls={open ? 'menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          <MenuIcon />
+          <MenuIcon sx={{ color: theme.palette.background.secondary }} />
         </IconButton>
         <BurgerMenu
           handleClose={handleClose}

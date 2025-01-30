@@ -25,9 +25,12 @@ function Leaderboard() {
 
   const theme = useTheme();
 
+  console.log(theme.palette.mode);
+
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // need to pass to widget
+  // difficult to change widget background dynamically
   const { mode } = useColorScheme();
 
   useEffect(() => {
@@ -57,17 +60,25 @@ function Leaderboard() {
       width={isMobile ? '90vw' : '27rem'}
       min-height={isMobile ? '48rem' : '67vh'}
       sx={{
-        background: theme.palette.secondaryGray.main,
+        background: theme.palette.background.default,
         padding: '24px',
         marginTop: '4px',
-        border: `1px solid ${theme.palette.primaryPurple.main}`,
+        border: `3px solid ${
+          theme.palette.mode === 'dark'
+            ? theme.palette.secondaryYellow.main // dark mode
+            : theme.palette.raspberry.main // light mode
+        }`,
         borderRadius: '25px',
       }}
     >
       <Typography
         variant={'h4'}
         fontFamily={'Lalezar'}
-        color={theme.palette.primary.main}
+        color={
+          theme.palette.mode === 'dark'
+            ? theme.palette.secondaryYellow.main // dark mode
+            : theme.palette.raspberry.main // light mode
+        }
         textTransform={'uppercase'}
         textAlign={'center'}
         gutterBottom={false}
@@ -79,7 +90,7 @@ function Leaderboard() {
       <LeaderboardUserCard />
       <Divider
         sx={{
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.primaryPink.main,
           margin: theme.spacing(2, 8, 1),
         }}
       />

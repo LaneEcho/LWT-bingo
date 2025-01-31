@@ -25,8 +25,6 @@ function Leaderboard() {
 
   const theme = useTheme();
 
-  console.log(theme.palette.mode);
-
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   // need to pass to widget

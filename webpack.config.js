@@ -29,6 +29,10 @@ module.exports = {
         test: /\.svg$/,
         use: ['@svgr/webpack'],
       },
+      {
+        test: /\.(png|jpe?g|gif)$/i,
+        type: 'asset/resource',
+      },
     ],
   },
   resolve: {
@@ -45,7 +49,7 @@ module.exports = {
   ],
   devServer: {
     static: {
-      directory: path.join(__dirname, './dist'),
+      directory: path.join(__dirname, './build'),
     },
   },
 };

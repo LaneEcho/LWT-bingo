@@ -5,6 +5,8 @@ import { Box } from '@mui/material/';
 import Header from './Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from '../components/leaderboard/leaderboard';
+import DarkBG from '../../assets/background/Background_V2.png';
+import LightBG from '../../assets/background/Background_V2_Light.png';
 
 export default function Container() {
   const theme = useTheme();
@@ -17,8 +19,13 @@ export default function Container() {
       flexDirection="column"
       justifyContent="center"
       sx={{
-        background: theme.palette.background.default,
+        width: '100vw',
         height: '100vh',
+        backgroundImage: `url(${
+          theme.palette.mode === 'dark' ? DarkBG : LightBG
+        })`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
       }}
     >
       <Header />

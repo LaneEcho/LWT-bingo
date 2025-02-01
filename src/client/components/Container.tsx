@@ -15,18 +15,20 @@ export default function Container() {
 
   return (
     <Box
+      height={'100vh'}
+      width={'100wv'}
       display="flex"
       flexDirection="column"
-      justifyContent="center"
+      alignItems={'center'}
       sx={{
-        width: '100vw',
-        height: '100vh',
         backgroundImage: `url(${
           theme.palette.mode === 'dark' ? DarkBG : LightBG
         })`,
         backgroundRepeat: 'repeat',
-        backgroundSize: '750px 750px',
+        backgroundSize: `${isMobile ? '350px 350px' : '750px 750px'}`,
         backgroundPosition: 'top left',
+        overflowY: 'auto',
+        padding: '1rem',
       }}
     >
       <Header />
@@ -34,7 +36,7 @@ export default function Container() {
         display="flex"
         gap={2}
         justifyContent={'center'}
-        alignItems={isMobile ? 'center' : 'flex-start'}
+        alignItems={'flex-start'}
         flexDirection={isMobile ? 'column' : 'row'}
       >
         <Board />

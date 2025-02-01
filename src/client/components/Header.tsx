@@ -40,7 +40,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   return (
     <Box
-      gap={5}
+      gap={isMobile ? 1 : 5}
       py={1}
       px={isMobile ? 2 : ''}
       width="100vw"
@@ -53,7 +53,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         display="flex"
         flexDirection="column"
         alignItems={'center'}
-        justifyContent={'space-between'}
+        justifyContent={isMobile ? 'flex-start' : 'space-between'}
         zIndex={-5}
         sx={{ backgroundColor: 'transparent' }}
       >
@@ -64,6 +64,15 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
           textTransform={'uppercase'}
           align="center"
           zIndex={-10}
+          sx={{
+            fontSize: {
+              xs: '2rem',
+              sm: '4rem',
+              md: '5rem',
+              lg: '6rem',
+              xl: '7rem',
+            },
+          }}
         >
           Big Gayme Bingo
         </Typography>
@@ -81,12 +90,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         )}
       </Box>
 
-      <Box
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        // alignSelf={'flex-start'}
-      >
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
         <IconButton
           size="large"
           edge="start"

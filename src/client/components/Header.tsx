@@ -9,6 +9,8 @@ import BurgerMenu from './menu';
 import User from './user';
 import PresentedGayme from '../../assets/svg/gayme/PresentedGayme.svg';
 import PresentedGaymeSmall from '../../assets/svg/gayme/PresentedGaymeSmall.svg';
+import PresentedGaymeLight from '../../assets/svg/gayme/PresentedGaymeLight.svg';
+import PresentedGaymeLightSmall from '../../assets/svg/gayme/PresentedGaymeLightSm.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
@@ -20,6 +22,9 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
   const open = Boolean(anchorEl);
 
   const theme = useTheme();
+
+  const mode = theme.palette.mode;
+  console.log('MODE', mode);
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -65,9 +70,15 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         </Typography>
 
         {isMobile ? (
-          <PresentedGaymeSmall aria-hidden="true" />
-        ) : (
+          mode === 'dark' ? (
+            <PresentedGaymeSmall aria-hidden="true" />
+          ) : (
+            <PresentedGaymeLightSmall aria-hidden="true" />
+          )
+        ) : mode === 'dark' ? (
           <PresentedGayme aria-hidden="true" />
+        ) : (
+          <PresentedGaymeLight aria-hidden="true" />
         )}
       </Box>
 

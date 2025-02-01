@@ -59,9 +59,9 @@ function ModeToggle() {
       }}
       sx={{
         position: 'absolute',
-        top: '50px',
+        top: isMobile ? '20px' : '50px',
         right: isMobile ? '20px' : '50px',
-        zIndex: 9999,
+        zIndex: 999,
       }}
     />
   );

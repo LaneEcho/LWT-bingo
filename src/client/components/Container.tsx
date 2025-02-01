@@ -24,8 +24,9 @@ export default function Container() {
         backgroundImage: `url(${
           theme.palette.mode === 'dark' ? DarkBG : LightBG
         })`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
+        backgroundRepeat: 'repeat',
+        backgroundSize: '750px 750px',
+        backgroundPosition: 'top left',
       }}
     >
       <Header />

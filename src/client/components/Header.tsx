@@ -24,7 +24,6 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
   const theme = useTheme();
 
   const mode = theme.palette.mode;
-  console.log('MODE', mode);
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 

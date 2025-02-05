@@ -17,6 +17,7 @@ import {
   doc,
 } from 'firebase/firestore';
 import { firebaseConfig } from './firebase-config';
+import { GAME_NAME } from './firebase-constants';
 
 interface ScoreData {
   userId: string;
@@ -46,7 +47,7 @@ const analytics = getAnalytics(app);
  * @param score
  */
 export const submitScore = async (userId: string, score: number) => {
-  const gameId = 'bingo';
+  const gameId = GAME_NAME;
   console.log('Submitting...', userId, gameId, score);
 
   const scoreData: ScoreData = {
@@ -97,7 +98,7 @@ export const subscribeToTopScores = (
   onScoresUpdate: (scores: Score[]) => void,
   onError: (error: Error) => void
 ): (() => void) => {
-  const scoresRef = collection(db, 'leaderboards', 'bingo', 'userScores');
+  const scoresRef = collection(db, 'leaderboards', GAME_NAME, 'userScores');
   const q = query(scoresRef, orderBy('totalScore', 'desc'), limit(10));
 
   const unsubscribe = onSnapshot(
@@ -134,7 +135,7 @@ export const subscribeToUserRank = (
   onUpdate: (rank: number, score: Score) => void,
   onError: (error: Error) => void
 ): (() => void) => {
-  const scoresRef = collection(db, 'leaderboards', 'bingo', 'userScores');
+  const scoresRef = collection(db, 'leaderboards', GAME_NAME, 'userScores');
   const q = query(scoresRef, orderBy('totalScore', 'desc'));
 
   const unsubscribe = onSnapshot(

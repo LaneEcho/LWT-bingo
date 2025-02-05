@@ -66,7 +66,7 @@ const phrases: Phrases = {
   61: 'New meme based on halftime',
   62: 'New meme based on player',
   63: 'Consider skipping work tomorrow',
-  64: 'Jon Batiste sings national anthem',
+  64: 'Jon Batiste national anthem',
   65: 'Pigs in-a-blanket sighting',
   66: 'Forehead can crush',
   67: '"Case of the Mondays"',
@@ -173,6 +173,11 @@ const phrases: Phrases = {
   168: '"Go all the way"',
   169: '"Spread Formation"',
   170: '"Opening up a hole"',
+  171: 'Spot Paul Rudd',
+  172: 'Spot Bradley Cooper',
+  173: 'Ledisi sings Lift Every Voice',
+  174: 'Trombone Shorty performance',
+  175: 'Lauren Daigle performance',
 };
 
 export default phrases;

@@ -6,6 +6,7 @@ import {
   bingoSpecial,
   BingoResult,
 } from '../../../util/bingo';
+import { useTheme } from '@mui/material';
 import ConfettiExplosion from 'react-confetti-explosion';
 import Stack from '@mui/material/Stack';
 import { useAuth } from '../../hooks/useAuth';
@@ -19,9 +20,14 @@ import Modal from '@mui/material/Modal';
 import HowToPlay from '../modals/howToPlay';
 import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
+// this component emcompases the bingo game board, buttons, and related functions for gameplay
+
+// TODO: conditional color changing for dark vs light since theme colors do not match
+
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
 let length: number = Object.keys(phrases).length;
 
+// gives us unique numbers that will correspond to the phrases to populate the board
 function pickUniqueNumbers(): number[] {
   let uniqueNumbers: Set<number> = new Set();
 
@@ -37,6 +43,8 @@ const Board: React.FC = () => {
   const { user } = useAuth();
   const track = useAnalytics();
 
+  const theme = useTheme();
+
   // either going to pull from localStorage, or invoke initial state function
   const [phraseIndex, setPhraseIndex] = useState<BoardState>(
     JSON.parse(localStorage.getItem('items')) || initialState()
@@ -45,7 +53,10 @@ const Board: React.FC = () => {
   const [gameOver, setGameOver] = useState(
     JSON.parse(localStorage.getItem('game over')) || false
   );
+
+  //this is the confetti
   const [confetti, setConfetti] = useState<boolean>(false);
+
   // so it makes sure to tell user to play again
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
   const [usernameOpen, setUsernameOpen] = useState<boolean>(false);
@@ -173,21 +184,16 @@ const Board: React.FC = () => {
     setSubmitScoreOpen(false);
   };
 
-  // accessing CSS variables in case we change them later
-  const root: HTMLElement = document.documentElement;
-  const hotPinkColor: string =
-    getComputedStyle(root).getPropertyValue('--hot-pink');
-  const neonBlueColor: string =
-    getComputedStyle(root).getPropertyValue('--neon-blue');
-  const lightBlueColor: string =
-    getComputedStyle(root).getPropertyValue('--light-blue');
-
   return (
     <div className="board" key={phraseIndex.toString()}>
       {confetti && (
         <ConfettiExplosion
           particleCount={500}
-          colors={[hotPinkColor, neonBlueColor, lightBlueColor]}
+          colors={[
+            theme.palette.raspberry.main,
+            theme.palette.primaryPurple.main,
+            theme.palette.orange.main,
+          ]}
         />
       )}
 
@@ -201,6 +207,7 @@ const Board: React.FC = () => {
             width: '12rem',
             height: '3rem',
             fontSize: 'x-large',
+            border: `2px solid ${theme.palette.primary.main}`,
           }}
         >
           BINGO!
@@ -213,6 +220,9 @@ const Board: React.FC = () => {
           onClick={showHowTo}
           sx={{
             width: '8rem',
+            border: `2px solid ${theme.palette.primary.contrastText}`,
+            backgroundColor: `${theme.palette.primary.main}`,
+            color: `${theme.palette.primary.contrastText}`,
           }}
         >
           How to Play
@@ -223,6 +233,9 @@ const Board: React.FC = () => {
           onClick={handleResetClicked}
           sx={{
             width: '10rem',
+            border: `2px solid ${theme.palette.primary.contrastText}`,
+            backgroundColor: `${theme.palette.primary.main}`,
+            color: `${theme.palette.primary.contrastText}`,
           }}
         >
           Get New Board

@@ -1,1 +1,1 @@
-export const GAME_NAME = "big-gayme-testing";
+export const GAME_NAME = "big-gayme";

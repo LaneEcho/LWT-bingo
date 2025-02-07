@@ -1,9 +1,11 @@
 import React, { useEffect, useRef } from 'react';
 
-
 type WidgetProps = {
   mode: string;
 };
+
+// this is the KoFi widget at the bottom of the leaderboard
+// TODO: figure out a way to dynamically change background color
 
 const KoFiWidget = ({ mode }: WidgetProps) => {
   const iframeRef = useRef(null);
@@ -25,7 +27,7 @@ const KoFiWidget = ({ mode }: WidgetProps) => {
       iframeDoc.body.appendChild(script2);
 
       setTimeout(() => {
-        iframeDoc.body.style.background = '#575757'; // hard coding color due to rendering
+        iframeDoc.body.style.background = '#7030a0'; // hard coding color due to rendering
       }, 100);
 
       // Adjust the style of the btn-container after the widget is loaded

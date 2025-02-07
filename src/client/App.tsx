@@ -1,21 +1,16 @@
 import React, { useEffect } from 'react';
 import { createRoot } from 'react-dom/client';
 import localStorageAvailable from '../util/localStorageAvail';
-import Board from './components/game_elements/board';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import {
-  Experimental_CssVarsProvider as CssVarsProvider,
-  useColorScheme,
-} from '@mui/material/styles';
+import { useColorScheme } from '@mui/material/styles';
 import { mainTheme } from './Theme';
-import { useTheme } from '@mui/material';
-import { Box } from '@mui/material/';
-import Header from './components/Header';
+import Container from './components/Container';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Leaderboard from './components/leaderboard/leaderboard';
 import { AuthProvider } from './context/AuthContext';
 import ToggleSwitch from './components/UI_Elements/Switch';
 
+// this function sets the initial state for the theme
 function initialState() {
   if (localStorageAvailable()) {
     const theme: string = localStorage.getItem('darkMode');
@@ -33,16 +28,20 @@ function initialState() {
   // probably want to return something if there is not local storage access idk
 }
 
+// this component returns a toggle switch to toggle the theme
+// theme preference is stored in local storage
 function ModeToggle() {
-  const prefersDark = initialState();
+  const prefersDark: boolean = initialState();
 
   const { mode, setMode } = useColorScheme();
 
-  const darkMode = mode === 'dark';
+  const darkMode: boolean = mode === 'dark';
 
-  const theme = useTheme();
+  const theme = createTheme({
+    cssVariables: true,
+  });
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isMobile: boolean = useMediaQuery(theme.breakpoints.down('sm'));
 
   useEffect(() => {
     if (prefersDark) {
@@ -54,13 +53,15 @@ function ModeToggle() {
     <ToggleSwitch
       checked={!darkMode}
       onChange={() => {
-        setMode(mode === 'light' ? 'dark' : 'light');
+        const newMode = mode === 'light' ? 'dark' : 'light';
+        setMode(newMode);
         localStorage.setItem('darkMode', (!prefersDark).toString());
       }}
       sx={{
         position: 'absolute',
-        top: '50px',
+        top: isMobile ? '20px' : '50px',
         right: isMobile ? '20px' : '50px',
+        zIndex: 999,
       }}
     />
   );
@@ -69,33 +70,14 @@ function ModeToggle() {
 function App() {
   const theme = mainTheme;
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-
   return (
-    <CssVarsProvider theme={theme}>
+    <ThemeProvider theme={theme}>
       <AuthProvider>
         <CssBaseline />
-        <Box
-          display="flex"
-          flexDirection="column"
-          justifyContent="center"
-          width={'100vw'}
-        >
-          <Header />
-          <ModeToggle />
-          <Box
-            display="flex"
-            gap={2}
-            justifyContent={'center'}
-            alignItems={isMobile ? 'center' : 'flex-start'}
-            flexDirection={isMobile ? 'column' : 'row'}
-          >
-            <Board />
-            <Leaderboard />
-          </Box>
-        </Box>
+        <ModeToggle />
+        <Container />
       </AuthProvider>
-    </CssVarsProvider>
+    </ThemeProvider>
   );
 }
 

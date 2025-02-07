@@ -10,6 +10,9 @@ interface LeaderboardCardProps {
   rank?: number | string;
 }
 
+// this component makes up the name displays on the leaderboard
+// TODO: Grid is deprecated
+
 const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
   index,
   score,
@@ -23,17 +26,29 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
       key={index}
       sx={[
         getRowColor(index + 1),
-        { borderRadius: '10px  ' },
+        { borderRadius: '10px' },
         {
           border:
             score?.id === userId
-              ? `4px solid ${theme.palette.primaryPurple.main}`
+              ? `4px solid ${
+                  theme.palette.mode === 'dark'
+                    ? theme.palette.primaryPurple.main
+                    : theme.palette.orange.main
+                }`
               : undefined,
         },
         { fontWeight: score?.id === userId || !!rank ? 'bold' : undefined },
         rank && {
-          backgroundColor: theme.palette.primaryPurple.main,
-          color: theme.palette.common.white,
+          backgroundColor: `${
+            theme.palette.mode === 'dark'
+              ? theme.palette.primaryPurple.main
+              : theme.palette.secondaryYellow.main
+          }`,
+          color: `${
+            theme.palette.mode === 'dark'
+              ? theme.palette.common.white
+              : theme.palette.common.black
+          }`,
         },
       ]}
     >
@@ -64,16 +79,24 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
   );
 
   function getRowColor(index: number) {
-    // const colors = [theme.palette.primary.main, theme.palette.secondary.main];
-    // quick fix to stop having the colors swap up when changing modes
-    // TODO: do it better
-    const colors = ['#05fff4', '#E11774'];
+    // array of colors that will change depending on color mode
+    let colors = [];
+
+    theme.palette.mode === 'dark'
+      ? (colors = [
+          theme.palette.primaryPink.main,
+          theme.palette.secondaryGreen.main,
+        ])
+      : (colors = [
+          theme.palette.primaryPink.main,
+          theme.palette.secondaryYellow.main,
+        ]);
 
     // Cycle through colors for other positions.
     // Overkill for just two colors, but leaving in case we decide to add a third or more in the future.
     return {
       backgroundColor: colors[(index - 1) % colors.length],
-      color: '#000000',
+      color: `${theme.palette.common.black}`,
     };
   }
 };

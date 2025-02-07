@@ -26,7 +26,12 @@ A simple Bingo game to ehnance your Lesbians Who Tech experience
 5. Choose an issue to work on and create a branch
 6. Create a PR to merge your branch into dev & await review!
 
+### Branches
+```main``` - merging into this branch automatically triggers a deployment
 <br>
+```dev``` - base branch for Unofficial LWT Bingo related code
+<br>
+```big-gayme``` - base branch for gay Super Bowl Bingo related code
 
 ### Theme
 ```client/Theme/MainTheme.tsx``` contains the current information for our theme, and another theme object for Dark Mode is found in ```DarkMode.tsx```
@@ -51,7 +56,7 @@ More details: <br>
 - ✅ = Ready to use
 - ⏳ = In progress
 
-## The Team
+## Contributors
 
 |  Developed By  |                                                                                                                                                  |                                                                                                                                                  |
 | :------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: |
@@ -59,6 +64,7 @@ More details: <br>
 |  Tegan Barron  |   [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tegan-barron/)    |
 | Jimena Cuadros |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jimena-cuadros/)   |   [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jcuadrosj)   |
 |   Alex Sharp   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alex-nicole-sharp/) | [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alexsharp4096) |
+|   Brandi Ude   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/brandiude/) | [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bude711) |
 |  K.D. Hubbard  |    [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/k-d-hubbard/)    |    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kdhubb)     |
 
 <!-- Logo Links -->

@@ -107,7 +107,7 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               align="center"
               gutterBottom
             >
-              How To Play #LWT Bingo
+              How To Play #BigGayme Bingo
             </Typography>
             <IconButton onClick={handleClick}>
               <CloseOutlined />

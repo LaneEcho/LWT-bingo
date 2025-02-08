@@ -7,10 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import BurgerMenu from './menu';
 import User from './user';
-import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
-import PresentedByInCoSmall from '../../assets/svg/PresentedByInCoSmall.svg';
-import Unofficial from '../../assets/svg/Unofficial.svg';
-import UnofficialSmall from '../../assets/svg/UnofficialSmall.svg';
+import PresentedGayme from '../../assets/svg/gayme/PresentedGayme.svg';
+import PresentedGaymeSmall from '../../assets/svg/gayme/PresentedGaymeSmall.svg';
+import PresentedGaymeLight from '../../assets/svg/gayme/PresentedGaymeLight.svg';
+import PresentedGaymeLightSmall from '../../assets/svg/gayme/PresentedGaymeLightSm.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
@@ -22,6 +22,8 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
   const open = Boolean(anchorEl);
 
   const theme = useTheme();
+
+  const mode = theme.palette.mode;
 
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
 
@@ -38,31 +40,22 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   return (
     <Box
-      gap={2}
+      gap={isMobile ? 1 : 5}
       py={1}
       px={isMobile ? 2 : ''}
       width="100vw"
       display="flex"
       justifyContent={'center'}
       alignItems={'center'}
+      sx={{ backgroundColor: 'transparent', zIndex: 99 }}
     >
-
-      <Box sx={{ background: 'transparent', paddingRight: '5px' }}>
-        {!isExtraSmall &&
-          (isMobileSmall ? (
-            <UnofficialSmall aria-hidden="true" />
-          ) : (
-            <Unofficial aria-hidden="true" />
-          ))}
-      </Box>
-
       <Box
         display="flex"
         flexDirection="column"
         alignItems={'center'}
-        justifyContent={'space-between'}
+        justifyContent={isMobile ? 'flex-start' : 'space-between'}
         zIndex={-5}
-        sx={{ background: 'transparent' }}
+        sx={{ backgroundColor: 'transparent' }}
       >
         <Typography
           variant="h1"
@@ -71,36 +64,43 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
           textTransform={'uppercase'}
           align="center"
           zIndex={-10}
+          sx={{
+            fontSize: {
+              xs: '2rem',
+              sm: '4rem',
+              md: '5rem',
+              lg: '6rem',
+              xl: '7rem',
+            },
+          }}
         >
-          {isExtraSmall
-            ? 'Unofficial Lesbians Who Tech Bingo!'
-            : ' Lesbians Who Tech Bingo'}
+          Big Gayme Bingo
         </Typography>
 
         {isMobile ? (
-          <PresentedByInCoSmall aria-hidden="true" />
+          mode === 'dark' ? (
+            <PresentedGaymeSmall aria-hidden="true" />
+          ) : (
+            <PresentedGaymeLightSmall aria-hidden="true" />
+          )
+        ) : mode === 'dark' ? (
+          <PresentedGayme aria-hidden="true" />
         ) : (
-          <PresentedByInCo aria-hidden="true" />
+          <PresentedGaymeLight aria-hidden="true" />
         )}
       </Box>
 
-      <Box
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        alignSelf={'flex-start'}
-      >
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
         <IconButton
           size="large"
           edge="start"
-          color="inherit"
           aria-label="menu-button"
           aria-controls={open ? 'menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          <MenuIcon />
+          <MenuIcon sx={{ color: theme.palette.background.secondary }} />
         </IconButton>
         <BurgerMenu
           handleClose={handleClose}

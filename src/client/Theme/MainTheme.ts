@@ -4,49 +4,69 @@ import darkTheme from './DarkTheme';
 
 declare module '@mui/material/styles' {
   interface Palette {
-    primaryBlue: Palette['primary'];
+    raspberry: Palette['primary'];
     primaryPurple: Palette['primary'];
+    primaryPink: Palette['primary'];
     secondaryGreen: Palette['secondary'];
     secondaryYellow: Palette['secondary'];
+    orange: Palette['secondary'];
     secondaryGray: Palette['secondary'];
   }
 
   interface PaletteOptions {
-    primaryBlue?: PaletteOptions['primary'];
+    raspberry?: PaletteOptions['primary'];
     primaryPurple?: PaletteOptions['primary'];
+    primaryPink?: PaletteOptions['primary'];
     secondaryGreen?: PaletteOptions['secondary'];
     secondaryYellow?: PaletteOptions['secondary'];
+    orange?: PaletteOptions['secondary'];
     secondaryGray?: PaletteOptions['secondary'];
+  }
+
+  interface TypeBackground {
+    default: string;
+    secondary: string;
   }
 }
 
 // adding colors
 // playing with calculations in the theme for light and dark values
 
-const lightBlueBase = '#46a4df';
+const raspberryBase = '#A10E42';
 const purpleBase = '#7030a0';
-const greenBase = '#92d050';
-const yellowBase = '#ffc000';
+const orangeBase = '#FE2B15';
+const yellowBase = '#CDE303';
+const greenBase = '#2ABE81';
+const darkRaspberry = '#661A38';
+const pink = '#CD1556';
+
 const grayBase = '#575757';
 
 let mainTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
+        background: { default: '#fff', secondary: 'black' },
         primary: {
-          main: '#E11774',
+          main: darkRaspberry,
           contrastText: '#fff',
         },
         secondary: {
-          main: '#05fff4',
+          main: pink,
           contrastText: '#fff',
         },
-        primaryBlue: {
-          main: lightBlueBase,
-          light: alpha(lightBlueBase, 0.5),
-          dark: alpha(lightBlueBase, 0.9),
+        raspberry: {
+          main: raspberryBase,
+          light: alpha(raspberryBase, 0.5),
+          dark: alpha(raspberryBase, 0.9),
           contrastText:
-            getContrastRatio(lightBlueBase, '#fff') > 4.5 ? '#fff' : '#000',
+            getContrastRatio(raspberryBase, '#fff') > 4.5 ? '#fff' : '#000',
+        },
+        primaryPink: {
+          main: pink,
+          light: alpha(pink, 0.5),
+          dark: alpha(pink, 0.9),
+          contrastText: getContrastRatio(pink, '#fff') > 4.5 ? '#fff' : '#000',
         },
         primaryPurple: {
           main: purpleBase,
@@ -65,6 +85,9 @@ let mainTheme = extendTheme({
         secondaryYellow: {
           main: yellowBase,
         },
+        orange: {
+          main: orangeBase,
+        },
         secondaryGray: {
           main: grayBase,
           light: alpha(grayBase, 0.5),
@@ -76,7 +99,7 @@ let mainTheme = extendTheme({
   typography: {
     fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
     h1: {
-      fontSize: '3rem',
+      fontSize: '4.5rem',
       '@media (max-width:640px)': {
         fontSize: '1.25rem',
       },

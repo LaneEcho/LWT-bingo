@@ -118,6 +118,14 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
             variant="body1"
             sx={{ mt: '1px' }}
           >
+            *** NOTE! If you have blank squares to start off, please click "Get
+            New Board" We are aware of the issue and working to fix. ***
+          </Typography>
+          <Typography
+            id="modal-modal-description"
+            variant="body1"
+            sx={{ mt: '1px' }}
+          >
             Similar to classic Bingo, the goal is to mark squares on your board
             to achieve a winning pattern. However, we reimagined to game to have
             a #BigGayme twist!
@@ -167,14 +175,14 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               id="modal-modal-description"
               variant="body1"
               sx={{ mt: '1px' }}
-            >        
+            >
               "X" = 45 points
             </Typography>{' '}
             <Typography
               id="modal-modal-description"
               variant="body1"
               sx={{ mt: '1px' }}
-            >           
+            >
               "Blackout" (all the squares!) = 125 points!
             </Typography>
           </Stack>

@@ -25,19 +25,14 @@ import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 // TODO: conditional color changing for dark vs light since theme colors do not match
 
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
-const length: number = Object.keys(phrases).length;
-
-// to check if the phrase object contains a phrase
-function isValidPhrase(phraseIndex: number[], length: number): boolean {
-  return phraseIndex.some((index) => index < length);
-}
+let length: number = Object.keys(phrases).length;
 
 // gives us unique numbers that will correspond to the phrases to populate the board
 function pickUniqueNumbers(): number[] {
-  const uniqueNumbers: Set<number> = new Set();
+  let uniqueNumbers: Set<number> = new Set();
 
   while (uniqueNumbers.size <= 25) {
-    const randomNumber: number = Math.floor(Math.random() * length) + 1;
+    let randomNumber: number = Math.floor(Math.random() * length) + 1;
     uniqueNumbers.add(randomNumber);
   }
 
@@ -51,16 +46,9 @@ const Board: React.FC = () => {
   const theme = useTheme();
 
   // either going to pull from localStorage, or invoke initial state function
-  const [phraseIndex, setPhraseIndex] = useState<BoardState>(() => {
-    const storedData = JSON.parse(localStorage.getItem('items'));
-
-    const valid = isValidPhrase(storedData, length);
-
-    return Array.isArray(storedData) && !valid ? storedData : initialState();
-  });
-
-  // const [phraseIndex, setPhraseIndex] = useState<BoardState>(initialState());
-
+  const [phraseIndex, setPhraseIndex] = useState<BoardState>(
+    JSON.parse(localStorage.getItem('items')) || initialState()
+  );
   // persisting gameOver state in case of refresh
   const [gameOver, setGameOver] = useState(
     JSON.parse(localStorage.getItem('game over')) || false
@@ -172,10 +160,6 @@ const Board: React.FC = () => {
   // if nothing is in localStorage, we will use this function
   function initialState(): number[] {
     const phrases: number[] = pickUniqueNumbers();
-    // const phrases: number[] = [
-    //   3, 17, 25, 8, 12, 41, 29, 36, 5, 50, 21, 7, 558, 14, 33, 19, 9, 27, 39,
-    //   111, 45, 23, 231, 442,
-    // ];
     localStorage.setItem('items', JSON.stringify(phrases));
     track(EventName.BOARD_INITIALIZED, {
       phrases,

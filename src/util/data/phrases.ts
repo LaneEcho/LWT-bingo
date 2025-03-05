@@ -1,4 +1,4 @@
-import { Phrases } from '../types';
+import { Phrases } from '../../types';
 
 // object for storing phrases to be used in the game
 

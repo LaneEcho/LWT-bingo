@@ -13,7 +13,7 @@ import { useAuth } from '../../hooks/useAuth';
 import { LoginModal } from '../modals/LoginModal';
 import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
 import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
-import phrases from '../../../lib/phrases';
+import phrases from '../../../util/data/phrases';
 import { BoardState } from '../../../types';
 import Button from '../UI_Elements/Button';
 import Modal from '@mui/material/Modal';

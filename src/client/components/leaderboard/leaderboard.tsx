@@ -63,8 +63,8 @@ function Leaderboard() {
         marginTop: '4px',
         border: `3px solid ${
           theme.palette.mode === 'dark'
-            ? theme.palette.secondaryYellow.main // dark mode
-            : theme.palette.raspberry.main // light mode
+            ? theme.palette.primaryIceBlue.main // dark mode
+            : theme.palette.primaryPink.main // light mode
         }`,
         borderRadius: '25px',
       }}
@@ -74,8 +74,8 @@ function Leaderboard() {
         fontFamily={'Lalezar'}
         color={
           theme.palette.mode === 'dark'
-            ? theme.palette.secondaryYellow.main // dark mode
-            : theme.palette.raspberry.main // light mode
+            ? theme.palette.primaryIceBlue.main // dark mode
+            : theme.palette.primaryPink.main // light mode
         }
         textTransform={'uppercase'}
         textAlign={'center'}

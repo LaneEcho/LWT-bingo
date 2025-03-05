@@ -11,7 +11,11 @@ const LeaderboardHeader: FunctionComponent<LeaderboardHeaderProps> = ({
   const theme = useTheme();
   return (
     <Typography
-      color={theme.palette.primaryPink.main}
+      color={
+        theme.palette.mode === 'dark'
+          ? theme.palette.primaryIceBlue.main // dark mode
+          : theme.palette.primaryPink.main // light mode
+      }
       align="center"
       gutterBottom={true}
       variant="body1"

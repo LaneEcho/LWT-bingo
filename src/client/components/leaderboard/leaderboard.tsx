@@ -8,7 +8,7 @@ import LeaderboardCard from './LeaderboardCard';
 import LeaderboardHeader from './LeaderboardHeader';
 import KoFiWidget from '../KoFiWidget';
 import LeaderboardUserCard from './LeaderboardUserCard';
-import Logo from '../../../assets/logos/Inco_Carabiner_BigGayme.png';
+import Logo from '../../../assets/svg/CarabinerLogoSVG.svg';
 import { useColorScheme } from '@mui/material';
 
 export interface Score {
@@ -83,7 +83,9 @@ function Leaderboard() {
       >
         Leaderboard
       </Typography>
-      <img src={Logo} style={{ height: '50px', alignSelf: 'center' }} />
+      {/* Use <img /> if not using svg */}
+      {/* <img src={Logo} style={{ height: '50px', alignSelf: 'center' }} />  */}
+      <Logo aria-hidden="true" />
       <LeaderboardHeader label="Your Current Score:" />
       <LeaderboardUserCard />
       <Divider

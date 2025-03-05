@@ -62,10 +62,9 @@ This project is built with [React](https://react.dev/) and [Webpack](https://web
 
 **Naming Conventions For Files**
 
-- Capitalize folders containing React Components (ex: 'Components')
-  - Files containing React components are to be capitalized, using PascalCase (ex: 'AuthButton.tsx')
-- Lowercase other folders (ex: 'util')
-  - Files not containing React components are to use camelCase (ex: 'carrierTypes.ts')
+- PascalCase for folders/ files containing React Components (ex: 'Components' or 'AuthButton.tsx')
+- camelCase for folders/ files not containing React components (ex: 'useAuth.ts')
+- kebab-case for configuration files and JSON data files (ex: 'firebase-api.ts')
 
 ### Theme
 

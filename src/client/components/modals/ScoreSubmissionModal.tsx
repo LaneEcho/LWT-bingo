@@ -11,7 +11,7 @@ import Button from '../UI_Elements/Button';
 import { useAuth } from '../../hooks/useAuth';
 import { submitScore } from '../../../firebase/firebase-api';
 import InvalidBoard from './content/InvalidBoard';
-import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
+import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 
 type ScoreSubmissionModalProps = {
   score: number;

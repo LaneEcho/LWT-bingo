@@ -18,7 +18,7 @@ import { BoardState } from '../../../types';
 import Button from '../UI_Elements/Button';
 import Modal from '@mui/material/Modal';
 import HowToPlay from '../modals/howToPlay';
-import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
+import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 
 // this component emcompases the bingo game board, buttons, and related functions for gameplay
 

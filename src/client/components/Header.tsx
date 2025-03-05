@@ -65,7 +65,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         <Typography
           variant="h1"
           fontFamily={'Lalezar'}
-          color={theme.palette.primary.main}
+          color={theme.palette.primaryPink.main}
           textTransform={'uppercase'}
           align="center"
           zIndex={-10}

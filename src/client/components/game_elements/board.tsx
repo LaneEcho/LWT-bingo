@@ -190,9 +190,9 @@ const Board: React.FC = () => {
         <ConfettiExplosion
           particleCount={500}
           colors={[
-            theme.palette.raspberry.main,
+            theme.palette.primary.main,
+            theme.palette.secondary.main,
             theme.palette.primaryPurple.main,
-            theme.palette.orange.main,
           ]}
         />
       )}

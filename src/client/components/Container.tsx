@@ -1,5 +1,5 @@
 import React from 'react';
-import Board from './game_elements/board';
+import Board from './game_elements/Board';
 import { useTheme } from '@mui/material';
 import { Box } from '@mui/material/';
 import Header from './Header';

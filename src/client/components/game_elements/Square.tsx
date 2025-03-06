@@ -54,16 +54,16 @@ function Square({ text, row, column, gameOver }: BoxProps) {
         borderRadius: '1rem',
         backgroundColor: clicked
           ? gameOver
-            ? theme.palette.orange.main // color of disabled clicked buttons
-            : theme.palette.primaryPink.main // color of clicked buttons
-          : theme.palette.background.secondary, // color of unclicked buttons
+            ? theme.palette.primaryPurple.main // color of disabled clicked buttons
+            : theme.palette.primaryBlue.main // color of clicked buttons
+          : theme.palette.background.default, // color of unclicked buttons
         border: clicked
           ? `1px solid ${theme.palette.primary.main}` // color of clicked border
-          : `1px solid ${theme.palette.primary.contrastText}`, // color of unclicked border
+          : `1px solid ${theme.palette.primary.main}`, // color of unclicked border
         padding: isMobile ? '1px' : '5px',
         color: clicked
-          ? theme.palette.secondary.contrastText // color of clicked text
-          : theme.palette.primary.contrastText, // color of unclicked text
+          ? theme.palette.primary.contrastText // color of clicked text
+          : theme.palette.primary.main, // color of unclicked text
         fontSize:
           text?.length > 35
             ? isMobile

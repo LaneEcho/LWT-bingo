@@ -107,7 +107,7 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               align="center"
               gutterBottom
             >
-              How To Play #BigGayme Bingo
+              How To Play #LWT Bingo
             </Typography>
             <IconButton onClick={handleClick}>
               <CloseOutlined />
@@ -118,17 +118,9 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
             variant="body1"
             sx={{ mt: '1px' }}
           >
-            *** NOTE! If you have blank squares to start off, please click "Get
-            New Board" We are aware of the issue and working to fix. ***
-          </Typography>
-          <Typography
-            id="modal-modal-description"
-            variant="body1"
-            sx={{ mt: '1px' }}
-          >
             Similar to classic Bingo, the goal is to mark squares on your board
             to achieve a winning pattern. However, we reimagined to game to have
-            a #BigGayme twist!
+            a #LWT twist!
           </Typography>
           <Typography
             id="modal-modal-description"
@@ -144,7 +136,7 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
             sx={{ mt: '1px' }}
           >
             Each square has a phrase, visual, or experience that might occur
-            during the "Big Gayme." If you see or hear that thing happen, click
+            during the #LWTSummit. If you see or hear that thing happen, click
             on that square on your board to mark it!
           </Typography>
           <Typography
@@ -176,8 +168,29 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
               variant="body1"
               sx={{ mt: '1px' }}
             >
-              "X" = 45 points
+              # = 80 points
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "L" = 45 points
             </Typography>{' '}
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "W" = 85 points
+            </Typography>
+            <Typography
+              id="modal-modal-description"
+              variant="body1"
+              sx={{ mt: '1px' }}
+            >
+              "T" = 45 points
+            </Typography>
             <Typography
               id="modal-modal-description"
               variant="body1"
@@ -185,6 +198,56 @@ const HowToPlay = React.forwardRef(function ({ close }: HowToPlayProps, ref) {
             >
               "Blackout" (all the squares!) = 125 points!
             </Typography>
+            <Stack direction="row" spacing={2} sx={{ mt: '15px' }}>
+              <Box
+                component="img"
+                sx={{
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
+                  mr: 2,
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the hashtag layout, with the second and fourth columns and rows clicked."
+                src={hashtagImgUrl(darkMode)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
+                  mr: 2,
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the L layout, with the left side and bottom clicked."
+                src={elImgUrl(darkMode)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
+                  mr: 2,
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the W layout, with the first, third, and fifth columns and the bottom clicked."
+                src={dubyaImgUrl(darkMode)}
+              />
+              <Box
+                component="img"
+                sx={{
+                  height: isMobile ? 64 : 128,
+                  width: isMobile ? 64 : 128,
+                  mr: 2,
+                  // maxHeight: { xs: 128, md: 167 },
+                  // maxWidth: { xs: 128, md: 250 },
+                }}
+                alt="Diagram of the T layout, with the top and the third column clicked."
+                src={teeImgUrl(darkMode)}
+              />
+            </Stack>
           </Stack>
           <Typography
             id="modal-modal-description"

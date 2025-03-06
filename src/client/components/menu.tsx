@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import DarkModeIcon from '@mui/icons-material/DarkMode';
-import HowToPlay from './modals/howToPlay';
+import HowToPlay from './modals/HowToPlay';
 import TermsAndConditions from './modals/terms';
 import { getAuth, signOut } from 'firebase/auth';
 import { useAuth } from '../hooks/useAuth';

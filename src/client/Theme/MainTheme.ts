@@ -4,22 +4,22 @@ import darkTheme from './darkTheme';
 
 declare module '@mui/material/styles' {
   interface Palette {
-    raspberry: Palette['primary'];
-    primaryPurple: Palette['primary'];
+    primaryBlue: Palette['primary'];
     primaryPink: Palette['primary'];
+    primaryIceBlue: Palette['primary'];
+    primaryPurple: Palette['primary'];
     secondaryGreen: Palette['secondary'];
     secondaryYellow: Palette['secondary'];
-    orange: Palette['secondary'];
     secondaryGray: Palette['secondary'];
   }
 
   interface PaletteOptions {
-    raspberry?: PaletteOptions['primary'];
-    primaryPurple?: PaletteOptions['primary'];
+    primaryBlue?: PaletteOptions['primary'];
     primaryPink?: PaletteOptions['primary'];
+    primaryIceBlue?: PaletteOptions['primary'];
+    primaryPurple?: PaletteOptions['primary'];
     secondaryGreen?: PaletteOptions['secondary'];
     secondaryYellow?: PaletteOptions['secondary'];
-    orange?: PaletteOptions['secondary'];
     secondaryGray?: PaletteOptions['secondary'];
   }
 
@@ -32,41 +32,47 @@ declare module '@mui/material/styles' {
 // adding colors
 // playing with calculations in the theme for light and dark values
 
-const raspberryBase = '#A10E42';
+const blueBase = '#46A4DF';
+const pinkBase = '#E11774';
+const iceBlueBase = '#05FFF4';
 const purpleBase = '#7030a0';
-const orangeBase = '#FE2B15';
-const yellowBase = '#CDE303';
-const greenBase = '#2ABE81';
-const darkRaspberry = '#661A38';
-const pink = '#CD1556';
-
+const greenBase = '#92D050';
+const yellowBase = '#FFC000';
 const grayBase = '#575757';
 
 let mainTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
-        background: { default: '#fff', secondary: 'black' },
+        background: { default: '#fff', secondary: '212121' },
         primary: {
-          main: darkRaspberry,
+          main: pinkBase,
           contrastText: '#fff',
         },
         secondary: {
-          main: pink,
-          contrastText: '#fff',
+          main: iceBlueBase,
+          contrastText: '#212121',
         },
-        raspberry: {
-          main: raspberryBase,
-          light: alpha(raspberryBase, 0.5),
-          dark: alpha(raspberryBase, 0.9),
+        primaryBlue: {
+          main: blueBase,
+          light: alpha(blueBase, 0.5),
+          dark: alpha(blueBase, 0.9),
           contrastText:
-            getContrastRatio(raspberryBase, '#fff') > 4.5 ? '#fff' : '#000',
+            getContrastRatio(blueBase, '#fff') > 4.5 ? '#fff' : '#000',
         },
         primaryPink: {
-          main: pink,
-          light: alpha(pink, 0.5),
-          dark: alpha(pink, 0.9),
-          contrastText: getContrastRatio(pink, '#fff') > 4.5 ? '#fff' : '#000',
+          main: pinkBase,
+          light: alpha(pinkBase, 0.5),
+          dark: alpha(pinkBase, 0.9),
+          contrastText:
+            getContrastRatio(pinkBase, '#fff') > 4.5 ? '#fff' : '#000',
+        },
+        primaryIceBlue: {
+          main: iceBlueBase,
+          light: alpha(iceBlueBase, 0.5),
+          dark: alpha(iceBlueBase, 0.9),
+          contrastText:
+            getContrastRatio(iceBlueBase, '#fff') > 4.5 ? '#fff' : '#000',
         },
         primaryPurple: {
           main: purpleBase,
@@ -84,9 +90,6 @@ let mainTheme = extendTheme({
         },
         secondaryYellow: {
           main: yellowBase,
-        },
-        orange: {
-          main: orangeBase,
         },
         secondaryGray: {
           main: grayBase,

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FunctionComponent } from 'react';
-import { Button as MuiButton, SxProps, Theme } from '@mui/material';
+import { Button as MuiButton, SxProps, Theme, useTheme } from '@mui/material';
 
 interface ButtonProps {
   variant: 'primary' | 'secondary-dark' | 'secondary' | 'primary-light';
@@ -25,10 +25,8 @@ const Button: FunctionComponent<ButtonProps> = ({
 }) => {
   const isPrimary = variant === 'primary';
   const isSecondary = variant === 'secondary';
-  const primaryBackGroundColor = !darkMode ? '#E11774' : '#0AFFF4';
-  const primaryColor = !darkMode ? '#FFFFFF' : '#000000';
-  const secondaryBackgroundColor = !darkMode ? '#FFFFFF' : '#000000';
-  const secondaryColor = !darkMode ? '#E11774' : '#0AFFF4';
+
+  const theme = useTheme();
 
   const styles: SxProps<Theme> = {
     margin: '5px 8px',
@@ -36,21 +34,22 @@ const Button: FunctionComponent<ButtonProps> = ({
     // boxShadow: '0px 3.43px 3.43px 0px #00000040',
   };
 
-  // TODO: use theme styles
   const primaryStyles: SxProps<Theme> = {
-    backgroundColor: primaryBackGroundColor,
-    color: primaryColor,
-    borderColor: primaryColor,
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText,
+    borderColor: theme.palette.primary.main,
     boxShadow: 'none',
     // TODO: Figure out hover style -- either by updating the theme or by addressing here
   };
 
   const secondaryStyles: SxProps<Theme> = {
-    backgroundColor: secondaryBackgroundColor,
-    color: secondaryColor,
-    borderColor: secondaryColor,
+    backgroundColor: theme.palette.secondary.main,
+    color: theme.palette.secondary.contrastText,
+    borderColor: theme.palette.secondary.main,
     boxShadow: 'none',
   };
+
+  // TODO: Add other styles
 
   return (
     <MuiButton

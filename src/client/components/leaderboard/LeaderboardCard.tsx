@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Card, Grid, useTheme } from '@mui/material';
-import { Score } from './Leaderboard';
+import { Score } from './leaderboard';
 
 interface LeaderboardCardProps {
   index?: number;
@@ -33,7 +33,7 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
               ? `4px solid ${
                   theme.palette.mode === 'dark'
                     ? theme.palette.primaryPurple.main
-                    : theme.palette.primaryPink.main
+                    : theme.palette.orange.main
                 }`
               : undefined,
         },
@@ -80,17 +80,16 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
 
   function getRowColor(index: number) {
     // array of colors that will change depending on color mode
-    // currently they are the same but this gives us flexibility
     let colors = [];
 
     theme.palette.mode === 'dark'
       ? (colors = [
           theme.palette.primaryPink.main,
-          theme.palette.primaryIceBlue.main,
+          theme.palette.secondaryGreen.main,
         ])
       : (colors = [
           theme.palette.primaryPink.main,
-          theme.palette.primaryIceBlue.main,
+          theme.palette.secondaryYellow.main,
         ]);
 
     // Cycle through colors for other positions.

@@ -7,10 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import BurgerMenu from './menu';
 import User from './user';
-import Unofficial from '../../assets/svg/unofficial.svg';
-import UnofficialSmall from '../../assets/svg/unofficialSmall.svg';
-import PresentedByInCo from '../../assets/svg/presentedByInCo.svg';
-import PresentedByInCoSmall from '../../assets/svg/presentedByInCoSmall.svg';
+import PresentedGayme from '../../assets/svg/gayme/PresentedGayme.svg';
+import PresentedGaymeSmall from '../../assets/svg/gayme/PresentedGaymeSmall.svg';
+import PresentedGaymeLight from '../../assets/svg/gayme/PresentedGaymeLight.svg';
+import PresentedGaymeLightSmall from '../../assets/svg/gayme/PresentedGaymeLightSm.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
@@ -49,11 +49,6 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       alignItems={'center'}
       sx={{ backgroundColor: 'transparent', zIndex: 99 }}
     >
-      {isMobile ? (
-        <UnofficialSmall aria-hidden="true" />
-      ) : (
-        <Unofficial aria-hidden="true" />
-      )}
       <Box
         display="flex"
         flexDirection="column"
@@ -65,28 +60,33 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         <Typography
           variant="h1"
           fontFamily={'Lalezar'}
-          color={theme.palette.primaryPink.main}
+          color={theme.palette.primary.main}
           textTransform={'uppercase'}
           align="center"
           zIndex={-10}
-          // keeping in case we re-name the game
-          // sx={{
-          //   fontSize: {
-          //     xs: '2rem',
-          //     sm: '4rem',
-          //     md: '4rem',
-          //     lg: '5rem',
-          //     xl: '6rem',
-          //   },
-          // }}
+          sx={{
+            fontSize: {
+              xs: '2rem',
+              sm: '4rem',
+              md: '5rem',
+              lg: '6rem',
+              xl: '7rem',
+            },
+          }}
         >
-          Lesbians Who Tech Bingo
+          Big Gayme Bingo
         </Typography>
 
         {isMobile ? (
-          <PresentedByInCoSmall aria-hidden="true" />
+          mode === 'dark' ? (
+            <PresentedGaymeSmall aria-hidden="true" />
+          ) : (
+            <PresentedGaymeLightSmall aria-hidden="true" />
+          )
+        ) : mode === 'dark' ? (
+          <PresentedGayme aria-hidden="true" />
         ) : (
-          <PresentedByInCo aria-hidden="true" />
+          <PresentedGaymeLight aria-hidden="true" />
         )}
       </Box>
 

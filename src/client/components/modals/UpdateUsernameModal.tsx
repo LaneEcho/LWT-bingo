@@ -14,7 +14,7 @@ import { submitScore, updateUser } from '../../../firebase/firebase-api';
 
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useAuth } from '../../hooks/useAuth';
-import useAnalytics, { EventName } from '../../hooks/useAnalytics';
+import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
 
 type UpdateUsernameModalProps = {
   score: number;

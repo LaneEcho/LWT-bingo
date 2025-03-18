@@ -1,4 +1,4 @@
-import { TermsConditions } from '../../types';
+import { TermsConditions } from '../types';
 
 export const ConditionsList: TermsConditions = {
   'Acceptance of Terms': `By accessing or using this Unofficial LWT Bingo

@@ -13,12 +13,12 @@ import { useAuth } from '../../hooks/useAuth';
 import { LoginModal } from '../modals/LoginModal';
 import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
 import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
-import phrases from '../../../lib/phrases';
+import phrases from '../../../util/data/phrases';
 import { BoardState } from '../../../types';
 import Button from '../UI_Elements/Button';
 import Modal from '@mui/material/Modal';
-import HowToPlay from '../modals/howToPlay';
-import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
+import HowToPlay from '../modals/HowToPlay';
+import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 
 // this component emcompases the bingo game board, buttons, and related functions for gameplay
 
@@ -190,9 +190,9 @@ const Board: React.FC = () => {
         <ConfettiExplosion
           particleCount={500}
           colors={[
-            theme.palette.raspberry.main,
+            theme.palette.primary.main,
+            theme.palette.secondary.main,
             theme.palette.primaryPurple.main,
-            theme.palette.orange.main,
           ]}
         />
       )}
@@ -207,7 +207,6 @@ const Board: React.FC = () => {
             width: '12rem',
             height: '3rem',
             fontSize: 'x-large',
-            border: `2px solid ${theme.palette.primary.main}`,
           }}
         >
           BINGO!
@@ -220,9 +219,6 @@ const Board: React.FC = () => {
           onClick={showHowTo}
           sx={{
             width: '8rem',
-            border: `2px solid ${theme.palette.primary.contrastText}`,
-            backgroundColor: `${theme.palette.primary.main}`,
-            color: `${theme.palette.primary.contrastText}`,
           }}
         >
           How to Play
@@ -233,9 +229,6 @@ const Board: React.FC = () => {
           onClick={handleResetClicked}
           sx={{
             width: '10rem',
-            border: `2px solid ${theme.palette.primary.contrastText}`,
-            backgroundColor: `${theme.palette.primary.main}`,
-            color: `${theme.palette.primary.contrastText}`,
           }}
         >
           Get New Board

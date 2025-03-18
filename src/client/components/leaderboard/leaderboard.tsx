@@ -8,7 +8,7 @@ import LeaderboardCard from './LeaderboardCard';
 import LeaderboardHeader from './LeaderboardHeader';
 import KoFiWidget from '../KoFiWidget';
 import LeaderboardUserCard from './LeaderboardUserCard';
-import Logo from '../../../assets/logos/Inco_Carabiner_BigGayme.png';
+import Logo from '../../../assets/svg/CarabinerLogoSVG.svg';
 import { useColorScheme } from '@mui/material';
 
 export interface Score {
@@ -63,8 +63,8 @@ function Leaderboard() {
         marginTop: '4px',
         border: `3px solid ${
           theme.palette.mode === 'dark'
-            ? theme.palette.secondaryYellow.main // dark mode
-            : theme.palette.raspberry.main // light mode
+            ? theme.palette.primaryIceBlue.main // dark mode
+            : theme.palette.primaryPink.main // light mode
         }`,
         borderRadius: '25px',
       }}
@@ -74,8 +74,8 @@ function Leaderboard() {
         fontFamily={'Lalezar'}
         color={
           theme.palette.mode === 'dark'
-            ? theme.palette.secondaryYellow.main // dark mode
-            : theme.palette.raspberry.main // light mode
+            ? theme.palette.primaryIceBlue.main // dark mode
+            : theme.palette.primaryPink.main // light mode
         }
         textTransform={'uppercase'}
         textAlign={'center'}
@@ -83,7 +83,9 @@ function Leaderboard() {
       >
         Leaderboard
       </Typography>
-      <img src={Logo} style={{ height: '50px', alignSelf: 'center' }} />
+      {/* Use <img /> if not using svg */}
+      {/* <img src={Logo} style={{ height: '50px', alignSelf: 'center' }} />  */}
+      <Logo aria-hidden="true" />
       <LeaderboardHeader label="Your Current Score:" />
       <LeaderboardUserCard />
       <Divider

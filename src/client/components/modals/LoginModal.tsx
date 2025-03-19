@@ -80,7 +80,7 @@ export const LoginModal = ({
                 marginBottom: theme.spacing(2),
               }}
             >
-              Congratulations!!! You earned a Bingo at #TheBigGayme! Submit
+              Congratulations!!! You earned a Bingo at the #LWTSummit! Submit
               your score to the Leaderboard by logging in below.
             </Typography>
             <Typography variant="h5">

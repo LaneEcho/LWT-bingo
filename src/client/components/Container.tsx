@@ -4,7 +4,7 @@ import { useTheme } from '@mui/material';
 import { Box } from '@mui/material/';
 import Header from './Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import Leaderboard from './leaderboard/leaderboard';
+import Leaderboard from './Leaderboard/leaderboard';
 // import DarkBG from '../../assets/background/Background_V2.png';
 // import LightBG from '../../assets/background/Background_V2_Light.png';
 

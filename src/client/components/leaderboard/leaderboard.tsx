@@ -4,10 +4,10 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import { subscribeToTopScores } from '../../../firebase/firebase-api';
 import { Box, Divider, Typography } from '@mui/material';
 import { useAuth } from '../../hooks/useAuth';
-import LeaderboardCard from './LeaderboardCard';
-import LeaderboardHeader from './LeaderboardHeader';
+import LeaderboardCard from '../Leaderboard/LeaderboardCard';
+import LeaderboardHeader from '../Leaderboard/LeaderboardHeader';
 import KoFiWidget from '../KoFiWidget';
-import LeaderboardUserCard from './LeaderboardUserCard';
+import LeaderboardUserCard from '../Leaderboard/LeaderboardUserCard';
 import Logo from '../../../assets/svg/CarabinerLogoSVG.svg';
 import { useColorScheme } from '@mui/material';
 

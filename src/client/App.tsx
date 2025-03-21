@@ -7,7 +7,7 @@ import { useColorScheme } from '@mui/material/styles';
 import { mainTheme } from './Theme';
 import Container from './components/Container';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AuthProvider } from './context/authContext';
+import { AuthProvider } from './context/AuthContext';
 import ToggleSwitch from './components/UI_Elements/Switch';
 
 // this function sets the initial state for the theme

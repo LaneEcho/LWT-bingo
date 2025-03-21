@@ -7,10 +7,10 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import BurgerMenu from './menu';
 import User from './user';
-import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
-import PresentedByInCoSmall from '../../assets/svg/PresentedByInCoSmall.svg';
-import Unofficial from '../../assets/svg/Unofficial.svg';
-import UnofficialSmall from '../../assets/svg/UnofficialSmall.svg';
+import Unofficial from '../../assets/svg/unofficial.svg';
+import UnofficialSmall from '../../assets/svg/unofficialSmall.svg';
+import PresentedByInCo from '../../assets/svg/presentedByInCo.svg';
+import PresentedByInCoSmall from '../../assets/svg/presentedByInCoSmall.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
@@ -23,7 +23,13 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   const theme = useTheme();
 
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const mode = theme.palette.mode;
+
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+
+  const isMobileSmall = useMediaQuery(theme.breakpoints.down('sm'));
+
+  const isExtraSmall = useMediaQuery(theme.breakpoints.down('xs'));
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -34,35 +40,47 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
 
   return (
     <Box
-      gap={isMobile ? 0 : 4}
+      gap={isMobile ? 1 : 5}
       py={1}
       px={isMobile ? 2 : ''}
       width="100vw"
       display="flex"
       justifyContent={'center'}
       alignItems={'center'}
+      sx={{ backgroundColor: 'transparent', zIndex: 99 }}
     >
       {isMobile ? (
         <UnofficialSmall aria-hidden="true" />
       ) : (
         <Unofficial aria-hidden="true" />
       )}
-
       <Box
         display="flex"
         flexDirection="column"
         alignItems={'center'}
-        justifyContent={'space-between'}
+        justifyContent={isMobile ? 'flex-start' : 'space-between'}
         zIndex={-5}
+        sx={{ backgroundColor: 'transparent' }}
       >
         <Typography
           variant="h1"
           fontFamily={'Lalezar'}
-          color="primary"
+          color={theme.palette.primaryPink.main}
           textTransform={'uppercase'}
           align="center"
+          zIndex={-10}
+          // keeping in case we re-name the game
+          // sx={{
+          //   fontSize: {
+          //     xs: '2rem',
+          //     sm: '4rem',
+          //     md: '4rem',
+          //     lg: '5rem',
+          //     xl: '6rem',
+          //   },
+          // }}
         >
-          Lesbians Who Tech Bingo!
+          Lesbians Who Tech Bingo
         </Typography>
 
         {isMobile ? (
@@ -72,23 +90,17 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
         )}
       </Box>
 
-      <Box
-        display={'flex'}
-        justifyContent={'center'}
-        alignItems={'center'}
-        alignSelf={'flex-start'}
-      >
+      <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
         <IconButton
           size="large"
           edge="start"
-          color="inherit"
           aria-label="menu-button"
           aria-controls={open ? 'menu' : undefined}
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
           onClick={handleClick}
         >
-          <MenuIcon />
+          <MenuIcon sx={{ color: theme.palette.background.secondary }} />
         </IconButton>
         <BurgerMenu
           handleClose={handleClose}

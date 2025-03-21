@@ -1,8 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
-
-export interface Phrases {
-  [key: string]: string;
-}
+import { Dispatch, SetStateAction } from 'react';
 
 export interface TermsConditions {
   [key: string]: string;
@@ -29,4 +25,4 @@ export type SubmitScore = {
   score: number;
   onClose: () => void;
   showLoginOptions?: Dispatch<SetStateAction<boolean>>;
-}
+};

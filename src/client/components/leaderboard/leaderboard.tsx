@@ -8,8 +8,8 @@ import LeaderboardCard from './LeaderboardCard';
 import LeaderboardHeader from './LeaderboardHeader';
 import KoFiWidget from '../KoFiWidget';
 import LeaderboardUserCard from './LeaderboardUserCard';
-import Logo from '../../../assets/svg/Logo.svg';
-import CarabinerLogo from '../logos/CarabinerLogo';
+import Logo from '../../../assets/svg/CarabinerLogoSVG.svg';
+import { useColorScheme } from '@mui/material';
 
 export interface Score {
   id: string;
@@ -23,7 +23,12 @@ function Leaderboard() {
   const [error, setError] = useState<string>('');
 
   const theme = useTheme();
+
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
+  // need to pass to widget
+  // difficult to change widget background dynamically
+  const { mode } = useColorScheme();
 
   useEffect(() => {
     const unsubscribe = subscribeToTopScores(
@@ -51,30 +56,41 @@ function Leaderboard() {
     <Box
       width={isMobile ? '90vw' : '27rem'}
       min-height={isMobile ? '48rem' : '67vh'}
+      textAlign={'center'}
       sx={{
         background: theme.palette.background.default,
         padding: '24px',
         marginTop: '4px',
-        border: `1px solid ${theme.palette.primaryPurple.main}`,
+        border: `3px solid ${
+          theme.palette.mode === 'dark'
+            ? theme.palette.primaryIceBlue.main // dark mode
+            : theme.palette.primaryPink.main // light mode
+        }`,
         borderRadius: '25px',
       }}
     >
       <Typography
         variant={'h4'}
         fontFamily={'Lalezar'}
-        color="primary"
+        color={
+          theme.palette.mode === 'dark'
+            ? theme.palette.primaryIceBlue.main // dark mode
+            : theme.palette.primaryPink.main // light mode
+        }
         textTransform={'uppercase'}
         textAlign={'center'}
         gutterBottom={false}
       >
         Leaderboard
       </Typography>
-      <CarabinerLogo />
-      <LeaderboardHeader label="Your Current Score:" color="primary" />
+      {/* Use <img /> if not using svg */}
+      {/* <img src={Logo} style={{ height: '50px', alignSelf: 'center' }} />  */}
+      <Logo aria-hidden="true" />
+      <LeaderboardHeader label="Your Current Score:" />
       <LeaderboardUserCard />
       <Divider
         sx={{
-          backgroundColor: theme.palette.primary.main,
+          backgroundColor: theme.palette.primaryPink.main,
           margin: theme.spacing(2, 8, 1),
         }}
       />
@@ -96,7 +112,7 @@ function Leaderboard() {
           paddingTop: theme.spacing(2),
         }}
       >
-        <KoFiWidget />
+        <KoFiWidget mode={mode} />
       </div>
     </Box>
   );

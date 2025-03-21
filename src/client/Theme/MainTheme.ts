@@ -5,6 +5,8 @@ import darkTheme from './DarkTheme';
 declare module '@mui/material/styles' {
   interface Palette {
     primaryBlue: Palette['primary'];
+    primaryPink: Palette['primary'];
+    primaryIceBlue: Palette['primary'];
     primaryPurple: Palette['primary'];
     secondaryGreen: Palette['secondary'];
     secondaryYellow: Palette['secondary'];
@@ -13,40 +15,64 @@ declare module '@mui/material/styles' {
 
   interface PaletteOptions {
     primaryBlue?: PaletteOptions['primary'];
+    primaryPink?: PaletteOptions['primary'];
+    primaryIceBlue?: PaletteOptions['primary'];
     primaryPurple?: PaletteOptions['primary'];
     secondaryGreen?: PaletteOptions['secondary'];
     secondaryYellow?: PaletteOptions['secondary'];
     secondaryGray?: PaletteOptions['secondary'];
+  }
+
+  interface TypeBackground {
+    default: string;
+    secondary: string;
   }
 }
 
 // adding colors
 // playing with calculations in the theme for light and dark values
 
-const lightBlueBase = '#46a4df';
+const blueBase = '#46A4DF';
+const pinkBase = '#E11774';
+const iceBlueBase = '#05FFF4';
 const purpleBase = '#7030a0';
-const greenBase = '#92d050';
-const yellowBase = '#ffc000';
+const greenBase = '#92D050';
+const yellowBase = '#FFC000';
 const grayBase = '#575757';
 
 let mainTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
+        background: { default: '#fff', secondary: '212121' },
         primary: {
-          main: '#E11774',
+          main: pinkBase,
           contrastText: '#fff',
         },
         secondary: {
-          main: '#05fff4',
-          contrastText: '#fff',
+          main: iceBlueBase,
+          contrastText: '#212121',
         },
         primaryBlue: {
-          main: lightBlueBase,
-          light: alpha(lightBlueBase, 0.5),
-          dark: alpha(lightBlueBase, 0.9),
+          main: blueBase,
+          light: alpha(blueBase, 0.5),
+          dark: alpha(blueBase, 0.9),
           contrastText:
-            getContrastRatio(lightBlueBase, '#fff') > 4.5 ? '#fff' : '#000',
+            getContrastRatio(blueBase, '#fff') > 4.5 ? '#fff' : '#000',
+        },
+        primaryPink: {
+          main: pinkBase,
+          light: alpha(pinkBase, 0.5),
+          dark: alpha(pinkBase, 0.9),
+          contrastText:
+            getContrastRatio(pinkBase, '#fff') > 4.5 ? '#fff' : '#000',
+        },
+        primaryIceBlue: {
+          main: iceBlueBase,
+          light: alpha(iceBlueBase, 0.5),
+          dark: alpha(iceBlueBase, 0.9),
+          contrastText:
+            getContrastRatio(iceBlueBase, '#fff') > 4.5 ? '#fff' : '#000',
         },
         primaryPurple: {
           main: purpleBase,
@@ -76,7 +102,7 @@ let mainTheme = extendTheme({
   typography: {
     fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
     h1: {
-      fontSize: '3rem',
+      fontSize: '4.5rem',
       '@media (max-width:640px)': {
         fontSize: '1.25rem',
       },

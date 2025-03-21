@@ -3,27 +3,24 @@ import { Typography, useTheme } from '@mui/material';
 
 interface LeaderboardHeaderProps {
   label: string;
-  color?: 'primary' | 'secondary';
 }
 
 const LeaderboardHeader: FunctionComponent<LeaderboardHeaderProps> = ({
   label,
-  color = 'secondary',
 }) => {
   const theme = useTheme();
-  const darkMode: boolean = localStorage.getItem('darkMode') === 'true';
   return (
     <Typography
-      sx={{
-        fontFamily: 'Poppins',
-        fontWeight: 600,
-        fontStyle: 'italic',
-        color:
-          darkMode
-            ? theme.palette.secondary.main
-            : theme.palette.primary.main,
-        textAlign: 'center',
-      }}
+      color={
+        theme.palette.mode === 'dark'
+          ? theme.palette.primaryIceBlue.main // dark mode
+          : theme.palette.primaryPink.main // light mode
+      }
+      align="center"
+      gutterBottom={true}
+      variant="body1"
+      fontWeight={'bold'}
+      fontStyle={'italic'}
     >
       {label}
     </Typography>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import useAnalytics, { EventName } from '../../../client/hooks/useAnalytics';
+import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 
 type BoxProps = {
   text: any;
@@ -54,12 +54,16 @@ function Square({ text, row, column, gameOver }: BoxProps) {
         borderRadius: '1rem',
         backgroundColor: clicked
           ? gameOver
-            ? '#7030A0' // color of disabled clicked buttons (change to theme)
-            : theme.palette.primary.dark
-          : theme.palette.background.default,
-        color: clicked ? '#fff' : theme.palette.primary.main,
-        border: clicked ? '1px solid #e11774' : '1px solid #7030A0',
+            ? theme.palette.primaryPurple.main // color of disabled clicked buttons
+            : theme.palette.primaryBlue.main // color of clicked buttons
+          : theme.palette.background.default, // color of unclicked buttons
+        border: clicked
+          ? `1px solid ${theme.palette.primary.main}` // color of clicked border
+          : `1px solid ${theme.palette.primary.main}`, // color of unclicked border
         padding: isMobile ? '1px' : '5px',
+        color: clicked
+          ? theme.palette.primary.contrastText // color of clicked text
+          : theme.palette.primary.main, // color of unclicked text
         fontSize:
           text?.length > 35
             ? isMobile

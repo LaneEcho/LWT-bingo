@@ -7,7 +7,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import BurgerMenu from './menu';
 import User from './user';
-import Unofficial from '../../assets/svg/unofficial.svg';
+import Unofficial from '../../assets/svg/Unofficial.svg';
 import UnofficialSmall from '../../assets/svg/UnofficialSmall.svg';
 import PresentedByInCo from '../../assets/svg/PresentedByInCo.svg';
 import PresentedByInCoSmall from '../../assets/svg/PresentedByInCoSmall.svg';

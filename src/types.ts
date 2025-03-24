@@ -21,6 +21,10 @@ export type ResetProps = {
   score?: number;
 };
 
+export interface Phrases {
+  [key: string]: string;
+}
+
 export type SubmitScore = {
   score: number;
   onClose: () => void;

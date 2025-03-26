@@ -10,14 +10,14 @@ import { useTheme } from '@mui/material';
 import ConfettiExplosion from 'react-confetti-explosion';
 import Stack from '@mui/material/Stack';
 import { useAuth } from '../../hooks/useAuth';
-import { LoginModal } from '../modals/LoginModal';
-import { UpdateUsernameModal } from '../modals/UpdateUsernameModal';
-import { ScoreSubmissionModal } from '../modals/ScoreSubmissionModal';
+import { LoginModal } from '../Modals/LoginModal';
+import { UpdateUsernameModal } from '../Modals/UpdateUsernameModal';
+import { ScoreSubmissionModal } from '../Modals/ScoreSubmissionModal';
 import phrases from '../../../util/data/phrases';
 import { BoardState } from '../../../types';
 import Button from '../UI_Elements/Button';
 import Modal from '@mui/material/Modal';
-import HowToPlay from '../modals/howToPlay';
+import HowToPlay from '../Modals/HowToPlay';
 import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 
 // this component emcompases the bingo game board, buttons, and related functions for gameplay

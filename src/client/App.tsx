@@ -4,11 +4,11 @@ import localStorageAvailable from '../util/localStorageAvail';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import { useColorScheme } from '@mui/material/styles';
-import { mainTheme } from './theme';
-import Container from './Components/Container';
+import { mainTheme } from './Theme';
+import Container from './components/Container';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { AuthProvider } from './context/authContext'; // incorrect case
-import ToggleSwitch from './Components/UI_Elements/Switch';
+import { AuthProvider } from './context/AuthContext';
+import ToggleSwitch from './components/UI_Elements/Switch';
 
 // this function sets the initial state for the theme
 function initialState() {

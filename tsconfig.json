@@ -6,12 +6,10 @@
     "target": "es5",
     "jsx": "react",
     "allowJs": true,
-    // "moduleResolution": "node",
-    "moduleResolution": "bundler",
+    "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@/*": ["./src/client/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": ["src/**/*"],

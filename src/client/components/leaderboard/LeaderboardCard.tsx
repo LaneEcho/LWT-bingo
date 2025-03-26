@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 import { Card, Grid, useTheme } from '@mui/material';
-import { Score } from './Leaderboard';
+import { Score } from '../leaderboard/Leaderboard';
 
 interface LeaderboardCardProps {
   index?: number;

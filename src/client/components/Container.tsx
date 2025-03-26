@@ -1,13 +1,10 @@
 import React from 'react';
 import Board from './Game_Elements/Board';
-// import Board from '@/Components/Game_Elements/Board';
 import { useTheme } from '@mui/material';
 import { Box } from '@mui/material/';
 import Header from './Header';
-// import Header from '@/Components/Header';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Leaderboard from './Leaderboard/Leaderboard';
-// import Leaderboard from '@/Components/Leaderboard/Leaderboard';
 // import DarkBG from '../../assets/background/Background_V2.png';
 // import LightBG from '../../assets/background/Background_V2_Light.png';
 

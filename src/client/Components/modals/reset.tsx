@@ -1,5 +1,5 @@
 import React from 'react';
-import { ResetProps } from '@/types';
+import { ResetProps } from '../../../types';
 import { Box, Typography, Button, Stack } from '@mui/material';
 import { FocusTrap } from '@mui/base/FocusTrap';
 

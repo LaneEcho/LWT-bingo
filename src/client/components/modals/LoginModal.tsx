@@ -11,7 +11,7 @@ import {
 import Button from '../UI_Elements/Button';
 import { CloseOutlined } from '@mui/icons-material';
 import GmailLogin from '../GmailLogin';
-import InvalidBoard from './content/InvalidBoard';
+import InvalidBoard from './Content/InvalidBoard';
 
 type LoginModalProps = {
   score: number;

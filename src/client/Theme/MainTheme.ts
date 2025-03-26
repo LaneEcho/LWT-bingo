@@ -1,6 +1,6 @@
 import { alpha, getContrastRatio } from '@mui/material/styles';
 import { extendTheme } from '@mui/material/styles';
-import darkTheme from './DarkTheme';
+import darkTheme from './darkTheme';
 
 declare module '@mui/material/styles' {
   interface Palette {

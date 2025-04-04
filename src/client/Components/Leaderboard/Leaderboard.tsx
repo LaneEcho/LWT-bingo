@@ -8,7 +8,7 @@ import LeaderboardCard from './LeaderboardCard';
 import LeaderboardHeader from './LeaderboardHeader';
 import KoFiWidget from '../KoFiWidget';
 import LeaderboardUserCard from './LeaderboardUserCard';
-import Logo from '../../../assets/svg/CarabinerLogoSVG.svg';
+import Logo from '../../../assets/svg/carabinerLogoSVG.svg';
 import { useColorScheme } from '@mui/material';
 
 export interface Score {

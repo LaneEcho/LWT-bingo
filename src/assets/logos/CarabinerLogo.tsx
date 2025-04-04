@@ -1,8 +1,8 @@
 import React, { FunctionComponent } from 'react';
 import { useMediaQuery, useTheme } from '@mui/material';
 
-import CarabinerLogoSVG from '../../../assets/svg/CarabinerLogoSVG.svg';
-import CarabinerLogoSmallSVG from '../../../assets/svg/CarabinerLogoSmallSVG.svg';
+import CarabinerLogoSVG from '../../../assets/svg/carabinerLogoSVG.svg';
+import CarabinerLogoSmallSVG from '../../../assets/svg/carabinerLogoSmallSVG.svg';
 
 interface CarabinerLogoProps {
   size?: 'small' | 'large';

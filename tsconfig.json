@@ -11,7 +11,7 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@/*": ["./src/client/*"]
+      "@/*": ["src/temp/client/*"]
     }
   },
   "include": ["src/**/*"],

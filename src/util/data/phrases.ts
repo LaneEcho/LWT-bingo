@@ -1,4 +1,4 @@
-import { Phrases } from '../types';
+import { Phrases } from '../../types';
 
 // object for storing phrases to be used in the game
 
@@ -180,4 +180,4 @@ const phrases: Phrases = {
   175: 'Lauren Daigle performance',
 };
 
-export default Phrases;
+export default phrases;

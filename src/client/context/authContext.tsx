@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState, ReactNode } from 'react';
 import { getAuth, onAuthStateChanged, User } from 'firebase/auth';
-import { app, db, subscribeToUserRank } from '../../../firebase/firebase-api';
+import { app, db, subscribeToUserRank } from '../../firebase/firebase-api';
 import { doc, getDoc } from 'firebase/firestore';
 
 const auth = getAuth(app);

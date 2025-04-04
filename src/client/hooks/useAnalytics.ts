@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { logEvent } from 'firebase/analytics';
-import { analytics } from '../../../firebase/firebase-api';
+import { analytics } from '../../firebase/firebase-api';
 
 export enum EventName {
   USER_LOGIN = 'user_login',

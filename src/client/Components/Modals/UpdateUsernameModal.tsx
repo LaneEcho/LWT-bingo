@@ -10,7 +10,7 @@ import {
 } from '@mui/material';
 import Button from '../UI_Elements/Button';
 import { getAuth } from 'firebase/auth';
-import { submitScore, updateUser } from '../../../../firebase/firebase-api';
+import { submitScore, updateUser } from '../../../firebase/firebase-api';
 
 import { getFunctions, httpsCallable } from 'firebase/functions';
 import { useAuth } from '../../hooks/useAuth';

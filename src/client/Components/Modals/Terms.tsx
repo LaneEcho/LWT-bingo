@@ -4,7 +4,7 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import { FocusTrap } from '@mui/base/FocusTrap';
-import { ConditionsList } from '../../../util/data/termsconditions';
+import { ConditionsList } from '../../../util/data/termsConditions';
 import { CloseOutlined } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
 import useMediaQuery from '@mui/material/useMediaQuery';

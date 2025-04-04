@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { subscribeToTopScores } from '../../../../firebase/firebase-api';
+import { subscribeToTopScores } from '../../../firebase/firebase-api';
 import { Box, Divider, Typography } from '@mui/material';
 import { useAuth } from '../../hooks/useAuth';
 import LeaderboardCard from './LeaderboardCard';

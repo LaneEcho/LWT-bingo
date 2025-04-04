@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import Button from '../UI_Elements/Button';
 import { useAuth } from '../../hooks/useAuth';
-import { submitScore } from '../../../../firebase/firebase-api';
+import { submitScore } from '../../../firebase/firebase-api';
 import InvalidBoard from './Content/InvalidBoard';
 import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 

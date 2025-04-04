@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { getAuth, signOut } from 'firebase/auth';
 import { useAuth } from '../hooks/useAuth';
-import { db, updateUser } from '../../../firebase/firebase-api';
+import { db, updateUser } from '../../firebase/firebase-api';
 import { doc } from 'firebase/firestore';
 import {
   Checkbox,

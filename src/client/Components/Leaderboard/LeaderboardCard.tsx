@@ -39,16 +39,8 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
         },
         { fontWeight: score?.id === userId || !!rank ? 'bold' : undefined },
         rank && {
-          backgroundColor: `${
-            theme.palette.mode === 'dark'
-              ? theme.palette.primaryPurple.main
-              : theme.palette.secondaryYellow.main
-          }`,
-          color: `${
-            theme.palette.mode === 'dark'
-              ? theme.palette.common.white
-              : theme.palette.common.black
-          }`,
+          backgroundColor: `${theme.palette.primaryPurple.main}`,
+          color: `${theme.palette.common.white}`,
         },
       ]}
     >

@@ -30,11 +30,7 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
         {
           border:
             score?.id === userId
-              ? `4px solid ${
-                  theme.palette.mode === 'dark'
-                    ? theme.palette.primaryPurple.main
-                    : theme.palette.primaryPink.main
-                }`
+              ? `4px solid ${theme.palette.primaryPurple.main}`
               : undefined,
         },
         { fontWeight: score?.id === userId || !!rank ? 'bold' : undefined },

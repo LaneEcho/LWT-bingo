@@ -1,5 +1,6 @@
 import React, { FunctionComponent } from 'react';
-import { Card, Grid, useTheme } from '@mui/material';
+import { Card, useTheme } from '@mui/material';
+import Grid from '@mui/material/Grid2';
 import { Score } from './Leaderboard';
 
 interface LeaderboardCardProps {
@@ -11,7 +12,6 @@ interface LeaderboardCardProps {
 }
 
 // this component makes up the name displays on the leaderboard
-// TODO: Grid is deprecated
 
 const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
   index,
@@ -30,25 +30,13 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
         {
           border:
             score?.id === userId
-              ? `4px solid ${
-                  theme.palette.mode === 'dark'
-                    ? theme.palette.primaryPurple.main
-                    : theme.palette.primaryPink.main
-                }`
+              ? `4px solid ${theme.palette.primaryPurple.main}`
               : undefined,
         },
         { fontWeight: score?.id === userId || !!rank ? 'bold' : undefined },
         rank && {
-          backgroundColor: `${
-            theme.palette.mode === 'dark'
-              ? theme.palette.primaryPurple.main
-              : theme.palette.secondaryYellow.main
-          }`,
-          color: `${
-            theme.palette.mode === 'dark'
-              ? theme.palette.common.white
-              : theme.palette.common.black
-          }`,
+          backgroundColor: `${theme.palette.primaryPurple.main}`,
+          color: `${theme.palette.common.white}`,
         },
       ]}
     >
@@ -58,15 +46,12 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
           padding: theme.spacing(0.5, 1),
         }}
       >
-        <Grid item flex={2}>
-          {rank ?? index + 1 ?? ''}
-        </Grid>
+        <Grid flex={2}>{rank ?? index + 1 ?? ''}</Grid>
 
-        <Grid item flex={6} sx={{ textOverflow: 'ellipsis' }}>
+        <Grid flex={6} sx={{ textOverflow: 'ellipsis' }}>
           {score?.username ?? '...'}
         </Grid>
         <Grid
-          item
           alignItems={'flex-end'}
           flex={4}
           textAlign={'right'}

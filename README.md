@@ -1,76 +1,117 @@
-<a name="readme-top"></a>
-<div align="center">
+# Play bingo with InCo!
 
-  <h1 align="center">Interconnected Collective Monorepo</h1>
+## Summary
 
-  <p align="center">
-    Home of the InCo Website and Bingo Game
-  </p>
-</div>
-<div align="center">
+<center>
+A simple Bingo game to ehnance your event experience
+<br>
 
-![Top Languages](https://img.shields.io/github/languages/top/InterconnectedCollective/inco-packages)
-![GitHub repo size](https://img.shields.io/github/repo-size/InterconnectedCollective/inco-packages)
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/InterconnectedCollective/inco-packages)
-![GitHub last commit](https://img.shields.io/github/last-commit/InterconnectedCollective/inco-packages)
+[Play it here!](https://bingo.incocollective.com)
 
-</div>
+</center>
 
-<!-- TABLE OF CONTENTS -->
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li><a href="#getting-started">Getting Started</a></li>
-    <li><a href="#version-history">Version History</a></li>
-    <li><a href="#acknowledgments">Acknowledgments</a></li>
-  </ol>
-</details>
+## Tech Stack
 
-<!-- GETTING STARTED -->
+This project is built with [React](https://react.dev/) and [Webpack](https://webpack.js.org/)
 
-## Getting Started
+[![React][React.js]][React-url] ![TypeScript](https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white) ![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=white&color=%23FFCA28) ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white) [![HTML5][HTML5]][HTML5-url] ![Material-UI](https://img.shields.io/badge/Material%20UI-007FFF?style=for-the-badge&logo=mui&logoColor=white) ![Webpack](https://img.shields.io/badge/webpack-%238DD6F9.svg?style=for-the-badge&logo=webpack&logoColor=black) ![Babel](https://img.shields.io/badge/Babel-F9DC3E?style=for-the-badge&logo=babel&logoColor=white)
 
-In order to work on the website and/or the Bingo game, you'll need to clone this repo (inco-packages) and install the package(s) you want to work on.
+<br>
 
-### Prerequisites
+## How to Work on This Project
 
-* npm
-  ```sh
-  npm install npm@latest -g
+1. Fork and close this repository to your local machine
+2. Install NPM packages: `npm install`
+3. Run `npm run dev` to start up the application
+4. Navigate to http://localhost:8080 to view the application
+5. Choose an issue to work on and create a branch
+6. Create a PR to merge your branch into dev & await review!
 
-### Installation (all packages)
+### Branches
 
-1. Clone the packages repo
-   ```sh
-   gh repo clone InterconnectedCollective/inco-packages
-   ```
-2. Install dependencies for website
-   ```sh
-   cd inco-packages/packages/InCo_Website
-   npm install
-   ```
-3. Install dependencies for bingo game
-    ```sh
-    cd ../LWT-Bingo
-    npm install
+`main` - merging into this branch automatically triggers a deployment
+<br>
+`dev` - base branch for Unofficial LWT Bingo related code
+<br>
+`big-gayme` - base branch for gay Super Bowl Bingo related code
 
-<p>Instructions to build and run the individual packages can be found in the appropriate README (<code>packages/InCo_Website/README.md</code> or <code>packages/LWT-Bingo/README.md</code>).</p>
-<p>Note: When switching between different packages, remember that you may need to navigate to the appropriate folder in your terminal (i.e., <code>packages/InCo_Website</code> or <code>packages/LWT-Bingo</code>) to make sure you're using the correct <code>package.json</code>.</p>
+## Style Guide
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+### File Structure
 
-<!-- VERSION HISTORY -->
+- **/build** - Compiled/ bundled files
 
-## Version History
-- 1.0.0
+- **/src** - Source code for the app
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+  - /src/assets - Includes static files such as images, logos, and SVGs
+  - /src/client - Code that is used on the client side of the app
+    - /src/client/components - React components
+    - /src/client/context - React context
+    - /src/client/hooks - Custom hooks
+    - /src/client/theme - Includes current theme objects
+  - /src/firebase - Code that is relevant for the Firebase server side
+  - /src/lib - Specialized helper functions or libraries (currently empty)
+  - /src/util - Contains general-purpose utility functions
+    - /src/util/data - Objects that store data for general use throughout app
+  - /src/types.ts - TypeScript definitions
 
-<!-- ACKNOWLEDGMENTS -->
+- **/tsconfig.json** - TypeScript config file
+- **/webpack.config.js** - Webpack config file
 
-## Acknowledgments
+  <br/>
 
-- [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
-- [Img Shields](https://shields.io)
+**Naming Conventions For Files**
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
+- PascalCase for folders/ files containing React Components (ex: 'Components' or 'AuthButton.tsx')
+- camelCase for folders/ files not containing React components (ex: 'useAuth.ts')
+- kebab-case for configuration files and JSON data files (ex: 'firebase-api.ts')
+
+### Theme
+
+`client/theme/mainTheme.ts` contains the current information for our theme, and another theme object for Dark Mode is found in `darkTheme.ts`
+It uses the experimental_extendTheme API which extends the default theme of MUI, which I found to avoid repetitive code like declaring the font family in both Dark Mode and Light Mode. We can easily update things like font family and breakpoints in the MainTheme object and they'll still apply to Dark Mode without having to also define them within the DarkMode object.
+<br>
+More details: <br>
+[MUI Theme](https://mui.com/material-ui/customization/theming/) <br>
+[extendTheme](https://mui.com/material-ui/experimental-api/css-theme-variables/customization/)
+
+**Changing Theme**
+
+To change the game's light mode theme, please find the corresponding value in `client/theme/mainTheme.ts`
+To change the game's dark mode theme, please find the corresponding value in `client/theme/darkTheme.ts`
+
+This keeps it easy for us to update values by keeping them in one location.
+
+## To Do
+
+| Feature                            | Status |
+| ---------------------------------- | ------ |
+| Alert player when they win         | ✅     |
+| Do not reset board on page refresh | ✅     |
+| Separate Modal Component           | ✅     |
+| Updated UI                         | ⏳     |
+| Responsive Design                  | ⏳     |
+| Leaderboard/ Database              | ⏳     |
+| And more...                        | ⏳     |
+
+- ✅ = Ready to use
+- ⏳ = In progress
+
+## Contributors
+
+|  Developed By  |                                                                                                                                                  |                                                                                                                                                  |
+| :------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------: |
+| Lane Hamilton  |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aleyna-hamilton/)  |   [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/LaneEcho)    |
+|  Tegan Barron  |   [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/tegan-barron/)    |
+| Jimena Cuadros |  [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jimena-cuadros/)   |   [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/jcuadrosj)   |
+|   Alex Sharp   | [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/alex-nicole-sharp/) | [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/alexsharp4096) |
+|   Brandi Ude   |     [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/brandiude/)     |    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/bude711)    |
+|  K.D. Hubbard  |    [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/k-d-hubbard/)    |    [![Github](https://img.shields.io/badge/github-%23121011.svg?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kdhubb)     |
+
+<!-- Logo Links -->
+
+[React.js]: https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB
+[React-url]: https://reactjs.org/
+[JavaScript-url]: https://www.javascript.com/
+[HTML5]: https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white
+[HTML5-url]: https://developer.mozilla.org/en-US/docs/Web/HTML/

@@ -23,11 +23,11 @@ const KoFiWidget = ({ mode }: WidgetProps) => {
     script1.onload = () => {
       const script2 = document.createElement('script');
       script2.type = 'text/javascript';
-      script2.innerHTML = `kofiwidget2.init('Support InCo on Ko-fi', '#7030a0', 'G2G412HLTW');kofiwidget2.draw();`;
+      script2.innerHTML = `kofiwidget2.init('Support InCo on Ko-fi', '#DF2634', 'G2G412HLTW');kofiwidget2.draw();`;
       iframeDoc.body.appendChild(script2);
 
       setTimeout(() => {
-        iframeDoc.body.style.background = '#7030a0'; // hard coding color due to rendering
+        iframeDoc.body.style.background = '#DF2634'; // hard coding color due to rendering
       }, 100);
 
       // Adjust the style of the btn-container after the widget is loaded
@@ -36,6 +36,13 @@ const KoFiWidget = ({ mode }: WidgetProps) => {
         btnContainer.setAttribute(
           'style',
           'display: flex !important; justify-content: center !important; align-items: center !important; width: 100% !important;'
+        );
+      }
+      const kofiButton = iframeDoc.querySelector('.kofi-button');
+      if (kofiButton) {
+        kofiButton.setAttribute(
+          'style',
+          'box-shadow: none !important; background-color: #DF2634' // hard code color again
         );
       }
     };
@@ -63,7 +70,7 @@ const KoFiWidget = ({ mode }: WidgetProps) => {
         overflow: 'hidden',
         margin: '16px',
         display: 'inline-block',
-        background: 'transparent',
+        borderRadius: '5px',
       }}
     />
   );

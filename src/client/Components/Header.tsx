@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import Box from '@mui/material/Box';
-import { useTheme } from '@mui/material';
+import { Stack, useTheme } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import BurgerMenu from './Menu';
 import User from './User';
-import Unofficial from '../../assets/svg/unofficial.svg';
-import UnofficialSmall from '../../assets/svg/unofficialSmall.svg';
-import PresentedByInCo from '../../assets/svg/presentedByInCo.svg';
-import PresentedByInCoSmall from '../../assets/svg/presentedByInCoSmall.svg';
+import useMediaQuery from '@mui/material/useMediaQuery';
+// import IconButton from '@mui/material/IconButton';
+// import MenuIcon from '@mui/icons-material/Menu';
+// import BurgerMenu from './Menu';
+// import Unofficial from '../../assets/svg/unofficial.svg';
+// import UnofficialSmall from '../../assets/svg/unofficialSmall.svg';
+// import PresentedByInCo from '../../assets/svg/presentedByInCo.svg';
+// import PresentedByInCoSmall from '../../assets/svg/presentedByInCoSmall.svg';
 
 interface HeaderProps {
   toggleTheme?: () => void;
@@ -19,28 +19,24 @@ interface HeaderProps {
 const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const open = Boolean(anchorEl);
-
+  // const open = Boolean(anchorEl);
   const theme = useTheme();
-
-  const mode = theme.palette.mode;
-
+  const isDark: boolean = theme.palette.mode === 'dark';
   const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const isLandscape: boolean = useMediaQuery('(orientation: landscape)');
+  const isTablet: boolean = useMediaQuery(theme.breakpoints.down('lg'));
+  const isLandscapeMobile: boolean = isLandscape && isTablet;
 
-  const isMobileSmall = useMediaQuery(theme.breakpoints.down('sm'));
-
-  const isExtraSmall = useMediaQuery(theme.breakpoints.down('xs'));
-
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  // const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
+  // const handleClose = () => {
+  //   setAnchorEl(null);
+  // };
 
   return (
     <Box
-      gap={isMobile ? 1 : 5}
+      // gap={isMobile || isLandscapeMobile ? 1 : 5}
       py={1}
       px={isMobile ? 2 : ''}
       width="100vw"
@@ -49,11 +45,6 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       alignItems={'center'}
       sx={{ backgroundColor: 'transparent', zIndex: 99 }}
     >
-      {isMobile ? (
-        <UnofficialSmall aria-hidden="true" />
-      ) : (
-        <Unofficial aria-hidden="true" />
-      )}
       <Box
         display="flex"
         flexDirection="column"
@@ -64,34 +55,92 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
       >
         <Typography
           variant="h1"
-          fontFamily={'Lalezar'}
-          color={theme.palette.primaryPink.main}
-          textTransform={'uppercase'}
+          fontFamily="Staatliches"
+          textTransform="uppercase"
           align="center"
-          zIndex={-10}
-          // keeping in case we re-name the game
-          // sx={{
-          //   fontSize: {
-          //     xs: '2rem',
-          //     sm: '4rem',
-          //     md: '4rem',
-          //     lg: '5rem',
-          //     xl: '6rem',
-          //   },
-          // }}
+          sx={{
+            position: 'relative',
+            display: 'inline-block',
+            filter: 'drop-shadow(5px 5px 4px #03056B)',
+            WebkitTextStroke: `${isMobile ? '.15px' : '.5px'} ${'#231f20'}`,
+            // marginTop: `${isMobile ? '5px' : '.5px'}`,
+            marginBottom: '5px',
+          }}
         >
-          Lesbians Who Tech Bingo
+          <span
+            style={{
+              color: '#DAE3F8',
+            }}
+          >
+            The People's Battle of Richmond
+          </span>
+
+          {/* top half color*/}
+          <span
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              height: '55%',
+              color: '#DF2634',
+              overflow: 'hidden',
+            }}
+          >
+            The People's Battle of Richmond
+          </span>
         </Typography>
 
-        {isMobile ? (
-          <PresentedByInCoSmall aria-hidden="true" />
-        ) : (
-          <PresentedByInCo aria-hidden="true" />
-        )}
+        <Typography
+          variant="h2"
+          fontFamily={'KC Neue Teeth, Poppins'}
+          color={
+            isDark
+              ? theme.palette.secondary.contrastText
+              : theme.palette.primary.main
+          }
+          align="center"
+          zIndex={-10}
+          sx={{
+            WebkitTextStroke: `${isMobile ? '.25px' : '1px'} ${
+              theme.palette.primary.main
+            }`,
+          }}
+        >
+          an online bingo game presented by
+        </Typography>
+
+        {/* {isMobile ? (
+            <PresentedByInCoSmall aria-hidden="true" />
+          ) : (
+            <PresentedByInCo aria-hidden="true" />
+          )} */}
+
+        <Typography
+          variant="h2"
+          fontFamily={'KC Neue Teeth, Poppins'}
+          color={
+            isDark
+              ? theme.palette.secondary.contrastText
+              : theme.palette.primary.main
+          }
+          align="center"
+          zIndex={-10}
+          sx={{
+            WebkitTextStroke: `${isMobile ? '.25px' : '1px'} ${
+              isDark
+                ? theme.palette.primary.main
+                : theme.palette.primaryGray.main
+            }`,
+          }}
+        >
+          InCo. and River City Roller Derby
+        </Typography>
       </Box>
 
       <Box display={'flex'} justifyContent={'center'} alignItems={'center'}>
-        <IconButton
+        {/* BURGER MENU - OPTIONAL */}
+        {/* <IconButton
           size="large"
           edge="start"
           aria-label="menu-button"
@@ -107,7 +156,7 @@ const Header = React.forwardRef(function ({ toggleTheme }: HeaderProps, ref) {
           toggleTheme={toggleTheme}
           anchorEl={anchorEl}
           open={open}
-        />
+        /> */}
         <User />
       </Box>
     </Box>

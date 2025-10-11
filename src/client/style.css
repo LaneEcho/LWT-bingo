@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'KC Neue Teeth';
+  src: url('packages/LWT-Bingo/src/assets/fonts/KCNeueTeeth.otf')
+    format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'KC Neue Teeth Inked';
+  src: url('packages/LWT-Bingo/src/assets/fonts/KCNeueTeeth-Inked.otf')
+    format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --hot-pink: #e11774;
   --neon-blue: #05fff4;

@@ -3,15 +3,17 @@ import Button from '@mui/material/Button';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import useAnalytics, { EventName } from '../../hooks/useAnalytics';
+import { alpha } from '@mui/material';
 
 type BoxProps = {
-  text: any;
+  text?: string;
+  image?: string;
   row: number;
   column: number;
   gameOver: boolean;
 };
 
-function Square({ text, row, column, gameOver }: BoxProps) {
+function Square({ text, image, row, column, gameOver }: BoxProps) {
   const [clicked, setClicked] = useState<boolean>(false);
 
   const theme = useTheme();
@@ -53,13 +55,13 @@ function Square({ text, row, column, gameOver }: BoxProps) {
         fontFamily: 'Poppins',
         borderRadius: '1rem',
         backgroundColor: clicked
-          ? gameOver
-            ? theme.palette.primaryPurple.main // color of disabled clicked buttons
-            : theme.palette.primaryBlue.main // color of clicked buttons
-          : theme.palette.background.default, // color of unclicked buttons
-        border: clicked
-          ? `1px solid ${theme.palette.primary.main}` // color of clicked border
-          : `1px solid ${theme.palette.primary.main}`, // color of unclicked border
+          ? theme.palette.clickedBackground.main // color of clicked buttons
+          : theme.palette.secondary.contrastText, // color of unclicked buttons
+        border: `2px solid ${
+          clicked
+            ? theme.palette.primary.contrastText // color of clicked border
+            : theme.palette.primary.main // color of unclicked border
+        }`,
         padding: isMobile ? '1px' : '5px',
         color: clicked
           ? theme.palette.primary.contrastText // color of clicked text
@@ -72,9 +74,31 @@ function Square({ text, row, column, gameOver }: BoxProps) {
             : isMobile
             ? '.55rem' // short phrases if on mobile
             : '.875rem', // short phrases if not on mobile
+        '&.Mui-disabled': {
+          background: clicked
+            ? theme.palette.background.secondary // color of disabled clicked buttons
+            : theme.palette.primaryGray.main, // color of unclicked buttons
+          color: clicked
+            ? theme.palette.secondary.main // color of clicked text
+            : alpha(theme.palette.primary.main, 0.5), // color of unclicked text
+          border: `1px solid ${alpha(theme.palette.primary.main, 0.5)}`,
+        },
       }}
     >
-      {text}
+      {image ? (
+        <img
+          src={image}
+          alt={text}
+          style={{
+            maxWidth: '100%',
+            maxHeight: '100%',
+            objectFit: 'contain',
+            borderRadius: '0.75rem',
+          }}
+        />
+      ) : (
+        text
+      )}
     </Button>
   );
 }

@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import { Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 import Button from '../../UI_Elements/Button';
 
 interface Props {
@@ -10,11 +10,11 @@ interface Props {
 
 const InvalidBoard = ({ onClose, resetBoard }: Props) => {
   return (
-    <>
+    <Stack spacing={2} alignItems={'center'}>
       <Typography variant="h4">
-        Oops! It looks like you don’t have any winning Bingo patterns yet.
+        Oops! It looks like you don’t have any winning Bingo patterns.
       </Typography>
-      <Typography variant="h4">
+      <Typography variant="h5">
         You can return to your board to continue playing or reset for a fresh
         Bingo board!*
       </Typography>
@@ -28,7 +28,7 @@ const InvalidBoard = ({ onClose, resetBoard }: Props) => {
       <Button variant="secondary" onClick={resetBoard}>
         Get New Board
       </Button>
-    </>
+    </Stack>
   );
 };
 

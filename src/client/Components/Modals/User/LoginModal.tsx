@@ -8,10 +8,10 @@ import {
   useMediaQuery,
   useTheme,
 } from '@mui/material';
-import Button from '../UI_Elements/Button';
+import Button from '../../UI_Elements/Button';
 import { CloseOutlined } from '@mui/icons-material';
-import GmailLogin from '../GmailLogin';
-import InvalidBoard from './Content/InvalidBoard';
+import GmailLogin from '../../GmailLogin';
+import InvalidBoard from '../Content/InvalidBoard';
 
 type LoginModalProps = {
   score: number;
@@ -80,7 +80,7 @@ export const LoginModal = ({
                 marginBottom: theme.spacing(2),
               }}
             >
-              Congratulations!!! You earned a Bingo at the #LWTSummit! Submit
+              Congratulations!!! You earned a Bingo! Submit
               your score to the Leaderboard by logging in below.
             </Typography>
             <Typography variant="h5">

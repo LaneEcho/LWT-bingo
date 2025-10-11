@@ -27,15 +27,35 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
       sx={[
         getRowColor(index + 1),
         { borderRadius: '10px' },
-        {
-          border:
-            score?.id === userId
-              ? `4px solid ${theme.palette.primaryPurple.main}`
-              : undefined,
-        },
+        theme.palette.mode === 'dark'
+          ? {
+              border:
+                score?.id === userId
+                  ? `4px solid ${theme.palette.secondary.contrastText}`
+                  : undefined,
+              backgroundColor:
+                score?.id === userId ? theme.palette.primary.main : undefined,
+              color:
+                score?.id === userId
+                  ? theme.palette.secondary.contrastText
+                  : undefined,
+            }
+          : {
+              border:
+                score?.id === userId
+                  ? `4px solid ${theme.palette.primary.main}`
+                  : undefined,
+              backgroundColor:
+                score?.id === userId
+                  ? theme.palette.secondary.contrastText
+                  : undefined,
+              color:
+                score?.id === userId ? theme.palette.primary.main : undefined,
+            },
         { fontWeight: score?.id === userId || !!rank ? 'bold' : undefined },
         rank && {
-          backgroundColor: `${theme.palette.primaryPurple.main}`,
+          backgroundColor: `${theme.palette.primary.main}`,
+          border: `4px solid ${theme.palette.primary.contrastText}`,
           color: `${theme.palette.common.white}`,
         },
       ]}
@@ -46,7 +66,10 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
           padding: theme.spacing(0.5, 1),
         }}
       >
-        <Grid flex={2}>{rank ?? index + 1 ?? ''}</Grid>
+        <Grid flex={2}>
+          {' '}
+          {rank != null ? rank : index != null ? index + 1 : ''}
+        </Grid>
 
         <Grid flex={6} sx={{ textOverflow: 'ellipsis' }}>
           {score?.username ?? '...'}
@@ -70,19 +93,24 @@ const LeaderboardCard: FunctionComponent<LeaderboardCardProps> = ({
 
     theme.palette.mode === 'dark'
       ? (colors = [
-          theme.palette.primaryPink.main,
-          theme.palette.primaryIceBlue.main,
+          theme.palette.secondary.contrastText,
+          // theme.palette.primaryIceBlue.main, // for LWT theme
         ])
       : (colors = [
-          theme.palette.primaryPink.main,
-          theme.palette.primaryIceBlue.main,
+          theme.palette.primary.main,
+          // theme.palette.primaryIceBlue.main,
         ]);
 
     // Cycle through colors for other positions.
     // Overkill for just two colors, but leaving in case we decide to add a third or more in the future.
     return {
+      marginTop: '2px',
       backgroundColor: colors[(index - 1) % colors.length],
-      color: `${theme.palette.common.black}`,
+      color: `${
+        theme.palette.mode === 'dark'
+          ? theme.palette.primary.main
+          : theme.palette.primary.contrastText
+      }`,
     };
   }
 };

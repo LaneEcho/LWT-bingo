@@ -57,11 +57,16 @@ function ModeToggle() {
         setMode(newMode);
         localStorage.setItem('darkMode', (!prefersDark).toString());
       }}
+      inputProps={{
+        'aria-label': darkMode ? 'Switch to light mode' : 'Switch to dark mode',
+      }}
       sx={{
         position: 'absolute',
-        top: isMobile ? '20px' : '50px',
-        right: isMobile ? '20px' : '50px',
+        left: '20px',
         zIndex: 999,
+        ...(isMobile
+          ? { bottom: '20px' } // stick to bottom on mobile
+          : { top: '10px' }), // stick to top on desktop
       }}
     />
   );

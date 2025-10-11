@@ -8,7 +8,8 @@ import LeaderboardCard from './LeaderboardCard';
 import LeaderboardHeader from './LeaderboardHeader';
 import KoFiWidget from '../KoFiWidget';
 import LeaderboardUserCard from './LeaderboardUserCard';
-import Logo from '../../../assets/svg/carabinerLogoSVG.svg';
+import WhiteLogo from '../../../assets/svg/pbr/whiteCarabiner.svg';
+import BlueLogo from '../../../assets/svg/pbr/blueCarabiner.svg';
 import { useColorScheme } from '@mui/material';
 
 export interface Score {
@@ -63,19 +64,19 @@ function Leaderboard() {
         marginTop: '4px',
         border: `3px solid ${
           theme.palette.mode === 'dark'
-            ? theme.palette.primaryIceBlue.main // dark mode
-            : theme.palette.primaryPink.main // light mode
+            ? theme.palette.secondary.contrastText // dark mode
+            : theme.palette.primaryGray.main // light mode
         }`,
         borderRadius: '25px',
       }}
     >
       <Typography
-        variant={'h4'}
+        variant={'h3'}
         fontFamily={'Lalezar'}
         color={
           theme.palette.mode === 'dark'
-            ? theme.palette.primaryIceBlue.main // dark mode
-            : theme.palette.primaryPink.main // light mode
+            ? theme.palette.secondary.contrastText // dark mode
+            : theme.palette.secondary.main // light mode
         }
         textTransform={'uppercase'}
         textAlign={'center'}
@@ -85,12 +86,17 @@ function Leaderboard() {
       </Typography>
       {/* Use <img /> if not using svg */}
       {/* <img src={Logo} style={{ height: '50px', alignSelf: 'center' }} />  */}
-      <Logo aria-hidden="true" />
+      {/* <Logo aria-hidden="true" /> */}
+      {theme.palette.mode === 'dark' ? (
+        <WhiteLogo aria-hidden="true" />
+      ) : (
+        <BlueLogo aria-hidden="true" />
+      )}
       <LeaderboardHeader label="Your Current Score:" />
       <LeaderboardUserCard />
       <Divider
         sx={{
-          backgroundColor: theme.palette.primaryPink.main,
+          backgroundColor: theme.palette.secondary.main,
           margin: theme.spacing(2, 8, 1),
         }}
       />

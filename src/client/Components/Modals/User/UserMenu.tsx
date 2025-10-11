@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import { getAuth, signOut } from 'firebase/auth';
-import { useAuth } from '../hooks/useAuth';
-import { db, updateUser } from '../../firebase/firebase-api';
+import { useAuth } from '../../../hooks/useAuth';
+import { db, updateUser } from '../../../../firebase/firebase-api';
 import { doc } from 'firebase/firestore';
 import {
   Checkbox,
@@ -13,14 +14,14 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
   TextField,
   Typography,
 } from '@mui/material';
 import { CloseOutlined } from '@mui/icons-material';
 import { getFunctions, httpsCallable } from 'firebase/functions';
-import Button from './UI_Elements/Button';
-import useAnalytics, { EventName } from '../hooks/useAnalytics';
-// import ListItemIcon from '@mui/material/ListItemIcon';
+import Button from '../../UI_Elements/Button';
+import useAnalytics, { EventName } from '../../../hooks/useAnalytics';
 
 interface MenuProps {
   handleClose: () => void;
@@ -28,20 +29,39 @@ interface MenuProps {
   open: boolean;
 }
 
+type FormData = {
+  username: string;
+  isOptedIn: boolean;
+};
+
+// TODO: Check the handling of the checkbox when we implement functionality
+
 const UserMenu = React.forwardRef(function (
   { handleClose, anchorEl, open }: MenuProps,
   ref: React.Ref<HTMLElement>
 ) {
+  const auth = getAuth();
+  const { user } = useAuth();
+
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    reset,
+    control,
+    formState: { errors, isSubmitSuccessful },
+  } = useForm<FormData>({
+    defaultValues: {
+      username: '',
+      isOptedIn: false,
+    },
+  });
+
   const functions = getFunctions();
   const track = useAnalytics();
   const [openUsernameChange, SetUserNameChange] = useState<boolean>(false);
-
   const [isBusy, setIsBusy] = React.useState<boolean>();
-  const [isOptedIn, setIsOptedIn] = React.useState<boolean>(false);
-
-  const auth = getAuth();
-  const { user } = useAuth();
-  const [username, setUsername] = useState(user?.username);
+  // const [isOptedIn, setIsOptedIn] = React.useState<boolean>(false);
 
   function showUserNameChange() {
     handleClose();
@@ -51,14 +71,10 @@ const UserMenu = React.forwardRef(function (
   function handleOnCloseClick() {
     // TODO: add confirmation if unsaved changes
     SetUserNameChange(false);
+    reset({ username: user?.username || '', isOptedIn: false }); // resets form values
   }
 
-  function showUsernameForm() {
-    SetUserNameChange(true);
-  }
-
-  async function handleSubmit(event: any) {
-    event.preventDefault();
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     const user = auth.currentUser;
     track(EventName.USERNAME_UPDATED, {
       location: 'Modal',
@@ -66,17 +82,17 @@ const UserMenu = React.forwardRef(function (
     });
 
     if (user) {
-      const userRef = doc(db, 'users', user.uid);
       try {
-        // await setDoc(userRef, { username }, { merge: true });
-        await updateUser(user?.uid, username, isOptedIn);
+        await updateUser(user.uid, data.username, data.isOptedIn);
         SetUserNameChange(false);
         console.log('Username saved!');
       } catch (error) {
         console.error('Error saving username:', error);
       }
+    } else {
+      console.error('Invalid or missing user');
     }
-  }
+  };
 
   function handleLogout() {
     if (user?.email) {
@@ -99,12 +115,31 @@ const UserMenu = React.forwardRef(function (
     'generateRandomUsername'
   );
 
+  async function getRandomUsername() {
+    try {
+      setIsBusy(true);
+      const generatedUsername = await generateRandomUsername();
+      setValue('username', generatedUsername.data as string);
+    } catch (error) {
+      console.error('Error fetching random username:', error);
+    } finally {
+      setIsBusy(false);
+    }
+  }
+
   React.useEffect(() => {
     if (!user?.username) {
       return;
     }
-    setUsername(user?.username);
+    setValue('username', user?.username);
   }, [user?.username]);
+
+  React.useEffect(() => {
+    reset({
+      username: '',
+      isOptedIn: false,
+    });
+  }, [isSubmitSuccessful]);
 
   return (
     <div>
@@ -142,61 +177,66 @@ const UserMenu = React.forwardRef(function (
           </IconButton>
         </DialogTitle>
         <DialogContent sx={{ textAlign: 'center' }}>
-          <div>
+          <Stack spacing={2} alignItems={'center'}>
             <Typography variant="h6">
               Enter the username you would like to use.
             </Typography>
             <TextField
               name="username"
+              {...register('username', {
+                required: 'Username is required',
+                validate: (value) =>
+                  value?.trim() !== '' || 'Username cannot be empty',
+              })}
               disabled={isBusy}
               placeholder={isBusy ? 'Getting random name...' : undefined}
-              onChange={(e) => setUsername(e.target.value)}
-              value={username}
-              sx={{ width: '552px', paddingTop: '15px' }}
+              error={!!errors.username}
+              helperText={errors.username?.message}
+              fullWidth
             />
             <div style={{ flex: 1 }} />
-            <Button variant="secondary" onClick={handleGenerateRandom}>
+            <Button
+              variant="secondary"
+              onClick={() => getRandomUsername()}
+              sx={{
+                width: '15rem',
+              }}
+            >
               Random username
             </Button>
-          </div>
-          <div>
-            {/* style={{ marginTop: '24px' }}> */}
-            <FormControlLabel
-              control={
-                <Checkbox checked={isOptedIn} onChange={handleOnCheckmark} />
-              }
-              label="Want to stay up-to-date with InCo? Check this box to join our mailing list"
+            {/* <div>
+              <FormControlLabel
+                control={
+                  <Checkbox checked={isOptedIn} onChange={handleOnCheckmark} />
+                }
+                label="Want to stay up-to-date with InCo? Check this box to join our mailing list"
+              />
+            </div> */}
+            <Controller
+              name="isOptedIn"
+              control={control}
+              defaultValue={false}
+              render={({ field }) => (
+                <FormControlLabel
+                  control={<Checkbox {...field} checked={field.value} />}
+                  label="Want to stay up-to-date with InCo? Check this box to join our mailing list"
+                />
+              )}
             />
-          </div>
-          <Button variant="primary" onClick={handleSubmit}>
-            Submit your name to the Leaderboard
-          </Button>
+            <Button
+              variant="primary"
+              onClick={handleSubmit(onSubmit)}
+              sx={{
+                width: '15rem',
+              }}
+            >
+              Submit your name to the Leaderboard
+            </Button>
+          </Stack>
         </DialogContent>
       </Dialog>
     </div>
   );
-
-  async function getRandomUsername() {
-    try {
-      setIsBusy(true);
-      const generatedUsername = await generateRandomUsername();
-
-      setUsername(generatedUsername.data as string);
-    } catch (error) {
-      setUsername('');
-      console.error('Error fetching random username:', error);
-    } finally {
-      setIsBusy(false);
-    }
-  }
-
-  function handleGenerateRandom() {
-    getRandomUsername();
-  }
-
-  function handleOnCheckmark(e: React.ChangeEvent<HTMLInputElement>) {
-    setIsOptedIn(e.target.checked);
-  }
 });
 
 export default UserMenu;

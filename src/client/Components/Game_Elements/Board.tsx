@@ -10,8 +10,7 @@ import { useTheme } from '@mui/material';
 import ConfettiExplosion from 'react-confetti-explosion';
 import Stack from '@mui/material/Stack';
 import { useAuth } from '../../hooks/useAuth';
-import { LoginModal } from '../Modals/LoginModal';
-import { UpdateUsernameModal } from '../Modals/UpdateUsernameModal';
+import { LoginModal } from '../Modals/User/LoginModal';
 import { ScoreSubmissionModal } from '../Modals/ScoreSubmissionModal';
 import phrases from '../../../util/data/phrases';
 import { BoardState } from '../../../types';
@@ -22,17 +21,15 @@ import useAnalytics, { EventName } from '../../hooks/useAnalytics';
 
 // this component emcompases the bingo game board, buttons, and related functions for gameplay
 
-// TODO: conditional color changing for dark vs light since theme colors do not match
-
 // getting a number so we don't have to hard code and continuously update the list of possible phrases
-let length: number = Object.keys(phrases).length;
+const length: number = Object.keys(phrases).length;
 
 // gives us unique numbers that will correspond to the phrases to populate the board
 function pickUniqueNumbers(): number[] {
-  let uniqueNumbers: Set<number> = new Set();
+  const uniqueNumbers: Set<number> = new Set();
 
   while (uniqueNumbers.size <= 25) {
-    let randomNumber: number = Math.floor(Math.random() * length) + 1;
+    const randomNumber: number = Math.floor(Math.random() * length) + 1;
     uniqueNumbers.add(randomNumber);
   }
 
@@ -59,7 +56,6 @@ const Board: React.FC = () => {
 
   // so it makes sure to tell user to play again
   const [loginOpen, setLoginOpen] = useState<boolean>(false);
-  const [usernameOpen, setUsernameOpen] = useState<boolean>(false);
   const [submitScoreOpen, setSubmitScoreOpen] = useState<boolean>(false);
   const [openHowTo, SetHowTo] = useState<boolean>(false);
 
@@ -101,14 +97,12 @@ const Board: React.FC = () => {
     setConfetti(false);
     setLoginOpen(false);
     setLoginOpen(false);
-    setUsernameOpen(false);
     setSubmitScoreOpen(false);
     setBingoResult(undefined);
   }
 
   function onLoginSuccess(): void {
     setLoginOpen(false);
-    setUsernameOpen(true);
   }
 
   function checkBingo(): BingoResult {
@@ -176,10 +170,6 @@ const Board: React.FC = () => {
     setLoginOpen(false);
   };
 
-  const handleUsernameClose = () => {
-    setUsernameOpen(false);
-  };
-
   const handleScoreSubmissionClose = () => {
     setSubmitScoreOpen(false);
   };
@@ -201,7 +191,7 @@ const Board: React.FC = () => {
 
       <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
-          variant="primary"
+          variant="secondary"
           onClick={callBingo}
           sx={{
             width: '12rem',
@@ -215,7 +205,7 @@ const Board: React.FC = () => {
 
       <Stack width={'100%'} direction="row" justifyContent="space-evenly">
         <Button
-          variant="secondary"
+          variant="primary-light"
           onClick={showHowTo}
           sx={{
             width: '8rem',
@@ -225,7 +215,7 @@ const Board: React.FC = () => {
         </Button>
 
         <Button
-          variant="secondary"
+          variant="primary-light"
           onClick={handleResetClicked}
           sx={{
             width: '10rem',
@@ -234,6 +224,18 @@ const Board: React.FC = () => {
           Get New Board
         </Button>
       </Stack>
+      <Button
+        component="a"
+        variant="primary"
+        href="https://incocollective.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        sx={{
+          width: '15rem',
+        }}
+      >
+        Learn About InCo
+      </Button>
       {loginOpen && (
         <LoginModal
           isOpen={loginOpen}
@@ -250,12 +252,6 @@ const Board: React.FC = () => {
       >
         <HowToPlay close={SetHowTo}></HowToPlay>
       </Modal>
-      <UpdateUsernameModal
-        isOpen={usernameOpen}
-        onClose={handleUsernameClose}
-        score={bingoResult?.score}
-        resetBoard={resetBoard}
-      />
       {submitScoreOpen && (
         <ScoreSubmissionModal
           isOpen={submitScoreOpen}

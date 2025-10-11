@@ -3,7 +3,7 @@ import { useAuth } from '../hooks/useAuth';
 import { Avatar, Typography } from '@mui/material';
 import { getAuth } from 'firebase/auth';
 
-import UserMenu from './UserMenu';
+import UserMenu from './Modals/User/UserMenu';
 import { styled } from 'styled-components';
 // import { AnchorOutlined } from '@mui/icons-material';
 
@@ -30,7 +30,7 @@ const User: React.FC = () => {
   // We need to add validation. We need to know if the username already exists
   // Open questions: what do we do if it does exist?
 
-  function showUserMenu(event: React.MouseEvent<HTMLElement>) {
+  function showUserMenu(event: React.MouseEvent<HTMLElement> | React.KeyboardEvent<HTMLDivElement> ) {
     setShowMenu(true);
     setAnchorEl(event.currentTarget);
   }
@@ -53,11 +53,18 @@ const User: React.FC = () => {
           <Avatar
             src={user?.photoURL}
             onClick={showUserMenu}
+            onKeyDown={(e) => {
+              if (e.code === 'Enter') {
+                e.preventDefault();
+                showUserMenu(e);
+              }
+            }}
             aria-label="user-menu-button"
             aria-controls={open ? 'menu' : undefined}
             aria-haspopup="true"
             aria-expanded={open ? 'true' : undefined}
             alt={user?.displayName}
+            tabIndex={0}
           />
         )
         /*{ <Typography variant="body2"> {user?.displayName}</Typography>

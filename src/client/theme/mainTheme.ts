@@ -4,7 +4,8 @@ import darkTheme from './darkTheme';
 
 declare module '@mui/material/styles' {
   interface Palette {
-    primaryBlue: Palette['primary'];
+    clickedBackground: Palette['primary'];
+    primaryGray: Palette['primary'];
     primaryPink: Palette['primary'];
     primaryIceBlue: Palette['primary'];
     primaryPurple: Palette['primary'];
@@ -14,7 +15,8 @@ declare module '@mui/material/styles' {
   }
 
   interface PaletteOptions {
-    primaryBlue?: PaletteOptions['primary'];
+    clickedBackground?: PaletteOptions['primary'];
+    primaryGray?: PaletteOptions['primary'];
     primaryPink?: PaletteOptions['primary'];
     primaryIceBlue?: PaletteOptions['primary'];
     primaryPurple?: PaletteOptions['primary'];
@@ -40,25 +42,39 @@ const greenBase = '#92D050';
 const yellowBase = '#FFC000';
 const grayBase = '#575757';
 
-let mainTheme = extendTheme({
+// PBR Bingo
+const kindaBlack = '#231f20';
+const PBRRed = '#DF2634';
+const PBRDeepBlue = '#03056B';
+const gray = '#979797';
+const PBRMedRed = '#F14949';
+const PBRPaleBlue = '#DAE3F8';
+
+const mainTheme = extendTheme({
   colorSchemes: {
     light: {
       palette: {
-        background: { default: '#fff', secondary: '212121' },
+        background: { default: PBRPaleBlue, secondary: '#212121' },
         primary: {
-          main: pinkBase,
+          main: PBRDeepBlue,
           contrastText: '#fff',
         },
         secondary: {
-          main: iceBlueBase,
-          contrastText: '#212121',
+          main: PBRRed,
+          contrastText: PBRPaleBlue,
         },
-        primaryBlue: {
-          main: blueBase,
-          light: alpha(blueBase, 0.5),
-          dark: alpha(blueBase, 0.9),
+        clickedBackground: {
+          main: PBRDeepBlue,
+          light: alpha(PBRDeepBlue, 0.5),
+          dark: alpha(PBRDeepBlue, 0.9),
           contrastText:
-            getContrastRatio(blueBase, '#fff') > 4.5 ? '#fff' : '#000',
+            getContrastRatio(PBRDeepBlue, '#fff') > 4.5 ? '#fff' : '#000',
+        },
+        primaryGray: {
+          main: gray,
+          light: alpha(gray, 0.5),
+          dark: alpha(gray, 0.9),
+          contrastText: getContrastRatio(gray, '#fff') > 4.5 ? '#fff' : '#000',
         },
         primaryPink: {
           main: pinkBase,
@@ -75,11 +91,12 @@ let mainTheme = extendTheme({
             getContrastRatio(iceBlueBase, '#fff') > 4.5 ? '#fff' : '#000',
         },
         primaryPurple: {
-          main: purpleBase,
-          light: alpha(purpleBase, 0.5),
-          dark: alpha(purpleBase, 0.9),
+          // this is red right now for PBR
+          main: PBRMedRed,
+          light: alpha(PBRMedRed, 0.5),
+          dark: alpha(PBRMedRed, 0.9),
           contrastText:
-            getContrastRatio(purpleBase, '#fff') > 4.5 ? '#fff' : '#000',
+            getContrastRatio(PBRMedRed, '#fff') > 4.5 ? '#fff' : '#000',
         },
         secondaryGreen: {
           main: greenBase,
@@ -100,14 +117,37 @@ let mainTheme = extendTheme({
     dark: darkTheme,
   },
   typography: {
-    fontFamily: ['Roboto', 'Lalezar', 'Poppins'].join(','),
+    fontFamily: [
+      'Roboto',
+      'Lalezar',
+      'Poppins',
+      'Staatliches',
+      'KC Neue Teeth',
+      'KC Neue Teeth Inked',
+    ].join(','),
     h1: {
       fontSize: '4.5rem',
+      '@media (max-width:1200px)': {
+        fontSize: '3rem',
+      },
+      '@media (max-width:640px)': {
+        fontSize: '1.75rem',
+      },
+      '@media (max-width:320px)': {
+        fontSize: '.85rem',
+      },
+    },
+    h2: {
+      '@media (max-width:1200px)': {
+        fontSize: '4rem',
+      },
+      '@media (max-width:800px)': {
+        fontSize: '1.25rem',
+      },
       '@media (max-width:640px)': {
         fontSize: '1.25rem',
       },
       '@media (max-width:320px)': {
-        // possibly the smallest screen size
         fontSize: '.85rem',
       },
     },
@@ -117,7 +157,7 @@ let mainTheme = extendTheme({
       xs: 320, // default 0
       sm: 640, // default 600
       md: 1024, // default 900
-      lg: 1280, // default 1200
+      lg: 1200, // default 1200
       xl: 1536, // default 1536
     },
   },

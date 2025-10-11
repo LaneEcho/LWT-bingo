@@ -13,8 +13,8 @@ const LeaderboardHeader: FunctionComponent<LeaderboardHeaderProps> = ({
     <Typography
       color={
         theme.palette.mode === 'dark'
-          ? theme.palette.primaryIceBlue.main // dark mode
-          : theme.palette.primaryPink.main // light mode
+          ? theme.palette.secondary.contrastText // dark mode
+          : theme.palette.primary.main // light mode
       }
       align="center"
       gutterBottom={true}

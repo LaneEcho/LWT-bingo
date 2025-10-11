@@ -3,27 +3,42 @@ import React from 'react';
 import { FunctionComponent } from 'react';
 import { Button as MuiButton, SxProps, Theme, useTheme } from '@mui/material';
 
-interface ButtonProps {
+type ButtonType = 'button' | 'submit' | 'reset';
+
+interface BaseProps {
   variant: 'primary' | 'secondary-dark' | 'secondary' | 'primary-light';
-  onClick: (e?: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
   children: React.ReactNode;
   startIcon?: React.ReactNode;
   className?: string;
   sx?: SxProps<Theme>;
   disabled?: boolean;
-  darkMode?: boolean;
 }
+
+interface ButtonAsButtonProps extends BaseProps {
+  component?: 'button';
+  type?: ButtonType;
+  onClick?: (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+}
+
+interface ButtonAsLinkProps extends BaseProps {
+  component: 'a';
+  href: string;
+  target?: string;
+  rel?: string;
+}
+
+type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 const Button: FunctionComponent<ButtonProps> = ({
   variant,
   children,
   startIcon,
   sx,
-  onClick,
   disabled,
-  darkMode,
+  ...rest
 }) => {
   const isPrimary = variant === 'primary';
+  const isPrimaryLight = variant === 'primary-light';
   const isSecondary = variant === 'secondary';
 
   const theme = useTheme();
@@ -45,7 +60,14 @@ const Button: FunctionComponent<ButtonProps> = ({
   const secondaryStyles: SxProps<Theme> = {
     backgroundColor: theme.palette.secondary.main,
     color: theme.palette.secondary.contrastText,
-    borderColor: theme.palette.secondary.main,
+    borderColor: theme.palette.secondary.contrastText,
+    boxShadow: 'none',
+  };
+
+  const primaryLightStyles: SxProps<Theme> = {
+    backgroundColor: theme.palette.secondary.contrastText,
+    color: theme.palette.primary.main,
+    borderColor: theme.palette.primary.main,
     boxShadow: 'none',
   };
 
@@ -55,14 +77,15 @@ const Button: FunctionComponent<ButtonProps> = ({
     <MuiButton
       startIcon={startIcon}
       variant={isPrimary ? 'contained' : 'outlined'}
-      onClick={onClick}
       disabled={disabled}
       sx={[
         styles,
         isPrimary && primaryStyles,
+        isPrimaryLight && primaryLightStyles,
         isSecondary && secondaryStyles,
         sx as any,
       ]}
+      {...rest}
     >
       {children}
     </MuiButton>

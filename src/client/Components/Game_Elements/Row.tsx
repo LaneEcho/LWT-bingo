@@ -3,6 +3,7 @@ import { RowProps } from '../../../types';
 import Square from './Square';
 import phrases from '../../../util/data/phrases';
 import { Stack } from '@mui/material';
+import PBR from '../../../assets/svg/pbr/PBR.png';
 
 function Row(props: RowProps) {
   const boxes: JSX.Element[] = [];
@@ -12,7 +13,8 @@ function Row(props: RowProps) {
     if (props.row === 3 && i === 2) {
       boxes.push(
         <Square
-          text={'Free Space'} // add image later
+          text={'Free Space'}
+          image={PBR}
           row={props.row}
           column={i}
           key={i}

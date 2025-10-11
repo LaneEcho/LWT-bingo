@@ -1,12 +1,12 @@
-# Lesbians Who Tech Bingo!
+# Play bingo with InCo!
 
 ## Summary
 
 <center>
-A simple Bingo game to ehnance your Lesbians Who Tech experience
+A simple Bingo game to ehnance your event experience
 <br>
 
-[Play it here!](https://laneecho.github.io/LWT-bingo/)
+[Play it here!](https://bingo.incocollective.com)
 
 </center>
 
@@ -68,12 +68,19 @@ This project is built with [React](https://react.dev/) and [Webpack](https://web
 
 ### Theme
 
-`client/theme/mainTheme.tsx` contains the current information for our theme, and another theme object for Dark Mode is found in `DarkMode.tsx`
+`client/theme/mainTheme.ts` contains the current information for our theme, and another theme object for Dark Mode is found in `darkTheme.ts`
 It uses the experimental_extendTheme API which extends the default theme of MUI, which I found to avoid repetitive code like declaring the font family in both Dark Mode and Light Mode. We can easily update things like font family and breakpoints in the MainTheme object and they'll still apply to Dark Mode without having to also define them within the DarkMode object.
 <br>
 More details: <br>
 [MUI Theme](https://mui.com/material-ui/customization/theming/) <br>
 [extendTheme](https://mui.com/material-ui/experimental-api/css-theme-variables/customization/)
+
+**Changing Theme**
+
+To change the game's light mode theme, please find the corresponding value in `client/theme/mainTheme.ts`
+To change the game's dark mode theme, please find the corresponding value in `client/theme/darkTheme.ts`
+
+This keeps it easy for us to update values by keeping them in one location.
 
 ## To Do
 

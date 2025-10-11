@@ -38,9 +38,10 @@ const LeaderboardUserCard: FunctionComponent<LeaderboardUserCardProps> = () => {
             fontWeight: 600,
             fontSize: 16,
             color: theme.palette.common.white,
-            backgroundColor: theme.palette.primaryPurple.main,
+            backgroundColor: theme.palette.primary.main,
             ':hover': {
-              backgroundColor: theme.palette.primaryPurple.dark,
+              backgroundColor: theme.palette.primary.contrastText,
+              color: theme.palette.primary.main,
             },
             borderRadius: 10,
           }}
